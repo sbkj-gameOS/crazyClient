@@ -36,7 +36,6 @@ var HTTP = cc.Class({
                     }
                 }
             };
-//
             xhr.open("GET", HTTP.baseURL+url, true);
             if(HTTP.authorization != null){
                 xhr.setRequestHeader("authorization", HTTP.authorization) ;

@@ -64,24 +64,22 @@ cc.Class({
     },
 
     login:function(){
-       this.io = require("IOUtils");
-       this.loadding();
-       
-
-       var url = window.location.href;
-       var data = url.split('?')[1];
-       if(data){
-       var values= data.split('&');
-       }
-       var value='';
-       for(var i in values){
-             var name = values[i].split('=')[0]
-          if (name=='userId'){
-             value =values[i].split('=')[1];
-          }
-       };
-       var xhr = cc.beimi.http.httpGet('/main/index.html?userId='+value,this.sucess,this.error,this);
-   },
+        this.io = require("IOUtils");
+        this.loadding();
+        var url = window.location.href;
+        var data = url.split('?')[1];
+        var value='';
+        if(data){
+        var values= data.split('&');
+            for(var i in values){
+            var name = values[i].split('=')[0]
+            if (name=='userId'){
+                value =values[i].split('=')[1];
+                var xhr = cc.beimi.http.httpGet('/main/index.html?userId='+value,this.sucess,this.error,this);
+                }
+            };
+        }        
+    },
 
    sucess:function(result,object){
        var data = JSON.parse(result) ;
