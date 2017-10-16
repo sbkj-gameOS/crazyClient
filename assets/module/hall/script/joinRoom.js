@@ -58,12 +58,17 @@ cc.Class({
             default:null,
             type:cc.Component
         },
+        notice:{
+            default: null,
+            type : cc.Node
+        },
        
     },
 
     // use this for initialization
     onLoad: function () {
          array = [];
+         //this.notice.active =false;
     },
     
     clickNum: function(event){
@@ -86,7 +91,7 @@ cc.Class({
     click: function(){
         var room={};
         if(this.roomNums.string.length!=6){
-           alert('请输入6位数房号');
+            this.notice.getComponent('cc.Label').string ='请输入6位数房号';
            return false;
         };
         room.roomNum = this.roomNums.string;
@@ -96,7 +101,7 @@ cc.Class({
             cc.beimi.http.httpPost('/api/room/query',room,this.JRsucess,this.JRerror,this);
         }else{
             array = [];
-            alert('not found token');
+            this.notice.getComponent('cc.Label').string ='not found token';
             
         }
         
@@ -108,7 +113,8 @@ cc.Class({
             room.token = cc.beimi.authorization;
             cc.beimi.http.httpPost('/api/room/match',room,this.JJsucess,this.JJerror,this);
         }else{
-            alert('not found token');
+
+            this.notice.getComponent('cc.Label').string ='not found token';
         }   
         
     },
@@ -119,7 +125,7 @@ cc.Class({
             cc.beimi.playway = data.playway;
             cc.director.loadScene('majiang');
         }else{
-            alert('加入失败');
+            object.notice.getComponent('cc.Label').string ='房间不存在';
         }     
     },
     JJsucess: function(result,object){
@@ -128,15 +134,15 @@ cc.Class({
             cc.beimi.playway = data.playway;
             cc.director.loadScene('majiang');
         }else{
-            alert('加入失败');
+            object.alert('加入失败');
         }     
     },
-    JJerror: function(){
-        alert('连接失败');
+    JJerror: function(object){
+        object.alert('加入失败，请重试');
     },
-    JRerror: function(){
-        alert('连接失败');        
-        this.roomNums.string = '';
+    JRerror: function(object){
+        object.notice.getComponent('cc.Label').string ='连接失败';        
+        object.roomNums.string = '';
         array = [];
        
     }

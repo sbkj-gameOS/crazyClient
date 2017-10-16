@@ -124,10 +124,18 @@ cc.Class({
             } else {
                 cc.beimi.authorization = data.token;
             }
-        }
-        cc.beimi.user = data.data ;
-        cc.beimi.games = data.games ;
+        };
     
+        if(data.data){
+            cc.beimi.user = data.data ;
+        }
+        if(data.playUser){
+            cc.beimi.user = data.playUser;
+        }
+        
+        if(data.game){
+            cc.beimi.games = data.games ;
+        }
         cc.beimi.playway = null ;
         this.io.put("userinfo" ,result );
     },

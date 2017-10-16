@@ -1947,7 +1947,17 @@
       "__id__": 44
     },
     "_enabled": true,
-    "roomNums": null
+    "roomNums": null,
+    "num_1": null,
+    "num_2": null,
+    "num_3": null,
+    "num_4": null,
+    "num_5": null,
+    "num_6": null,
+    "num_7": null,
+    "num_8": null,
+    "num_9": null,
+    "num_0": null
   },
   {
     "__type__": "cc.Node",
@@ -1995,7 +2005,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 385,
-      "y": -120
+      "y": -129
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -2721,6 +2731,13 @@
     "cards": {
       "__id__": 22
     },
-    "girl": null
+    "girl": null,
+    "loaddingPrefab": null,
+    "alertPrefab": {
+      "__uuid__": "7225babf-48d1-4485-86dd-f2da82fa0cfd"
+    },
+    "headimg": {
+      "__id__": 8
+    }
   }
 ]

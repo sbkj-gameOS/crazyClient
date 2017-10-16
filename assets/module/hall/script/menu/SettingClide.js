@@ -50,6 +50,9 @@ cc.Class({
     onLoad: function () {
         this.musicSlider.progress = cc.beimi.audio.getBGMVolume();
         this.music.fillRange  = cc.beimi.audio.getBGMVolume() ;
+
+        this.soundSlider.progress = cc.beimi.audio.getSFXVolume();
+        this.sound.fillRange =cc.beimi.audio.getSFXVolume();
         
         if(cc.beimi.audio.getState() == cc.audioEngine.AudioState.PLAYING){
             this.musicon.active = true ;
@@ -68,6 +71,21 @@ cc.Class({
     },
     onSoundSlide:function(slider){
         this.sound.fillRange  = slider.progress ;
+        cc.beimi.audio.setSFXVolume(slider.progress) ;
+        this.soundon.active = true ;
+        this.soundoff.active =  false;
+    },
+    onSoundBtnClick:function(){
+        //console.log(cc.beimi.audio.getSFXVolume());
+        if(cc.beimi.audio.getSFXVolume()>0){
+            this.soundon.active = false ;
+            this.soundoff.active =true;
+            cc.beimi.audio.setSFXVolume(0);
+        }else{
+            this.soundon.active =true;
+            this.soundoff.active =false;
+            cc.beimi.audio.setSFXVolume(this.sound.fillRange); 
+        }
     },
     onMusiceBtnClick:function(){
         if(cc.beimi.audio.getState() == cc.audioEngine.AudioState.PLAYING){

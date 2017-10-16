@@ -70,6 +70,9 @@ cc.Class({
             this.deskVolume = v;
         }
     },
+    getSFXVolume:function(){
+        return cc.sys.localStorage.getItem('deskVolume');
+    },
     getState:function(){
         return cc.audioEngine.getState(this.bgAudioID);
     },

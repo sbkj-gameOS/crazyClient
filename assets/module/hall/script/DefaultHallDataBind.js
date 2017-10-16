@@ -29,24 +29,84 @@ cc.Class({
         girl:{
             default: null,
             type: cc.Node
+        },
+        loaddingPrefab: {
+            default: null,
+            type: cc.Prefab
+        },
+        alertPrefab: {
+            default: null,
+            type: cc.Prefab
+        },
+        headimg:{
+            default:null,
+            type:cc.Node
         }
     },
 
     // use this for initialization
     onLoad: function () {
+        // var url = window.location.href;
+        // //console.log(url);
+        // var data = url.split('?')[1];
+        // var value='';
+        // if(data){
+        // var values= data.split('&');
+        //     for(var i in values){
+        //     var name = values[i].split('=')[0]
+        //     if (name == 'payNum'){
+        //         value = values[i].split('=')[1];
+        //         cc.beimi.http.httpGet(''+payNum,this.seccess,this.error,this);
+        //         }
+        //     };
+        // }
+        
         if(this.ready()){
-            //this.username.string = 'huan';
+            //ljh 加新场景的alert节点池子
+            cc.beimi.dialog = new cc.NodePool();
+            cc.beimi.dialog.put(cc.instantiate(this.alertPrefab));
+            if(cc.beimi.paystatus){
+                if( cc.beimi.paystatus=='true'){
+                    this.alert('充值成功');
+                    cc.beimi.paystatus = null;
+                }else{
+                    this.alert('充值失败');
+                    cc.beimi.paystatus = null;
+                }  
+            };
             //当接受到这个对象时，对象来自于登录时传回的json数据
-            this.username.string = cc.beimi.user.username ;
-            if(cc.beimi.user.goldcoins > 9999){
-                //var num = cc.beimi.user.goldcoins / 10000  ;
-                //this.goldcoins.string = num.toFixed(2) + '万';
-            }else{
-                //this.goldcoins.string = cc.beimi.user.goldcoins;
-            }
+            // var self = this.headimg;
+            // var url = "cc.beimi.user.headimgurl";
+            // cc.loader.loadImg(url, {isCrossOrigin : true }, function(err,img){
+            //     var logo  = new cc.Sprite(img);
+            //      self.addChild(logo);
+            // }); 
+            this.username.string = cc.beimi.user.nickname ;
+            // if(cc.beimi.user.goldcoins > 9999){
+            //     var num = cc.beimi.user.goldcoins / 10000  ;
+            //     this.goldcoins.string = num.toFixed(2) + '万';
+            // }else{
+            //     this.goldcoins.string = cc.beimi.user.goldcoins;
+            // }
             this.cards.string = cc.beimi.user.cards + "张" ;
+    
         }
     },
+    // seccess: function(result,object){
+    //     var data = JSON.parse(result);
+    //     if(data.seccess==true){
+    //         var cardNum = data.cardNum;
+    //         cc.beimi.user.cards = Number(cc.beimi.user.cards) + Number(cardNum);
+    //         this.cards.string = cc.beimi.user.cards+ '张';
+    //         this.alert('充值成功');
+    //     }else{
+    //         this.alert('充值失败');
+    //     }
+        
+    // },
+    // error: function(result,object){
+    //     this.alert('充值失败');
+    // },
     playToLeft:function(){
         this._girlAnimCtrl = this.girl.getComponent(cc.Animation);
         this._girlAnimCtrl.play("girl_to_left");

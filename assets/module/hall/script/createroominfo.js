@@ -23,12 +23,16 @@ cc.Class({
         people:{
             default:null,
             type: cc.Node,
-        }
+        },
+        notice:{
+            default: null,
+            type : cc.Node
+        },
     },
 
     // use this for initialization
     onLoad: function () {
-
+        //this.notice.active = false ;
     },
 
     // called every frame, uncomment this function to activate update callback
@@ -55,9 +59,7 @@ cc.Class({
             }
          }
          garams.waytype = way_arry;
-         console.log(IIRFilterNode.people);
          var pep = this.people.children;
-         console.log(pep);
          for(var k in pep){
              if(pep[k].children[1].active==true){
                  var pop_num = pep[k].children[1].name;
@@ -78,10 +80,10 @@ cc.Class({
             cc.beimi.playway = data.playway;
             cc.director.loadScene("majiang");
         }else{
-            alert('连接出错');
+            object.notice.getComponent('cc.Label').string ='请求失败';
         }  
     },
     error:function(object){
-        alert('fail');
+        object.notice.getComponent('cc.Label').string ='连接出错';
     }
 });

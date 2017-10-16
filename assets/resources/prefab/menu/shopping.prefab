@@ -34,17 +34,20 @@
       },
       {
         "__id__": 42
+      },
+      {
+        "__id__": 44
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 44
+        "__id__": 47
       }
     ],
     "_prefab": {
-      "__id__": 45
+      "__id__": 48
     },
     "_id": "",
     "_opacity": 255,
@@ -468,8 +471,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
-      "height": 0
+      "width": 280,
+      "height": 179
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -477,8 +480,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -281,
-      "y": -126
+      "x": -257,
+      "y": 71
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -531,8 +534,8 @@
     "_scaleY": 1.02,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 65,
-      "y": 190
+      "x": 5,
+      "y": 7
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -624,8 +627,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 63,
-      "y": 121
+      "x": 5,
+      "y": -62
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -724,8 +727,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -42,
-      "y": 193
+      "x": -88,
+      "y": 21
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -769,7 +772,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 50.05,
+      "width": 16.68,
       "height": 30
     },
     "_rotationX": 0,
@@ -778,8 +781,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 109,
-      "y": -16
+      "x": 108,
+      "y": -27
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -804,7 +807,7 @@
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_N$string": "100",
+    "_N$string": "1",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -865,8 +868,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 182,
-      "y": -14
+      "x": 168,
+      "y": -24
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1381,6 +1384,93 @@
     "sync": false
   },
   {
+    "__type__": "cc.Node",
+    "_name": "New Label",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 45
+      }
+    ],
+    "_prefab": {
+      "__id__": 46
+    },
+    "_id": "",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 235,
+      "g": 13,
+      "b": 13,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 35
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": -27,
+      "y": -168
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 44
+    },
+    "_enabled": true,
+    "_useOriginalSize": false,
+    "_actualFontSize": 35,
+    "_fontSize": 35,
+    "_lineHeight": 35,
+    "_enableWrapText": true,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
+    "_spacingX": 0,
+    "_N$string": "",
+    "_N$horizontalAlign": 1,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "42df2b20-8167-43b2-96a1-32dbb3cb4640"
+    },
+    "fileId": "4784AJmmlCgrmSNUeXSepn",
+    "sync": false
+  },
+  {
     "__type__": "e83f56shAJO17//f64VxYqQ",
     "_name": "",
     "_objFlags": 0,
@@ -1390,6 +1480,12 @@
     "_enabled": true,
     "price": {
       "__id__": 22
+    },
+    "roomNumType": {
+      "__id__": 13
+    },
+    "notice": {
+      "__id__": 44
     }
   },
   {

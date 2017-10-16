@@ -1,3 +1,4 @@
+var Common = require("common");
 cc.Class({
     extends: cc.Component,
 
@@ -33,7 +34,9 @@ cc.Class({
             canvas.fitWidth = true;
         }
         this.initMgr();
-
+        var bmc = new Common();
+        bmc.login();
+        console.log(cc.beimi.userId);
     },
     start:function(){        
         var self = this;
@@ -53,7 +56,8 @@ cc.Class({
             cc.beimi.seckey = "beimi";
 
             cc.beimi.dialog = null ;
-
+            cc.beimi.paystatus = null ;
+            
             cc.beimi.loadding = new cc.NodePool();
             cc.beimi.loadding.put(cc.instantiate(this.loaddingPrefab)); // 创建节点
 
@@ -71,7 +75,9 @@ cc.Class({
             }
 
             cc.beimi.audio.playBGM("bgMain.mp3");
+            cc.beimi.audio.setSFXVolume(0.5);
         }
-    }
+    },
+   
 
 });

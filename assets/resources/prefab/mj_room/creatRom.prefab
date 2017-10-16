@@ -49,17 +49,20 @@
       },
       {
         "__id__": 161
+      },
+      {
+        "__id__": 166
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 166
+        "__id__": 169
       }
     ],
     "_prefab": {
-      "__id__": 167
+      "__id__": 170
     },
     "_id": "",
     "_opacity": 255,
@@ -5426,6 +5429,93 @@
     "sync": false
   },
   {
+    "__type__": "cc.Node",
+    "_name": "New Label",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 167
+      }
+    ],
+    "_prefab": {
+      "__id__": 168
+    },
+    "_id": "",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 238,
+      "g": 10,
+      "b": 10,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 35
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 298,
+      "y": -225
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 166
+    },
+    "_enabled": true,
+    "_useOriginalSize": false,
+    "_actualFontSize": 35,
+    "_fontSize": 35,
+    "_lineHeight": 35,
+    "_enableWrapText": true,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
+    "_spacingX": 0,
+    "_N$string": "",
+    "_N$horizontalAlign": 1,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "9e0addb1-6e49-462b-a01d-d6915d19c8a9"
+    },
+    "fileId": "8ej7CHCbBN+70osWzWvDmO",
+    "sync": false
+  },
+  {
     "__type__": "4eedaT3AIhPn61NCkoO7UlM",
     "_name": "",
     "_objFlags": 0,
@@ -5441,6 +5531,9 @@
     },
     "people": {
       "__id__": 123
+    },
+    "notice": {
+      "__id__": 166
     }
   },
   {
