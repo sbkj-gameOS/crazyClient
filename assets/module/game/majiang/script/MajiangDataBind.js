@@ -281,14 +281,14 @@ cc.Class({
         /**
          * ActionEvent发射的事件 ， 点击 杠 , 通知服务器端，用户点击了 杠 动作，服务器端进行处理，处理完毕后通知客户端后续动作
          */
-        this.node.on("gang",function(event){
-            let socket = self.socket();
-            socket.emit("selectaction" , JSON.stringify({
-                action:"gang",
-                actionCard:[]
-            }));
-            event.stopPropagation();
-        });
+        // this.node.on("gang",function(event){
+        //     let socket = self.socket();
+        //     socket.emit("selectaction" , JSON.stringify({
+        //         action:"gang",
+        //         actionCard:[]
+        //     }));
+        //     event.stopPropagation();
+        // });
         /**
          * ActionEvent发射的事件 ， 点击 碰
          */
