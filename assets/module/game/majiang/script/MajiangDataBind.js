@@ -299,13 +299,14 @@ cc.Class({
                 action:"peng",
                 actionCard:[]
             }));
+            console.log("peng");
             event.stopPropagation();
         });
         this.node.on("dan",function(event){  
             let socket = self.socket();
             socket.emit("selectaction" , JSON.stringify({
-                action:"peng",
-                actionCard:this.gangs[0]
+                action:"dan",
+                actionCard:this.dans[0]
             }));
             event.stopPropagation();
         });
@@ -313,7 +314,7 @@ cc.Class({
             
             let socket = self.socket();
             socket.emit("selectaction" , JSON.stringify({
-                action:"peng",
+                action:"gang",
                 actionCard:this.gangs[0]
             }));
             event.stopPropagation();
