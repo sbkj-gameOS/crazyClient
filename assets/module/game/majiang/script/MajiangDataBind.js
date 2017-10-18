@@ -2,7 +2,7 @@ var beiMiCommon = require("BeiMiCommon");
 
 cc.Class({
     extends: beiMiCommon,
-
+    //extends: cc.Component,
     properties: {
         // foo: {
         //    default: null,      // The default value will be used only when the component attaching
@@ -158,6 +158,7 @@ cc.Class({
      * 重构后，只有两个消息类型
      */
     onLoad: function () {
+
         //ljh追加 房号的显示
         if(cc.beimi.room&&cc.beimi.room.length==6){
             this.room_num.getComponent(cc.Label).string = cc.beimi.room;
@@ -178,6 +179,10 @@ cc.Class({
         this.topcards = new Array() ;           //对家手牌
 
         this.deskcards = new Array();           //当前玩家和 对家 已出牌
+
+        this.chis = [];
+        this.gangs = [];
+        this.dans = [];
 
         this.centertimer = null ;
         /**
@@ -203,7 +208,7 @@ cc.Class({
         for(var i=0 ; i<14 ; i++){
             this.cardpool.put(cc.instantiate(this.cards_current));
         }
-
+        
         this.exchange_state("init" , this);
         let self = this ;
         if(this.ready()){
@@ -218,9 +223,9 @@ cc.Class({
 
             this.map("play" , this.play_event) ;          //人齐了，接收发牌信息
 
-            this.map("selectcolor" , this.selectcolor_event) ;          //从服务端发送的 定缺的 指令，如果服务端玩法里不包含定缺， 可以不发送这个指令而是直接开始打牌
+          //  this.map("selectcolor" , this.selectcolor_event) ;          //从服务端发送的 定缺的 指令，如果服务端玩法里不包含定缺， 可以不发送这个指令而是直接开始打牌
 
-            this.map("selectresult" , this.selectresult_event) ;          //从服务端发送的 定缺的 指令，如果服务端玩法里不包含定缺， 可以不发送这个指令而是直接开始打牌
+          //  this.map("selectresult" , this.selectresult_event) ;          //从服务端发送的 定缺的 指令，如果服务端玩法里不包含定缺， 可以不发送这个指令而是直接开始打牌
 
             this.map("lasthands" , this.lasthands_event) ;              //庄家开始打牌了，允许出牌
 
@@ -236,6 +241,8 @@ cc.Class({
 
             socket.on("command" , function(result){
                 var data = self.parse(result) ;
+                console.log(data.command);
+                console.log(data);
                 self.route(data.command)(data , self);
             });
             /**
@@ -276,24 +283,51 @@ cc.Class({
          */
         this.node.on("gang",function(event){
             let socket = self.socket();
-            socket.emit("selectaction" , "gang") ;
-
+            socket.emit("selectaction" , JSON.stringify({
+                action:"gang",
+                actionCard:[]
+            }));
             event.stopPropagation();
         });
         /**
          * ActionEvent发射的事件 ， 点击 碰
          */
         this.node.on("peng",function(event){
+            
             let socket = self.socket();
-            socket.emit("selectaction" , "peng") ;
+            socket.emit("selectaction" , JSON.stringify({
+                action:"peng",
+                actionCard:[]
+            }));
             event.stopPropagation();
         });
+        this.node.on("dan",function(event){  
+            let socket = self.socket();
+            socket.emit("selectaction" , JSON.stringify({
+                action:"peng",
+                actionCard:this.gangs[0]
+            }));
+            event.stopPropagation();
+        });
+        this.node.on("gang",function(event){
+            
+            let socket = self.socket();
+            socket.emit("selectaction" , JSON.stringify({
+                action:"peng",
+                actionCard:this.gangs[0]
+            }));
+            event.stopPropagation();
+        });
+
         /**
          * ActionEvent发射的事件 ， 点击 吃
          */
         this.node.on("chi",function(event){
             let socket = self.socket();
-            socket.emit("selectaction" , "chi") ;
+            socket.emit("selectaction" , JSON.stringify({
+                action:"chi",
+                actionCard:this.chis[0]
+            }));
             event.stopPropagation();
         });
         /**
@@ -301,7 +335,10 @@ cc.Class({
          */
         this.node.on("hu",function(event){
             let socket = self.socket();
-            socket.emit("selectaction" , "hu") ;
+            socket.emit("selectaction" , JSON.stringify({
+                action:"hu",
+                actionCard:[]
+            }));
             event.stopPropagation();
         });
         /**
@@ -309,7 +346,10 @@ cc.Class({
          */
         this.node.on("guo",function(event){
             let socket = self.socket();
-            socket.emit("selectaction" , "guo") ;
+            socket.emit("selectaction" , JSON.stringify({
+                action:"guo",
+                actionCard:[]
+            }));
             event.stopPropagation();
         });
     },
@@ -362,7 +402,6 @@ cc.Class({
             for (var inx = 0; inx < context.playercards.length; ) {
                 let handcards = context.playercards[inx].getComponent("HandCards");
                 if (data.card == handcards.value) {
-
                     context.playercards[inx].zIndex = 0 ;
                     /**
                      * 从数组中移除
@@ -454,6 +493,7 @@ cc.Class({
      * @param context
      */
     dealcard_event:function(data , context){
+       
         let player = context.player(data.userid , context);
         context.select_action_searchlight(data, context , player) ;
 
@@ -469,6 +509,7 @@ cc.Class({
             }
             context.initPlayerHandCards(0 , 1 , inx , context , true);
         }
+       
         context.desk_cards.string = data.deskcards ;
     },
     select_action_searchlight:function(data , context , player){
@@ -545,8 +586,12 @@ cc.Class({
      * @param context
      */
     action_event:function(data, context){
-        if(cc.beimi.user.id == data.userid){
-            let gang , peng , chi , hu , guo;
+       // if(cc.beimi.user.id == data.userid){
+            let gang , peng , chi , hu , guo ,dan,ting;
+            context.chis = data["chis"]?data["chis"]:[];
+            context.gangs = data["gangs"]?data["gangs"]:[];
+            context.dans = data["dans"]?data["dans"]:[];
+            
             if(data.deal == true){  //发牌的动作
                 for(var inx = 0 ; inx < context.actionnode_deal.children.length ; inx++){
                     let temp = context.actionnode_deal.children[inx] ;
@@ -560,64 +605,97 @@ cc.Class({
                 if(data.peng){peng.active = true ;}
                 if(data.chi){chi.active = true ;}
                 if(data.hu){hu.active = true ;}
-
+               
                 context.actionnode_deal.active = true ;
 
                 context.action = "deal" ;
             }else{
-                if((data.gang == true || data.peng == true || data.chi == true) && data.hu == true){
-                    let desk_script = context.actionnode_three.getComponent("DeskCards") ;
-                    desk_script.init(data.card);
+                // if((data.gang == true || data.peng == true || data.chi == true) && data.hu == true){
+                //     let desk_script = context.actionnode_three.getComponent("DeskCards") ;
+                //     desk_script.init(data.card);
 
-                    for(var inx = 0 ; inx < context.actionnode_three_list.children.length ; inx++){
-                        let temp = context.actionnode_three_list.children[inx] ;
-                        if(temp.name == "gang"){gang = temp ;}
-                        if(temp.name == "peng"){peng = temp ;}
-                        if(temp.name == "chi"){chi = temp ;}
-                        if(temp.name == "hu"){hu = temp ;}
-                        if(temp.name == "guo"){guo = temp ;}
-                        temp.active = false ;
-                    }
-                    if(data.gang){gang.active = true ;}
-                    if(data.peng){peng.active = true ;}
-                    if(data.chi){chi.active = true ;}
-                    if(data.deal == false){
-                        guo.active = true;
-                    }
-                    hu.active = true ;
+                //     for(var inx = 0 ; inx < context.actionnode_three_list.children.length ; inx++){
+                //         let temp = context.actionnode_three_list.children[inx] ;
+                //         if(temp.name == "gang"){gang = temp ;}
+                //         if(temp.name == "peng"){peng = temp ;}
+                //         if(temp.name == "chi"){chi = temp ;}
+                //         if(temp.name == "hu"){hu = temp ;}
+                //         if(temp.name == "guo"){guo = temp ;}
+                //         temp.active = false ;
+                //     }
+                //     if(data.gang){gang.active = true ;}
+                //     if(data.peng){peng.active = true ;}
+                //     if(data.chi){chi.active = true ;}
+                //     if(data.deal == false){
+                //         guo.active = true;
+                //     }
+                //     hu.active = true ;
 
-                    let ani = context.actionnode_three.getComponent(cc.Animation);
-                    ani.play("majiang_three_action") ;
-                    context.action = "three" ;
-                }else if(data.gang == true || data.peng == true || data.chi == true || data.hu == true){
-                    let desk_script = context.actionnode_two.getComponent("DeskCards") ;
-                    desk_script.init(data.card);
-
-
-                    for(var inx = 0 ; inx < context.actionnode_two_list.children.length ; inx++){
-                        let temp = context.actionnode_two_list.children[inx] ;
-                        if(temp.name == "gang"){gang = temp ;}
-                        if(temp.name == "peng"){peng = temp ;}
-                        if(temp.name == "chi"){chi = temp ;}
-                        if(temp.name == "hu"){hu = temp ;}
-                        if(temp.name == "guo"){guo = temp ;}
-                        temp.active = false ;
-                    }
-                    if(data.gang){gang.active = true ;}
-                    if(data.peng){peng.active = true ;}
-                    if(data.chi){chi.active = true ;}
-                    if(data.hu){hu.active = true ;}
-
-                    if(data.deal == false){
-                        guo.active = true ;
-                    }
-
-                    let ani = context.actionnode_two.getComponent(cc.Animation);
-                    ani.play("majiang_action") ;
-                    context.action = "two" ;
+                //     let ani = context.actionnode_three.getComponent(cc.Animation);
+                //     ani.play("majiang_three_action") ;
+                //     context.action = "three" ;
+                // }else if(data.gang == true || data.peng == true || data.chi == true || data.hu == true){
+                    
+                // }
+                let desk_script = context.actionnode_two.getComponent("DeskCards") ;
+                desk_script.init(data.card);
+                for(var inx = 0 ; inx < context.actionnode_two_list.children.length ; inx++){
+                    let temp = context.actionnode_two_list.children[inx] ;
+                    if(temp.name == "gang"){gang = temp ;}
+                    if(temp.name == "peng"){peng = temp ;}
+                    if(temp.name == "chi"){chi = temp ;}
+                    if(temp.name == "hu"){hu = temp ;}
+                    if(temp.name == "guo"){guo = temp ;}
+                    if(temp.name == "dan"){dan = temp ;}
+                    if(temp.name == "ting"){ting = temp ;}
+                    temp.active = false ;
                 }
+                var count = 0;
+                if(data.gang){
+                    gang.active = true ;
+                    gang.x = - 250 + count * 82
+                    count++;
+                }
+                if(data.peng){
+                    peng.active = true ;
+                    peng.x = - 250 + count * 82
+                    count++;
+                }
+                if(data.chi){
+                    chi.active = true ;
+                    chi.x = - 250 + count * 82
+                    count++;
+                }
+                if(data.hu){
+                    hu.active = true ;
+                    hu.x = - 250 + count * 82
+                    count++;
+                }
+                if(data.dan){
+                    dan.active = true ;
+                    dan.x = - 250 + count * 82
+                    count++;
+                }
+                if(data.ting){
+                    ting.active = true ;
+                    ting.x = - 250 + count * 82
+                    count++;
+                }
+                if(data.deal == false){
+                    guo.active = true ;
+                    guo.x = - 250 + count * 82
+                    count++;
+                }
+                
+                var action = cc.moveTo(0.5,940 - count*85,-147);
+                console.log(940 - count*85);
+                context.actionnode_two.runAction(action);
+                console.log(context.actionnode_two);
+                // let ani = context.actionnode_two.getComponent(cc.Animation);
+                // ani.play("majiang_action") ;
+                context.action = "two" ;
             }
-        }
+       // }
     },
     selectaction_event:function(data , context){
         let player = context.player(data.userid , context);
@@ -871,9 +949,10 @@ cc.Class({
         temp_script.init(data.card);
 
         temp_script.lastone();
-        if(parseInt(data.card / 36) == data.color){
-            temp_script.selected() ;
-        }
+        // console.log(data);
+        // if(parseInt(data.card / 36) == data.color){
+        //     temp_script.selected() ;
+        // }
         temp.zIndex = 2000; //直接放到最后了，出牌后，恢复 zIndex
         temp.parent = context.cards_panel ;  //庄家的最后一张牌
     },
@@ -1063,11 +1142,13 @@ cc.Class({
             case "nextplayer" :
                 if(object.action ){
                     if(object.action == "two"){
-                        let ani = object.actionnode_two.getComponent(cc.Animation);
-                        ani.play("majiang_action_end") ;
+                        // let ani = object.actionnode_two.getComponent(cc.Animation);
+                        // ani.play("majiang_action_end") ;
+                        var action = cc.moveTo(0.5,1122,-147);
+                        object.actionnode_two.runAction(action);
                     }else if(object.action == "three") {
                         let ani = object.actionnode_three.getComponent(cc.Animation);
-                        ani.play("majiang_trhee_action_end") ;
+                        ani.play("majiang_three_action_end") ;
                     }else if(object.action == "deal") {
                         object.actionnode_deal.active = false ;
                     }
