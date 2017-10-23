@@ -81,7 +81,10 @@ cc.Class({
             //     var logo  = new cc.Sprite(img);
             //      self.addChild(logo);
             // }); 
-            this.username.string = cc.beimi.user.nickname ;
+			if(cc.beimi.user.nickname == null || cc.beimi.user.nickname == ""){
+				cc.beimi.user.nickname = "游客_"+Date.parse(new Date());
+			}
+            this.username.string = cc.beimi.user.nickname;
             // if(cc.beimi.user.goldcoins > 9999){
             //     var num = cc.beimi.user.goldcoins / 10000  ;
             //     this.goldcoins.string = num.toFixed(2) + '万';

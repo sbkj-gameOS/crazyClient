@@ -28,15 +28,16 @@ cc.Class({
         sym :cc.Label,
         pep :cc.Label,
         doing:cc.Label,
+		ytx:cc.Label,
         shop:cc.Prefab
     },
 
     // use this for initialization
     onLoad: function () {
         this.init();
-        cc.beimi.money = 0;       
+        cc.beimi.money = 0;	
         if(cc.beimi.user!=null){
-            this.username.string = cc.beimi.user.nickname;
+			this.username.string = cc.beimi.user.nickname;
             this.cards.string = cc.beimi.user.cards + "张"
             if(cc.beimi.user.headimgurl){
                 var imgurl = cc.beimi.user.headimgurl;
@@ -46,15 +47,24 @@ cc.Class({
                 })
             }
         }
-        if(cc.beimi.authorization!=null){
-            cc.beimi.http.httpGet('/presentapp/runSummary?token='+cc.beimi.authorization,this.success,this.error,this);
+        if(cc.beimi.authorization!=null){//+cc.beimi.authorization
+            cc.beimi.http.httpGet('/presentapp/runSummary?token=b4361cdff21d4760a1a9d882db87f97a',this.success,this.error,this);
         }     
     },
     success:function(result,object){
-        var data = JSON.parse(result);
-        object.sym.string = data.trtProfit;
-        object.pep.string = data.subCount;
-        object.doing.string = data.ppAmount;
+        result = JSON.parse(result);
+		if(result.data.trtProfit != null && result.data.trtProfit != 0){
+			object.sym.string = result.data.trtProfit;
+		}
+        if(result.data.subCount != null && result.data.subCount != 0){
+			object.pep.string = result.data.subCount;
+		}
+        if(result.data.ppAmount != null && result.data.ppAmount != 0){
+			object.doing.string = result.data.ppAmount;
+		}
+        if(result.data.amountPaid != null && result.data.amountPaid != 0){
+			object.ytx.string = result.data.amountPaid;
+		}
         cc.beimi.money = object.sym.string;
     },
     error:function(){

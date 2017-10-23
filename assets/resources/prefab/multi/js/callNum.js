@@ -38,14 +38,15 @@ cc.Class({
     },
     click:function(){
         var money = Number(this.text.string);
+		cc.beimi.money = 1000.00;
         if(money<100){
-            this.notice.string = '提现金额大于100元';
+            this.notice.string = '提现金额不能小于100元';
         }else{
-            if(cc.beimi.money<100){
+            if(money > cc.beimi.money){
                 this.notice.string='余额不足';
             }else{
                 if(cc.beimi.authorization!=null){
-                    cc.beimi.http.httpGet('/presentapp/appForCash?token='+'&amountMoney='+money,this.success,this.error,this);
+                    cc.beimi.http.httpGet('/presentapp/appForCash?token='+cc.beimi.authorization+'&amountMoney='+money,this.success,this.error,this);
                 }   
             }
         }

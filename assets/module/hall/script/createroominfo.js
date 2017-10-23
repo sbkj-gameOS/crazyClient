@@ -1,17 +1,8 @@
 var beiMiCommon = require("BeiMiCommon");
+var moShi = "2-part",playerData = "点泡泡三家@@",userType = "4-pep";
 cc.Class({
     extends: beiMiCommon,
     properties: {
-        // foo: {
-        //    default: null,      // The default value will be used only when the component attaching
-        //                           to a node for the first time
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
         model:{
             default:null,
             type: cc.Node,
@@ -29,43 +20,57 @@ cc.Class({
             type : cc.Node
         },
     },
-
-    // use this for initialization
-    onLoad: function () {
-        //this.notice.active = false ;
+	
+	//创建房间-模式类型值选择
+	radioButtonClicked: function(toggle) {
+		var moShiId = toggle.node.name;
+		if(moShiId == "toggle1"){
+			moShi = "2-part";
+		}else if(moShiId == "toggle2"){
+			moShi = "4-part";
+		}else if(moShiId == "toggle3"){
+			moShi = "8-part";
+		}
+    },
+	
+	//创建房间-玩法类型值选择
+	checkBoxClicked: function (toggle) {
+		if(toggle.isChecked){
+			playerData += toggle.node.name+"@@";
+		}else{
+			playerData = playerData.replace(toggle.node.name+"@@","");
+		}
+    },
+	
+	//创建房间-人数类型选择
+	radioButtonClickedUser: function(toggle) {
+		var moShiId = toggle.node.name;
+		if(moShiId == "toggle1"){
+			userType = "4-pep";
+		}else if(moShiId == "toggle2"){
+			userType = 2;
+		}
     },
 
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
+    onLoad: function () {
+        
+    },
 
-    // },
+    //创建房间点击按钮
     createRoom(){
-        // console.log('1');
-        //  console.log(this.model.children[1].children[1]);
+		//console.log("模式类型:"+moShi + "玩法:"+playerData +"人数:"+ userType);//模式类型moShi 玩法playerData  人数userType
+		debugger
          var garams ={};
-         var way_arry=[];
-         var model_arry =this.model.children;
-         for(var i in model_arry){
-             if(model_arry[i].children[1].active==true){
-                 var model_type = model_arry[i].children[1].name;
-             }
-         }
-         garams.modeltype = model_type;
-
-         var playway_arry = this.playway.children;
-         for(var j in playway_arry){
-            if(playway_arry[j].children[1].active==true){
-                way_arry.push(playway_arry[j].name);
-            }
-         }
-         garams.waytype = way_arry;
-         var pep = this.people.children;
-         for(var k in pep){
-             if(pep[k].children[1].active==true){
-                 var pop_num = pep[k].children[1].name;
-             }
-         }
-         garams.pep_nums = pop_num;
+		 //模式类型
+         garams.modeltype = moShi;
+		 playerData = playerData.split("@@");
+		 playerData.pop();
+		 //玩法类型
+         garams.waytype = playerData;
+         //人数
+         garams.pep_nums = userType;
+		 
+		//token值
          if(cc.beimi.authorization){
              garams.token = cc.beimi.authorization;
          }
