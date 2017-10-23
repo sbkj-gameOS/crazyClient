@@ -107,17 +107,7 @@ cc.Class({
         
     },
     
-    jjclick: function(){
-        var room ={};
-        if(cc.beimi.authorization){
-            room.token = cc.beimi.authorization;
-            cc.beimi.http.httpPost('/api/room/match',room,this.JJsucess,this.JJerror,this);
-        }else{
-
-            this.notice.getComponent('cc.Label').string ='not found token';
-        }   
-        
-    },
+  
     JRsucess: function(result,object){
         var data = JSON.parse(result);
         if(data.playway&&data.room){
@@ -128,18 +118,7 @@ cc.Class({
             object.notice.getComponent('cc.Label').string ='房间不存在';
         }     
     },
-    JJsucess: function(result,object){
-        var data = JSON.parse(result);
-        if(data.playway){
-            cc.beimi.playway = data.playway;
-            cc.director.loadScene('majiang');
-        }else{
-            object.alert('加入失败');
-        }     
-    },
-    JJerror: function(object){
-        object.alert('加入失败，请重试');
-    },
+    
     JRerror: function(object){
         object.notice.getComponent('cc.Label').string ='连接失败';        
         object.roomNums.string = '';

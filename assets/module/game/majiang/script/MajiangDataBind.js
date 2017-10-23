@@ -14,6 +14,9 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
+        ZM:cc.Prefab,
+        FM:cc.Prefab,
+        godcard:cc.Node,
         playerprefab:{
             default : null ,
             type : cc.Prefab
@@ -274,7 +277,17 @@ cc.Class({
 
                     //开始匹配
                 let socket = self.socket();
-                socket.emit("doplaycards" , card_script.value) ;
+                
+                if (cc.sys.localStorage.getItem('ting') == 'true') {
+                    let socket = self.socket();
+                    socket.emit("selectaction" , JSON.stringify({
+                        action:"ting",
+                        actionCard:[]
+                    }));
+                    cc.sys.localStorage.removeItem('ting') ;
+                } else {    
+                    socket.emit("doplaycards" , card_script.value) ;
+                }
             }
             event.stopPropagation();
         });
@@ -304,17 +317,21 @@ cc.Class({
         this.node.on("dan",function(event){  
             let socket = self.socket();
             socket.emit("selectaction" , JSON.stringify({
-                action:"peng",
-                actionCard:this.gangs[0]
+                action:"dan",
+                actionCard:this.dans[0]
             }));
             event.stopPropagation();
         });
         this.node.on("gang",function(event){
             
             let socket = self.socket();
+            let tmpGang ;
+            if ( this.gangs ) {
+                tmpGang = this.gangs[0] ;
+            }
             socket.emit("selectaction" , JSON.stringify({
-                action:"peng",
-                actionCard:this.gangs[0]
+                action:"gang",
+                actionCard:tmpGang
             }));
             event.stopPropagation();
         });
@@ -328,6 +345,19 @@ cc.Class({
                 action:"chi",
                 actionCard:this.chis[0]
             }));
+            event.stopPropagation();
+        });
+        /**
+         * ActionEvent发射的事件 ， 点击 听
+         */
+        this.node.on("ting",function(event){
+            /*let socket = self.socket();
+            socket.emit("selectaction" , JSON.stringify({
+                action:"ting",
+                actionCard:[]
+            }));*/
+            //记录听得状态后，在出牌阶段判断状态并发送听牌事件。
+            cc.sys.localStorage.setItem('ting','true') ;
             event.stopPropagation();
         });
         /**
@@ -593,20 +623,43 @@ cc.Class({
             context.dans = data["dans"]?data["dans"]:[];
             
             if(data.deal == true){  //发牌的动作
-                for(var inx = 0 ; inx < context.actionnode_deal.children.length ; inx++){
-                    let temp = context.actionnode_deal.children[inx] ;
+                let desk_script = context.actionnode_two.getComponent("DeskCards") ;
+                desk_script.init(data.card);
+                for(var inx = 0 ; inx < context.actionnode_two_list.children.length ; inx++){
+                    let temp = context.actionnode_two_list.children[inx] ;
                     if(temp.name == "gang"){gang = temp ;}
-                    if(temp.name == "peng"){peng = temp ;}
-                    if(temp.name == "chi"){chi = temp ;}
+                    if(temp.name == "dan"){dan = temp ;}
+                    if(temp.name == "ting"){ting = temp ;}
                     if(temp.name == "hu"){hu = temp ;}
                     temp.active = false ;
                 }
-                if(data.gang){gang.active = true ;}
-                if(data.peng){peng.active = true ;}
-                if(data.chi){chi.active = true ;}
-                if(data.hu){hu.active = true ;}
+                var count = 0;
+                if(data.gang){
+                    gang.active = true ;
+                    gang.x = - 250 + count * 82 ;
+                    count++;
+                }
+                if(data.dan){
+                    dan.active = true ;
+                    dan.x = - 250 + count * 82 ;
+                    count++;
+                }
+                if(data.ting){
+                    ting.active = true ;
+                    ting.x = - 250 + count * 82 ;
+                    count++;
+                }
+                if(data.hu){
+                    hu.active = true ;
+                    hu.x = - 250 + count * 82 ;
+                    count++;
+                }
                
-                context.actionnode_deal.active = true ;
+                var action = cc.moveTo(0.5,940 - count*85,-147);
+                console.log(940 - count*85);
+                context.actionnode_two.runAction(action);
+                console.log(context.actionnode_two);
+                //context.actionnode_deal.active = true ;
 
                 context.action = "deal" ;
             }else{
@@ -646,8 +699,6 @@ cc.Class({
                     if(temp.name == "chi"){chi = temp ;}
                     if(temp.name == "hu"){hu = temp ;}
                     if(temp.name == "guo"){guo = temp ;}
-                    if(temp.name == "dan"){dan = temp ;}
-                    if(temp.name == "ting"){ting = temp ;}
                     temp.active = false ;
                 }
                 var count = 0;
@@ -668,7 +719,7 @@ cc.Class({
                 }
                 if(data.hu){
                     hu.active = true ;
-                    hu.x = - 250 + count * 82
+                    hu.x = -250 + count * 82
                     count++;
                 }
                 if(data.dan){
@@ -847,6 +898,21 @@ cc.Class({
          * 初始化状态，首个玩家加入，然后开始等待其他玩家 ， 如果是 恢复数据， 则不会进入
          */
         //this.statusbtn.active = true ;
+        //ljh改  神牌
+        if(data.player.power){
+            if(data.player.powercard&&data.player.powercard.length>0){
+                for(let i= 0 ; i<data.player.powercard.length;i++){
+                    var laiziZM = cc.instantiate(context.ZM);
+                    laiziZM.parent = context.godcard.children[0];
+                    var LZH  = laiziZM.getComponent('DeskCards');
+                    LZH.init(data.player.value);
+                }
+            }else{
+                var laiziFM = cc.instantiate(context.FM);
+                laiziFM.parent = context.godcard;
+                console.log(laiziFM.position);
+            }
+        }      
     },
     /**
      * 开始定缺
@@ -1150,6 +1216,8 @@ cc.Class({
                         let ani = object.actionnode_three.getComponent(cc.Animation);
                         ani.play("majiang_three_action_end") ;
                     }else if(object.action == "deal") {
+                        var action = cc.moveTo(0.5,1122,-147);
+                        object.actionnode_two.runAction(action);
                         object.actionnode_deal.active = false ;
                     }
                 }
