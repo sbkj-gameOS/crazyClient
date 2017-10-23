@@ -25,10 +25,18 @@ cc.Class({
             default: null,
             type: cc.Prefab
         },
-        charts:{
+        head:{
             default: null,
             type: cc.Prefab
-        }
+        },
+        sharemoney:{
+            default: null,
+            type: cc.Prefab
+        },
+		record:{
+			default: null,
+            type: cc.Prefab
+		}
 
     },
   
@@ -51,10 +59,18 @@ cc.Class({
         cc.beimi.dialog = cc.instantiate(this.sharing);
         cc.beimi.dialog.parent =this.root();
     },
-    onChartsClick:function(){
-        cc.beimi.dialog = cc.instantiate(this.charts);
+    onHeadClick:function(){
+        cc.beimi.dialog = cc.instantiate(this.head);
         cc.beimi.dialog.parent =this.root();
-    }
+    },
+    onSharemoneyClick:function(){
+        cc.beimi.dialog = cc.instantiate(this.sharemoney);
+        cc.beimi.dialog.parent =this.root();
+    },
+	onRecordClick:function(){
+		cc.beimi.dialog = cc.instantiate(this.record);
+        cc.beimi.dialog.parent =this.root();
+	}
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 

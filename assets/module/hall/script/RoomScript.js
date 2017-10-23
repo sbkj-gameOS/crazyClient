@@ -22,6 +22,10 @@ cc.Class({
 			default:null,
 			type:cc.Prefab
 		},
+		bshall:{
+			default:null,
+			type:cc.Prefab
+		}
 	
         // foo: {
         //    default: null,      // The default value will be used only when the component attaching
@@ -93,6 +97,36 @@ onLoad: function () {
         cc.beimi.dialog.parent = this.root();
       
 	},
+	jjbshall:function(){
+		// cc.director.loadScene('joinInRoom');
+		cc.beimi.dialog = cc.instantiate(this.bshall) ;
+        cc.beimi.dialog.parent = this.root();
+      
+	},
+	jjclick: function(){
+        var room ={};
+        
+        if(cc.beimi.authorization){
+            room.token = cc.beimi.authorization;
+            cc.beimi.http.httpPost('/api/room/match',room,this.JJsucess,this.JJerror,this);
+        }else{
+
+            this.notice.getComponent('cc.Label').string ='not found token';
+        }   
+        
+    },
+	JJsucess: function(result,object){
+        var data = JSON.parse(result);
+        if(data.playway){
+            cc.beimi.playway = data.playway;
+            cc.director.loadScene('majiang');
+        }else{
+            object.alert('加入失败');
+        }     
+    },
+    JJerror: function(object){
+        object.alert('加入失败，请重试');
+    },
 	//创建包厢点击事件
 	createRoomBtn:function(){
 		alert("模式类型:"+moShi + "玩法:"+playerData +"人数:"+ userType);//模式类型moShi 玩法playerData  人数userType
