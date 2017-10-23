@@ -14,6 +14,9 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
+        card4:cc.Node,
+        mjUnit:cc.Prefab,
+        selectfather:cc.Node,
         ZM:cc.Prefab,
         FM:cc.Prefab,
         godcard:cc.Node,
@@ -241,7 +244,7 @@ cc.Class({
             this.map("dealcard" , this.dealcard_event) ;                //我出的牌
 
             this.map("allcards" , this.allcards_event) ;                //我出的牌
-
+            //this.mjOperation('chi', [[1,2,3],[2,3],[2]],this);
             socket.on("command" , function(result){
                 var data = self.parse(result) ;
                 console.log(data.command);
@@ -302,6 +305,23 @@ cc.Class({
         //     }));
         //     event.stopPropagation();
         // });
+        this.node.on('mjSelection',function(event){
+            event.target.parent.active= false;
+            event.target.parent.children.splice(0,event.target.parent.children.length) ;
+            let socket = self.socket();
+            let params = [];
+            let sendEvent ;
+            console.log(event);
+            if ( event.getUserData() ) {
+                sendEvent = event.getUserData().name ;
+                params = event.getUserData().params ;
+            }
+            socket.emit("selectaction" , JSON.stringify({
+                action:sendEvent,
+                actionCard:params
+            }));
+            event.stopPropagation();
+        });
         /**
          * ActionEvent发射的事件 ， 点击 碰
          */
@@ -314,25 +334,36 @@ cc.Class({
             }));
             event.stopPropagation();
         });
-        this.node.on("dan",function(event){  
-            let socket = self.socket();
-            socket.emit("selectaction" , JSON.stringify({
-                action:"dan",
-                actionCard:this.dans[0]
-            }));
+        this.node.on("dan",function(event){
+            if ( context.dans || context.dans.length > 1 ) {
+                this.mjOperation('dan', context.dans);
+            } else {
+                let socket = self.socket();
+                let danParam = [];
+                if ( context.dans ) {
+                    danParam = context.dans[0] ;
+                }
+                socket.emit("selectaction" , JSON.stringify({
+                    action:'dan',
+                    actionCard:danParam
+                }));
+            }
             event.stopPropagation();
         });
         this.node.on("gang",function(event){
-            
-            let socket = self.socket();
-            let tmpGang ;
-            if ( this.gangs ) {
-                tmpGang = this.gangs[0] ;
+            if ( context.gangs || context.gangs.length > 1 ) {
+                this.mjOperation('gang', context.gangs);
+            } else {
+                let socket = self.socket();
+                let gangParam = [];
+                if ( context.gangs ) {
+                    gangParam = context.gangs[0] ;
+                }
+                socket.emit("selectaction" , JSON.stringify({
+                    action:'gang',
+                    actionCard:gangParam
+                }));
             }
-            socket.emit("selectaction" , JSON.stringify({
-                action:"gang",
-                actionCard:tmpGang
-            }));
             event.stopPropagation();
         });
 
@@ -340,11 +371,15 @@ cc.Class({
          * ActionEvent发射的事件 ， 点击 吃
          */
         this.node.on("chi",function(event){
-            let socket = self.socket();
-            socket.emit("selectaction" , JSON.stringify({
-                action:"chi",
-                actionCard:this.chis[0]
-            }));
+            if ( context.chis && context.chis.length > 1 ) {
+                this.mjOperation('chi', context.chis);
+            } else {
+                let socket = self.socket();
+                socket.emit("selectaction" , JSON.stringify({
+                    action:'chi',
+                    actionCard:context.chis[0]
+                }));
+            }
             event.stopPropagation();
         });
         /**
@@ -382,6 +417,7 @@ cc.Class({
             }));
             event.stopPropagation();
         });
+        
     },
     /**
      * 新创建牌局，首个玩家加入，进入等待状态，等待其他玩家加入，服务端会推送 players数据
@@ -1272,6 +1308,21 @@ cc.Class({
             socket.disconnect();
         }
     },
+    mjOperation : function(event,params,context){
+            //this.selectfather.active = true;
+            //context.card4.getComponent('operation').setAction(event);
+            for(var i = 0 ; i < params.length;i++ ){
+                var b = cc.instantiate(context.card4);
+                b.getComponent('operation').setAction({'name':event,'params':params[i]});
+                b.width = 47*(params[i].length);
+                b.parent = context.selectfather;
+                for(var j = 0 ; j< params[i].length; j++){
+                    var a = cc.instantiate(context.mjUnit);
+                    a.parent = b;
+                    console.log(a.position);
+                }
+            }
+    }
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 

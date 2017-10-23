@@ -37,8 +37,10 @@ cc.Class({
         var bmc = new Common();
         bmc.login();
         console.log(cc.beimi.userId);
+        //预加载majiang场景
+        cc.director.preloadScene('majiang');
     },
-    start:function(){        
+    start:function(){
         var self = this;
         var SHOW_TIME = 3000;
         var FADE_TIME = 500;
@@ -56,6 +58,7 @@ cc.Class({
             cc.beimi.seckey = "beimi";
 
             cc.beimi.dialog = null ;
+            cc.beimi.dialogtwo = null;
             cc.beimi.paystatus = null ;
             
             cc.beimi.loadding = new cc.NodePool();

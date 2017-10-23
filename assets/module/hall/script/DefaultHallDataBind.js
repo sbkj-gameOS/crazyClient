@@ -65,6 +65,10 @@ cc.Class({
             //ljh 加新场景的alert节点池子
             cc.beimi.dialog = new cc.NodePool();
             cc.beimi.dialog.put(cc.instantiate(this.alertPrefab));
+
+            cc.beimi.loadding = new cc.NodePool();
+            cc.beimi.loadding.put(cc.instantiate(this.loaddingPrefab));
+            
             if(cc.beimi.paystatus){
                 if( cc.beimi.paystatus=='true'){
                     this.alert('充值成功');
@@ -89,6 +93,13 @@ cc.Class({
             //     this.goldcoins.string = cc.beimi.user.goldcoins;
             // }
             this.cards.string = cc.beimi.user.cards + "张" ;
+            if(cc.beimi.user.headimgurl){
+                var imgurl = cc.beimi.user.headimgurl;
+                var sprite = this.headimg.getComponent(cc.Sprite);
+                cc.loader.load({url:imgurl,type:'jpg'},function(err,texture){
+                    sprite.spriteFrame = new cc.SpriteFrame(texture);
+                })
+            }
     
         }
     },

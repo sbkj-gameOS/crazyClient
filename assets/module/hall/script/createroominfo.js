@@ -70,6 +70,7 @@ cc.Class({
              garams.token = cc.beimi.authorization;
          }
          //console.log(garams);
+         this.loadding();
          cc.beimi.http.httpPost('/api/room/create',garams,this.sucess,this.error,this);
          
     },
