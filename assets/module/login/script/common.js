@@ -93,6 +93,34 @@ cc.Class({
     wxseccess: function(result,object){
         window.location.href=result;
     },
+    // login:function(){
+    //     this.io = require("IOUtils");
+    //     //this.loadding();
+    //     var url = window.location.href;
+    //     //console.log(url);
+    //     var data = url.split('?')[1];
+    //     var value='';
+    //     if(data){
+    //     var values= data.split('&');
+
+    //     for(let i in values){
+    //         var name = values[i].split('=')[0]
+    //         if (name =='status'){
+    //             cc.beimi.paystatus = values[i].split('=')[1];
+    //         }
+    //     };
+    //         for(let i in values){
+    //         var name = values[i].split('=')[0]
+    //         if (name == 'userId'){
+    //             value = values[i].split('=')[1];
+    //             cc.beimi.userId= value;
+    //             console.log(value);
+    //             this.loadding();
+    //             cc.beimi.http.httpGet('/wxController/getWxUserToken?userId='+value,this.sucess,this.error,this);
+    //             }
+    //         };
+    //     }
+    // },
     login:function(){
         this.io = require("IOUtils");
         //this.loadding();
@@ -101,26 +129,37 @@ cc.Class({
         var data = url.split('?')[1];
         var value='';
         if(data){
-        var values= data.split('&');
+            var values= data.split('&');
+            //好友分享进入
+            for(let i in values){
+                var name = values[i].split('=')[0]
+                if (name =='invitationcode'){
+                    var code = values[i].split('=')[1];
+                    this.loadding();
+                    cc.beimi.http.httpGet('/wxController/getLoginCode?invitationcode='+code,this.wxseccess,this.error,this);
 
-        for(let i in values){
-            var name = values[i].split('=')[0]
-            if (name =='status'){
-                cc.beimi.paystatus = values[i].split('=')[1];
-            }
-        };
+                   
+                }
+            };
+            //判断是否有充值
+            for(let i in values){
+                var name = values[i].split('=')[0]
+                if (name =='status'){
+                    cc.beimi.paystatus = values[i].split('=')[1];
+                }
+            };
+            //直接点击链接登陆
             for(let i in values){
             var name = values[i].split('=')[0]
             if (name == 'userId'){
                 value = values[i].split('=')[1];
-                cc.beimi.userId= value;
-                console.log(value);
+                //console.log(value);
+                this.loadding();
                 cc.beimi.http.httpGet('/wxController/getWxUserToken?userId='+value,this.sucess,this.error,this);
                 }
             };
         }
     },
-
    sucess:function(result,object){
        var data = JSON.parse(result) ;
        if(data != null && data.success == true && data.token!=null){
@@ -134,7 +173,8 @@ cc.Class({
             * 登录成功后即创建Socket链接
             */
           
-           object.connect();
+            object.loadding();
+            object.connect();
            object.scene('gameMain' , object) ;
        }
    },

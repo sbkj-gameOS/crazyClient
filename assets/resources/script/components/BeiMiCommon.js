@@ -50,7 +50,7 @@ cc.Class({
         return object.getComponent(common);
     },
     loadding:function(){
-        if(cc.beimi.dialog.size() > 0){
+        if(cc.beimi.loadding.size() > 0){
             this.loaddingDialog = cc.beimi.loadding.get();
             this.loaddingDialog.parent = cc.find("Canvas");
 

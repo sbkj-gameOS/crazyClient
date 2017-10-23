@@ -2879,7 +2879,9 @@
       "__id__": 27
     },
     "girl": null,
-    "loaddingPrefab": null,
+    "loaddingPrefab": {
+      "__uuid__": "88d34ba5-4c3f-4618-ab8f-32a655dec5ab"
+    },
     "alertPrefab": {
       "__uuid__": "7225babf-48d1-4485-86dd-f2da82fa0cfd"
     },
