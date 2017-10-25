@@ -56,7 +56,7 @@ cc.Class({
         let cardcolors = parseInt(this.value/4 ) ;
         let cardtype  = parseInt(cardcolors / 9);
 
-        this.mjtype = cardtype ;
+        this.mjtype = cvalue; ;
         this.mjvalue = parseInt((this.value%36)/4 ) ;
 
         let deskcard , cardframe ;

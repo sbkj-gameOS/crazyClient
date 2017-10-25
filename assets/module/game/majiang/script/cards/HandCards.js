@@ -50,7 +50,7 @@ cc.Class({
 
         this.mjtype = cardtype ;
         this.mjvalue = parseInt((this.value%36)/4 ) ;
-
+    
         let deskcard ;
         this.lastonecard = false;
         if(cardcolors < 0){

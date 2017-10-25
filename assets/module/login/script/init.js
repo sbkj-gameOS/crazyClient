@@ -60,7 +60,7 @@ cc.Class({
             cc.beimi.dialog = null ;
             cc.beimi.dialogtwo = null;
             cc.beimi.paystatus = null ;
-            
+
             cc.beimi.loadding = new cc.NodePool();
             cc.beimi.loadding.put(cc.instantiate(this.loaddingPrefab)); // 创建节点
 
