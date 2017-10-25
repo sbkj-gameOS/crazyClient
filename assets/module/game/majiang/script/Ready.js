@@ -16,15 +16,21 @@ cc.Class({
         target:{
             default:null ,
             type : cc.Node
+        },
+        count:{
+            default:null
         }
     },
 
     // use this for initialization
     onLoad: function () {
-
+        this.count = 0;
     },
     onClick:function(event){
         //开始匹配
+        var count = event.target.getComponent('Ready').count;
+
+        cc.find('/Canvas/global').zIndex =0;
         let socket = this.socket();
         var param = {
             token:cc.beimi.authorization,
@@ -36,7 +42,12 @@ cc.Class({
         }
         let majiang = this.target.getComponent("MajiangDataBind");
         majiang.waittingForPlayers();
-        socket.emit("joinroom" ,JSON.stringify(param)) ;
+        if(count == 0){
+            event.target.getComponent('Ready').count=count+1;
+            socket.emit("joinroom" ,JSON.stringify(param)) ;
+        }else{
+            this.node.dispatchEvent(new cc.Event.EventCustom('readyGM', true));       
+        }   
     }
 
     // called every frame, uncomment this function to activate update callback
