@@ -19,9 +19,32 @@ cc.Class({
     onLoad: function () {
 		this.content = this.scrollView.content;
         this.items = [];
-    	this.initialize();
+    	//this.initialize();
+		if(cc.beimi.authorization){
+            cc.beimi.http.httpGet('/record/perRecord?token='+cc.beimi.authorization+'&page=1&limit=10',this.success,this.error,this);
+        };  
     },
-	
+	success:function(result,object){
+        var data = JSON.parse(result) ;
+        if(data.count>0){
+            object.content.height = object.totalCount * (object.itemTemplate.height + object.spacing) + object.spacing; // get total content height
+			for (let i = 0; i < data.data.length; ++i) { // spawn items, we only need to do this once
+				let item = cc.instantiate(object.itemTemplate);
+				object.content.addChild(item);
+				item.setPosition(0, -item.height * (0.5 + i) - object.spacing * (i + 1));
+				var roomNum = data.data[i].roomNum;//房间号
+				var gameNum = data.data[i].gameNum;//局数
+				var time = data.data[i].time;//时间
+				var id = data.data[i].id;//id 
+				var gamerInfo = data.data[i].gamerInfo;//id 
+				item.getComponent('recordItem').updateItem(roomNum, gameNum, time,id,gamerInfo);
+				object.items.push(item);
+			}
+        }              
+    },
+	error:function(object){
+        console.log('shibai');
+    },
 	initialize: function () {
         this.content.height = this.totalCount * (this.itemTemplate.height + this.spacing) + this.spacing; // get total content height
     	for (let i = 0; i < this.spawnCount; ++i) { // spawn items, we only need to do this once
@@ -32,6 +55,7 @@ cc.Class({
             this.items.push(item);
     	}
     },
+	
 	scrollEvent: function(sender, event) {
         switch(event) {
             case 0: 

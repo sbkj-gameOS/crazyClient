@@ -85,6 +85,14 @@ cc.Class({
 				cc.beimi.user.nickname = "游客_"+Date.parse(new Date());
 			}
             this.username.string = cc.beimi.user.nickname;
+			debugger
+			if(cc.beimi.user.headimgurl){
+                var imgurl = cc.beimi.user.headimgurl;
+                var sprite = this.headimg.getComponent(cc.Sprite);
+                cc.loader.load({url:imgurl,type:'jpg'},function(err,texture){
+                    sprite.spriteFrame = new cc.SpriteFrame(texture);
+                })
+            }
             // if(cc.beimi.user.goldcoins > 9999){
             //     var num = cc.beimi.user.goldcoins / 10000  ;
             //     this.goldcoins.string = num.toFixed(2) + '万';

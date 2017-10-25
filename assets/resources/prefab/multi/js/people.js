@@ -36,7 +36,6 @@ cc.Class({
     },
     success: function (result,object) {
         var data = JSON.parse(result);
-        //设置scrollView宽度
 		object.content.height = data.data.length * (object.content.height + object.spacing) + object.spacing;
     	for (let i = 0; i <data.data.length; i++) {
 			let item = cc.instantiate(object.model);
@@ -53,33 +52,54 @@ cc.Class({
     error:function(){
         console.log('error');
     },
-    updateItem:function(data){
-        var num = data.getProfitTime;
-        var time = new Date(num);
-        this.label0.string = time.getFullYear()+'/'+(time.getMonth()+1)+'/'+time.getDate()+'  '+time.getHours()+':'+time.getMinutes()+':'+time.getSeconds();
-        this.label1.string = data.sourceName;
-        this.label2.string = data.getProfitAmount;
-    },
     scrolling:function(sender, event) {
         switch(event) {
             case 0: 
 				console.log("Scroll to Top");
                break;
             case 1: 
-				console.log("Scroll to Bottom");
-				//let items = this.items;
-				//debugger
-				//this.content.height += 100;
-				//let item = cc.instantiate(this.itemTemplate);
-				//item.addComponent('recordItem').updateItem(i, i);
-				//this.items.push(item);
+				console.log("Scroll to Bottom1");
+				var data = {"data":[{"sourceId":"651c0370c97249fcbe8df80a2bcc46b5","getProfitTime":1508469907000,"id":"ad5fcd2c11e341e29580102eeff898eb","sourceName":"T。篮球疯子爱健身","userName":"T。篮球疯子爱健身","getProfitAmount":0.63,"invitationCode":"14594f4bdbb546d2b3afbaf25659fca1"},{"sourceId":"651c0370c97249fcbe8df80a2bcc46b5","getProfitTime":1508744945000,"id":"b7cf3812d03b4fb4aebc26889f1d9dc7","sourceName":"T。篮球疯子爱健身","userName":"T。篮球疯子爱健身","getProfitAmount":0.84,"invitationCode":"14594f4bdbb546d2b3afbaf25659fca1"}],"count":7};
             case 4: 
 				console.log("Scrolling");
                break;
         }
 	},
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
-
-    // },
+	getPositionInView: function (item) { // 在scrollview的节点空间中获取项目位置
+        let worldPos = item.parent.convertToWorldSpaceAR(item.position);
+        let viewPos = this.scrollView.node.convertToNodeSpaceAR(worldPos);
+        return viewPos;
+    },
+    update: function(dt) {
+        this.updateTimer += dt;
+        if (this.updateTimer < this.updateInterval) return; // 我们不需要计算每一帧
+        this.updateTimer = 0;
+        let items = this.items;
+        let buffer = this.bufferZone;
+        let isDown = this.scrollView.content.y < this.lastContentPosY; // 滚动方向
+        let offset = (this.model.height + this.spacing) * items.length;
+        for (let i = 0; i < items.length; ++i) {
+            let viewPos = this.getPositionInView(items[i]);
+            if (isDown) {
+                // 如果离开缓冲区，没有达到内容的顶端
+                if (viewPos.y < -buffer && items[i].y + offset < 0) {
+                    items[i].setPositionY(items[i].y + offset );
+                    let item = items[i].getComponent('Item');
+                    let itemId = item.itemID - items.length; // update item id
+                    item.updateItem(itemId,"123", "123","");
+                }
+            } else {
+                // 如果离开缓冲区，不到达内容的底部
+                if (viewPos.y > buffer && items[i].y - offset > -this.content.height) {
+					debugger
+                    items[i].setPositionY(items[i].y - offset );
+                    let item = items[i].getComponent('peopleItem');
+                    let itemId = item.itemID + items.length;
+                    item.updateItem(itemId,"123", "123","");
+                }
+            }
+        }
+        // 更新lastContentPosY
+        this.lastContentPosY = this.scrollView.content.y;
+    },
 });

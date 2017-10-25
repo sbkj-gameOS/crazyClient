@@ -14,11 +14,7 @@ cc.Class({
             default: null,
             type: cc.Label
         },
-		win: {
-            default: null,
-            type: cc.Label
-        },
-		lose: {
+		gamerInfos: {
             default: null,
             type: cc.Label
         },
@@ -41,15 +37,31 @@ cc.Class({
             console.log("Item " + this.itemID + ' clicked');
         }, this);
     },
-	updateItem: function(tmplId, itemId) {
-		debugger
+	updateItem: function(roomNum, gameNum, time, itemId,gamerInfo) {
         this.itemID = itemId;
-		this.label1.string = "房间号："+tmplId;
-        this.label2.string = "局数："+tmplId;
-		this.label3.string = "2017-07-10 17：59";
-		this.win.string = "赢："+tmplId;
-		this.lose.string = "输："+tmplId;
+		this.label1.string = "房间号："+roomNum;
+        this.label2.string = "局数："+gameNum;
+		this.label3.string = this.getNowFormatDate(time);
+		this.gamerInfos.string = gamerInfo;
     },
+	//时间处理返回格式：yyyy-MM-dd HH:MM:SS
+	getNowFormatDate:function(time){
+		var date = new Date();
+		var seperator1 = "-";
+		var seperator2 = ":";
+		var month = date.getMonth() + 1;
+		var strDate = date.getDate();
+		if (month >= 1 && month <= 9) {
+			month = "0" + month;
+		}
+		if (strDate >= 0 && strDate <= 9) {
+			strDate = "0" + strDate;
+		}
+		var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+				+ " " + date.getHours() + seperator2 + date.getMinutes()
+				+ seperator2 + date.getSeconds();
+		return currentdate;
+	},
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 
