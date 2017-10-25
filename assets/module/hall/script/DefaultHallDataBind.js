@@ -85,7 +85,6 @@ cc.Class({
 				cc.beimi.user.nickname = "游客_"+Date.parse(new Date());
 			}
             this.username.string = cc.beimi.user.nickname;
-			debugger
 			if(cc.beimi.user.headimgurl){
                 var imgurl = cc.beimi.user.headimgurl;
                 var sprite = this.headimg.getComponent(cc.Sprite);
