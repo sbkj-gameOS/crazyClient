@@ -36,8 +36,19 @@ cc.Class({
 		record:{
 			default: null,
             type: cc.Prefab
-		}
-
+		},
+		help:{
+			default: null,
+            type: cc.Prefab
+		},
+		service:{
+			default: null,
+            type: cc.Prefab
+		},
+		rodeoRoom:{
+			default: null,
+            type: cc.Prefab
+		},
     },
   
 
@@ -71,13 +82,24 @@ cc.Class({
 		cc.beimi.dialog = cc.instantiate(this.record);
         cc.beimi.dialog.parent =this.root();
     },
+	onHelpClick:function(){
+		cc.beimi.dialog = cc.instantiate(this.help);
+        cc.beimi.dialog.parent =this.root();
+    },
+	onServiceClick:function(){
+		cc.beimi.dialog = cc.instantiate(this.service);
+        cc.beimi.dialog.parent =this.root();
+    },
+	onRodeoRoomClick:function(){
+		cc.beimi.dialog = cc.instantiate(this.rodeoRoom);
+        cc.beimi.dialog.parent =this.root();
+    },
     jjclick: function(){
         var room ={};
         if(cc.beimi.authorization){
             room.token = cc.beimi.authorization;
             cc.beimi.http.httpPost('/api/room/match',room,this.JJsucess,this.JJerror,this);
         }else{
-
             this.notice.getComponent('cc.Label').string ='not found token';
         }   
         
