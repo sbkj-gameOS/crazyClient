@@ -30,7 +30,6 @@ cc.Class({
         //开始匹配
         var count = event.target.getComponent('Ready').count;
 
-        cc.find('/Canvas/global').zIndex =0;
         let socket = this.socket();
         var param = {
             token:cc.beimi.authorization,

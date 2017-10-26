@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "ckongcards",
+    "_name": "暗杠",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -50,8 +50,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
-      "height": 0
+      "width": 98,
+      "height": 44
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -59,8 +59,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": -42.8,
+      "y": -8.999999999999943
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -71,7 +71,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "麻将牌-侧家杠牌",
+    "_name": "麻将牌-自己杠牌",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -104,8 +104,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 52,
-      "height": 47
+      "width": 30,
+      "height": 48
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -113,7 +113,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -17,
+      "x": -28,
       "y": 0
     },
     "_skewX": 0,
@@ -132,10 +132,10 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "8574487a-3d1e-4b98-96a7-889bbbbf447b"
+      "__uuid__": "16af731a-a088-4500-aea2-58b93b21b8f8"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -159,12 +159,12 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "328Ac5jGhEt5umZzIMgP+k",
+    "fileId": "b7SfFNeaBFWoVOJPr+D56S",
     "sync": false
   },
   {
     "__type__": "cc.Node",
-    "_name": "麻将牌-侧家杠牌",
+    "_name": "麻将牌-自己杠牌",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -197,8 +197,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 52,
-      "height": 47
+      "width": 30,
+      "height": 48
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -206,8 +206,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -17,
-      "y": -31
+      "x": 0,
+      "y": 0
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -225,10 +225,10 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "8574487a-3d1e-4b98-96a7-889bbbbf447b"
+      "__uuid__": "16af731a-a088-4500-aea2-58b93b21b8f8"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -252,12 +252,12 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "0cAeuoep5KGoyi9Ue4Coxd",
+    "fileId": "d5JP91Cj1KwIMkOUJLTfwH",
     "sync": false
   },
   {
     "__type__": "cc.Node",
-    "_name": "麻将牌-侧家杠牌",
+    "_name": "麻将牌-自己杠牌",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -290,8 +290,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 52,
-      "height": 47
+      "width": 30,
+      "height": 48
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -299,8 +299,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -17,
-      "y": -62
+      "x": 28,
+      "y": 0
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -318,10 +318,10 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "8574487a-3d1e-4b98-96a7-889bbbbf447b"
+      "__uuid__": "16af731a-a088-4500-aea2-58b93b21b8f8"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -345,12 +345,12 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "2eMKjJTKRHd4brseUhVH9g",
+    "fileId": "aerD31ci1Hw6NahkfPFG+n",
     "sync": false
   },
   {
     "__type__": "cc.Node",
-    "_name": "leftcards",
+    "_name": "current",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -392,8 +392,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -17.5,
-      "y": -14
+      "x": 0,
+      "y": 12
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -404,7 +404,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "麻将牌-侧家出牌",
+    "_name": "麻将牌-自己出牌对家出牌对家碰牌",
     "_objFlags": 0,
     "_parent": {
       "__id__": 11
@@ -441,8 +441,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 49,
-      "height": 49
+      "width": 30,
+      "height": 48
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -462,7 +462,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "麻将牌-牌面-wan5",
+    "_name": "麻将牌-牌面-wan2",
     "_objFlags": 0,
     "_parent": {
       "__id__": 12
@@ -495,17 +495,17 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 79,
-      "height": 111
+      "width": 51,
+      "height": 74
     },
-    "_rotationX": 90,
-    "_rotationY": 90,
+    "_rotationX": 0,
+    "_rotationY": 0,
     "_scaleX": 0.5,
     "_scaleY": 0.5,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 4,
-      "y": 7.3
+      "x": 0,
+      "y": 7
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -523,10 +523,10 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "6073b09d-efcd-47e3-a1a5-9e3aebfa5158"
+      "__uuid__": "651fed8e-e918-46f7-b204-1d113f7ca63d"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -550,7 +550,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "d3/JLj/HtIYaE1MbyT/8Ri",
+    "fileId": "83dMW7ZU9KG43M4RY52spl",
     "sync": false
   },
   {
@@ -562,10 +562,10 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "f6d3753a-965a-48fb-a3fd-63d0ed10a927"
+      "__uuid__": "935c97bf-d4d1-4baf-a682-5c914d54e619"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -589,7 +589,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "f4Ol1oDPdE+YDVZzqvqVHY",
+    "fileId": "93fXNlFeRKfqpsPbammOBU",
     "sync": false
   },
   {
@@ -600,7 +600,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "a7KY4L4Y9HPL21OMTaF3Az",
+    "fileId": "704R5evG1CG4tb20zkDLZr",
     "sync": false
   },
   {
@@ -611,7 +611,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "26JJ4HPVJJBr1TTXCK9tqx",
+    "fileId": "92C7VyW09D+I00peaPvjgk",
     "sync": false
   }
 ]
