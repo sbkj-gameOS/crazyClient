@@ -1042,7 +1042,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 155.07,
+      "width": 377.01,
       "height": 30
     },
     "_rotationX": 0,
@@ -1051,8 +1051,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -462,
-      "y": 29
+      "x": -351,
+      "y": 27
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1075,13 +1075,13 @@
     "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "User_name",
+    "_N$string": "游客_123456789456446544",
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 2,
     "_N$fontFamily": "Arial",
-    "_N$overflow": 0
+    "_N$overflow": 2
   },
   {
     "__type__": "cc.Node",
@@ -1125,8 +1125,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
-      "height": 0
+      "width": 160,
+      "height": 40
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1134,8 +1134,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -372,
-      "y": -13
+      "x": -370,
+      "y": -15
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1473,7 +1473,7 @@
     },
     "_fillStart": 0,
     "_fillRange": 0,
-    "_isTrimmedMode": true,
+    "_isTrimmedMode": false,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_atlas": {
