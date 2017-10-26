@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "ting",
+    "_name": "chi",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -23,21 +23,18 @@
     "_components": [
       {
         "__id__": 8
-      },
-      {
-        "__id__": 9
       }
     ],
     "_prefab": {
-      "__id__": 10
+      "__id__": 9
     },
     "_id": "",
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 167,
-      "g": 167,
-      "b": 167,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -48,8 +45,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 46,
-      "height": 74
+      "width": 50,
+      "height": 20
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -57,8 +54,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -365,
-      "y": 38
+      "x": -12,
+      "y": 101.5
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -69,7 +66,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "麻将牌-自己手牌",
+    "_name": "麻将牌-侧家出牌",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -106,8 +103,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 53,
-      "height": 81
+      "width": 37.5,
+      "height": 29.6
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -115,8 +112,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": -1
+      "x": -5,
+      "y": -3
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -127,7 +124,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "麻将牌-牌面-wan1",
+    "_name": "麻将牌-牌面-wan3",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -160,17 +157,17 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 39.1,
-      "height": 51.8
+      "width": 25.5,
+      "height": 38.6
     },
-    "_rotationX": 0,
-    "_rotationY": 0,
+    "_rotationX": 90,
+    "_rotationY": 90,
     "_scaleX": 1,
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -0.6,
-      "y": -1.9
+      "x": 2,
+      "y": 3
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -188,7 +185,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "5545c037-77e2-4418-bafc-5e86f84133e9"
+      "__uuid__": "b6714ad5-947c-43fb-868a-35bed8c006d4"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -213,9 +210,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a46a891c-53bd-4efd-8630-1ed7049b56c1"
+      "__uuid__": "42e00b02-7a50-4371-bd7b-3aea9a0f6cc6"
     },
-    "fileId": "8bMyyqc+VM+qUte1fDeNSB",
+    "fileId": "c2xA9cgzZNl6pvMVyx1s7j",
     "sync": false
   },
   {
@@ -227,7 +224,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "c5cf3e6c-a005-4af5-bd16-63dfa6bfd3ef"
+      "__uuid__": "f6d3753a-965a-48fb-a3fd-63d0ed10a927"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -252,37 +249,13 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a46a891c-53bd-4efd-8630-1ed7049b56c1"
+      "__uuid__": "42e00b02-7a50-4371-bd7b-3aea9a0f6cc6"
     },
-    "fileId": "6emcZLlEBJtouhIVFdil1T",
+    "fileId": "8crWurvQVDQ55U4nG2sz+n",
     "sync": false
   },
   {
-    "__type__": "cc.Sprite",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "_spriteFrame": null,
-    "_type": 1,
-    "_sizeMode": 0,
-    "_fillType": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_atlas": null
-  },
-  {
-    "__type__": "b8da7m1o6lOnpZbARNcuqt/",
+    "__type__": "0fe67JecMpLz5GGCrRtpy0D",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -295,9 +268,11 @@
     "beimi0": {
       "__uuid__": "d1d96e5c-707c-4fd6-a0d9-a07ed71d54c1"
     },
-    "cardvalue": {
-      "__id__": 3
-    },
+    "card_one": null,
+    "card_two": null,
+    "card_three": null,
+    "card_four": null,
+    "card_last": null,
     "target": {
       "__id__": 1
     }
@@ -308,9 +283,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "a46a891c-53bd-4efd-8630-1ed7049b56c1"
+      "__uuid__": "42e00b02-7a50-4371-bd7b-3aea9a0f6cc6"
     },
-    "fileId": "792TRDxBpMNoPtVPjI4PlM",
+    "fileId": "5a293S6kJKJrDqWSMVK6lX",
     "sync": false
   }
 ]

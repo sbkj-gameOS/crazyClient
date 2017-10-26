@@ -14,6 +14,27 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
+        left_gang_peng : cc.Prefab,
+        left_an : cc.Prefab,
+        left_chi : cc.Prefab,
+        left_dan :cc.Prefab,
+        left_loyal :cc.Node,
+        left_danLoyad: cc.Node,
+
+        right_gang_peng : cc.Prefab,
+        right_an : cc.Prefab,
+        right_chi : cc.Prefab,
+        right_dan :cc.Prefab,
+        right_loyal :cc.Node,
+        right_danLoyad: cc.Node,
+
+        top_gang_peng : cc.Prefab,
+        top_an : cc.Prefab,
+        top_chi : cc.Prefab,
+        top_dan :cc.Prefab,
+        top_loyal :cc.Node,
+        top_danLoyad: cc.Node,
+
         chiCards: cc.Prefab,
         danLoyad: cc.Node,
         card4:cc.Node,
@@ -197,6 +218,10 @@ cc.Class({
         this.gangs = [];
         this.dans = [];
 
+        this.right ='';
+        this.left = '';
+        this.top = '';
+
         this.centertimer = null ;
         /**
          * 预制的 对象池
@@ -326,7 +351,7 @@ cc.Class({
             event.target.parent.destroy();
         });
         this.node.on('mjSelection',function(event){
-            event.target.parent.active= false;
+            event.target.parent.parent.active= false;
             event.target.parent.children.splice(0,event.target.parent.children.length) ;
             let socket = self.socket();
             let params = [];
@@ -461,6 +486,7 @@ cc.Class({
                     //var playerscript = player.getComponent("MaJiangPlayer");
                     player.setPosition(570 , 50);
                     tablepos = "right" ;
+                   // context.right = ''
                 }else if(inx == 1){
                     //var playerscript = player.getComponent("MaJiangPlayer");
                     player.setPosition(400 , 300);
@@ -639,14 +665,17 @@ cc.Class({
                     //var playerscript = player.getComponent("MaJiangPlayer");
                     player.setPosition(570 , 50);
                     tablepos = "right" ;
+                   
                 }else if(inx == 1){
                     //var playerscript = player.getComponent("MaJiangPlayer");
                     player.setPosition(400 , 300);
                     tablepos = "top" ;
+                    
                 }else if(inx == 2){
                     //var playerscript = player.getComponent("MaJiangPlayer");
                     player.setPosition(-570 , 50);
                     tablepos = "left" ;
+
                 }
 
                 playerscript.init(temp , inx , tablepos);
@@ -802,6 +831,7 @@ cc.Class({
     },
     selectaction_event:function(data , context){
         let player = context.player(data.userid , context);
+        let count = 0;
         /**
          * 杠碰吃，胡都需要将牌从 触发玩家的 桌牌 里 移除，然后放入当前玩家 桌牌列表里，如果是胡牌，则放到 胡牌 列表里，首先
          * 首先，需要找到触发对象，如果触发对象不是 all ， 则 直接找到 对象对应的玩家 桌牌列表，并找到 桌牌里 的最后 的 牌，
@@ -833,33 +863,36 @@ cc.Class({
             /**
              * 杠后移除当前手牌，进入到 杠 列表里  这里为通用 方法  不管是起手还是中途补  都会判定 并且去掉手牌
              */
-
-            for(var inx = 0 ; inx < context.playercards.length ; ){
-                let temp = context.playercards[inx].getComponent("HandCards");
-                if(data.cardtype == temp.mjtype && data.cardvalue == temp.mjvalue){
-                    context.cardpool.put(context.playercards[inx]) ;
-                    context.playercards.splice(inx, 1) ;
-                }else{
-                    inx++ ;
-                }
-            };
-            //下蛋  将手牌 除去
-            for(var inx = 0 ; inx < context.playercards.length ; ){
-                let temp = context.playercards[inx].getComponent("HandCards");
-                if(data.action == 'dan' ){
-                    for(let i =0 ;i< data.card.length; i++){
-                        if(data.card[i]== temp.value){
+            // let array = [];
+            // for(let inx = 0 ; inx < context.playercards.length ; inx++ ){
+            //     array[inx] = context.playercards[inx]
+            // }
+            if(data.action == 'dan'&& data.cards){
+                for(let i =0 ;i< data.cards.length; i++){
+                    for(let inx = 0 ; inx < context.playercards.length ; inx++ ){
+                        let temp = context.playercards[inx].getComponent("HandCards");
+                        if(data.cards[i]== temp.value){
                             context.cardpool.put(context.playercards[inx]) ;
                             context.playercards.splice(inx, 1) ;
                         }
-                    }     
-                }else{
-                    inx++ ;
+                    }
                 }
+            }else{
+                for(var inx = 0 ; inx < context.playercards.length ; ){
+                    let temp = context.playercards[inx].getComponent("HandCards");
+                    if(data.cardtype == temp.mjtype && data.cardvalue == temp.mjvalue){
+                        context.cardpool.put(context.playercards[inx]) ;
+                        context.playercards.splice(inx, 1) ;
+                    }else{
+                        inx++ ;
+                    }
+                };
             }
+            //下蛋  将手牌 除去
+            
 
             let cards_action ;
-            let count = 0;
+            
 
             /**
              * 刚和碰共用一个 Prefab，都是来自于 cards_action_ming_prefab ，显示方式也相同， 区别在于：刚显示四张牌，碰显示两张牌
@@ -901,11 +934,11 @@ cc.Class({
                 }
             }else if(data.action == "dan"){
                 //cards_dan = cc.instantiate(context.dan_current)
-                if(data.card && data.card.length>=3){
-                    for(var i =0 ;i<data.card.length;i++){
+                if(data.cards && data.cards.length>=3){
+                    for(var i =0 ;i<data.cards.length;i++){
                         var cards_action = cc.instantiate(context.dan_current);
                         let  temp_script = cards_action.getComponent('DanAction');
-                        temp_script.init(data.card[i]);
+                        temp_script.init(data.cards[i]);
                         cards_action.parent = context.danLoyad;
                     };
                 }else{
@@ -930,10 +963,248 @@ cc.Class({
                 }
             }
             context.exchange_state("nextplayer" , context);
-        }else{
+            //右边玩家
+        }else if (player.tablepos == 'right'){
+            let cards_action;
+            let int ;
+            //去手牌 
+            if(data.action == 'dan'){int = data.cards.lenth};
+            if(data.action == 'peng' || data.action == 'chi'){int=2};
+            if(data.action == 'gang'){
+                if(data.card != null){
+                    int = 3;
+                    var gang = cc.find('Canvas/content/handcards/rightdesk/kong');
+                    for(let i = 0; i<gang.children[i];i++){
+                        let temp = gang.children[i].getComponent('DanAction');
+                        if(data.card ==temp.value){
+                            int = 1; 
+                        }
+                    }
+                }else{int = 4}
+            } 
+            //if(data.action ==)
+            for(let i = 0; i< int ;i++){
+                this.right_panel.children[i].destroy();
+                this.rightcards.splice(i,1);
+            };
+            //右边放牌
+            if(data.action == 'peng'||data.caction == 'gang'){
+                cards_action = cc.instantiate(context.right_gang_peng);
+                let temp_script = cards_action.getComponent("GangAction");
+                if(data.action == 'peng'){
+                    temp_script.init(data.card , false);
+                    cards_action.parent = context.right_loyal ;
+                }else if(data.action == 'gang' && int ==3){
+                    //补杠
+                    let gang = cc.find('Canvas/content/handcards/rightcard/kong');
+                    for(let i= 0  ; i< gang.children[i];i++){
+                        let temp = gang.children[i].getComponent('GangAction');
+                        if(data.cardtype == temp.mjtype && data.cardvalue == temp.mjvalue){
+                            temp.card_last.active =true;
+                        }
+                    }
+                }else if(data.action == 'gang' && data.card == null){
+                    //暗杠
+                    cards_action = cc.instantiate(context.right_an);
+                    cards_action.parent = context.right_loyal;
+                }else{
+                    //明杠
+                    temp_script.init(data.card , true);
+                    cards_action.parent = context.right_loyal ;
+                     
+                }
+            }else if(data.action == 'chi'){
+                function sortNumber(a,b){return b - a}
+                data.cards.push(data.card); 
+                data.cards.sort(sortNumber);
+                console.log(data.cards);
+                for(let i =0 ; i< data.cards.length;i++){
+                    var cards_action = cc.instantiate(context.left_chi);
+                    var temp = cards_action.getComponent('GangAction');
+                    temp.init(data.cards[i]);
+                    cards_action.parent = context.right_loyal ;
+                }
 
-        }
-        
+            }else if(data.action == 'dan'){
+                if(data.card && data.cards.length>=3){
+                    for(var i =0 ;i<data.cards.length;i++){
+                        var cards_action = cc.instantiate(context.right_dan);
+                        let  temp_script = cards_action.getComponent('DanAction');
+                        temp_script.init(data.cards[i]);
+                        cards_action.parent = context.right_danLoyad;
+                    };
+                }else{
+                    var dan = context.right_danLoyad;
+                    for(let i = 0; i<dan.children[i];i++){
+                        let temp = dan.children[i].getComponent('DanAction');
+                        if(data.card ==temp.value){
+                            temp.count.string = Number(Number(temp.count.string)+1);
+                        }
+                    }
+                }
+
+            }//左边玩家
+        }else if(player.tablepos == 'left' ){
+            let cards_action; 
+            let int ;
+            //去手牌
+            if(data.action == 'dan'){int = data.cards.lenth};
+            if(data.action == 'peng' || data.action == 'chi'){int=2};
+            if(data.action == 'gang'){
+                if(data.card != null){
+                    int = 3;
+                    var gang = cc.find('Canvas/content/handcards/leftdesk/kong');
+                    for(let i = 0; i<gang.children[i];i++){
+                        let temp = gang.children[i].getComponent('DanAction');
+                        if(data.card ==temp.value){
+                            int = 1; 
+                        }
+                    }
+                }else{int = 4}
+            } 
+            //if(data.action ==)
+            for(let i = 0; i< int ;i++){
+                this.left_panel.children[i].destroy();
+                this.leftcards.splice(i,1);
+            };
+            //右边放牌
+            if(data.action == 'peng'||data.caction == 'gang'){
+                cards_action = cc.instantiate(context.left_gang_peng);
+                let temp_script = cards_action.getComponent("GangAction");
+                if(data.action == 'peng'){
+                    temp_script.init(data.card , false);
+                    cards_action.parent = context.left_loyal ;
+                }else if(data.action == 'gang' && int ==3){
+                    //补杠
+                    let gang = cc.find('Canvas/content/handcards/leftcard/kong');
+                    for(let i= 0  ; i< gang.children[i];i++){
+                        let temp = gang.children[i].getComponent('GangAction');
+                        if(data.cardtype == temp.mjtype && data.cardvalue == temp.mjvalue){
+                            temp.card_last.active =true;
+                        }
+                    }
+                }else if(data.action == 'gang' && data.card == null){
+                    //暗杠
+                    cards_action = cc.instantiate(context.left_an);
+                    cards_action.parent = context.left_loyal;
+                }else{
+                    //明杠
+                    temp_script.init(data.card , true);
+                    cards_action.parent = context.left_loyal ;
+                     
+                }
+            }else if(data.action == 'chi'){
+                function sortNumber(a,b){return b - a}
+                data.cards.push(data.card); 
+                data.cards.sort(sortNumber);
+                console.log(data.cards);
+                for(let i =0 ; i< data.cards.length;i++){
+                    var cards_action = cc.instantiate(context.left_chi);
+                    var temp = cards_action.getComponent('GangAction');
+                    temp.init(data.cards[i]);
+                    cards_action.parent = context.left_loyal ;
+                }
+
+            }else if(data.action == 'dan'){
+                if(data.cards && data.cards.length>=3){
+                    for(var i =0 ;i<data.cards.length;i++){
+                        var cards_action = cc.instantiate(context.left_dan);
+                        let  temp_script = cards_action.getComponent('DanAction');
+                        temp_script.init(data.cards[i]);
+                        cards_action.parent = context.left_danLoyad;
+                    };
+                }else{
+                    var dan = context.left_danLoyad;
+                    for(let i = 0; i<dan.children[i];i++){
+                        let temp = dan.children[i].getComponent('DanAction');
+                        if(data.card ==temp.value){
+                            temp.count.string = Number(Number(temp.count.string)+1);
+                        }
+                    }
+                }
+
+            }
+        }else{//对家
+            let cards_action;
+            let int ;
+            //去手牌
+            if(data.action == 'dan'){int = data.cards.lenth};
+            if(data.action == 'peng' || data.action == 'chi'){int=2};
+            if(data.action == 'gang'){
+                if(data.card != null){
+                    int = 3;
+                    var gang = cc.find('Canvas/content/handcards/topdesk/kong');
+                    for(let i = 0; i<gang.children[i];i++){
+                        let temp = gang.children[i].getComponent('DanAction');
+                        if(data.card ==temp.value){
+                            int = 1; 
+                        }
+                    }
+                }else{int = 4}
+            } 
+            //if(data.action ==)
+            for(let i = 0; i< int ;i++){
+                this.top_panel.children[i].destroy();
+                this.topcards.splice(i,1);
+            }; 
+            //右边放牌
+            if(data.action == 'peng'||data.caction == 'gang'){
+                cards_action = cc.instantiate(context.top_gang_peng);
+                let temp_script = cards_action.getComponent("GangAction");
+                if(data.action == 'peng'){
+                    temp_script.init(data.card , false);
+                    cards_action.parent = context.top_loyal ;
+                }else if(data.action == 'gang' && int ==3){
+                    //补杠
+                    let gang = cc.find('Canvas/content/handcards/topcard/kong');
+                    for(let i= 0  ; i< gang.children[i];i++){
+                        let temp = gang.children[i].getComponent('GangAction');
+                        if(data.cardtype == temp.mjtype && data.cardvalue == temp.mjvalue){
+                            temp.card_last.active =true;
+                        }
+                    }
+                }else if(data.action == 'gang' && data.card == null){
+                    //暗杠
+                    cards_action = cc.instantiate(context.top_an);
+                    cards_action.parent = context.top_loyal;
+                }else{
+                    //明杠
+                    temp_script.init(data.card , true);
+                    cards_action.parent = context.top_loyal ;
+                     
+                }
+            }else if(data.action == 'chi'){
+                function sortNumber(a,b){return b - a}
+                data.cards.push(data.card); 
+                data.cards.sort(sortNumber);
+                console.log(data.cards);
+                for(let i =0 ; i< data.cards.length;i++){
+                    var cards_action = cc.instantiate(context.top_chi);
+                    var temp = cards_action.getComponent('GangAction');
+                    temp.init(data.cards[i]);
+                    cards_action.parent = context.top_loyal ;
+                }
+
+            }else if(data.action == 'dan'){
+                if(data.cards && data.cards.length>=3){
+                    for(var i =0 ;i<data.cards.length;i++){
+                        var cards_action = cc.instantiate(context.top_dan);
+                        let  temp_script = cards_action.getComponent('DanAction');
+                        temp_script.init(data.cards[i]);
+                        cards_action.parent = context.top_danLoyad;
+                    };
+                }else{ 
+                    var dan = context.top_danLoyad;
+                    for(let i = 0; i<dan.children[i];i++){
+                        let temp = dan.children[i].getComponent('DanAction');
+                        if(data.card ==temp.value){
+                            temp.count.string = Number(Number(temp.count.string)+1);
+                        }
+                    }
+                }
+
+            }
+    }
         if(data.action == 'peng'||(data.action == 'gang'&&count==3)||data.action=='chi'||data.action == 'hu'){
             //以下代码是用于找到 杠/碰/吃/胡牌的 目标牌  ， 然后将此牌 从 桌面牌中移除
 
@@ -944,6 +1215,8 @@ cc.Class({
                 deskcardpanel = context.deskcards_left_panel;
             } else if (temp.tablepos == "top") {
                 deskcardpanel = context.deskcards_top_panel;
+            }else{
+                deskcardpanel = context.deskcards_current_panel;
             }
             if (deskcardpanel.children.length > 0) {
                 deskcardpanel.children[deskcardpanel.children.length - 1].destroy();
@@ -1398,7 +1671,7 @@ cc.Class({
         }
     },
     mjOperation : function(event,params,context){
-            //this.selectfather.active = true;
+            this.selectfather.active = true;
             //context.card4.getComponent('operation').setAction(event);
             
             for(var i = 0 ; i < params.length;i++ ){
@@ -1408,6 +1681,7 @@ cc.Class({
                 b.parent = context.selectfather;
                 for(var j = 0 ; j< params[i].length; j++){
                     var a = cc.instantiate(context.mjUnit);
+                    a.getComponent('DeskCards').init(params[i][j]);
                     a.parent = b;
                     console.log(a.position);
                 }
