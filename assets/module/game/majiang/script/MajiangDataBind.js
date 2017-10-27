@@ -294,7 +294,7 @@ cc.Class({
                     let socket = self.socket();
                     socket.emit("selectaction" , JSON.stringify({
                         action:"ting",
-                        actionCard:[]
+                        actionCard:[card_script.value]
                     }));
                     cc.sys.localStorage.removeItem('ting') ;
                 } else {
@@ -1494,7 +1494,7 @@ cc.Class({
     // },
     cardModle: function(cards,parent,back,fangwei,context){
         if(cards.length == 1){
-            var cardOp = findCardForKong(parent,cards[0]) ;
+            var cardOp = context.findCardForKong(parent,cards[0]) ;
             let card = cc.instantiate(context.dan_current);
             let temp = card.getComponent('DanAction');
             temp.init(cards[i],false,fangwei);
@@ -1532,7 +1532,7 @@ cc.Class({
     findCardForKong: function(kong,card) {
         var resNode ;
         var isGang ;
-        var cardNum
+        var cardNum;
         for ( var i = 0 ; i < kong.children.length ; i++ ) {
             var cards = kong.children[i] ;
             var dans = cards.children ;
@@ -1551,7 +1551,7 @@ cc.Class({
                 break ;
             }
         }
-        return {cardNode:resNode,isGang:isGang,num:cardNum} ;
+        return {cardNode:resNode,isGang:isGang,cardNum:cardNum} ;
     },
     handCardRemove: function(data,context){
         if ( data.cards ) {
