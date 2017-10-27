@@ -1,5 +1,6 @@
+var beiMiCommon = require("BeiMiCommon");
 cc.Class({
-    extends: cc.Component,
+    extends: beiMiCommon,
 
     properties: {
         // foo: {
@@ -15,16 +16,32 @@ cc.Class({
         agree:{
             default:null,
             type: cc.Node
-        }
+        },
+		protocol1:{
+			default:null,
+            type: cc.Prefab
+		},
+		protocol2:{
+			default:null,
+            type: cc.Prefab
+		}
     },
 
     // use this for initialization
     onLoad: function () {
-
+		
     },
-    click: function(){
-        this.agree.active = !this.agree.active;
-    }
+    click: function(toggle){
+        this.agree.active = toggle.isChecked;
+    },
+	onProtocol1Click:function(event){
+		cc.beimi.dialog = cc.instantiate(this.protocol1) ;
+        cc.beimi.dialog.parent = this.root();
+	},
+	onProtocol2Click:function(){
+		cc.beimi.dialog = cc.instantiate(this.protocol2) ;
+        cc.beimi.dialog.parent = this.root();
+	}
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 
