@@ -43,11 +43,6 @@ cc.Class({
     },
 	updateItem: function(roomNum, gameNum, time, itemId,gamerInfo) {
         this.itemID = itemId;
-		var sprite = this.itemTemplate.getComponent(cc.Sprite);
-		var imgurl = 'http://tssb.bizpartner.cn/main/res/raw-assets/resources/images/other/bk-image.png';
-		cc.loader.load({url:imgurl,type:'png'},function(err,texture){
-			sprite.spriteFrame = new cc.SpriteFrame(texture);
-		})
 		this.label1.string = "房间号："+roomNum;
         this.label2.string = "局数："+gameNum;
 		this.label3.string = this.getNowFormatDate(time);
