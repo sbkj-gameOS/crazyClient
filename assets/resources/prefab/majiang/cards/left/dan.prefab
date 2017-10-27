@@ -260,12 +260,14 @@
     "beimi0": {
       "__uuid__": "c1a3894d-ecd5-4442-adcb-3363966af0a2"
     },
+    "atlas": null,
     "count": {
       "__id__": 8
     },
     "target": {
       "__id__": 2
-    }
+    },
+    "MJhead": null
   },
   {
     "__type__": "cc.Label",
@@ -374,6 +376,9 @@
     },
     "_enabled": true,
     "beimi0": {
+      "__uuid__": "d1d96e5c-707c-4fd6-a0d9-a07ed71d54c1"
+    },
+    "atlas": {
       "__uuid__": "c1a3894d-ecd5-4442-adcb-3363966af0a2"
     },
     "count": {
@@ -381,6 +386,9 @@
     },
     "target": {
       "__id__": 3
+    },
+    "MJhead": {
+      "__id__": 2
     }
   },
   {

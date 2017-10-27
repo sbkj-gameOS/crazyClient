@@ -43,6 +43,7 @@ cc.Class({
         });
     },
     init:function(cvalue){
+        //console.log('width:   '+this.target.width)
         this.value = cvalue ;
         let cardframe ;
         let cardcolors = parseInt(this.value/4 ) ;
@@ -87,7 +88,7 @@ cc.Class({
     relastone:function(){
         if(this.lastonecard == true){
             this.lastonecard = false;
-            this.target.width = this.target.width - 30 ;
+            this.target.width = 0 ;
         }
     },
     reinit:function(){

@@ -172,7 +172,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -1,
+      "x": -5,
       "y": 6
     },
     "_skewX": 0,
@@ -260,12 +260,14 @@
     "beimi0": {
       "__uuid__": "c1a3894d-ecd5-4442-adcb-3363966af0a2"
     },
+    "atlas": null,
     "count": {
       "__id__": 8
     },
     "target": {
       "__id__": 2
-    }
+    },
+    "MJhead": null
   },
   {
     "__type__": "cc.Label",
@@ -376,12 +378,14 @@
     "beimi0": {
       "__uuid__": "c1a3894d-ecd5-4442-adcb-3363966af0a2"
     },
+    "atlas": null,
     "count": {
       "__id__": 8
     },
     "target": {
       "__id__": 3
-    }
+    },
+    "MJhead": null
   },
   {
     "__type__": "cc.PrefabInfo",
