@@ -31,9 +31,6 @@ cc.Class({
     onLoad: function () {
 		
     },
-    click: function(toggle){
-        this.agree.active = toggle.isChecked;
-    },
 	onProtocol1Click:function(event){
 		cc.beimi.dialog = cc.instantiate(this.protocol1) ;
         cc.beimi.dialog.parent = this.root();
