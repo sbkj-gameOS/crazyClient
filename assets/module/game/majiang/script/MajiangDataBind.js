@@ -14,28 +14,11 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
-        left_gang_peng : cc.Prefab,
-        left_an : cc.Prefab,
-        left_chi : cc.Prefab,
-        left_dan :cc.Prefab,
-        left_loyal :cc.Node,
+        
         left_danLoyad: cc.Node,
-
-        right_gang_peng : cc.Prefab,
-        right_an : cc.Prefab,
-        right_chi : cc.Prefab,
-        right_dan :cc.Prefab,
-        right_loyal :cc.Node,
         right_danLoyad: cc.Node,
-
-        top_gang_peng : cc.Prefab,
-        top_an : cc.Prefab,
-        top_chi : cc.Prefab,
-        top_dan :cc.Prefab,
-        top_loyal :cc.Node,
         top_danLoyad: cc.Node,
 
-        chiCards: cc.Prefab,
         danLoyad: cc.Node,
         card4:cc.Node,
         mjUnit:cc.Prefab,
@@ -277,7 +260,7 @@ cc.Class({
 
             this.map("allcards" , this.allcards_event) ;                //我出的牌
             
-            //this.dosomething({action:'chi',card:103,cards:[13,24]},this);
+            //this.dosomething({},this);
             socket.on("command" , function(result){
                 var data = self.parse(result) ;
                 console.log(data.command);
@@ -381,7 +364,7 @@ cc.Class({
         });
         this.node.on("dan",function(event){
             var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
-            if ( context.dans || context.dans.length > 1 ) {
+            if ( context.dans && context.dans.length > 1 ) {
                 context.mjOperation('dan', context.dans,context);
             } else {
                 let socket = self.socket();
@@ -398,7 +381,7 @@ cc.Class({
         });
         this.node.on("gang",function(event){
             var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
-            if ( context.gangs || context.gangs.length > 1 ) {
+            if ( context.gangs && context.gangs.length > 1 ) {
                 context.mjOperation('gang', context.gangs,context);
             } else {
                 let socket = self.socket();
@@ -830,15 +813,13 @@ cc.Class({
        // }
     },
     selectaction_event:function(data , context){
-        let player = context.player(data.userid , context);
-        let count = 0;
+        let player = context.player(data.userid , context), opParent, count = 0;
         /**
          * 杠碰吃，胡都需要将牌从 触发玩家的 桌牌 里 移除，然后放入当前玩家 桌牌列表里，如果是胡牌，则放到 胡牌 列表里，首先
          * 首先，需要找到触发对象，如果触发对象不是 all ， 则 直接找到 对象对应的玩家 桌牌列表，并找到 桌牌里 的最后 的 牌，
          * 然后将此牌 移除即可，如果对象是 all， 则不用做任何处理即可
          */
         if(cc.beimi.user.id == data.userid){
-            
             /**
              * 碰，显示碰的动画，
              * 杠，显示杠的动画，杠分为：明杠，暗杠，弯杠，每种动画效果不同，明杠/暗杠需要扣三家分，弯杠需要扣一家分
@@ -858,354 +839,110 @@ cc.Class({
                 context.select_action_searchlight(data, context , player) ;
 
             }
-
-
-            /**
-             * 杠后移除当前手牌，进入到 杠 列表里  这里为通用 方法  不管是起手还是中途补  都会判定 并且去掉手牌
-             */
-            // let array = [];
-            // for(let inx = 0 ; inx < context.playercards.length ; inx++ ){
-            //     array[inx] = context.playercards[inx]
-            // }
-            if(data.action == 'dan'&& data.cards){
-                for(let i =0 ;i< data.cards.length; i++){
-                    for(let inx = 0 ; inx < context.playercards.length ; inx++ ){
-                        let temp = context.playercards[inx].getComponent("HandCards");
-                        if(data.cards[i]== temp.value){
-                            context.cardpool.put(context.playercards[inx]) ;
-                            context.playercards.splice(inx, 1) ;
-                        }
-                    }
-                }
-            }else{
-                for(var inx = 0 ; inx < context.playercards.length ; ){
-                    let temp = context.playercards[inx].getComponent("HandCards");
-                    if(data.cardtype == temp.mjtype && data.cardvalue == temp.mjvalue){
-                        context.cardpool.put(context.playercards[inx]) ;
-                        context.playercards.splice(inx, 1) ;
-                    }else{
-                        inx++ ;
-                    }
-                };
-            }
-            //下蛋  将手牌 除去
+            context.handCardRemove(data,context);//碰、点杠等情况只有data.card的情况需要处理。
+            let opCards , back = false , fangwei = player.tablepos ;
+            //根据方位判断parent
             
-
-            let cards_action ;
-            
-
-            /**
-             * 刚和碰共用一个 Prefab，都是来自于 cards_action_ming_prefab ，显示方式也相同， 区别在于：刚显示四张牌，碰显示两张牌
-             */
-            // if(data.actype == "an"){
-            //     cards_action = cc.instantiate(context.cards_gang_an_prefab);
-            // }else{
-            if(data.action == 'gang' || data.action == 'peng'){
-                cards_action = cc.instantiate(context.cards_gang_ming_prefab);
-                let temp_script = cards_action.getComponent("GangAction");
-                if(data.action == "gang"){
-                    
-                    for(var inx = 0 ; inx < context.playercards.length ; inx++){
-                        let temp = context.playercards[inx].getComponent("HandCards");
-                        if(data.cardtype == temp.mjtype && data.cardvalue == temp.mjvalue){
-                            ++count; 
-                        }
-                    };
-                    if(count == 3){
-                        temp_script.init(data.card , true);
-                        cards_action.parent = context.gang_current ;
-                    }else if(count == 4){
-                        cards_action = cc.instantiate(context.cards_gang_an_prefab);
-                        let temp_script = cards_action.getComponent("GangAction");
-                        temp_script.init(data.card , true);
-                        cards_action.parent = context.gang_current ;
-                    }else{
-                        let gang = cc.find('Canvas/content/handcards/deskcard/kong');
-                        for(let i= 0  ; i< gang.children[i];i++){
-                            let temp = gang.children[i].getComponent('GangAction');
-                            if(data.cardtype == temp.mjtype && data.cardvalue == temp.mjvalue){
-                                temp.card_last.active =true;
-                            }
-                        }
-                    }
-                }else if(data.action == "peng"){
-                    temp_script.init(data.card , false);
-                    cards_action.parent = context.gang_current ;
-                }
-            }else if(data.action == "dan"){
-                //cards_dan = cc.instantiate(context.dan_current)
-                if(data.cards && data.cards.length>=3){
-                    for(var i =0 ;i<data.cards.length;i++){
-                        var cards_action = cc.instantiate(context.dan_current);
-                        let  temp_script = cards_action.getComponent('DanAction');
-                        temp_script.init(data.cards[i]);
-                        cards_action.parent = context.danLoyad;
-                    };
-                }else{
-                    var dan = cc.find('Canvas/content/handcards/deskcard/dan');
-                    for(let i = 0; i<dan.children[i];i++){
-                        let temp = dan.children[i].getComponent('DanAction');
-                        if(data.card ==temp.value){
-                            temp.count.string = Number(Number(temp.count.string)+1);
-                        }
-                    }
-                }
-            }else if(data.action == "chi"){
+            opParent = cc.find("Canvas/content/handcards/deskcard/kong") ;
+            if(data.action == "chi"){
                 function sortNumber(a,b){return b - a}
                 data.cards.push(data.card); 
                 data.cards.sort(sortNumber);
-                console.log(data.cards);
-                for(let i =0 ; i< data.cards.length;i++){
-                    var cards_action = cc.instantiate(context.chiCards);
-                    var temp = cards_action.getComponent('GangAction');
-                    temp.init(data.cards[i]);
-                    cards_action.parent = context.gang_current ;
+                opCards = data.cards;
+            } else if ( data.action == "peng" ) {
+                data.cards.push(data.card); 
+                opCards = data.cards;
+            } else if ( data.action == "gang" ) {
+                if ( data.card && data.card != -1 ) {
+                    data.cards.push(data.card);
                 }
+                if ( data.actype == 'an' ){
+                    back = true ;
+                }
+
+                opCards = data.cards;
+            } else if ( data.action == "dan" ) {
+                opCards = data.cards;
             }
-            context.exchange_state("nextplayer" , context);
-            //右边玩家
+            context.cardModle(opCards,opParent,back,fangwei,context);//补杠和补蛋的时候，逻辑需要区分。
         }else if (player.tablepos == 'right'){
-            let cards_action;
-            let int ;
-            //去手牌 
-            if(data.action == 'dan'){int = data.cards.lenth};
-            if(data.action == 'peng' || data.action == 'chi'){int=2};
-            if(data.action == 'gang'){
-                if(data.card != null){
-                    int = 3;
-                    var gang = cc.find('Canvas/content/handcards/rightdesk/kong');
-                    for(let i = 0; i<gang.children[i];i++){
-                        let temp = gang.children[i].getComponent('DanAction');
-                        if(data.card ==temp.value){
-                            int = 1; 
-                        }
-                    }
-                }else{int = 4}
-            } 
-            //if(data.action ==)
-            for(let i = 0; i< int ;i++){
-                this.right_panel.children[i].destroy();
-                this.rightcards.splice(i,1);
-            };
-            //右边放牌
-            if(data.action == 'peng'||data.caction == 'gang'){
-                cards_action = cc.instantiate(context.right_gang_peng);
-                let temp_script = cards_action.getComponent("GangAction");
-                if(data.action == 'peng'){
-                    temp_script.init(data.card , false);
-                    cards_action.parent = context.right_loyal ;
-                }else if(data.action == 'gang' && int ==3){
-                    //补杠
-                    let gang = cc.find('Canvas/content/handcards/rightcard/kong');
-                    for(let i= 0  ; i< gang.children[i];i++){
-                        let temp = gang.children[i].getComponent('GangAction');
-                        if(data.cardtype == temp.mjtype && data.cardvalue == temp.mjvalue){
-                            temp.card_last.active =true;
-                        }
-                    }
-                }else if(data.action == 'gang' && data.card == null){
-                    //暗杠
-                    cards_action = cc.instantiate(context.right_an);
-                    cards_action.parent = context.right_loyal;
-                }else{
-                    //明杠
-                    temp_script.init(data.card , true);
-                    cards_action.parent = context.right_loyal ;
-                     
-                }
-            }else if(data.action == 'chi'){
+            opParent = cc.find("Canvas/content/handcards/"+player.tablepos+"desk/kong") ;
+            otherHandCardRemove(data,cotext);
+            let opCards , back = false , fangwei = player.tablepos ;
+            if(data.action =='chi'){
                 function sortNumber(a,b){return b - a}
                 data.cards.push(data.card); 
                 data.cards.sort(sortNumber);
-                console.log(data.cards);
-                for(let i =0 ; i< data.cards.length;i++){
-                    var cards_action = cc.instantiate(context.left_chi);
-                    var temp = cards_action.getComponent('GangAction');
-                    temp.init(data.cards[i]);
-                    cards_action.parent = context.right_loyal ;
+                opCards = data.cards;
+            }else if(data.action == 'peng'){
+                data.cards.push(data.card); 
+                opCards = data.cards;
+            }else if(data.action == 'gang'){
+                if ( data.card && data.card != -1 ) {
+                    data.cards.push(data.card);
                 }
-
+                if ( data.actype == 'an' ){
+                    back = true ;
+                }
+                opCards = data.cards;
             }else if(data.action == 'dan'){
-                if(data.card && data.cards.length>=3){
-                    for(var i =0 ;i<data.cards.length;i++){
-                        var cards_action = cc.instantiate(context.right_dan);
-                        let  temp_script = cards_action.getComponent('DanAction');
-                        temp_script.init(data.cards[i]);
-                        cards_action.parent = context.right_danLoyad;
-                    };
-                }else{
-                    var dan = context.right_danLoyad;
-                    for(let i = 0; i<dan.children[i];i++){
-                        let temp = dan.children[i].getComponent('DanAction');
-                        if(data.card ==temp.value){
-                            temp.count.string = Number(Number(temp.count.string)+1);
-                        }
-                    }
-                }
-
-            }//左边玩家
+                opCards = data.cards;
+            }
+            context.cardModle(opCards,opParent,back,fangwei,context);
+            
         }else if(player.tablepos == 'left' ){
-            let cards_action; 
-            let int ;
-            //去手牌
-            if(data.action == 'dan'){int = data.cards.lenth};
-            if(data.action == 'peng' || data.action == 'chi'){int=2};
-            if(data.action == 'gang'){
-                if(data.card != null){
-                    int = 3;
-                    var gang = cc.find('Canvas/content/handcards/leftdesk/kong');
-                    for(let i = 0; i<gang.children[i];i++){
-                        let temp = gang.children[i].getComponent('DanAction');
-                        if(data.card ==temp.value){
-                            int = 1; 
-                        }
-                    }
-                }else{int = 4}
-            } 
-            //if(data.action ==)
-            for(let i = 0; i< int ;i++){
-                this.left_panel.children[i].destroy();
-                this.leftcards.splice(i,1);
-            };
-            //右边放牌
-            if(data.action == 'peng'||data.caction == 'gang'){
-                cards_action = cc.instantiate(context.left_gang_peng);
-                let temp_script = cards_action.getComponent("GangAction");
-                if(data.action == 'peng'){
-                    temp_script.init(data.card , false);
-                    cards_action.parent = context.left_loyal ;
-                }else if(data.action == 'gang' && int ==3){
-                    //补杠
-                    let gang = cc.find('Canvas/content/handcards/leftcard/kong');
-                    for(let i= 0  ; i< gang.children[i];i++){
-                        let temp = gang.children[i].getComponent('GangAction');
-                        if(data.cardtype == temp.mjtype && data.cardvalue == temp.mjvalue){
-                            temp.card_last.active =true;
-                        }
-                    }
-                }else if(data.action == 'gang' && data.card == null){
-                    //暗杠
-                    cards_action = cc.instantiate(context.left_an);
-                    cards_action.parent = context.left_loyal;
-                }else{
-                    //明杠
-                    temp_script.init(data.card , true);
-                    cards_action.parent = context.left_loyal ;
-                     
-                }
-            }else if(data.action == 'chi'){
+            opParent = cc.find("Canvas/content/handcards/"+player.tablepos+"desk/kong") ;
+            otherHandCardRemove(data,cotext);
+            let opCards , back = false , fangwei = player.tablepos ;
+            if(data.action =='chi'){
                 function sortNumber(a,b){return b - a}
                 data.cards.push(data.card); 
                 data.cards.sort(sortNumber);
-                console.log(data.cards);
-                for(let i =0 ; i< data.cards.length;i++){
-                    var cards_action = cc.instantiate(context.left_chi);
-                    var temp = cards_action.getComponent('GangAction');
-                    temp.init(data.cards[i]);
-                    cards_action.parent = context.left_loyal ;
+                opCards = data.cards;
+            }else if(data.action == 'peng'){
+                data.cards.push(data.card); 
+                opCards = data.cards;
+            }else if(data.action == 'gang'){
+                if ( data.card && data.card != -1 ) {
+                    data.cards.push(data.card);
                 }
-
+                if ( data.actype == 'an' ){
+                    back = true ;
+                }
+                opCards = data.cards;
             }else if(data.action == 'dan'){
-                if(data.cards && data.cards.length>=3){
-                    for(var i =0 ;i<data.cards.length;i++){
-                        var cards_action = cc.instantiate(context.left_dan);
-                        let  temp_script = cards_action.getComponent('DanAction');
-                        temp_script.init(data.cards[i]);
-                        cards_action.parent = context.left_danLoyad;
-                    };
-                }else{
-                    var dan = context.left_danLoyad;
-                    for(let i = 0; i<dan.children[i];i++){
-                        let temp = dan.children[i].getComponent('DanAction');
-                        if(data.card ==temp.value){
-                            temp.count.string = Number(Number(temp.count.string)+1);
-                        }
-                    }
-                }
-
+                opCards = data.cards;
             }
+            context.cardModle(opCards,opParent,back,fangwei,context);
+            
+ 
         }else{//对家
-            let cards_action;
-            let int ;
-            //去手牌
-            if(data.action == 'dan'){int = data.cards.lenth};
-            if(data.action == 'peng' || data.action == 'chi'){int=2};
-            if(data.action == 'gang'){
-                if(data.card != null){
-                    int = 3;
-                    var gang = cc.find('Canvas/content/handcards/topdesk/kong');
-                    for(let i = 0; i<gang.children[i];i++){
-                        let temp = gang.children[i].getComponent('DanAction');
-                        if(data.card ==temp.value){
-                            int = 1; 
-                        }
-                    }
-                }else{int = 4}
-            } 
-            //if(data.action ==)
-            for(let i = 0; i< int ;i++){
-                this.top_panel.children[i].destroy();
-                this.topcards.splice(i,1);
-            }; 
-            //右边放牌
-            if(data.action == 'peng'||data.caction == 'gang'){
-                cards_action = cc.instantiate(context.top_gang_peng);
-                let temp_script = cards_action.getComponent("GangAction");
-                if(data.action == 'peng'){
-                    temp_script.init(data.card , false);
-                    cards_action.parent = context.top_loyal ;
-                }else if(data.action == 'gang' && int ==3){
-                    //补杠
-                    let gang = cc.find('Canvas/content/handcards/topcard/kong');
-                    for(let i= 0  ; i< gang.children[i];i++){
-                        let temp = gang.children[i].getComponent('GangAction');
-                        if(data.cardtype == temp.mjtype && data.cardvalue == temp.mjvalue){
-                            temp.card_last.active =true;
-                        }
-                    }
-                }else if(data.action == 'gang' && data.card == null){
-                    //暗杠
-                    cards_action = cc.instantiate(context.top_an);
-                    cards_action.parent = context.top_loyal;
-                }else{
-                    //明杠
-                    temp_script.init(data.card , true);
-                    cards_action.parent = context.top_loyal ;
-                     
-                }
-            }else if(data.action == 'chi'){
+            opParent = cc.find("Canvas/content/handcards/"+player.tablepos+"desk/kong") ;
+            otherHandCardRemove(data,cotext);
+            let opCards , back = false , fangwei = player.tablepos ;
+            if(data.action =='chi'){
                 function sortNumber(a,b){return b - a}
                 data.cards.push(data.card); 
                 data.cards.sort(sortNumber);
-                console.log(data.cards);
-                for(let i =0 ; i< data.cards.length;i++){
-                    var cards_action = cc.instantiate(context.top_chi);
-                    var temp = cards_action.getComponent('GangAction');
-                    temp.init(data.cards[i]);
-                    cards_action.parent = context.top_loyal ;
+                opCards = data.cards;
+            }else if(data.action == 'peng'){
+                data.cards.push(data.card); 
+                opCards = data.cards;
+            }else if(data.action == 'gang'){
+                if ( data.card && data.card != -1 ) {
+                    data.cards.push(data.card);
                 }
-
+                if ( data.actype == 'an' ){
+                    back = true ;
+                }
+                opCards = data.cards;
             }else if(data.action == 'dan'){
-                if(data.cards && data.cards.length>=3){
-                    for(var i =0 ;i<data.cards.length;i++){
-                        var cards_action = cc.instantiate(context.top_dan);
-                        let  temp_script = cards_action.getComponent('DanAction');
-                        temp_script.init(data.cards[i]);
-                        cards_action.parent = context.top_danLoyad;
-                    };
-                }else{ 
-                    var dan = context.top_danLoyad;
-                    for(let i = 0; i<dan.children[i];i++){
-                        let temp = dan.children[i].getComponent('DanAction');
-                        if(data.card ==temp.value){
-                            temp.count.string = Number(Number(temp.count.string)+1);
-                        }
-                    }
-                }
-
+                opCards = data.cards;
             }
-    }
-        if(data.action == 'peng'||(data.action == 'gang'&&count==3)||data.action=='chi'||data.action == 'hu'){
+            context.cardModle(opCards,opParent,back,fangwei,context);
+         
+        }
+        if(data.action == 'peng'||(data.action == 'gang'&&data.cards.length==3)||data.action=='chi'||data.action == 'hu'){
             //以下代码是用于找到 杠/碰/吃/胡牌的 目标牌  ， 然后将此牌 从 桌面牌中移除
 
             let temp = context.player(data.target, context), deskcardpanel;
@@ -1725,7 +1462,110 @@ cc.Class({
     // update: function (dt) {
 
     // },
-    dosomething: function (data , context){
-        //用于测试
+    cardModle: function(cards,parent,back,fangwei,context){
+        if(cards.length == 1){
+            var cardOp = findCardForKong(parent,cards[0]) ;
+            let card = cc.instantiate(context.dan_current);
+            let temp = card.getComponent('DanAction');
+            temp.init(cards[i],false,fangwei);
+            if ( cardOp.isGang ) {
+                card.parent = cardOp.cardNode ;
+            } else {
+                var count = cardOp.cardNode.children[cardOp.cardNum];
+                count.string = Number(Number(count.string)+1);
+            }
+        }else{
+            let cardParent = null ;
+            if(fangwei == 'top'){
+                cardParent = cc.instantiate(context.top_danLoyad);
+            }else if(fangwei == 'left'){
+                cardParent = cc.instantiate(context.left_danLoyad);
+            }else if(fangwei == 'right'){
+                cardParent = cc.instantiate(context.right_danLoyad);
+            }else{
+                cardParent = cc.instantiate(context.one_card_panel) ;
+            }
+            for(let i = 0 ; i< cards.length;i++){
+                let card = cc.instantiate(context.dan_current);
+                
+                let temp = card.getComponent('DanAction');
+                if ( i == 2 && back == true ) {
+                    temp.init(cards[i],false,fangwei);
+                } else {
+                    temp.init(cards[i],back,fangwei);
+                }
+                card.parent = cardParent;
+            }
+            cardParent.parent = parent ;
+        }       
     },
+    findCardForKong: function(kong,card) {
+        var resNode ;
+        var isGang ;
+        var cardNum
+        for ( var i = 0 ; i < kong.children.length ; i++ ) {
+            var cards = kong.children[i] ;
+            var dans = cards.children ;
+            isGang = true ;
+            for ( var j = 0 ; j<dans.length; j++ ){
+                var cardUnit = dans[j] ;
+                if ( card == cardUnit.getComponent("DanAction").value ) {
+                    resNode = cards ;
+                    cardNum = i;
+                } else if ( card != cardUnit.getComponent("DanAction").value) {
+                    isGang = false ;
+                }
+            }
+            if ( isGang ){
+                resNode = cards ;
+                break ;
+            }
+        }
+        return {cardNode:resNode,isGang:isGang,num:cardNum} ;
+    },
+    handCardRemove: function(data,context){
+        if ( data.cards ) {
+            for(let i =0 ;i< data.cards.length; i++){
+                for(let inx = 0 ; inx < context.playercards.length ; inx++ ){
+                    let temp = context.playercards[inx].getComponent("HandCards");
+                    if(data.cards[i]== temp.value){
+                        context.cardpool.put(context.playercards[inx]) ;
+                        context.playercards.splice(inx, 1) ;
+                    }
+                }
+            }
+        }
+        if ( data.card != -1 ) {
+            for(var inx = 0 ; inx < context.playercards.length ; ){
+                let temp = context.playercards[inx].getComponent("HandCards");
+                if(data.card == temp.value){
+                    context.cardpool.put(context.playercards[inx]) ;
+                    context.playercards.splice(inx, 1) ;
+                    break ;
+                }else{
+                    inx++ ;
+                }
+            }
+        }
+    },
+    otherHandCardRemove: function(data,context){
+        for(let i = 0 ; i<data.cards.length; i++){
+            context.right_panel.children[i].destroy();
+            context.rightcards.splice(i,1);
+        }      
+    },
+    dosomething: function (data , context){
+        this.cardModle([19,21,12],cc.find("Canvas/content/handcards/leftdesk/kong"),true,'left',context);
+        this.cardModle([19,21,12],cc.find("Canvas/content/handcards/leftdesk/kong"),true,'left',context);
+        this.cardModle([19,20,12],cc.find("Canvas/content/handcards/rightdesk/kong"),true,'right',context);
+        this.cardModle([20,21,12],cc.find("Canvas/content/handcards/rightdesk/kong"),true,'right',context);
+        
+        this.cardModle([19,20,12],cc.find("Canvas/content/handcards/topdesk/kong"),true,'top',context);
+        this.cardModle([19,20,21],cc.find("Canvas/content/handcards/topdesk/kong"),true,'top',context);
+        
+        this.cardModle([12,20,21],cc.find("Canvas/content/handcards/deskcard/kong"),true,'',context);
+        this.cardModle([20,12,21],cc.find("Canvas/content/handcards/deskcard/kong"),true,'',context);
+        
+    },
+
 });
