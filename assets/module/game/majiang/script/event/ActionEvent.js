@@ -22,6 +22,9 @@ cc.Class({
     },
     onClick:function(event , data){
         this.node.dispatchEvent( new cc.Event.EventCustom(data, true) );
+    },
+    click: function(event){
+        event.target.active = false;
     }
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {

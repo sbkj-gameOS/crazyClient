@@ -19,6 +19,7 @@ cc.Class({
         right_danLoyad: cc.Node,
         top_danLoyad: cc.Node,
 
+        allbord: cc.Node,
         danLoyad: cc.Node,
         card4:cc.Node,
         mjUnit:cc.Prefab,
@@ -146,14 +147,6 @@ cc.Class({
             default:null ,
             type : cc.Prefab
         },
-        cards_gang_ming_prefab:{
-            default:null ,
-            type : cc.Prefab
-        },
-        cards_gang_an_prefab:{
-            default:null ,
-            type : cc.Prefab
-        },
         gang_current:{        //动作节点
             default:null ,
             type : cc.Node
@@ -260,7 +253,7 @@ cc.Class({
 
             this.map("allcards" , this.allcards_event) ;                //我出的牌
             
-            //this.dosomething({},this);
+            //this.dosomething({player:{power:[3,2]}},this);
             socket.on("command" , function(result){
                 var data = self.parse(result) ;
                 console.log(data.command);
@@ -304,9 +297,11 @@ cc.Class({
                         actionCard:[]
                     }));
                     cc.sys.localStorage.removeItem('ting') ;
-                } else {    
+                } else {
                     socket.emit("doplaycards" , card_script.value) ;
                 }
+                //cc.find("");
+                self.shouOperationMune();
             }
             event.stopPropagation();
         });
@@ -330,8 +325,10 @@ cc.Class({
             var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
             cc.find('Canvas/global/main/button/readybtn').active =true;   
             context.reinitGame();
-            //context.collect(context);  
-            event.target.parent.destroy();
+            //context.collect(context);
+             //cc.find("");
+             self.shouOperationMune();
+             event.target.parent.destroy();             
         });
         this.node.on('mjSelection',function(event){
             event.target.parent.parent.active= false;
@@ -348,6 +345,8 @@ cc.Class({
                 action:sendEvent,
                 actionCard:params
             }));
+            //cc.find("");
+            self.shouOperationMune();
             event.stopPropagation();
         });
         /**
@@ -360,6 +359,8 @@ cc.Class({
                 action:"peng",
                 actionCard:[]
             }));
+            //cc.find("");
+            self.shouOperationMune();
             event.stopPropagation();
         });
         this.node.on("dan",function(event){
@@ -377,6 +378,8 @@ cc.Class({
                     actionCard:danParam
                 }));
             }
+            //cc.find("");
+            self.shouOperationMune();
             event.stopPropagation();
         });
         this.node.on("gang",function(event){
@@ -394,6 +397,8 @@ cc.Class({
                     actionCard:gangParam
                 }));
             }
+            //cc.find("");
+            self.shouOperationMune();
             event.stopPropagation();
         });
 
@@ -411,6 +416,8 @@ cc.Class({
                     actionCard:context.chis[0]
                 }));
             }
+            //cc.find("");
+            self.shouOperationMune();
             event.stopPropagation();
         });
         /**
@@ -435,6 +442,8 @@ cc.Class({
                 action:"hu",
                 actionCard:[]
             }));
+            //cc.find("");
+            self.shouOperationMune();
             event.stopPropagation();
         });
         /**
@@ -446,6 +455,8 @@ cc.Class({
                 action:"guo",
                 actionCard:[]
             }));
+            //cc.find("");
+            self.shouOperationMune();
             event.stopPropagation();
         });
         
@@ -501,6 +512,7 @@ cc.Class({
         if(data.userid == cc.beimi.user.id) {
             for (var inx = 0; inx < context.playercards.length;i++ ) {
                 let handcards = context.playercards[inx].getComponent("HandCards");
+                handcards.relastone();
                 if (data.card == handcards.value) {
                     context.playercards[inx].zIndex = 0 ;
                     /**
@@ -597,7 +609,7 @@ cc.Class({
         let player = context.player(data.userid , context);
         context.select_action_searchlight(data, context , player) ;
 
-        if(data.userid == cc.beimi.user.id){
+        if(data.userid == cc.beimi.user.id){    
             context.initDealHandCards(context , data);
         }else{
             let inx = 0 ;
@@ -611,6 +623,23 @@ cc.Class({
         }
        
         context.desk_cards.string = data.deskcards ;
+        if(data.power){
+            if(data.powerCard&&data.powerCard.length>0){
+                cc.find('Canvas/global/main/godcard/child').children[0].active = false;
+                for(let i= 0 ; i<data.powerCard.length;i++){
+                    var laiziZM = cc.instantiate(context.ZM);
+                    laiziZM.parent = context.godcard.children[0];
+                    var LZH  = laiziZM.getComponent('DeskCards');
+                    LZH.init(data.powerCard[i]);
+                }
+            }else{
+                var laiziFM = cc.instantiate(context.FM);
+                var LZH = laiziFM.getComponent('DeskCards');
+                LZH.init(-4);
+                laiziFM.parent = context.godcard.children[0];
+                console.log(laiziFM.position);
+            }
+        }
     },
     select_action_searchlight:function(data , context , player){
         context.exchange_searchlight(player.tablepos , context);
@@ -622,7 +651,7 @@ cc.Class({
         //结算界面，
         let temp = cc.instantiate(context.summary) ;
         temp.parent = context.root() ;
-        temp.getComponent('SummaryClick').setData(data);
+        temp.getComponent('SummaryClick').setData(data); 
     },
     /**
      * 恢复牌局数据， 等待服务端推送 Players数据后进行恢复
@@ -1031,16 +1060,19 @@ cc.Class({
         //this.statusbtn.active = true ;
         //ljh改  神牌
         if(data.player.power){
-            if(data.player.powercard&&data.player.powercard.length>0){
-                for(let i= 0 ; i<data.player.powercard.length;i++){
+            if(data.player.powerCard&&data.player.powerCard.length>0){
+                cc.find('Canvas/global/main/godcard/child').children[0].active = false;
+                for(let i= 0 ; i<data.player.powerCard.length;i++){
                     var laiziZM = cc.instantiate(context.ZM);
                     laiziZM.parent = context.godcard.children[0];
                     var LZH  = laiziZM.getComponent('DeskCards');
-                    LZH.init(data.player.value);
+                    LZH.init(data.player.powerCard[i]);
                 }
             }else{
                 var laiziFM = cc.instantiate(context.FM);
-                laiziFM.parent = context.godcard;
+                var LZH = laiziFM.getComponent('DeskCards');
+                LZH.init(-4);
+                laiziFM.parent = context.godcard.children[0];
                 console.log(laiziFM.position);
             }
         }      
@@ -1345,14 +1377,10 @@ cc.Class({
                     if(object.action == "two"){
                         // let ani = object.actionnode_two.getComponent(cc.Animation);
                         // ani.play("majiang_action_end") ;
-                        var action = cc.moveTo(0.5,1122,-147);
-                        object.actionnode_two.runAction(action);
                     }else if(object.action == "three") {
                         let ani = object.actionnode_three.getComponent(cc.Animation);
                         ani.play("majiang_three_action_end") ;
                     }else if(object.action == "deal") {
-                        var action = cc.moveTo(0.5,1122,-147);
-                        object.actionnode_two.runAction(action);
                         object.actionnode_deal.active = false ;
                     }
                 }
@@ -1425,37 +1453,39 @@ cc.Class({
             }
     },
     reinitGame: function(){
-        for(let i = 0; i< this.deskcards_current_panel.children.length ;i++){
-            this.deskcards_current_panel.children[i].destroy();
-        };
-        for(let i = 0; i< this.deskcards_left_panel.children.length ;i++){
-            this.deskcards_left_panel.children[i].destroy();
-        };
-        for(let i = 0; i< this.deskcards_right_panel.children.length ;i++){
-            this.deskcards_right_panel.children[i].destroy();
-        };
-        for(let i = 0; i< this.deskcards_top_panel.children.length ;i++){
-            this.deskcards_top_panel.children[i].destroy();
-        };
-        for(let i = 0; i< this.cards_panel.children.length ;i++){
-            this.cardpool.put(this.playercards[i])
-            this.playercards.splice(i, 1);
-        };
-        for(let i = 0; i< this.left_panel.children.length ;i++){
-            this.left_panel.children[i].destroy();
-            this.leftcards.splice(i,1);
-        };
-        for(let i = 0; i< this.right_panel.children.length ;i++){
-            this.right_panel.children[i].destroy();
-            this.rightcards.splice(i,1);
-        };
-        for(let i = 0; i< this.top_panel.children.length ;i++){
-            this.top_panel.children[i].destroy();
-            this.topcards.splice(i,1);
-        };
-        for(let i = 0; i< this.gang_current.children.length ;i++){
-            this.gang_current.children[i].destroy();
-        }
+        //for(let j = 0 ; j< 4; j++){
+            for(let i = 0; i< this.deskcards_current_panel.children.length ;i++){
+                this.deskcards_current_panel.children[i].destroy();
+            };
+            for(let i = 0; i< this.deskcards_left_panel.children.length ;i++){
+                this.deskcards_left_panel.children[i].destroy();
+            };
+            for(let i = 0; i< this.deskcards_right_panel.children.length ;i++){
+                this.deskcards_right_panel.children[i].destroy();
+            };
+            for(let i = 0; i< this.deskcards_top_panel.children.length ;i++){
+                this.deskcards_top_panel.children[i].destroy();
+            };
+            for(let i = 0; i< this.cards_panel.children.length ;i++){
+                this.cardpool.put(this.playercards[i])
+                this.playercards.splice(i, 1);
+            };
+            for(let i = 0; i< this.left_panel.children.length ;i++){
+                this.left_panel.children[i].destroy();
+                this.leftcards.splice(i,1);
+            };
+            for(let i = 0; i< this.right_panel.children.length ;i++){
+                this.right_panel.children[i].destroy();
+                this.rightcards.splice(i,1);
+            };
+            for(let i = 0; i< this.top_panel.children.length ;i++){
+                this.top_panel.children[i].destroy();
+                this.topcards.splice(i,1);
+            };
+            for(let i = 0; i< this.gang_current.children.length ;i++){
+                this.gang_current.children[i].destroy();
+            }   
+       // }
     },
     
     // called every frame, uncomment this function to activate update callback
@@ -1554,17 +1584,38 @@ cc.Class({
             context.rightcards.splice(i,1);
         }      
     },
+    shouOperationMune: function(){
+        var action = cc.moveTo(0.5,1122,-147);
+        var control = cc.find("") ;
+        this.actionnode_two.runAction(action);
+    },
     dosomething: function (data , context){
-        this.cardModle([19,21,12],cc.find("Canvas/content/handcards/leftdesk/kong"),true,'left',context);
-        this.cardModle([19,21,12],cc.find("Canvas/content/handcards/leftdesk/kong"),true,'left',context);
-        this.cardModle([19,20,12],cc.find("Canvas/content/handcards/rightdesk/kong"),true,'right',context);
-        this.cardModle([20,21,12],cc.find("Canvas/content/handcards/rightdesk/kong"),true,'right',context);
+        // this.cardModle([19,21,12],cc.find("Canvas/content/handcards/leftdesk/kong"),true,'left',context);
+        // this.cardModle([19,21,12],cc.find("Canvas/content/handcards/leftdesk/kong"),true,'left',context);
+        // this.cardModle([19,20,12],cc.find("Canvas/content/handcards/rightdesk/kong"),true,'right',context);
+        // this.cardModle([20,21,12],cc.find("Canvas/content/handcards/rightdesk/kong"),true,'right',context);
         
-        this.cardModle([19,20,12],cc.find("Canvas/content/handcards/topdesk/kong"),true,'top',context);
-        this.cardModle([19,20,21],cc.find("Canvas/content/handcards/topdesk/kong"),true,'top',context);
+        // this.cardModle([19,20,12],cc.find("Canvas/content/handcards/topdesk/kong"),true,'top',context);
+        // this.cardModle([19,20,21],cc.find("Canvas/content/handcards/topdesk/kong"),true,'top',context);
         
-        this.cardModle([12,20,21],cc.find("Canvas/content/handcards/deskcard/kong"),true,'',context);
-        this.cardModle([20,12,21],cc.find("Canvas/content/handcards/deskcard/kong"),true,'',context);
+        // this.cardModle([12,20,21],cc.find("Canvas/content/handcards/deskcard/kong"),true,'',context);
+        // this.cardModle([20,12,21],cc.find("Canvas/content/handcards/deskcard/kong"),true,'',context);
+        if(data.player.power){
+            if(data.player.powercard&&data.player.powercard.length>0){
+                for(let i= 0 ; i<data.player.powercard.length;i++){
+                    var laiziZM = cc.instantiate(context.ZM);
+                    laiziZM.parent = context.godcard.children[0];
+                    var LZH  = laiziZM.getComponent('DeskCards');
+                    LZH.init(data.player.pover[i]);
+                }
+            }else{
+                var laiziFM = cc.instantiate(context.FM);
+                var LZH = laiziFM.getComponent('DeskCards');
+                LZH.init(data.player.value);
+                laiziFM.parent = context.godcard;
+                console.log(laiziFM.position);
+            }
+        }      
         
     },
 

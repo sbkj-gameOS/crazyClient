@@ -52,7 +52,9 @@ cc.Class({
         }else{
             cardframe = this.atlas.getSpriteFrame('麻将牌-牌面-'+deskcard);
         }
-        this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
+        if(this.cardvalue){
+            this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
+        }
     },
 
     // called every frame, uncomment this function to activate update callback
