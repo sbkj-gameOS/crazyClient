@@ -13,7 +13,10 @@ cc.Class({
         // },
         // ...
         headimg:cc.Node,
-        username:cc.Label,
+		usernames:{
+            default:null,
+            type:cc.RichText,
+        },
         cards:cc.Label,
         callNum: cc.Prefab,
         callPep: cc.Prefab,
@@ -34,10 +37,10 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        this.init();
+        //this.init();
         cc.beimi.money = 0;	
         if(cc.beimi.user!=null){
-			this.username.string = cc.beimi.user.nickname;
+			this.usernames.string = "<color=#794F19><b>"+cc.beimi.user.nickname+"</b></c>";
             this.cards.string = cc.beimi.user.cards + "张"
             if(cc.beimi.user.headimgurl){
                 var imgurl = cc.beimi.user.headimgurl;
@@ -71,16 +74,14 @@ cc.Class({
         console.log('error');
     },
     clickmoney: function(){
-        if(this.right1.active == false){
-            this.right2.active = false;
-            this.right1.active = true;
-        }
+        var callNum = cc.instantiate(this.callNum);
+		callNum.parent = this.node;
+		callNum.setPosition(640,360);
     },
     clickpeople:function(){
-        if(this.right2.active == false){
-            this.right1.active = false;
-            this.right2.active = true;
-        }
+		var callPep = cc.instantiate(this.callPep);
+		callPep.parent = this.node;
+		callPep.setPosition(640,360);
     },
     init:function(){
         

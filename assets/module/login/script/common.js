@@ -19,7 +19,6 @@ cc.Class({
     },
     // use this for initialization
     onLoad: function () {
-        
         /**
          * 游客登录，无需弹出注册对话框，先从本地获取是否有过期的对话数据，如果有过期的对话数据，则使用过期的对话数据续期
          * 如果没有对话数据，则重新使用游客注册接口
@@ -84,8 +83,12 @@ cc.Class({
     },
     wxlogin: function(){
         if(this.agree.active){
-            this.loadding();
-            cc.beimi.http.httpGet('/wxController/getLoginCode',this.wxseccess,this.error,this)
+			if(cc.sys.os == "Windows"){//Windows电脑
+				alert(1)
+			}else{
+				this.loadding();
+				cc.beimi.http.httpGet('/wxController/getLoginCode',this.wxseccess,this.error,this);
+			}
         }else{
             this.alert('请同意用户使用协议');
         }       

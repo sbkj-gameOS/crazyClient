@@ -10,6 +10,14 @@ cc.Class({
             default: null,
             type: cc.EditBox,
         },
+		message:{
+			default: null,
+            type: cc.Label
+		},
+		mask:{
+			default: null,
+            type: cc.Mask
+		},
 		radioButton: {
             default: [],
             type: cc.Toggle
@@ -75,11 +83,37 @@ cc.Class({
 
    
 
-// use this for initialization
-onLoad: function () {
-	
+	onLoad: function () {
+		this.message.string = "恭喜您已赢得一张周赛卡。";
+        this.gundongText();
+    },
+	//滚动公告字幕
+	gundongText:function(){
+		var self = this;
+		setTimeout(function(){
+			var notifyRes = JSON.parse(cc.sys.localStorage.getItem('notify'));
+			var gundongNode = cc.find("Canvas/message");
+			if(notifyRes != null){
+				if(gundongNode){
+					gundongNode.active = true;
+				}
+				self.message.string = notifyRes;
+			}else{
+				if(gundongNode){
+					gundongNode.active = false;
+				}
+			}
+			var text = self.message;
+			var width = self.mask.node.width;
+			text.node.runAction(cc.repeatForever(cc.sequence(
+				cc.moveTo(text.node.width/width*10,cc.p(-text.node.width-width/5,text.node.y)),
+				cc.callFunc(function(){
+					text.node.x = width;
+				})
+			)));
 
-},
+		},300);
+	},
 	//返回
 	backRoom:function(){
 		cc.director.loadScene('gameMain');
