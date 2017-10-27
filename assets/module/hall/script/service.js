@@ -29,6 +29,5 @@ cc.Class({
         document.addEventListener('copy', save);
         document.execCommand('copy');
         document.removeEventListener('copy', save);
-		this.alert('已复制');
     },
 });
