@@ -870,8 +870,7 @@ cc.Class({
          * 首先，需要找到触发对象，如果触发对象不是 all ， 则 直接找到 对象对应的玩家 桌牌列表，并找到 桌牌里 的最后 的 牌，
          * 然后将此牌 移除即可，如果对象是 all， 则不用做任何处理即可
          */
-        if(cc.beimi.user.id == data.userid){
-            cc.sys.localStorage.setItem('take','true');                    
+        if(cc.beimi.user.id == data.userid){              
             /**
              * 碰，显示碰的动画，
              * 杠，显示杠的动画，杠分为：明杠，暗杠，弯杠，每种动画效果不同，明杠/暗杠需要扣三家分，弯杠需要扣一家分
@@ -916,6 +915,7 @@ cc.Class({
             } else if ( data.action == "dan" ) {
                 opCards = data.cards;
             }
+            cc.sys.localStorage.setItem('take','true');
             context.cardModle(opCards,opParent,back,fangwei,context);//补杠和补蛋的时候，逻辑需要区分。    
         }else{//对家
             opParent = cc.find("Canvas/content/handcards/"+player.tablepos+"desk/kong") ;
