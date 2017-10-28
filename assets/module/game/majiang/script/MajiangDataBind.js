@@ -618,10 +618,10 @@ cc.Class({
         if(data.userid == cc.beimi.user.id){    
             context.initDealHandCards(context , data);
             //暗杠或者旋风蛋时  处理间隙
-            for (var inx = 0; inx < context.playercards.length;i++ ){
-                let handcards = context.playercards[inx].getComponent("HandCards");
-                handcards.relastone();
-            }     
+            // for (var inx = 0; inx < context.playercards.length;i++ ){
+            //     let handcards = context.playercards[inx].getComponent("HandCards");
+            //     handcards.relastone();
+            // }     
         }else{
             let inx = 0 ;
             if(player.tablepos == "top"){
