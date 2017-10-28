@@ -6,6 +6,10 @@ cc.Class({
             default: null,
             type: cc.Node
         },
+		itemTemplates:{
+			default:null,
+			type: cc.Prefab
+		},
         scrollView: {
         	default: null,
         	type: cc.ScrollView
@@ -25,12 +29,11 @@ cc.Class({
         };  
     },
 	success:function(result,object){
-        var data = JSON.parse(result) ;
+        var data = JSON.parse(result);
         if(data.count>0){
-			data.count = 4;
-            object.content.height += data.count * (object.itemTemplate.height + object.spacing) + object.spacing; // get total content height
+            object.content.height += data.count * (160 + object.spacing) + object.spacing; // get total content height
 			for (let i = 0; i < data.data.length; ++i) { // spawn items, we only need to do this once
-				let item = cc.instantiate(object.itemTemplate);
+				let item = cc.instantiate(object.itemTemplates);
 				object.content.addChild(item);
 				item.setPosition(0, -item.height * (0.5 + i) - object.spacing * (i + 1));
 				var roomNum = data.data[i].roomNum;//房间号
@@ -53,12 +56,11 @@ cc.Class({
 				console.log("Scroll to Top");
                break;
             case 1: 
-			debugger
 				console.log("Scroll to Bottom");
-				var data = {"data":[{"id":"34256789643542135445","playuserId":"59fdd046660b445eab87423b653d52e9","roomNum":"125478","gameNum":"8","time":"Oct 24, 2017 4:55:56 PM","gamerInfo":"测试信息2","createTime":"Oct 24, 2017 4:56:03 PM","isDel":0},{"id":"12312312312312312313","playuserId":"59fdd046660b445eab87423b653d52e9","roomNum":"201254","gameNum":"4","time":"Oct 24, 2017 4:55:22 PM","gamerInfo":"测试信息","createTime":"Oct 24, 2017 4:55:34 PM","isDel":0}],"count":2};
-				this.content.height = data.count * (this.itemTemplate.height + this.spacing) + this.spacing; // get total content height
+				/**var data = {"data":[{"id":"34256789643542135445","playuserId":"59fdd046660b445eab87423b653d52e9","roomNum":"125478","gameNum":"8","time":"Oct 24, 2017 4:55:56 PM","gamerInfo":"测试信息2","createTime":"Oct 24, 2017 4:56:03 PM","isDel":0},{"id":"34256789643542135445","playuserId":"59fdd046660b445eab87423b653d52e9","roomNum":"125478","gameNum":"8","time":"Oct 24, 2017 4:55:56 PM","gamerInfo":"测试信息2","createTime":"Oct 24, 2017 4:56:03 PM","isDel":0},{"id":"34256789643542135445","playuserId":"59fdd046660b445eab87423b653d52e9","roomNum":"125478","gameNum":"8","time":"Oct 24, 2017 4:55:56 PM","gamerInfo":"测试信息2","createTime":"Oct 24, 2017 4:56:03 PM","isDel":0},{"id":"12312312312312312313","playuserId":"59fdd046660b445eab87423b653d52e9","roomNum":"201254","gameNum":"4","time":"Oct 24, 2017 4:55:22 PM","gamerInfo":"测试信息","createTime":"Oct 24, 2017 4:55:34 PM","isDel":0}],"count":4};
+				this.content.height += data.count * (160 + this.spacing) + this.spacing; // get total content height
 				for (let i = 0; i < data.data.length; ++i) { // spawn items, we only need to do this once
-					let item = cc.instantiate(this.itemTemplate);
+					let item = cc.instantiate(this.itemTemplates);
 					this.content.addChild(item);
 					item.setPosition(0, -item.height * (0.5 + i) - this.spacing * (i + 1));
 					var roomNum = data.data[i].roomNum;//房间号
@@ -66,15 +68,10 @@ cc.Class({
 					var time = data.data[i].time;//时间
 					var id = data.data[i].id;//id 
 					var gamerInfo = data.data[i].gamerInfo;//id 
-					item.getComponent('recordItem').updateItem(roomNum, gameNum, time,id,gamerInfo);
+					item.addComponent('recordItem').updateItem(roomNum, gameNum, time,id,gamerInfo);
 					this.items.push(item);
-				}
-				//let items = this.items;
-				//debugger
-				//this.content.height += 100;
-				//let item = cc.instantiate(this.itemTemplate);
-				//item.addComponent('recordItem').updateItem(i, i);
-				//this.items.push(item);
+				}**/
+				break;
             case 4: 
 				console.log("Scrolling");
                break;

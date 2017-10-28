@@ -1,4 +1,5 @@
 var beiMiCommon = require("BeiMiCommon");
+var tongyi = true;
 cc.Class({
     extends: beiMiCommon,
     properties: {
@@ -43,7 +44,7 @@ cc.Class({
         };
     },
     tourist: function(){
-        if(this.agree.active){
+        if(tongyi){
             this.io = require("IOUtils");
             this.loadding();
             if(this.io.get("userinfo") == null){
@@ -59,6 +60,9 @@ cc.Class({
         }else{
             this.alert('请同意用户使用协议');
         }     
+    },
+    click: function(toggle){
+        tongyi = toggle.isChecked;
     },
     guestSucess:function(result , object){
         var data = JSON.parse(result) ;

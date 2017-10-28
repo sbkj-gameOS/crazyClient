@@ -1981,8 +1981,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -187,
-      "y": 1
+      "x": -185,
+      "y": 0
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -2370,7 +2370,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -230,
+      "x": -226,
       "y": 0
     },
     "_skewX": 0,
@@ -2606,7 +2606,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -190,
+      "x": -184,
       "y": 0
     },
     "_skewX": 0,
