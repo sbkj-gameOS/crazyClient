@@ -1097,9 +1097,9 @@ cc.Class({
      */
     lasthands_event:function(data, context){
         if(data.userid == cc.beimi.user.id){    //该我出牌 , 庄家出牌，可以不用判断是否庄家了 ，不过，庄家数据已经传过来了
-            cc.sys.localStorage.setItem('take','true');
             context.exchange_state("lasthands" , context);
             context.exchange_searchlight("current",context);
+            cc.sys.localStorage.setItem('take','true');            
         }else{
             context.exchange_state("otherplayer" , context);    //当前玩家出牌，计时器开始计时，探照灯照向该玩家
             for(var inx = 0 ; inx<context.playersarray.length ; inx++){
