@@ -280,30 +280,35 @@ cc.Class({
          * 无论 胡牌/杠/碰/吃，都需要采用这种方式处理
          */
         this.node.on('takecard', function (event) {
-            let card = event.target.getComponent("TakeMJCard");
-            if(card != null){
-                let card_script = card.target.getComponent("HandCards") ;
-                /**
-                 * 提交数据，等待服务器返回
-                 */
-
-                    //开始匹配
-                let socket = self.socket();
-                
-                if (cc.sys.localStorage.getItem('ting') == 'true') {
+            if(cc.sys.localStorage.getItem('take') == 'true'){
+                let card = event.target.getComponent("TakeMJCard");
+                if(card != null){
+                    let cardValue = card.target.getComponent('HandCards');
+                    self.takecard_event({userid:cc.beimi.user.id,card:cardValue.value},self);
+                    self.shouOperationMune();
+                    let card_script = card.target.getComponent("HandCards") ;
+                    /**
+                     * 提交数据，等待服务器返回
+                     */
+    
+                        //开始匹配
                     let socket = self.socket();
-                    socket.emit("selectaction" , JSON.stringify({
-                        action:"ting",
-                        actionCard:[card_script.value]
-                    }));
-                    cc.sys.localStorage.removeItem('ting') ;
-                } else {
-                    socket.emit("doplaycards" , card_script.value) ;
+                    
+                    if (cc.sys.localStorage.getItem('ting') == 'true') {
+                        let socket = self.socket();
+                        socket.emit("selectaction" , JSON.stringify({
+                            action:"ting",
+                            actionCard:[card_script.value]
+                        }));
+                        cc.sys.localStorage.removeItem('ting') ;
+                    } else {
+                        socket.emit("doplaycards" , card_script.value) ;
+                    }
+                    //cc.find("");
+                    self.shouOperationMune();
                 }
-                //cc.find("");
-                self.shouOperationMune();
+                event.stopPropagation();
             }
-            event.stopPropagation();
         });
         /**
          * ActionEvent发射的事件 ， 点击 杠 , 通知服务器端，用户点击了 杠 动作，服务器端进行处理，处理完毕后通知客户端后续动作
@@ -516,6 +521,11 @@ cc.Class({
     takecard_event:function(data , context){
         
         if(data.userid == cc.beimi.user.id) {
+           
+            if(cc.sys.localStorage.getItem('take') != 'true'){
+                return;
+            }
+            cc.sys.localStorage.removeItem('take');
             for (var inx = 0; inx < context.playercards.length;i++ ) {
                 let handcards = context.playercards[inx].getComponent("HandCards");
                 handcards.relastone();
@@ -564,6 +574,7 @@ cc.Class({
             context.exchange_state("takecard" , context);  //隐藏 提示状态
         }else{
             //其他玩家出牌
+            //cc.sys.localStorage.setItem('take','true');
             let temp = context.player(data.userid , context) ;
             let cardpanel  , cardprefab , deskcardpanel;
             if(temp.tablepos == "right"){
@@ -610,12 +621,11 @@ cc.Class({
      * @param data
      * @param context
      */
-    dealcard_event:function(data , context){
-       
+    dealcard_event:function(data , context){      
         let player = context.player(data.userid , context);
-        context.select_action_searchlight(data, context , player) ;
-
-        if(data.userid == cc.beimi.user.id){    
+        context.select_action_searchlight(data, context , player);
+        if(data.userid == cc.beimi.user.id){
+            cc.sys.localStorage.setItem('take','true');
             context.initDealHandCards(context , data);
             //暗杠或者旋风蛋时  处理间隙
             // for (var inx = 0; inx < context.playercards.length;i++ ){
@@ -720,6 +730,7 @@ cc.Class({
         for(var inx = 0 ; inx<context.playersarray.length ; inx++){
             let temp = context.playersarray[inx].getComponent("MaJiangPlayer") ;
             if(temp.data.id == data.userid){
+                //cc.sys.localStorage.setItem('take','true');
                 temp.banker(); break ;
             }
         }
@@ -860,6 +871,7 @@ cc.Class({
          * 然后将此牌 移除即可，如果对象是 all， 则不用做任何处理即可
          */
         if(cc.beimi.user.id == data.userid){
+            cc.sys.localStorage.setItem('take','true');                    
             /**
              * 碰，显示碰的动画，
              * 杠，显示杠的动画，杠分为：明杠，暗杠，弯杠，每种动画效果不同，明杠/暗杠需要扣三家分，弯杠需要扣一家分
@@ -1085,6 +1097,7 @@ cc.Class({
      */
     lasthands_event:function(data, context){
         if(data.userid == cc.beimi.user.id){    //该我出牌 , 庄家出牌，可以不用判断是否庄家了 ，不过，庄家数据已经传过来了
+            cc.sys.localStorage.setItem('take','true');
             context.exchange_state("lasthands" , context);
             context.exchange_searchlight("current",context);
         }else{
@@ -1130,6 +1143,12 @@ cc.Class({
         }
     },
     initDealHandCards:function(context , data){
+        const length  = cc.find('Canvas/content/handcards/deskcard/layout').children.length;
+        for(let i =0; i<length;i++){
+            let cards =cc.find('Canvas/content/handcards/deskcard/layout').children[i];
+            cards.width=0;
+            
+        }
         let temp = context.cardpool.get();
         let temp_script = temp.getComponent("HandCards") ;
 
@@ -1287,7 +1306,7 @@ cc.Class({
                 /**
                  * 一个短暂的状态，等待下一步指令是 定缺 还是直接开始打牌 ， 持续时间的计时器是 2秒
                  */
-                object.timer(object , 2) ;
+                object.timer(object , 0) ;
                 break   ;
             case "selectcolor" :
                 /**
@@ -1426,7 +1445,7 @@ cc.Class({
         if(fangwei == 'deskcard'){
             for(let i =0 ; i< handcard; i++){
                 let handcards = context.playercards[i].getComponent("HandCards");
-                handcards.relastone();
+                handcards.reinit();
                 context.cardpool.put(context.playercards[i]);
                 }
                 context.playercards = [];
@@ -1464,7 +1483,7 @@ cc.Class({
             if ( cardOp.isGang ) {
                 card.parent = cardOp.cardNode ;
             } else {
-                var count = cardOp.cardNode.children[cardOp.cardNum];
+                var count = cardOp.cardNode.children[cardOp.cardNum].getComponent('DanAction');
                 count.string = Number(Number(count.string)+1);
             }
         }else{
@@ -1496,23 +1515,25 @@ cc.Class({
         var resNode ;
         var isGang ;
         var cardNum;
-        for ( var i = 0 ; i < kong.children.length ; i++ ) {
+        for ( let i = 0 ; i < kong.children.length ; i++ ) {
             var cards = kong.children[i] ;
             var dans = cards.children ;
             isGang = true ;
-            for ( var j = 0 ; j<dans.length; j++ ){
-                var cardUnit = dans[j] ;
-                if ( card == cardUnit.getComponent("DanAction").value ) {
-                    resNode = cards ;
-                    cardNum = i;
-                } else if ( card != cardUnit.getComponent("DanAction").value) {
-                    isGang = false ;
+            if(dans.length>0){
+                for ( let j = 0 ; j<dans.length; j++ ){
+                    var cardUnit = dans[j] ;
+                    if ( card == cardUnit.getComponent("DanAction").value ) {
+                        resNode = cards ;
+                        cardNum = j;
+                    } else if ( card != cardUnit.getComponent("DanAction").value) {
+                        isGang = false ;
+                    }
                 }
-            }
-            if ( isGang ){
-                resNode = cards ;
-                break ;
-            }
+                if ( isGang ){
+                    resNode = cards ;
+                    break ;
+                }
+            }    
         }
         return {cardNode:resNode,isGang:isGang,cardNum:cardNum} ;
     },

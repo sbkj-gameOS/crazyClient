@@ -20,30 +20,26 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        this.clickstate = false  ;
+        
     },
     onClick:function(){
         let handCards = this.target.getComponent("HandCards")
         let self = this ;
-        if(this.clickstate == true){
+        if( handCards.take == true){
             //出牌
             this.node.dispatchEvent( new cc.Event.EventCustom('takecard', true) );
         }else{
-            if(handCards.take == true){
-                handCards.take = false ;
-                this.target.y = this.target.y - 30 ;
-            }else{
-                handCards.take = true;
-                this.target.y = this.target.y + 30 ;
+    
+            const length  = cc.find('Canvas/content/handcards/deskcard/layout').children.length;
+            for(let i =0; i<length;i++){
+                let cards =cc.find('Canvas/content/handcards/deskcard/layout').children[i];
+                let handCards = cards.getComponent("HandCards");
+                handCards.take = false;
+                cards.y=0;
+                
             }
-            this.clickstate = true  ;
-            setTimeout(function(){  //双击算法
-                self.clickstate = false ;
-            } , 500) ;
-        }
-    }
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
-
-    // },
+            this.target.y = this.target.y + 30
+            handCards.take = true;
+            }    
+       }
 });

@@ -44,6 +44,7 @@ cc.Class({
     },
     init:function(cvalue){
         //console.log('width:   '+this.target.width)
+        this.take = false;
         this.value = cvalue ;
         let cardframe ;
         let cardcolors = parseInt(this.value/4 ) ;
@@ -78,7 +79,7 @@ cc.Class({
     lastone:function(){
         if(this.lastonecard == false){
             this.lastonecard = true;
-            this.target.width = this.target.width + 30 ;
+            this.target.width = 30 ;
         }
     },
     selected:function(){
@@ -89,6 +90,7 @@ cc.Class({
         if(this.lastonecard == true){
             this.lastonecard = false;
             this.target.width = 0 ;
+            this.target.y=0;
         }
     },
     reinit:function(){
@@ -100,7 +102,7 @@ cc.Class({
         this.target.opacity = 255 ;
 
         if(this.take){
-            this.target.y = this.target.y - 30 ;
+            this.target.y=0;
             this.take = false ;
         }
     }
