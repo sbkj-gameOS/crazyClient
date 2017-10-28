@@ -323,8 +323,14 @@ cc.Class({
         });
         this.node.on('restar',function(event){
             var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
-            cc.find('Canvas/global/main/button/readybtn').active =true;   
-            context.reinitGame();
+            cc.find('Canvas/global/main/button/readybtn').active =true;  
+            var laizi = cc.find('Canvas/global/main/godcard/child').children
+            if(laizi){
+                for(let i =0 ; i < laizi.length ; i ++ ){
+                    cc.find('Canvas/global/main/godcard/child').children[i].destroy();
+                }
+            }     
+            context.reinitGame(context);
             //context.collect(context);
              //cc.find("");
              self.shouOperationMune();
@@ -611,6 +617,11 @@ cc.Class({
 
         if(data.userid == cc.beimi.user.id){    
             context.initDealHandCards(context , data);
+            //暗杠或者旋风蛋时  处理间隙
+            for (var inx = 0; inx < context.playercards.length;i++ ){
+                let handcards = context.playercards[inx].getComponent("HandCards");
+                handcards.relastone();
+            }     
         }else{
             let inx = 0 ;
             if(player.tablepos == "top"){
@@ -625,7 +636,7 @@ cc.Class({
         context.desk_cards.string = data.deskcards ;
         if(data.power){
             if(data.powerCard&&data.powerCard.length>0){
-                cc.find('Canvas/global/main/godcard/child').children[0].active = false;
+                cc.find('Canvas/global/main/godcard/child').children[0].destroy();
                 for(let i= 0 ; i<data.powerCard.length;i++){
                     var laiziZM = cc.instantiate(context.ZM);
                     laiziZM.parent = context.godcard.children[0];
@@ -893,61 +904,10 @@ cc.Class({
             } else if ( data.action == "dan" ) {
                 opCards = data.cards;
             }
-            context.cardModle(opCards,opParent,back,fangwei,context);//补杠和补蛋的时候，逻辑需要区分。
-        }else if (player.tablepos == 'right'){
-            opParent = cc.find("Canvas/content/handcards/"+player.tablepos+"desk/kong") ;
-            otherHandCardRemove(data,cotext);
-            let opCards , back = false , fangwei = player.tablepos ;
-            if(data.action =='chi'){
-                function sortNumber(a,b){return b - a}
-                data.cards.push(data.card); 
-                data.cards.sort(sortNumber);
-                opCards = data.cards;
-            }else if(data.action == 'peng'){
-                data.cards.push(data.card); 
-                opCards = data.cards;
-            }else if(data.action == 'gang'){
-                if ( data.card && data.card != -1 ) {
-                    data.cards.push(data.card);
-                }
-                if ( data.actype == 'an' ){
-                    back = true ;
-                }
-                opCards = data.cards;
-            }else if(data.action == 'dan'){
-                opCards = data.cards;
-            }
-            context.cardModle(opCards,opParent,back,fangwei,context);
-            
-        }else if(player.tablepos == 'left' ){
-            opParent = cc.find("Canvas/content/handcards/"+player.tablepos+"desk/kong") ;
-            otherHandCardRemove(data,cotext);
-            let opCards , back = false , fangwei = player.tablepos ;
-            if(data.action =='chi'){
-                function sortNumber(a,b){return b - a}
-                data.cards.push(data.card); 
-                data.cards.sort(sortNumber);
-                opCards = data.cards;
-            }else if(data.action == 'peng'){
-                data.cards.push(data.card); 
-                opCards = data.cards;
-            }else if(data.action == 'gang'){
-                if ( data.card && data.card != -1 ) {
-                    data.cards.push(data.card);
-                }
-                if ( data.actype == 'an' ){
-                    back = true ;
-                }
-                opCards = data.cards;
-            }else if(data.action == 'dan'){
-                opCards = data.cards;
-            }
-            context.cardModle(opCards,opParent,back,fangwei,context);
-            
- 
+            context.cardModle(opCards,opParent,back,fangwei,context);//补杠和补蛋的时候，逻辑需要区分。    
         }else{//对家
             opParent = cc.find("Canvas/content/handcards/"+player.tablepos+"desk/kong") ;
-            otherHandCardRemove(data,cotext);
+            context.otherHandCardRemove(data,cotext);
             let opCards , back = false , fangwei = player.tablepos ;
             if(data.action =='chi'){
                 function sortNumber(a,b){return b - a}
@@ -1061,7 +1021,7 @@ cc.Class({
         //ljh改  神牌
         if(data.player.power){
             if(data.player.powerCard&&data.player.powerCard.length>0){
-                cc.find('Canvas/global/main/godcard/child').children[0].active = false;
+                cc.find('Canvas/global/main/godcard/child').children[0].destroy();
                 for(let i= 0 ; i<data.player.powerCard.length;i++){
                     var laiziZM = cc.instantiate(context.ZM);
                     laiziZM.parent = context.godcard.children[0];
@@ -1452,40 +1412,43 @@ cc.Class({
                 }
             }
     },
-    reinitGame: function(){
-        //for(let j = 0 ; j< 4; j++){
-            for(let i = 0; i< this.deskcards_current_panel.children.length ;i++){
-                this.deskcards_current_panel.children[i].destroy();
-            };
-            for(let i = 0; i< this.deskcards_left_panel.children.length ;i++){
-                this.deskcards_left_panel.children[i].destroy();
-            };
-            for(let i = 0; i< this.deskcards_right_panel.children.length ;i++){
-                this.deskcards_right_panel.children[i].destroy();
-            };
-            for(let i = 0; i< this.deskcards_top_panel.children.length ;i++){
-                this.deskcards_top_panel.children[i].destroy();
-            };
-            for(let i = 0; i< this.cards_panel.children.length ;i++){
-                this.cardpool.put(this.playercards[i])
-                this.playercards.splice(i, 1);
-            };
-            for(let i = 0; i< this.left_panel.children.length ;i++){
-                this.left_panel.children[i].destroy();
-                this.leftcards.splice(i,1);
-            };
-            for(let i = 0; i< this.right_panel.children.length ;i++){
-                this.right_panel.children[i].destroy();
-                this.rightcards.splice(i,1);
-            };
-            for(let i = 0; i< this.top_panel.children.length ;i++){
-                this.top_panel.children[i].destroy();
-                this.topcards.splice(i,1);
-            };
-            for(let i = 0; i< this.gang_current.children.length ;i++){
-                this.gang_current.children[i].destroy();
-            }   
-       // }
+    reinitGame: function(context){
+        context.destroycards('deskcard',context);
+        context.destroycards('leftdesk',context);
+        context.destroycards('rightdesk',context);
+        context.destroycards('topdesk',context);
+     
+     },
+     destroycards :function(fangwei,context){
+        let handcard =cc.find('Canvas/content/handcards/'+fangwei+'/layout').children.length;
+        let deskcard =cc.find('Canvas/content/deskcards/'+fangwei+'/layout').children.length;
+        let kong =cc.find('Canvas/content/handcards/'+fangwei+'/kong').children.length;
+        if(fangwei == 'deskcard'){
+            for(let i =0 ; i< handcard; i++){
+                let handcards = context.playercards[i].getComponent("HandCards");
+                handcards.relastone();
+                context.cardpool.put(context.playercards[i]);
+                }
+                context.playercards = [];
+        }else{
+            for(let i =0 ; i< handcard; i++){
+                cc.find('Canvas/content/handcards/'+fangwei+'/layout').children[i].destroy();
+            }
+                if(fangwei == 'leftdesk'){
+                   this.leftcards=[];
+                }else if(fangwei == 'rightdesk'){
+                   this.rightcards=[];
+                }else{
+                   this.topcards=[];                                                          
+                }   
+        }
+        for(let i = 0;i< deskcard;i++ ){
+            cc.find('Canvas/content/deskcards/'+fangwei+'/layout').children[i].destroy();
+                
+        }
+        for(let i = 1;i< kong;i++ ){
+            cc.find('Canvas/content/handcards/'+fangwei+'/kong').children[i].destroy();
+        }
     },
     
     // called every frame, uncomment this function to activate update callback
@@ -1586,9 +1549,9 @@ cc.Class({
     },
     shouOperationMune: function(){
         var action = cc.moveTo(0.5,1122,-147);
-        var control = cc.find("") ;
         this.actionnode_two.runAction(action);
     },
+    
     dosomething: function (data , context){
         // this.cardModle([19,21,12],cc.find("Canvas/content/handcards/leftdesk/kong"),true,'left',context);
         // this.cardModle([19,21,12],cc.find("Canvas/content/handcards/leftdesk/kong"),true,'left',context);
