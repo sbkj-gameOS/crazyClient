@@ -28,6 +28,7 @@ cc.Class({
     },
     onClick:function(event){
         //开始匹配
+        debugger
         var count = event.target.getComponent('Ready').count;
 
         let socket = this.socket();

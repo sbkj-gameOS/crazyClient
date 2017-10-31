@@ -12,7 +12,7 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
-       
+        
         beimi0: {
             default: null,
             type: cc.SpriteAtlas
@@ -43,61 +43,67 @@ cc.Class({
         this.mjtype = cvalue; 
         this.mjvalue = parseInt((this.value%36)/4 ) ;
 
-        let deskcard , cardframe ;
+        var deskcard , cardframe ;
         if(this.back == true){
-            if(this.fangwei == 'left'||this.fangwei == 'right'){
-                this.MJhead.getComponent(cc.Sprite).spriteFrame = this.atlas.getSpriteFrame('麻将牌-侧家杠牌');
-                this.MJhead.height = 20;
+            if(this.fangwei == 'left'){
+                this.MJhead.getComponent(cc.Sprite).spriteFrame = this.atlas.getSpriteFrame('e_mj_b_left');
             }else if(this.fangwei == 'top'){
-                this.MJhead.getComponent(cc.Sprite).spriteFrame = this.atlas.getSpriteFrame('麻将牌-对家杠牌');
+                this.MJhead.getComponent(cc.Sprite).spriteFrame = this.atlas.getSpriteFrame('e_mj_b_bottom');
+                this.target.height =63;
+            }else if(fangwei == 'right'){
+                this.MJhead.getComponent(cc.Sprite).spriteFrame = this.atlas.getSpriteFrame('e_mj_b_right');
             }else{
-                this.MJhead.getComponent(cc.Sprite).spriteFrame = this.atlas.getSpriteFrame('麻将牌-对家杠牌');
+                this.MJhead.getComponent(cc.Sprite).spriteFrame = this.atlas.getSpriteFrame('e_mj_b_bottom');
+                this.target.height = 76;
             }
         } else {
             //确定牌的花色
-            if(cardcolors < 0){
-                deskcard = "wind"+(cardcolors + 8) ; //东南西北风 ， 中发白
-            }else{
-                if(cardtype == 0){ //万
-                    deskcard = "wan"+ (parseInt((this.value%36)/4)+1) ;
-                }else if(cardtype == 1){ //筒
-                    deskcard = "tong"+ (parseInt((this.value%36)/4)+1) ;
-                }else if(cardtype == 2){  //条
-                    deskcard = "suo"+ (parseInt((this.value%36)/4)+1) ;
-                }
-            }
-            if(deskcard == "suo2"){
-                cardframe = this.beimi0.getSpriteFrame('麻将牌-牌面-'+deskcard);
-            }else{
-                cardframe = this.atlas.getSpriteFrame('麻将牌-牌面-'+deskcard);
-            }
+            var  fw = 'B';
             if(fangwei == 'left'){
-                this.MJhead.getComponent(cc.Sprite).spriteFrame = this.atlas.getSpriteFrame('麻将牌-侧家出牌');
-                this.target.rotation = 90;
-                this.target.x = this.target.x+3;
-                this.target.y = this.target.y-7;
-                this.count.node.rotation = -90;
+                fw = 'L';
             }else if(fangwei == 'right'){
-                this.MJhead.getComponent(cc.Sprite).spriteFrame = this.atlas.getSpriteFrame('麻将牌-侧家出牌');
-                this.target.rotation = -90;
-                this.count.node.rotation = 90;
-                this.target.x = this.target.x-3;
-                this.target.y = this.target.y-7;
-            }else if(fangwei == 'top'){
-                this.target.rotation = 180;
-                this.target.y = this.target.y-10;
-            }else{
-                this.target.y = this.target.y-3;
-
+                fw = 'R'
             }
+            if(cardcolors < 0){
+               
+                if(cardcolors==-7){
+                    deskcard = fw+'_wind_east';
+                } else if(cardcolors==-6){
+                    deskcard = fw+'_wind_south';
+                } else if(cardcolors==-5){
+                    deskcard = fw+'_wind_west';
+                } else if(cardcolors == -4){
+                    deskcard = fw+'_wind_north';
+                }else if(cardcolors == -3){
+                    deskcard = fw+'_red';
+                }else if(cardcolors == -2){
+                    deskcard = fw+'_green';
+                }else if(cardcolors == -1){
+                    deskcard = fw+'_white';
+                }       
+               
+            }else{
+            
+                if(cardtype == 0){ //万
+                    deskcard = fw+"_character_"+ (parseInt((this.value%36)/4)+1) ;
+                }else if(cardtype == 1){ //筒
+                    deskcard = fw+"_dot_"+ (parseInt((this.value%36)/4)+1) ;
+                }else if(cardtype == 2){  //条
+                    deskcard = fw+"_bamboo_"+ (parseInt((this.value%36)/4)+1) ;
+                }                // }
+                
+            }
+            cardframe = this.beimi0.getSpriteFrame(deskcard);
             this.target.getComponent(cc.Sprite).spriteFrame = cardframe;
-            this.target.width= 40;
-            this.target.height= 50;
+            
+            }
             this.count.string = '1';
             if(this.count.string == '1'){
                 this.count.node.active = false;
-            }
-        }
+         }
+    },
+    countactive:function(){
+        this.count.node.active =true ; 
     }
 
 

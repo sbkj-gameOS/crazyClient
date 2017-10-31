@@ -12,6 +12,7 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
+        mj: cc.Node,
         atlas: {
             default: null,
             type: cc.SpriteAtlas
@@ -42,8 +43,9 @@ cc.Class({
             console.log('Hello Mover!');
         });
     },
-    init:function(cvalue){
+    init:function(cvalue,pd){
         //console.log('width:   '+this.target.width)
+        //this.mj.color = new cc.Color(255, 255, 255);        
         this.take = false;
         this.value = cvalue ;
         let cardframe ;
@@ -55,41 +57,59 @@ cc.Class({
     
         let deskcard ;
         this.lastonecard = false;
+       
         if(cardcolors < 0){
-            deskcard = "wind"+(cardcolors + 8) ; //东南西北风 ， 中发白
+            if(cardcolors==-7){
+                deskcard = 'M_wind_east';
+            } else if(cardcolors==-6){
+                deskcard = 'M_wind_south';
+            } else if(cardcolors==-5){
+                deskcard = 'M_wind_west';
+            } else if(cardcolors == -4){
+                deskcard = 'M_wind_north';
+            }else if(cardcolors == -3){
+                deskcard = 'M_red';
+            }else if(cardcolors == -2){
+                deskcard = 'M_green';
+            }else if(cardcolors == -1){
+                deskcard = 'M_white';
+            }
+            
+            //东南西北风 ， 中发白
         }else{
             if(cardtype == 0){ //万
-                deskcard = "wan"+ (parseInt((this.value%36)/4)+1) ;
+                deskcard = "M_character_"+ (parseInt((this.value%36)/4)+1) ;
             }else if(cardtype == 1){ //筒
-                deskcard = "tong"+ (parseInt((this.value%36)/4)+1) ;
+                deskcard = "M_dot_"+ (parseInt((this.value%36)/4)+1) ;
             }else if(cardtype == 2){  //条
-                deskcard = "suo"+ (parseInt((this.value%36)/4)+1) ;
+                deskcard = "M_bamboo_"+ (parseInt((this.value%36)/4)+1) ;
             }
         }
-        if(deskcard == "suo2"){
-            cardframe = this.beimi0.getSpriteFrame('麻将牌-牌面-'+deskcard);
-        }else{
-            cardframe = this.atlas.getSpriteFrame('麻将牌-牌面-'+deskcard);
-        }
+        // if(deskcard == "suo2"){
+        //     cardframe = this.beimi0.getSpriteFrame('麻将牌-牌面-'+deskcard);
+        // }else{
+            cardframe = this.atlas.getSpriteFrame(deskcard);
+        // }
         this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
-
-        var anim = this.getComponent(cc.Animation);
-        anim.play("majiang_current");
+        if(pd == null){
+            var anim = this.getComponent(cc.Animation);
+            anim.play("majiang_current");
+        }   
     },
     lastone:function(){
         if(this.lastonecard == false){
             this.lastonecard = true;
-            this.target.width = 30 ;
+            this.target.width = 80 ;
         }
     },
     selected:function(){
-        this.target.opacity = 168 ;
+        this.cardvalue.opacity = 168 ;
         this.selectcolor = true ;
     },
     relastone:function(){
         if(this.lastonecard == true){
             this.lastonecard = false;
-            this.target.width = 0 ;
+            this.target.width = 59 ;
             this.target.y=0;
         }
     },
@@ -99,7 +119,7 @@ cc.Class({
         this.lastonecard = false;
 
         this.selectcolor = false ;
-        this.target.opacity = 255 ;
+        this.cardvalue.opacity = 255 ;
 
         if(this.take){
             this.target.y=0;

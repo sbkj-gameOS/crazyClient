@@ -51,8 +51,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
-      "height": 0
+      "width": 59,
+      "height": 86
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -60,8 +60,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": -11,
+      "y": 1
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -112,8 +112,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 78,
-      "height": 116
+      "width": 62,
+      "height": 90
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -166,8 +166,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 79,
-      "height": 111
+      "width": 61,
+      "height": 87
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -175,7 +175,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 4,
+      "x": 1,
       "y": 0
     },
     "_skewX": 0,
@@ -197,7 +197,7 @@
       "__uuid__": "651fed8e-e918-46f7-b204-1d113f7ca63d"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -232,11 +232,9 @@
       "__id__": 2
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "c5cf3e6c-a005-4af5-bd16-63dfa6bfd3ef"
-    },
+    "_spriteFrame": null,
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -248,9 +246,7 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": {
-      "__uuid__": "c1a3894d-ecd5-4442-adcb-3363966af0a2"
-    }
+    "_atlas": null
   },
   {
     "__type__": "cc.Button",
@@ -476,11 +472,14 @@
       "__id__": 1
     },
     "_enabled": true,
+    "mj": {
+      "__id__": 2
+    },
     "atlas": {
-      "__uuid__": "c1a3894d-ecd5-4442-adcb-3363966af0a2"
+      "__uuid__": "ab2500fa-9ff8-4489-a1c7-5febd50136b7"
     },
     "beimi0": {
-      "__uuid__": "d1d96e5c-707c-4fd6-a0d9-a07ed71d54c1"
+      "__uuid__": "ab2500fa-9ff8-4489-a1c7-5febd50136b7"
     },
     "cardvalue": {
       "__id__": 3
