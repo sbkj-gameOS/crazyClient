@@ -12,6 +12,8 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
+        headimg:cc.Node,
+        on_off_line:cc.Node,
         username:{
             default:null ,
             type:cc.Label
@@ -40,6 +42,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+        this.on_off_line.active = false;
         this.selected.active = false ;
         this.creator.active = false ;
     },

@@ -30,31 +30,46 @@ cc.Class({
         },
     },
 
-    init:function(cvalue){
+    init:function(cvalue,fangwei){
         this.value = cvalue ;
         let cardframe ;
         let cardcolors = parseInt(this.value/4 ) ;
         let cardtype  = parseInt(cardcolors / 9);
         let deskcard ;
+        
         if(cardcolors < 0){
-            deskcard = "wind"+(cardcolors + 8) ; //东南西北风 ， 中发白
+            if(cardcolors==-7){
+                deskcard = fangwei+'_wind_east';
+            } else if(cardcolors==-6){
+                deskcard = fangwei+'_wind_south';
+            } else if(cardcolors==-5){
+                deskcard = fangwei+'_wind_west';
+            } else if(cardcolors == -4){
+                deskcard = fangwei+'_wind_north';
+            }else if(cardcolors == -3){
+                deskcard = fangwei+'_red';
+            }else if(cardcolors == -2){
+                deskcard = fangwei+'_green';
+            }else if(cardcolors == -1){
+                deskcard = fangwei+'_white';
+            }
+            
+            //东南西北风 ， 中发白
         }else{
             if(cardtype == 0){ //万
-                deskcard = "wan"+ (parseInt((this.value%36)/4)+1) ;
+                deskcard = fangwei+"_character_"+ (parseInt((this.value%36)/4)+1) ;
             }else if(cardtype == 1){ //筒
-                deskcard = "tong"+ (parseInt((this.value%36)/4)+1) ;
+                deskcard = fangwei+"_dot_"+ (parseInt((this.value%36)/4)+1) ;
             }else if(cardtype == 2){  //条
-                deskcard = "suo"+ (parseInt((this.value%36)/4)+1) ;
+                deskcard = fangwei+"_bamboo_"+ (parseInt((this.value%36)/4)+1) ;
             }
         }
-        if(deskcard == "suo2"){
-            cardframe = this.beimi0.getSpriteFrame('麻将牌-牌面-'+deskcard);
-        }else{
-            cardframe = this.atlas.getSpriteFrame('麻将牌-牌面-'+deskcard);
-        }
-        if(this.cardvalue){
-            this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
-        }
+        // if(deskcard == "suo2"){
+        //     cardframe = this.beimi0.getSpriteFrame('麻将牌-牌面-'+deskcard);
+        // }else{
+            cardframe = this.atlas.getSpriteFrame(deskcard);
+        // }
+        this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
     },
 
     // called every frame, uncomment this function to activate update callback

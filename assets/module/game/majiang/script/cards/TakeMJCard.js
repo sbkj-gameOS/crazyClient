@@ -36,9 +36,10 @@ cc.Class({
                 let handCards = cards.getComponent("HandCards");
                 handCards.take = false;
                 cards.y=0;
-                
+                handCards.mj.color = new cc.Color(255, 255, 255);
             }
-            this.target.y = this.target.y + 30
+            this.target.y = this.target.y + 20 ;
+            handCards.mj.color = new cc.Color(230, 190, 190);
             handCards.take = true;
             }    
        }
