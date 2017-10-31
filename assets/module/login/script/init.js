@@ -35,7 +35,7 @@ cc.Class({
         }
         this.initMgr();
         var bmc = new Common();
-        bmc.login();
+        //bmc.login();
         console.log(cc.beimi.userId);
         //预加载majiang场景
         cc.director.preloadScene('majiang');

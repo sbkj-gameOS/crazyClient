@@ -14,6 +14,10 @@ cc.Class({
 			default: null,
             type: cc.Label
 		},
+		ganmeBtn:{
+			default: null,
+            type: cc.Node
+		},
 		mask:{
 			default: null,
             type: cc.Mask
@@ -30,11 +34,18 @@ cc.Class({
 			default:null,
 			type:cc.Prefab
 		},
+		userProtocol:{
+            default:null,
+            type: cc.Prefab
+        },
 		bshall:{
 			default:null,
 			type:cc.Prefab
-		}
-	
+		},
+		backRoomImg:{
+			default:null,
+			type:cc.SpriteFrame
+		},
         // foo: {
         //    default: null,      // The default value will be used only when the component attaching
         //                           to a node for the first time
@@ -86,6 +97,8 @@ cc.Class({
 	onLoad: function () {
 		this.message.string = "恭喜您已赢得一张周赛卡。";
         this.gundongText();
+		//请求获取当前用户是否已经参加了房间
+        cc.beimi.http.httpGet('/api/room/reConnection?token='+cc.beimi.authorization,this.roomSuccess,this.roomError,this);
     },
 	//滚动公告字幕
 	gundongText:function(){
@@ -120,16 +133,23 @@ cc.Class({
 	},
 	//创建包厢
 	createRoom:function(){
+		if(roomNum){
+			cc.director.loadScene('majiang');
+		}else{
+			cc.beimi.dialog = cc.instantiate(this.creatRoom) ;
+        	cc.beimi.dialog.parent = this.root();
+		}
 		//cc.director.loadScene('createRoom');
-		cc.beimi.dialog = cc.instantiate(this.creatRoom) ;
-        cc.beimi.dialog.parent = this.root();
+		
 	},
 	//加入包厢
 	joinInRoom:function(){
-		// cc.director.loadScene('joinInRoom');
-		cc.beimi.dialog = cc.instantiate(this.joinRoom) ;
-        cc.beimi.dialog.parent = this.root();
-      
+		if(roomNum){
+			cc.director.loadScene('majiang');
+		}else{
+			cc.beimi.dialog = cc.instantiate(this.joinRoom) ;
+	        cc.beimi.dialog.parent = this.root();
+      	}
 	},
 	jjbshall:function(){
 		// cc.director.loadScene('joinInRoom');
@@ -161,19 +181,21 @@ cc.Class({
     JJerror: function(object){
         object.alert('加入失败，请重试');
     },
-	//创建包厢点击事件
-	createRoomBtn:function(){
-		alert("模式类型:"+moShi + "玩法:"+playerData +"人数:"+ userType);//模式类型moShi 玩法playerData  人数userType
-	},
+	roomSuccess: function(result,object){
+        if(result.room){
+        	roomNum = result.room;
+        	cc.beimi.room = result.room;
+            cc.beimi.playway = result.playway;
+            var sprite = object.ganmeBtn.getComponent(cc.Sprite);
+        	sprite.spriteFrame = object.backRoomImg;
+        }
+        
+    },
+    roomError: function(object){
+        object.alert("网络异常");
+    },
 	//加入包厢点击事件
 	buttonClicked: function() {
 		cc.log("房间号："+roomNum);
-        
-	}
-	
-
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
-
-    // },
+	},
 });

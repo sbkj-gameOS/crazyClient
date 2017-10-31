@@ -1,4 +1,5 @@
 var beiMiCommon = require("BeiMiCommon");
+var Common = require("common");
 cc.Class({
     extends: beiMiCommon,
 
@@ -38,7 +39,12 @@ cc.Class({
 	onProtocol2Click:function(){
 		cc.beimi.dialog = cc.instantiate(this.protocol2) ;
         cc.beimi.dialog.parent = this.root();
-	}
+	},
+    tongyiBtn:function(){
+        localStorage.setItem("xySuccess","1");
+        var bmc = new Common();
+        bmc.login();
+    },
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 

@@ -1,5 +1,6 @@
 var beiMiCommon = require("BeiMiCommon");
 var tongyi = true;
+var a = 1;
 cc.Class({
     extends: beiMiCommon,
     properties: {
@@ -16,7 +17,11 @@ cc.Class({
         agree:{
             default:null,
             type: cc.Node
-        }
+        },
+        userProtocol:{
+            default:null,
+            type: cc.Prefab
+        },
     },
     // use this for initialization
     onLoad: function () {
@@ -26,6 +31,16 @@ cc.Class({
          */
         // this.loginFormPool = new cc.NodePool();
         // this.loginFormPool.put(cc.instantiate(this.prefab)); // 创建节点
+        var xySuccess = localStorage.getItem("xySuccess");
+        console.log(xySuccess);
+        if(xySuccess == 1){
+            //this.tourist();
+            this.login();
+        }else{
+            cc.beimi.dialog = cc.instantiate(this.userProtocol);
+            cc.beimi.dialog.parent = this.root();
+        }
+        
         cc.beimi.game = {
             model : null ,
             playway : null,

@@ -1933,8 +1933,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 372,
-      "height": 138
+      "width": 206,
+      "height": 251
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1942,8 +1942,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 50
+      "x": 49,
+      "y": -25
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1961,7 +1961,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "61ee1930-8651-45c2-a700-a03c95e3a9a6"
+      "__uuid__": "d7f45491-a68f-486c-a938-33f66f663018"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -1976,9 +1976,7 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": {
-      "__uuid__": "c1a3894d-ecd5-4442-adcb-3363966af0a2"
-    }
+    "_atlas": null
   },
   {
     "__type__": "cc.Button",
@@ -2079,8 +2077,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 384,
-      "height": 130
+      "width": 206,
+      "height": 251
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -2088,8 +2086,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 395,
-      "y": 50
+      "x": 317,
+      "y": -25
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -2107,7 +2105,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "1ac27bea-19ba-44ca-93e1-cc166e761e9e"
+      "__uuid__": "26a7b03b-281c-4504-9cc0-8e10ad213097"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -2122,9 +2120,7 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": {
-      "__uuid__": "79938bea-34a0-4ab7-8cdb-4ec11ac6ad4b"
-    }
+    "_atlas": null
   },
   {
     "__type__": "cc.Button",
@@ -2198,7 +2194,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 56
@@ -2342,7 +2338,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 60
@@ -3230,6 +3226,9 @@
     "message": {
       "__id__": 44
     },
+    "ganmeBtn": {
+      "__id__": 47
+    },
     "mask": {
       "__id__": 45
     },
@@ -3238,10 +3237,14 @@
       "__uuid__": "031efb80-0660-4c6c-884a-a359b2afb6fb"
     },
     "creatRoom": {
-      "__uuid__": "9e0addb1-6e49-462b-a01d-d6915d19c8a9"
+      "__uuid__": "3fb5eddf-def3-4aec-ab08-6b122159304f"
     },
+    "userProtocol": null,
     "bshall": {
       "__uuid__": "5f620b82-9a2b-4f02-b4ad-1d84752af42a"
+    },
+    "backRoomImg": {
+      "__uuid__": "8c084281-a4f2-415b-922f-f63b394bd2d3"
     }
   },
   {
