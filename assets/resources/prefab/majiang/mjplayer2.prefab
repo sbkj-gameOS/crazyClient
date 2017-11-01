@@ -21,6 +21,9 @@
         "__id__": 10
       },
       {
+        "__id__": 12
+      },
+      {
         "__id__": 19
       },
       {
@@ -347,16 +350,12 @@
     "_parent": {
       "__id__": 1
     },
-    "_children": [
-      {
-        "__id__": 11
-      }
-    ],
+    "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 18
+      "__id__": 11
     },
     "_id": "",
     "_opacity": 255,
@@ -395,29 +394,40 @@
     "groupIndex": 0
   },
   {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "b7b97ecd-9da0-4cd2-9c13-e4b7883ffd8d"
+    },
+    "fileId": "65hyA7rtdNH70vv44TjHWf",
+    "sync": false
+  },
+  {
     "__type__": "cc.Node",
     "_name": "New Layout",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 10
+      "__id__": 1
     },
     "_children": [
       {
-        "__id__": 12
+        "__id__": 13
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 15
+        "__id__": 16
       },
       {
-        "__id__": 16
+        "__id__": 17
       }
     ],
     "_prefab": {
-      "__id__": 17
+      "__id__": 18
     },
     "_id": "",
     "_opacity": 255,
@@ -436,8 +446,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 26.7,
-      "height": 22.6
+      "width": 22.9,
+      "height": 21.4
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -445,8 +455,8 @@
     "_scaleY": 1.1494253,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 42,
-      "y": 5
+      "x": 44.1,
+      "y": 0.5
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -460,18 +470,18 @@
     "_name": "玩家头像-banker",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 11
+      "__id__": 12
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 13
+        "__id__": 14
       }
     ],
     "_prefab": {
-      "__id__": 14
+      "__id__": 15
     },
     "_id": "",
     "_opacity": 255,
@@ -499,8 +509,8 @@
     "_scaleY": 0.87,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0.7,
-      "y": 1.8
+      "x": 0.063,
+      "y": 0.06
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -514,7 +524,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 12
+      "__id__": 13
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -553,7 +563,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 11
+      "__id__": 12
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -579,13 +589,13 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 11
+      "__id__": 12
     },
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 26.7,
-      "height": 22.6
+      "width": 22.9,
+      "height": 21.4
     },
     "_resize": 0,
     "_N$layoutType": 0,
@@ -614,17 +624,6 @@
       "__uuid__": "b7b97ecd-9da0-4cd2-9c13-e4b7883ffd8d"
     },
     "fileId": "5f83X92MVBnbfJruH+/EX3",
-    "sync": false
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__uuid__": "b7b97ecd-9da0-4cd2-9c13-e4b7883ffd8d"
-    },
-    "fileId": "65hyA7rtdNH70vv44TjHWf",
     "sync": false
   },
   {
@@ -1327,8 +1326,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": 3,
+      "y": 7
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1439,8 +1438,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": 18,
+      "y": -2
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1689,7 +1688,7 @@
       "__id__": 19
     },
     "creator": {
-      "__id__": 10
+      "__id__": 12
     },
     "selectcards": {
       "__id__": 43

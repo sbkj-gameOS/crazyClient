@@ -33,8 +33,8 @@ cc.Class({
         // this.loginFormPool.put(cc.instantiate(this.prefab)); // 创建节点
         var xySuccess = localStorage.getItem("xySuccess");
         if(xySuccess == 1){
-            //this.tourist();
-            this.login();
+            this.tourist();
+            // this.login();
         }else{
             cc.beimi.dialog = cc.instantiate(this.userProtocol);
             cc.beimi.dialog.parent = this.root();

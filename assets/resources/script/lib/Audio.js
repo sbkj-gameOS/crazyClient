@@ -59,7 +59,7 @@ cc.Class({
     
     playSFX(url){
         var audioUrl = this.getUrl(url);
-        if(this.sfxVolume > 0){
+        if(this.deskVolume > 0){
             var audioId = cc.audioEngine.play(audioUrl,false,this.deskVolume);    
         }
     },

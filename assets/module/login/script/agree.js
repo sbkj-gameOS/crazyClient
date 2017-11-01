@@ -43,7 +43,7 @@ cc.Class({
     tongyiBtn:function(){
         localStorage.setItem("xySuccess","1");
         var bmc = new Common();
-        bmc.login();
+        bmc.tourist();
     },
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
