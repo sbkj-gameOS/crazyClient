@@ -53,13 +53,14 @@ cc.Class({
     },
 
     onLoad: function () {
-        
+        moShi = "2-part";
+        playerData = "点泡泡三家@@";
+        userType = "4-pep";
     },
 
     //创建房间点击按钮
     createRoom(){
 		//console.log("模式类型:"+moShi + "玩法:"+playerData +"人数:"+ userType);//模式类型moShi 玩法playerData  人数userType
-		debugger
          var garams ={};
 		 //模式类型
          garams.modeltype = moShi;
