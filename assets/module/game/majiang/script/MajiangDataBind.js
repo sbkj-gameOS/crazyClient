@@ -14,13 +14,16 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
+
+        gameSettingClick: cc.Prefab,
+
+
         tuoguan: cc.Node,
         dan_topcurrent:cc.Prefab,
         dan_leftcurrent:cc.Prefab,
         dan_rightcurrent:cc.Prefab,
         dan_mycurrent:cc.Prefab,
         dan_childrend: cc.Node,
-        gamesetting: cc.Prefab,
         isOver: cc.Prefab,
 
         ready2: cc.Node,
@@ -231,7 +234,7 @@ cc.Class({
         this.alert = new cc.NodePool();
         this.setting = new cc.NodePool();
         this.alert.put(cc.instantiate(this.isOver));
-        this.setting.put(cc.instantiate(this.gamesetting));
+        this.setting.put(cc.instantiate(this.gameSettingClick));
         /**
          *
          * 初始化玩家 的 对象池
@@ -304,6 +307,9 @@ cc.Class({
          * 则会导致高度的 组件耦合，不利于系统 未来扩展，也会导致 业务逻辑交叉/混乱
          * 无论 胡牌/杠/碰/吃，都需要采用这种方式处理
          */
+        this.node.on('music',function(event){
+
+        });
         this.node.on('click',function(event){
             let mjdata = cc.find('Canvas').getComponent('MajiangDataBind');
             var action = cc.moveTo(0.5,880,274);
@@ -326,6 +332,7 @@ cc.Class({
             }))
         });
         this.node.on('takecard', function (event) {
+            cc.beimi.audio.playSFX('select.mp3');
             if(cc.sys.localStorage.getItem('take') == 'true'){
                 let card = event.target.getComponent("TakeMJCard");
                 if(card != null){
@@ -368,6 +375,7 @@ cc.Class({
         //     event.stopPropagation();
         // });
         this.node.on('readyGM',function(event){ 
+            //alert();
             let socket = self.socket();
             socket.emit('readyGame',JSON.stringify({
             }))
@@ -539,6 +547,23 @@ cc.Class({
             }
         }
     },
+    //播放音乐的事件  data {url：路径，userid：内容}
+    playMusic_event:function(data,context){
+        let playerarray = context.playersarray;
+        if(playerarray){
+            for(let i =0 ; i< playerarray.length;i++){
+                var playerinfo = playerarray[i].getComponent('MaJiangPlayer');
+                var tablepos = playerinfo.tablepos;      
+                if(data.userid == playerinfo.data.id) {
+                    cc.beimi.audio.playSFX(data.url+'.mp3');    
+                    cc.find('Canvas/music/'+tablepos).active = true;  
+                    setTimeout(function(){
+                        cc.find('Canvas/music/'+tablepos).active = false;
+                    },3000);
+                }
+            }
+        }
+    },
     joinRoom:function(){
         //开始匹配
         let socket = this.socket();
@@ -607,7 +632,7 @@ cc.Class({
                         var tablepos = playerinfo.tablepos;      
                         var on_off_line = playerinfo.on_off_line;     
                         var headimg = playerinfo.headimg;
-                        if(data.userid == playerinfo.id) {
+                        if(data.id == playerinfo.data.id) {
                             if(data.status == 'READY'){    
                                 cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
                             }else{
@@ -625,7 +650,8 @@ cc.Class({
                 }
             }
             if(context.playersarray.length == 2){
-                this.ready2.active = false;
+
+                context.ready2.active = false;
                 var action = cc.moveTo(0.2,-21,-151);
                 context.readybth.runAction(action);
             }
@@ -671,7 +697,9 @@ cc.Class({
                         var tablepos = playerinfo.tablepos;      
                         var on_off_line = playerinfo.on_off_line;     
                         var headimg = playerinfo.headimg;
-                        if(data.userid == playerinfo.id) {
+                        // console.log("----->"+playerinfo.data.id)
+                        // console.log("-ssss---->"+data.userid)
+                        if(data.id == playerinfo.data.id) {
                             if(data.status == 'READY'){    
                                 cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
                             }else{
@@ -689,7 +717,7 @@ cc.Class({
                 }
             }
             if(context.playersarray.length == 4){
-                this.ready2.active = false;
+                context.ready2.active = false;
                 var action = cc.moveTo(0.2,-21,-151);
                 context.readybth.runAction(action);
             }
@@ -703,13 +731,14 @@ cc.Class({
     //掉线 和上线
     
     takecard_event:function(data , context){
-        
+        cc.beimi.audio.playSFX('give.mp3');
         if(data.userid == cc.beimi.user.id) {
            
             if(cc.sys.localStorage.getItem('take') != 'true'){
                 return;
             }
             cc.sys.localStorage.removeItem('take');
+            
             for (var inx = 0; inx < context.playercards.length;i++ ) {
                 let handcards = context.playercards[inx].getComponent("HandCards");
                 handcards.relastone();
@@ -740,6 +769,7 @@ cc.Class({
 
                     context.deskcards.push(desk_card);
                     desk_card.parent = context.deskcards_current_panel;
+                    
                 }else{
 
                     handcards.relastone();
@@ -824,6 +854,7 @@ cc.Class({
         if(data.peoNum){
             var peoNum = data.peoNum;
         }
+        
         context.shouOperationMune();
         let player = context.player(data.userid , context);
         context.select_action_searchlight(data, context , player);
@@ -861,7 +892,6 @@ cc.Class({
                 var LZH = laiziFM.getComponent('DeskCards');
                 //LZH.init(-4);
                 laiziFM.parent = context.godcard.children[0];
-                console.log(laiziFM.position);
             }
         }
     },
@@ -992,7 +1022,7 @@ cc.Class({
                 }
                
                 var action = cc.moveTo(0.1,940 - count*285,-147);
-                console.log(940 - count*85);
+                context.actionnode_two.active = true;
                 context.actionnode_two.runAction(action);
                 console.log(context.actionnode_two);
                 //context.actionnode_deal.active = true ;
@@ -1066,6 +1096,8 @@ cc.Class({
                 
                 var action = cc.moveTo(0.1,940 - count*285,-147);
                 console.log(940 - count*85);
+
+                context.actionnode_two.active = true;
                 context.actionnode_two.runAction(action);
                 console.log(context.actionnode_two);
                 // let ani = context.actionnode_two.getComponent(cc.Animation);
@@ -1115,7 +1147,7 @@ cc.Class({
                 data.cards.push(data.card); 
                 opCards = data.cards;
             } else if ( data.action == "gang" ) {
-                if ( data.card && data.card != -1 ) {
+                if ( data.card != -1 ) {
                     data.cards.push(data.card);
                 }
                 if ( data.actype == 'an' ){
@@ -1154,10 +1186,10 @@ cc.Class({
             context.cardModle(opCards,opParent,back,fangwei,context);
          
         }
-        if(data.action == 'peng'||(data.action == 'gang'&&data.cards.length==3)||data.action=='chi'||data.action == 'hu'){
+        if(data.action == 'peng'||(data.action == 'gang'&&data.card!=-1)||data.action=='chi'||data.action == 'hu'){
             //以下代码是用于找到 杠/碰/吃/胡牌的 目标牌  ， 然后将此牌 从 桌面牌中移除
 
-            let temp = context.player(data.target, context), deskcardpanel;
+            let temp = context.player(data.target, context), deskcardpanel=null;
             if (temp.tablepos == "right") {
                 deskcardpanel = context.deskcards_right_panel;
             } else if (temp.tablepos == "left") {
@@ -1222,6 +1254,7 @@ cc.Class({
         }
 
         setTimeout(function(){
+            cc.beimi.audio.playSFX('shuffle.mp3');            
             let ani = context.cards_panel.getComponent(cc.Animation);
             ani.play("majiang_reorder") ;
             var maxvalue  = -100;
@@ -1367,7 +1400,7 @@ cc.Class({
         }
     },
     initDealHandCards:function(context , data){
-        const length  = cc.find('Canvas/content/handcards/deskcard/layout').children.length;
+        let length  = cc.find('Canvas/content/handcards/deskcard/layout').children.length;
         for(let i =0; i<length;i++){
             let cards =cc.find('Canvas/content/handcards/deskcard/layout').children[i];
             cards.width=59;
@@ -1641,6 +1674,9 @@ cc.Class({
                     text = "0"+times ;
                 }
                 object.mjtimer.string = text ;
+                // if(times< 5){
+                //     cc.beimi.audio.playSFX('timeup_alarm.mp3');                    
+                // }
             }
         }
         object.unscheduleAllCallbacks();
@@ -1717,22 +1753,23 @@ cc.Class({
     // },
     cardModle: function(cards,parent,back,fangwei,context){
         if(cards.length == 1){
-            if(fanwei == 'top'){
-                var cardOp = context.findCardForKong(parent,cards[0]) ;
-                let card = cc.instantiate(context.dan_topcurrent);
-                let temp = card.getComponent('DanAction');
+            var cardOp,card,temp;
+            if(fangwei == 'top'){
+                cardOp = context.findCardForKong(parent,cards[0]) ;
+                card = cc.instantiate(context.dan_topcurrent);
+                temp = card.getComponent('DanAction');
             }else if(fangwei == 'left'){
-                var cardOp = context.findCardForKong(parent,cards[0]) ;
-                let card = cc.instantiate(context.dan_leftcurrent);
-                let temp = card.getComponent('DanAction');
+                cardOp = context.findCardForKong(parent,cards[0]) ;
+                card = cc.instantiate(context.dan_leftcurrent);
+                temp = card.getComponent('DanAction');
             }else if(fangwei == 'right'){
-                var cardOp = context.findCardForKong(parent,cards[0]) ;
-                let card = cc.instantiate(context.dan_rightcurrent);
-                let temp = card.getComponent('DanAction');
+                cardOp = context.findCardForKong(parent,cards[0]) ;
+                card = cc.instantiate(context.dan_rightcurrent);
+                temp = card.getComponent('DanAction');
             }else{
-                var cardOp = context.findCardForKong(parent,cards[0]) ;
-                let card = cc.instantiate(context.dan_mycurrent);
-                let temp = card.getComponent('DanAction');
+                cardOp = context.findCardForKong(parent,cards[0]) ;
+                card = cc.instantiate(context.dan_mycurrent);
+                temp = card.getComponent('DanAction');
             } 
             temp.init(cards[i],false,fangwei);
             if ( cardOp.isGang ) {
@@ -1836,6 +1873,8 @@ cc.Class({
     shouOperationMune: function(){
         var action = cc.moveTo(0.5,1122,-147);
         this.actionnode_two.runAction(action);
+        this.actionnode_two.active = false;
+        
     },
     //其他玩家准备
     // allReady_event(data,context){
@@ -1858,7 +1897,7 @@ cc.Class({
          this.cardModle([11,12,13,14],cc.find('Canvas/content/handcards/leftdesk/kong'),true,'left',context)
 
          this.cardModle([11,12,13,14],cc.find('Canvas/content/handcards/rightdesk/kong'),true,'right',context)
-         this.cardModle([11,12,13,14],cc.find('Canvas/content/handcards/deskcard/kong'),true,'',context)
+         this.cardModle([9,10,11,],cc.find('Canvas/content/handcards/deskcard/kong'),false,'',context)
 
          this.cardModle([11,12,13,14],cc.find('Canvas/content/handcards/topdesk/kong'),true,'top',context)
          
@@ -1869,7 +1908,7 @@ cc.Class({
         
     },
     dosomethings: function (data , context){
-        this.selectaction_event({userid:cc.beimi.user.id,cards:[9],card:-1,action:'gang'},context)
+        this.selectaction_event({userid:cc.beimi.user.id,cards:[35],card:-1,action:'gang'},context)
        
        
    },

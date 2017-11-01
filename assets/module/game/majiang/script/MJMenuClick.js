@@ -40,19 +40,19 @@ cc.Class({
         this.node.dispatchEvent( new cc.Event.EventCustom('leaveGame', true) );
     },
     //点击 确认结束游戏
-    overGameClick:function(){
+    // overGameClick:function(){
         
-        //this.scene("gameMain" , this);
-        this.button.active = false;
-        this.labei.active = true;
-        this.node.dispatchEvent( new cc.Event.EventCustom('overGame', true) );
+    //     //this.scene("gameMain" , this);
+    //     this.button.active = false;
+    //     this.labei.active = true;
+    //     this.node.dispatchEvent( new cc.Event.EventCustom('overGame', true) );
         
-    },
-    goonGameClick: function(){
-        let mj = cc.find('Canvas').getComponent('MajiangDataBind')
-        let dialog = cc.find("Canvas/alert") ;
-        mj.alert.put(dialog);
-    },
+    // },
+    // goonGameClick: function(){
+    //     let mj = cc.find('Canvas').getComponent('MajiangDataBind')
+    //     let dialog = cc.find("Canvas/alert") ;
+    //     mj.alert.put(dialog);
+    // },
     setting:function(){
 
         let mjdata = cc.find('Canvas').getComponent('MajiangDataBind');
@@ -60,7 +60,17 @@ cc.Class({
         mjdata.setting_coin.runAction(action);
         this.node.dispatchEvent( new cc.Event.EventCustom('settingclick', true) );
         
-    }
+    },
+    gameSetting:function(){
+        let mjdata = cc.find('Canvas').getComponent('MajiangDataBind');
+        let setting = cc.instantiate(mjdata.gameSettingClick);
+        setting.parent = mjdata.node;
+    },
+    backSetting: function(){
+        let mj = cc.find('Canvas').getComponent('MajiangDataBind')
+        let dialog = cc.find("Canvas/setting") ;
+        mj.setting.put(dialog);
+    },
 
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
