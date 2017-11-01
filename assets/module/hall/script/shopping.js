@@ -43,4 +43,15 @@ cc.Class({
         }
        
     },
+    payfors: function(data){
+        var roomNum = data.target._name;
+        console.log("房卡："+roomNum);
+        //判断支付金额
+        if(roomNum <= 0) {
+            this.notice.getComponent('cc.Label').string = "支付金额异常!请联系客服人员";
+        }else{
+            window.location.href = 'http://game.bizpartner.cn/wxController/wxPayHtml?' + '&roomNum='+roomNum+'&userId='+cc.beimi.userId+"&token="+cc.beimi.authorization;   
+        }
+       
+    },
 })

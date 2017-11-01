@@ -26,8 +26,7 @@ cc.Class({
         var a =require('heading');
     },
     clickNum: function(event){
-        var value = event.currentTarget.name;
-        var num = event.target.children[0].name.replace('coins','');
+        var num = event.currentTarget.name;
         console.log(num);
         array.push(num);
         this.text.string = array.join('');
@@ -51,10 +50,10 @@ cc.Class({
             }
         }
     },   
-    success: function(){
+    success: function(result,object){
         
     },
-    error: function(){
+    error: function(result){
 
     }
 

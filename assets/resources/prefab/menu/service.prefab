@@ -30,7 +30,7 @@
         "__id__": 26
       },
       {
-        "__id__": 42
+        "__id__": 41
       },
       {
         "__id__": 15
@@ -40,7 +40,7 @@
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 58
+      "__id__": 57
     },
     "_id": "",
     "_opacity": 255,
@@ -821,7 +821,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 41
+      "__id__": 40
     },
     "_id": "",
     "_opacity": 255,
@@ -904,7 +904,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 7,
-      "y": 39
+      "y": 20
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1090,7 +1090,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 7,
-      "y": -49
+      "y": -70
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1141,7 +1141,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 37
@@ -1221,7 +1221,7 @@
       "__id__": 26
     },
     "_enabled": true,
-    "transition": 3,
+    "transition": 0,
     "pressedColor": {
       "__type__": "cc.Color",
       "r": 211,
@@ -1240,11 +1240,7 @@
     "zoomScale": 1.2,
     "pressedSprite": null,
     "hoverSprite": null,
-    "clickEvents": [
-      {
-        "__id__": 40
-      }
-    ],
+    "clickEvents": [],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
     "_N$normalColor": {
@@ -1268,15 +1264,6 @@
     }
   },
   {
-    "__type__": "cc.ClickEvent",
-    "target": {
-      "__id__": 16
-    },
-    "component": "service",
-    "handler": "copyNum",
-    "customEventData": ""
-  },
-  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -1296,27 +1283,27 @@
     },
     "_children": [
       {
-        "__id__": 43
+        "__id__": 42
       },
       {
-        "__id__": 46
+        "__id__": 45
       },
       {
-        "__id__": 49
+        "__id__": 48
       },
       {
-        "__id__": 52
+        "__id__": 51
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 55
+        "__id__": 54
       }
     ],
     "_prefab": {
-      "__id__": 57
+      "__id__": 56
     },
     "_id": "",
     "_opacity": 255,
@@ -1359,18 +1346,18 @@
     "_name": "分享-wechat_icon",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 42
+      "__id__": 41
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 44
+        "__id__": 43
       }
     ],
     "_prefab": {
-      "__id__": 45
+      "__id__": 44
     },
     "_id": "",
     "_opacity": 255,
@@ -1399,7 +1386,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": -71,
-      "y": 39
+      "y": 20
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1413,7 +1400,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 43
+      "__id__": 42
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -1452,18 +1439,18 @@
     "_name": "用户边框",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 42
+      "__id__": 41
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 47
+        "__id__": 46
       }
     ],
     "_prefab": {
-      "__id__": 48
+      "__id__": 47
     },
     "_id": "",
     "_opacity": 255,
@@ -1506,7 +1493,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 46
+      "__id__": 45
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -1545,18 +1532,18 @@
     "_name": "label",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 42
+      "__id__": 41
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 50
+        "__id__": 49
       }
     ],
     "_prefab": {
-      "__id__": 51
+      "__id__": 50
     },
     "_id": "",
     "_opacity": 255,
@@ -1585,7 +1572,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": -73,
-      "y": -49
+      "y": -70
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1599,7 +1586,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 49
+      "__id__": 48
     },
     "_enabled": true,
     "_useOriginalSize": false,
@@ -1632,18 +1619,18 @@
     "_name": "richtext",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 42
+      "__id__": 41
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
-        "__id__": 53
+        "__id__": 52
       }
     ],
     "_prefab": {
-      "__id__": 54
+      "__id__": 53
     },
     "_id": "",
     "_opacity": 255,
@@ -1686,7 +1673,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 52
+      "__id__": 51
     },
     "_enabled": true,
     "_N$string": "<color=#469E0B><b>复制</b></color>",
@@ -1713,10 +1700,10 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 42
+      "__id__": 41
     },
     "_enabled": true,
-    "transition": 3,
+    "transition": 0,
     "pressedColor": {
       "__type__": "cc.Color",
       "r": 211,
@@ -1737,7 +1724,7 @@
     "hoverSprite": null,
     "clickEvents": [
       {
-        "__id__": 56
+        "__id__": 55
       }
     ],
     "_N$interactable": true,
@@ -1759,14 +1746,12 @@
     "_N$normalSprite": null,
     "_N$disabledSprite": null,
     "_N$target": {
-      "__id__": 42
+      "__id__": 41
     }
   },
   {
     "__type__": "cc.ClickEvent",
-    "target": {
-      "__id__": 16
-    },
+    "target": null,
     "component": "service",
     "handler": "copyNum",
     "customEventData": ""

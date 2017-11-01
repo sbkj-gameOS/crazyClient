@@ -25,6 +25,9 @@ cc.Class({
     onCloseClick:function(){
         cc.beimi.dialog.destroy();
         cc.beimi.dialog = null ;
+    },
+    onClick:function(){
+        console.log(1);
     }
 
     // called every frame, uncomment this function to activate update callback
