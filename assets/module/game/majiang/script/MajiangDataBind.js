@@ -14,6 +14,7 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
+        tuoguan: cc.Node,
         dan_topcurrent:cc.Prefab,
         dan_leftcurrent:cc.Prefab,
         dan_rightcurrent:cc.Prefab,
@@ -523,6 +524,33 @@ cc.Class({
             event.stopPropagation();
         });
         
+        cc.sys.localStorage.removeItem('current');
+        cc.sys.localStorage.removeItem('right');
+        cc.sys.localStorage.removeItem('left');
+        cc.sys.localStorage.removeItem('top');
+        this.joinRoom();
+        if(cc.beimi.game.type){
+            if(cc.beimi.game.type.peoNum == 2){
+                this.left_player.active = false;
+                this.right_player.active = false;
+            }
+            if(cc.beimi.game.type.model == 'pipei'){
+                this.tuoguan.active = false;
+            }
+        }
+    },
+    joinRoom:function(){
+        //开始匹配
+        let socket = this.socket();
+        var param = {
+            token:cc.beimi.authorization,
+            playway:cc.beimi.playway,
+            orgi:cc.beimi.user.orgi
+        } ;
+        if ( cc.beimi.room ) {
+            param.room = cc.beimi.room ;
+        }
+        socket.emit("joinroom" ,JSON.stringify(param)) ;
     },
     /**
      * 解散房间的事件
@@ -552,71 +580,119 @@ cc.Class({
      * @param context
      */
     joinroom_event:function(data , context){
-        var player = context.playerspool.get();
-        if(player){
-            var playerscript = player.getComponent("MaJiangPlayer");
-            var inx = null , tablepos = "";
-            if(data.id == cc.beimi.user.id){
-                player.setPosition(-584 , -269);
-                player.parent = context.root();
-                tablepos = "current" ;
-            }else{
-                inx = context.playersarray.length - 1 ;
-                if(inx == 0){
-                    //var playerscript = player.getComponent("MaJiangPlayer");
-                    player.parent= context.right_player;
-                    tablepos = "right" ;
-                   // context.right = ''
-                }else if(inx == 1){
-                    //var playerscript = player.getComponent("MaJiangPlayer");
+        
+        if(data.peoNum == 2){
+            if(data.id!=cc.sys.localStorage.getItem('current')&&data.id!=cc.sys.localStorage.getItem('top')){
+                var player = context.playerspool.get();
+                var playerscript = player.getComponent("MaJiangPlayer");
+                var inx = null , tablepos = "";
+                if(data.id == cc.beimi.user.id){
+                    player.setPosition(-584 , -269);
+                    player.parent = context.root();
+                    tablepos = "current" ;
+                    cc.sys.localStorage.setItem('current',data.id);
+                }else{
                     player.parent= context.top_player;
                     tablepos = "top" ;
-                }else if(inx == 2){
-                    //var playerscript = player.getComponent("MaJiangPlayer");
-                    player.parent= context.left_player;
-                    tablepos = "left" ;
+                    cc.sys.localStorage.setItem('top',data.id);
+                    player.setPosition(0,0);
                 }
-                player.setPosition(0,0);
+                playerscript.init(data , inx , tablepos);
+                context.playersarray.push(player) ;
+            }else{
+                var playerarray = context.playersarray;
+                if(playerarray){
+                    for(let i =0 ; i< playerarray.length;i++){
+                        var playerinfo = playerarray[i].getComponent('MaJiangPlayer');
+                        var tablepos = playerinfo.tablepos;      
+                        var on_off_line = playerinfo.on_off_line;     
+                        var headimg = playerinfo.headimg;
+                        if(data.userid == playerinfo.id) {
+                            if(data.status == 'READY'){    
+                                cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
+                            }else{
+                                cc.find('Canvas/ready/'+tablepos+'_ready').active =false;
+                            }
+                            if(data.online == false){
+                                on_off_line.active = true;
+                                headimg.color = new cc.Color(42, 25, 25);
+                            }else{
+                                on_off_line.active = false;
+                                headimg.color = new cc.Color(255, 255, 255);
+                            }
+                        }    
+                    }
+                }
             }
-            playerscript.init(data , inx , tablepos);
-            context.playersarray.push(player) ;
-            
-                
-            //var playerscript = player.getComponent("MaJiangPlayer");
-
-        /**
-         * 初始化状态，首个玩家加入，然后开始等待其他玩家 ， 如果是 恢复数据， 则不会进入
-         */
-        //this.statusbtn.active = true ;
-        }    
-
-        var playerarray = context.playersarray;
-        if(playerarray){
-            for(let i =0 ; i< playerarray.length;i++){
-                var playerinfo = playerarray[i].getComponent('MaJiangPlayer');
-                var tablepos = playerinfo.tablepos;      
-                var on_off_line = playerinfo.on_off_line;     
-                var headimg = playerinfo.headimg;
-                if(data.userid == playerinfo.data) {
-                    if(data.status == 'READY'){    
-                        cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
-                    }else{
-                        cc.find('Canvas/ready/'+tablepos+'_ready').active =false;
-                    }
-                    if(data.online == false){
-                        on_off_line.active = true;
-                        headimg.color = new cc.Color(42, 25, 25);
-                    }else{
-                        on_off_line.active = false;
-                        headimg.color = new cc.Color(255, 255, 255);
-                    }
-                }    
+            if(context.playersarray.length == 2){
+                this.ready2.active = false;
+                var action = cc.moveTo(0.2,-21,-151);
+                context.readybth.runAction(action);
             }
         }
-        if(context.playersarray.length == 4){
-            this.ready2.active = false;
-            var action = cc.moveTo(0.2,-21,-151);
-            context.readybth.runAction(action);
+        else{
+            if(data.id!=cc.sys.localStorage.getItem('current')&&data.id!=cc.sys.localStorage.getItem('right')&&data.id!=cc.sys.localStorage.getItem('left')&&data.id!=cc.sys.localStorage.getItem('top')){
+                var player = context.playerspool.get();
+                var playerscript = player.getComponent("MaJiangPlayer");
+                var inx = null , tablepos = "";
+                if(data.id == cc.beimi.user.id){
+                    player.setPosition(-584 , -269);
+                    player.parent = context.root();
+                    tablepos = "current" ;
+                    cc.sys.localStorage.setItem('current',data.id);
+                }else{
+                    inx = context.playersarray.length-1 ;
+                    if(inx == 0){
+                        //var playerscript = player.getComponent("MaJiangPlayer");
+                        player.parent= context.right_player;
+                        tablepos = "right" ;
+                        cc.sys.localStorage.setItem('right',data.id);
+                       // context.right = ''
+                    }else if(inx == 1){
+                        //var playerscript = player.getComponent("MaJiangPlayer");
+                        player.parent= context.top_player;
+                        tablepos = "top" ;
+                        cc.sys.localStorage.setItem('top',data.id);
+                    }else if(inx == 2){
+                        //var playerscript = player.getComponent("MaJiangPlayer");
+                        player.parent= context.left_player;
+                        tablepos = "left" ;
+                        cc.sys.localStorage.setItem('left',data.id);
+                    }
+                    player.setPosition(0,0);
+                }
+                playerscript.init(data , inx , tablepos);
+                context.playersarray.push(player) ;
+            }else{
+                var playerarray = context.playersarray;
+                if(playerarray){
+                    for(let i =0 ; i< playerarray.length;i++){
+                        var playerinfo = playerarray[i].getComponent('MaJiangPlayer');
+                        var tablepos = playerinfo.tablepos;      
+                        var on_off_line = playerinfo.on_off_line;     
+                        var headimg = playerinfo.headimg;
+                        if(data.userid == playerinfo.id) {
+                            if(data.status == 'READY'){    
+                                cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
+                            }else{
+                                cc.find('Canvas/ready/'+tablepos+'_ready').active =false;
+                            }
+                            if(data.online == false){
+                                on_off_line.active = true;
+                                headimg.color = new cc.Color(42, 25, 25);
+                            }else{
+                                on_off_line.active = false;
+                                headimg.color = new cc.Color(255, 255, 255);
+                            }
+                        }    
+                    }
+                }
+            }
+            if(context.playersarray.length == 4){
+                this.ready2.active = false;
+                var action = cc.moveTo(0.2,-21,-151);
+                context.readybth.runAction(action);
+            }
         }
     },
     /**
@@ -745,6 +821,10 @@ cc.Class({
      * @param context
      */
     dealcard_event:function(data , context){      
+        if(data.peoNum){
+            var peoNum = data.peoNum;
+        }
+        context.shouOperationMune();
         let player = context.player(data.userid , context);
         context.select_action_searchlight(data, context , player);
         if(data.userid == cc.beimi.user.id){
@@ -763,7 +843,7 @@ cc.Class({
             }else if(player.tablepos == "left"){
                 inx = 2 ;
             }
-            context.initPlayerHandCards(0 , 1 , inx , context , true);
+            context.initPlayerHandCards(0 , 1 , inx , context , true,peoNum);
         }
        
         context.desk_cards.string = data.deskcards ;
@@ -813,27 +893,36 @@ cc.Class({
         var inx = 0 ;
         for(var i=0 ; i<data.length ; i++){
             let temp = data[i] ;
+           
             if(temp.id != cc.beimi.user.id){
                 var player = context.playerspool.get();
                 var playerscript = player.getComponent("MaJiangPlayer");
                 var tablepos = "" ;
-                if(inx == 0){
-                    //var playerscript = player.getComponent("MaJiangPlayer");
-                    player.parent= context.right_player;
-                    tablepos = "right" ;
-                   
-                }else if(inx == 1){
-                    //var playerscript = player.getComponent("MaJiangPlayer");
+                if(data.peoNum == 2){
                     player.parent= context.top_player;
                     tablepos = "top" ;
-                    
-                }else if(inx == 2){
-                    //var playerscript = player.getComponent("MaJiangPlayer");
-                    player.parent= context.left_player;
-                    tablepos = "left" ;
-
+                    playerscript.init(temp , inx , tablepos);
+                    player.setPosition(0,0);
+                    context.playersarray.push(player) ;
+                    return;
+                }else{
+                    if(inx == 0){
+                        //var playerscript = player.getComponent("MaJiangPlayer");
+                        player.parent= context.right_player;
+                        tablepos = "right" ;
+                       
+                    }else if(inx == 1){
+                        //var playerscript = player.getComponent("MaJiangPlayer");
+                        player.parent= context.top_player;
+                        tablepos = "top" ;
+                        
+                    }else if(inx == 2){
+                        //var playerscript = player.getComponent("MaJiangPlayer");
+                        player.parent= context.left_player;
+                        tablepos = "left" ;
+    
+                    }
                 }
-
                 playerscript.init(temp , inx , tablepos);
                 player.setPosition(0,0);
                 context.playersarray.push(player) ;
@@ -1091,7 +1180,11 @@ cc.Class({
     play_event:function(data , context){
         /**
          * 改变状态，开始发牌
+         * 
          */
+        if(data.peoNum){
+            var peoNum = data.peoNum;
+        }
         {
         var action = cc.moveTo(0.2,570,50);
         context.right_player.runAction(action);
@@ -1106,7 +1199,7 @@ cc.Class({
 
         var temp_player = data.player ;
         var cards = context.decode(temp_player.cards);
-
+        //var cards = temp_player.cards;
         setTimeout(function(){
             context.calcdesc_cards(context , 136 , data.deskcards) ;
         } , 0) ;
@@ -1121,7 +1214,7 @@ cc.Class({
                 var inx = 0 ;
                 for(var i=0 ; i<data.players.length ; i++){
                     if(data.players[i].playuser != cc.beimi.user.id){
-                        context.initPlayerHandCards(groupNums , data.players[inx++].deskcards , inx,context , false);
+                        context.initPlayerHandCards(groupNums , data.players[inx++].deskcards , inx,context , false,peoNum);
                     }
                 }
                 groupNums = groupNums + 1 ;
@@ -1303,20 +1396,26 @@ cc.Class({
      * @param context
      * @param spec 是否特殊的牌，即刚抓起来的牌
      */
-    initPlayerHandCards:function(groupNums , deskcards , inx , context , spec){
+    initPlayerHandCards:function(groupNums , deskcards , inx , context , spec,peoNum){
         let parent = context.right_panel  ;
         let cardarray = context.rightcards;
         let prefab = context.cards_right ;
-
-        if(inx == 1){
+        if(peoNum == 2){
             parent = context.top_panel  ;
             cardarray = context.topcards   ;
             prefab = context.cards_top ;
-        }else if(inx == 2){
-            parent = context.left_panel  ;
-            cardarray = context.leftcards;
-            prefab = context.cards_left ;
+        }else{   
+            if(inx == 1){
+                parent = context.top_panel  ;
+                cardarray = context.topcards   ;
+                prefab = context.cards_top ;
+            }else if(inx == 2){
+                parent = context.left_panel  ;
+                cardarray = context.leftcards;
+                prefab = context.cards_left ;
+            }
         }
+      
         context.initOtherCards(groupNums , context , deskcards , prefab , cardarray , parent , spec , inx);    //左侧，
     },
     initOtherCards:function(group , context , cards , prefab , cardsarray, parent , spec , inx){

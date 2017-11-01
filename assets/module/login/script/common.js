@@ -34,8 +34,8 @@ cc.Class({
         var xySuccess = localStorage.getItem("xySuccess");
         console.log(xySuccess);
         if(xySuccess == 1){
-            //this.tourist();
-            this.login();
+            this.tourist();
+            // this.login();
         }else{
             cc.beimi.dialog = cc.instantiate(this.userProtocol);
             cc.beimi.dialog.parent = this.root();

@@ -184,7 +184,7 @@ cc.Class({
 	roomSuccess: function(result,object){
         if(result.room){
         	roomNum = result.room;
-        	cc.beimi.room = result.room;
+        	//cc.beimi.room = result.room;
             cc.beimi.playway = result.playway;
             var sprite = object.ganmeBtn.getComponent(cc.Sprite);
         	sprite.spriteFrame = object.backRoomImg;

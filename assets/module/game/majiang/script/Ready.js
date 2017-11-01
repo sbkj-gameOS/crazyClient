@@ -28,7 +28,6 @@ cc.Class({
     },
     onClick:function(event){
         //开始匹配
-        debugger
         var count = event.target.getComponent('Ready').count;
 
         let socket = this.socket();
@@ -42,12 +41,12 @@ cc.Class({
         }
         let majiang = this.target.getComponent("MajiangDataBind");
         majiang.waittingForPlayers();
-        if(count == 0){
-            event.target.getComponent('Ready').count=count+1;
-            socket.emit("joinroom" ,JSON.stringify(param)) ;
-        }else{
+        // if(count == 0){
+        //     event.target.getComponent('Ready').count=count+1;
+        //     socket.emit("joinroom" ,JSON.stringify(param)) ;
+        // }else{
             this.node.dispatchEvent(new cc.Event.EventCustom('readyGM', true));       
-        }   
+        // }
     }
 
     // called every frame, uncomment this function to activate update callback
