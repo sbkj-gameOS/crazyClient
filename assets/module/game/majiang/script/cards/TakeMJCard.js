@@ -36,6 +36,7 @@ cc.Class({
                 let handCards = cards.getComponent("HandCards");
                 handCards.take = false;
                 cards.y=0;
+                cards.width = 59;
                 handCards.mj.color = new cc.Color(255, 255, 255);
             }
             this.target.y = this.target.y + 20 ;
