@@ -33,11 +33,8 @@ cc.Class({
         // this.loginFormPool.put(cc.instantiate(this.prefab)); // 创建节点
         var xySuccess = localStorage.getItem("xySuccess");
         if(xySuccess == 1){
-            this.tourist();
-            // this.login();
-        }else{
-            cc.beimi.dialog = cc.instantiate(this.userProtocol);
-            cc.beimi.dialog.parent = this.root();
+            this.login();
+            //this.tourist();
         }
         
         cc.beimi.game = {
@@ -100,20 +97,23 @@ cc.Class({
         }
     },
     wxlogin: function(){
-        if(this.agree.active){
-			if(cc.sys.os == "Windows"){//Windows电脑
-				alert(1)
-			}else{
-				this.loadding();
-				cc.beimi.http.httpGet('/wxController/getLoginCode',this.wxseccess,this.error,this);
-			}
-        }else{
-            this.alert('请同意用户使用协议');
-        }       
+        localStorage.setItem("xySuccess","1");
+        //this.tourist();
+        this.login();
+   //      if(this.agree.active){
+			// if(cc.sys.os == "Windows"){//Windows电脑
+			// 	alert(1)
+			// }else{
+			// 	this.loadding();
+			// 	cc.beimi.http.httpGet('/wxController/getLoginCode',this.wxseccess,this.error,this);
+			// }
+   //      }else{
+   //          this.alert('请同意用户使用协议');
+   //      }       
     },
-    wxseccess: function(result,object){
-        window.location.href=result;
-    },
+    // wxseccess: function(result,object){
+    //     window.location.href=result;
+    // },
     // login:function(){
     //     this.io = require("IOUtils");
     //     //this.loadding();
@@ -143,6 +143,7 @@ cc.Class({
     //     }
     // },
     login:function(){
+        debugger
         this.io = require("IOUtils");
         //this.loadding();
         var url = window.location.href;
