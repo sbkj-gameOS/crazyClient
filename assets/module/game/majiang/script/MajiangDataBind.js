@@ -548,22 +548,22 @@ cc.Class({
         }
     },
     //播放音乐的事件  data {url：路径，userid：内容}
-    playMusic_event:function(data,context){
-        let playerarray = context.playersarray;
-        if(playerarray){
-            for(let i =0 ; i< playerarray.length;i++){
-                var playerinfo = playerarray[i].getComponent('MaJiangPlayer');
-                var tablepos = playerinfo.tablepos;      
-                if(data.userid == playerinfo.data.id) {
-                    cc.beimi.audio.playSFX(data.url+'.mp3');    
-                    cc.find('Canvas/music/'+tablepos).active = true;  
-                    setTimeout(function(){
-                        cc.find('Canvas/music/'+tablepos).active = false;
-                    },3000);
-                }
-            }
-        }
-    },
+    // playMusic_event:function(data,context){
+    //     let playerarray = context.playersarray;
+    //     if(playerarray){
+    //         for(let i =0 ; i< playerarray.length;i++){
+    //             var playerinfo = playerarray[i].getComponent('MaJiangPlayer');
+    //             var tablepos = playerinfo.tablepos;      
+    //             if(data.userid == playerinfo.data.id) {
+    //                 cc.beimi.audio.playSFX(data.url+'.mp3');    
+    //                 cc.find('Canvas/music/'+tablepos).active = true;  
+    //                 setTimeout(function(){
+    //                     cc.find('Canvas/music/'+tablepos).active = false;
+    //                 },3000);
+    //             }
+    //         }
+    //     }
+    // },
     joinRoom:function(){
         //开始匹配
         let socket = this.socket();
@@ -1022,7 +1022,7 @@ cc.Class({
                 }
                
                 var action = cc.moveTo(0.1,940 - count*285,-147);
-                context.actionnode_two.active = true;
+                //context.actionnode_two.active = true;
                 context.actionnode_two.runAction(action);
                 console.log(context.actionnode_two);
                 //context.actionnode_deal.active = true ;
@@ -1097,7 +1097,7 @@ cc.Class({
                 var action = cc.moveTo(0.1,940 - count*285,-147);
                 console.log(940 - count*85);
 
-                context.actionnode_two.active = true;
+                //context.actionnode_two.active = true;
                 context.actionnode_two.runAction(action);
                 console.log(context.actionnode_two);
                 // let ani = context.actionnode_two.getComponent(cc.Animation);
@@ -1873,7 +1873,7 @@ cc.Class({
     shouOperationMune: function(){
         var action = cc.moveTo(0.5,1122,-147);
         this.actionnode_two.runAction(action);
-        this.actionnode_two.active = false;
+        //this.actionnode_two.active = false;
         
     },
     //其他玩家准备
