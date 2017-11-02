@@ -15,6 +15,7 @@ cc.Class({
     },
     // 首次加载页面方法
     onLoad: function () {
+        tongyi = true;
         /**
          * 游客登录，无需弹出注册对话框，先从本地获取是否有过期的对话数据，如果有过期的对话数据，则使用过期的对话数据续期
          * 如果没有对话数据，则重新使用游客注册接口
@@ -63,6 +64,7 @@ cc.Class({
             this.alert('请同意用户使用协议');
         }     
     },
+    //同意协议内容
     click: function(toggle){
         tongyi = toggle.isChecked;
     },
