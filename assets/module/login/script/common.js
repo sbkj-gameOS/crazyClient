@@ -4,16 +4,6 @@ var a = 1;
 cc.Class({
     extends: beiMiCommon,
     properties: {
-        // foo: {
-        //    default: null,      // The default value will be used only when the component attaching
-        //                           to a node for the first time
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
         agree:{
             default:null,
             type: cc.Node
@@ -23,7 +13,7 @@ cc.Class({
             type: cc.Prefab
         },
     },
-    // use this for initialization
+    // 首次加载页面方法
     onLoad: function () {
         /**
          * 游客登录，无需弹出注册对话框，先从本地获取是否有过期的对话数据，如果有过期的对话数据，则使用过期的对话数据续期
@@ -54,6 +44,7 @@ cc.Class({
             }
         };
     },
+    //游客登录方法
     tourist: function(){
         if(tongyi){
             this.io = require("IOUtils");
@@ -97,51 +88,14 @@ cc.Class({
         }
     },
     wxlogin: function(){
-        localStorage.setItem("xySuccess","1");
-        //this.tourist();
-        this.login();
-   //      if(this.agree.active){
-			// if(cc.sys.os == "Windows"){//Windows电脑
-			// 	alert(1)
-			// }else{
-			// 	this.loadding();
-			// 	cc.beimi.http.httpGet('/wxController/getLoginCode',this.wxseccess,this.error,this);
-			// }
-   //      }else{
-   //          this.alert('请同意用户使用协议');
-   //      }       
+        if(tongyi){
+            localStorage.setItem("xySuccess","1");
+            //this.tourist();
+            this.login();    
+        }else{
+            this.alert('请同意用户使用协议');
+        }
     },
-    // wxseccess: function(result,object){
-    //     window.location.href=result;
-    // },
-    // login:function(){
-    //     this.io = require("IOUtils");
-    //     //this.loadding();
-    //     var url = window.location.href;
-    //     //console.log(url);
-    //     var data = url.split('?')[1];
-    //     var value='';
-    //     if(data){
-    //     var values= data.split('&');
-
-    //     for(let i in values){
-    //         var name = values[i].split('=')[0]
-    //         if (name =='status'){
-    //             cc.beimi.paystatus = values[i].split('=')[1];
-    //         }
-    //     };
-    //         for(let i in values){
-    //         var name = values[i].split('=')[0]
-    //         if (name == 'userId'){
-    //             value = values[i].split('=')[1];
-    //             cc.beimi.userId= value;
-    //             console.log(value);
-    //             this.loadding();
-    //             cc.beimi.http.httpGet('/wxController/getWxUserToken?userId='+value,this.sucess,this.error,this);
-    //             }
-    //         };
-    //     }
-    // },
     login:function(){
         this.io = require("IOUtils");
         //this.loadding();
@@ -203,9 +157,4 @@ cc.Class({
        object.closeloadding(object.loaddingDialog);
        object.alert("网络异常，服务访问失败");
    },
-
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
-
-    // },
 });
