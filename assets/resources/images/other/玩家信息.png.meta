@@ -1,22 +1,22 @@
 {
   "ver": "1.0.0",
-  "uuid": "72540e6e-58fc-4326-b4d6-ff5f5dfbe800",
+  "uuid": "253d1edc-f402-4c9b-b78a-b22109ce2dc8",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "分享": {
+    "玩家信息": {
       "ver": "1.0.3",
-      "uuid": "e35b197f-bac3-4314-8d96-6e275dd6ebe8",
-      "rawTextureUuid": "72540e6e-58fc-4326-b4d6-ff5f5dfbe800",
+      "uuid": "8f6d2d92-42e1-4a5c-80ab-dced801eba05",
+      "rawTextureUuid": "253d1edc-f402-4c9b-b78a-b22109ce2dc8",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
       "offsetX": 0,
       "offsetY": 0,
-      "trimX": 40,
+      "trimX": 0,
       "trimY": 0,
-      "width": 86,
+      "width": 166,
       "height": 47,
       "rawWidth": 166,
       "rawHeight": 47,

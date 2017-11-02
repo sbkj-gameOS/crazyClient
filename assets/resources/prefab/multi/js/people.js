@@ -16,7 +16,10 @@ cc.Class({
         	default: null,
         	type: cc.ScrollView
         },
-        model: cc.Node,
+        model:{
+            default:null,
+            type: cc.Prefab
+        },
 		spacing: 0, // space between each item
         label0: cc.Label,
         label1: cc.Label,
