@@ -143,7 +143,6 @@ cc.Class({
     //     }
     // },
     login:function(){
-        debugger
         this.io = require("IOUtils");
         //this.loadding();
         var url = window.location.href;
