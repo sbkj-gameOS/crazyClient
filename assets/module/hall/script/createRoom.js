@@ -5,11 +5,16 @@ cc.Class({
     properties: {
         ccMjType: cc.Prefab,
         tpMjType: cc.Prefab,
+        lgMjType: cc.Prefab,
         right1:{
             default:null,
             type:cc.Node,
         },
         right2:{
+            default:null,
+            type:cc.Node,
+        },
+        right3:{
             default:null,
             type:cc.Node,
         },
@@ -34,8 +39,12 @@ cc.Class({
         this.right2 = cc.instantiate(this.tpMjType);
         this.right2.parent = this.node;
         this.right2.setPosition(111,-18);
+        this.right3 = cc.instantiate(this.lgMjType);
+        this.right3.parent = this.node;
+        this.right3.setPosition(111,-18);
         this.right1.active = true;
-        this.right2.active = false; 
+        this.right2.active = false;
+        this.right3.active = false; 
     },
     toggleClick: function(toggle) {
         //当前选中文字颜色切换白色
@@ -46,9 +55,15 @@ cc.Class({
         if(moShiId == "台炮麻将"){
             this.right1.active = false;
             this.right2.active = true; 
+            this.right3.active = false;
         }else if(moShiId == "长春麻将"){
             this.right1.active = true;
-            this.right2.active = false; 
+            this.right2.active = false;
+            this.right3.active = false; 
+        }else if(moShiId == "龙港麻将"){
+            this.right1.active = false;
+            this.right2.active = false;
+            this.right3.active = true; 
         }
         selectlastToggle = toggle;
     },

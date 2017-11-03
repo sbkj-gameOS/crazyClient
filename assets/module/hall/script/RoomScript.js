@@ -182,6 +182,7 @@ cc.Class({
         object.alert('加入失败，请重试');
     },
 	roomSuccess: function(result,object){
+		result = JSON.parse(result);
         if(result.room){
         	roomNum = result.room;
         	//cc.beimi.room = result.room;

@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "7f781bba-ff0c-47bd-a0da-ddc51c3a174d",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "龙港麻将": {
+      "ver": "1.0.3",
+      "uuid": "b421863f-6e75-49f8-be2b-95847ca791a8",
+      "rawTextureUuid": "7f781bba-ff0c-47bd-a0da-ddc51c3a174d",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 472,
+      "height": 112,
+      "rawWidth": 472,
+      "rawHeight": 112,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
