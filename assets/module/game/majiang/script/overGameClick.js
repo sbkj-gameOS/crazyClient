@@ -42,6 +42,10 @@ cc.Class({
     //     this.node.dispatchEvent( new cc.Event.EventCustom('leaveGame', true) );
     // },
     //点击 确认结束游戏
+    init: function(){
+        this.button.active = true;
+        this.labei.active =false;
+    },
     overGameClick:function(){
         
         //this.scene("gameMain" , this);
@@ -63,6 +67,16 @@ cc.Class({
 
         //alert();
     },
+    dontLeaveGameClick: function(){
+        let mj = cc.find('Canvas').getComponent('MajiangDataBind')        
+        let dialog = cc.find("Canvas/isleave") ;
+        mj.alert.put(dialog);
+    },
+    leaveGameClick:function(){
+        
+                this.scene("gameMain" , this);
+                this.node.dispatchEvent( new cc.Event.EventCustom('leaveGame', true) );
+            },
     // setting:function(){
 
     //     let mjdata = cc.find('Canvas').getComponent('MajiangDataBind');

@@ -45,8 +45,10 @@ cc.Class({
         this.on_off_line.active = false;
         this.selected.active = false ;
         this.creator.active = false ;
+        
     },
     init:function(playerdata , inx , tablepos){
+        this.creator.active = false ;
         this.data = playerdata ;    //存放玩家数据
         this.tablepos = tablepos ;
         if(inx == 0){
@@ -54,7 +56,6 @@ cc.Class({
         }else if(inx == 1){
             this.selectcards.parent.x = this.selectcards.parent.x * -1 ;
         }
-
         this.username.string = playerdata.username ;
         this.goldcoins.string = playerdata.goldcoins ;
     },

@@ -39,7 +39,8 @@ cc.Class({
         this.fangwei = fangwei;
         let cardcolors = parseInt(this.value/4 ) ;
         let cardtype  = parseInt(cardcolors / 9);
-
+        this.cardcolors =cardcolors;
+        this.cardtype =cardtype;
         this.mjtype = cvalue; 
         this.mjvalue = parseInt((this.value%36)/4 ) ;
 
@@ -104,6 +105,9 @@ cc.Class({
     },
     countactive:function(){
         this.count.node.active =true ; 
+    },
+    setValue: function(values){
+        this.value = values;
     }
 
 

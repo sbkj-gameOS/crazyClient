@@ -29,6 +29,7 @@ cc.Class({
             var alert = mj.alert.get();
             alert.parent = cc.find("Canvas");
             let node = alert.getComponent('overGameClick') ;
+            node.init();
             node.txt.string = '是否发起解散' ;
             
         }
@@ -40,14 +41,14 @@ cc.Class({
         this.node.dispatchEvent( new cc.Event.EventCustom('leaveGame', true) );
     },
     //点击 确认结束游戏
-    // overGameClick:function(){
+    sureLiveGameClick:function(){
         
-    //     //this.scene("gameMain" , this);
-    //     this.button.active = false;
-    //     this.labei.active = true;
-    //     this.node.dispatchEvent( new cc.Event.EventCustom('overGame', true) );
+        let mjdata = cc.find('Canvas').getComponent('MajiangDataBind');
+        let setting = cc.instantiate(mjdata.leave_alert);
+        setting.parent = mjdata.node;
+        //this.node.dispatchEvent( new cc.Event.EventCustom('overGame', true) );
         
-    // },
+    },
     // goonGameClick: function(){
     //     let mj = cc.find('Canvas').getComponent('MajiangDataBind')
     //     let dialog = cc.find("Canvas/alert") ;

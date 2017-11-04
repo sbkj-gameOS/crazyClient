@@ -103,9 +103,11 @@ cc.Class({
     },
     click: function(){
         var room={};
-        room.roomNum = array;
+        room.room = array;
         console.log(room);
+        
         if(cc.beimi.authorization){
+            cc.beimi.room =array;
             room.token = cc.beimi.authorization;
             cc.beimi.http.httpPost('/api/room/query',room,this.JRsucess,this.JRerror,this);
         }else{
@@ -118,7 +120,7 @@ cc.Class({
     JRsucess: function(result,object){
         var data = JSON.parse(result);
         if(data.playway&&data.room){
-            cc.beimi.room = data.room;
+            //cc.beimi.room = data.room;
             cc.beimi.playway = data.playway;
             cc.director.loadScene('majiang');
         }else{

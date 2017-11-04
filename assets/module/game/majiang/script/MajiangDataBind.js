@@ -17,7 +17,7 @@ cc.Class({
 
         gameSettingClick: cc.Prefab,
 
-
+        leave_alert: cc.Prefab,
         tuoguan: cc.Node,
         dan_topcurrent:cc.Prefab,
         dan_leftcurrent:cc.Prefab,
@@ -233,8 +233,11 @@ cc.Class({
         this.cardpool = new cc.NodePool();
         this.alert = new cc.NodePool();
         this.setting = new cc.NodePool();
+        this.leave =new cc.NodePool();
+        
         this.alert.put(cc.instantiate(this.isOver));
         this.setting.put(cc.instantiate(this.gameSettingClick));
+        this.leave.put(cc.instantiate(this.leave_alert));
         /**
          *
          * 初始化玩家 的 对象池
@@ -293,6 +296,9 @@ cc.Class({
              */
             socket.on("players" , function(result){
                 var data = self.parse(result) ;
+                console.log('players');
+                
+                console.log(data);
                 /**
                  * 处理 Players
                  */
@@ -323,13 +329,14 @@ cc.Class({
         });
         this.node.on('overGame',function(event){
             let socket = self.socket();
-            var Refuse = null;
             if(event.getUserData()){
-                Refuse = event.getUserData().REFUSE;
+                socket.emit('overGame',JSON.stringify({
+                    REFUSE : event.getUserData().REFUSE
+                }))
+            }else{
+                socket.emit('overGame',JSON.stringify({
+                }))
             }
-            socket.emit('overGame',JSON.stringify({
-                REFUSE : Refuse
-            }))
         });
         this.node.on('takecard', function (event) {
             cc.beimi.audio.playSFX('select.mp3');
@@ -581,6 +588,7 @@ cc.Class({
      * 解散房间的事件
      */
     isOver_event:function(){
+
         var mj = cc.find('Canvas').getComponent('MajiangDataBind');
         if(mj.alert.size()>0){
             var alert = mj.alert.get();
@@ -591,8 +599,8 @@ cc.Class({
         }
     },
     over_event: function(){
-        var mj = cc.find('Canvas').getComponent('MajiangDataBind');
-        mj.scene("gameMain" , this);     
+        cc.director.loadScene('gameMain');
+        
     },
     unOver_event: function(){
         let mj = cc.find('Canvas').getComponent('MajiangDataBind')
@@ -624,6 +632,7 @@ cc.Class({
                 }
                 playerscript.init(data , inx , tablepos);
                 context.playersarray.push(player) ;
+                
             }else{
                 var playerarray = context.playersarray;
                 if(playerarray){
@@ -635,8 +644,6 @@ cc.Class({
                         if(data.id == playerinfo.data.id) {
                             if(data.status == 'READY'){    
                                 cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
-                            }else{
-                                cc.find('Canvas/ready/'+tablepos+'_ready').active =false;
                             }
                             if(data.online == false){
                                 on_off_line.active = true;
@@ -660,25 +667,26 @@ cc.Class({
             if(data.id!=cc.sys.localStorage.getItem('current')&&data.id!=cc.sys.localStorage.getItem('right')&&data.id!=cc.sys.localStorage.getItem('left')&&data.id!=cc.sys.localStorage.getItem('top')){
                 var player = context.playerspool.get();
                 var playerscript = player.getComponent("MaJiangPlayer");
-                var inx = null , tablepos = "";
+                var inx = 0 , tablepos = "";
                 if(data.id == cc.beimi.user.id){
                     player.setPosition(-584 , -269);
                     player.parent = context.root();
                     tablepos = "current" ;
                     cc.sys.localStorage.setItem('current',data.id);
                 }else{
-                    inx = context.playersarray.length-1 ;
                     if(inx == 0){
                         //var playerscript = player.getComponent("MaJiangPlayer");
                         player.parent= context.right_player;
                         tablepos = "right" ;
                         cc.sys.localStorage.setItem('right',data.id);
                        // context.right = ''
+                       inx++
                     }else if(inx == 1){
                         //var playerscript = player.getComponent("MaJiangPlayer");
                         player.parent= context.top_player;
                         tablepos = "top" ;
                         cc.sys.localStorage.setItem('top',data.id);
+                        inx ++
                     }else if(inx == 2){
                         //var playerscript = player.getComponent("MaJiangPlayer");
                         player.parent= context.left_player;
@@ -689,6 +697,9 @@ cc.Class({
                 }
                 playerscript.init(data , inx , tablepos);
                 context.playersarray.push(player) ;
+                if(data.status == 'READY'){    
+                    cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
+                }
             }else{
                 var playerarray = context.playersarray;
                 if(playerarray){
@@ -702,8 +713,6 @@ cc.Class({
                         if(data.id == playerinfo.data.id) {
                             if(data.status == 'READY'){    
                                 cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
-                            }else{
-                                cc.find('Canvas/ready/'+tablepos+'_ready').active =false;
                             }
                             if(data.online == false){
                                 on_off_line.active = true;
@@ -729,7 +738,8 @@ cc.Class({
      * @param context
      */
     //掉线 和上线
-    
+ 
+
     takecard_event:function(data , context){
         cc.beimi.audio.playSFX('give.mp3');
         if(data.userid == cc.beimi.user.id) {
@@ -741,7 +751,7 @@ cc.Class({
             
             for (var inx = 0; inx < context.playercards.length;i++ ) {
                 let handcards = context.playercards[inx].getComponent("HandCards");
-                handcards.relastone();
+                handcards.reinit();
                 if (data.card == handcards.value) {
                     context.playercards[inx].zIndex = 0 ;
                     /**
@@ -772,7 +782,7 @@ cc.Class({
                     
                 }else{
 
-                    handcards.relastone();
+                    handcards.reinit();
                     if(handcards.selectcolor == true){
                         context.playercards[inx].zIndex = 1000 + handcards.value ;
                     }else{
@@ -913,6 +923,7 @@ cc.Class({
     recoverboard:function(data,context){
         //this.statebtn.active = false ;
     },
+   
     /**
      * 接收到服务端的 推送的 玩家数据，根据玩家数据 恢复牌局
      * @param data
@@ -920,45 +931,230 @@ cc.Class({
      */
     players_event:function(data,context){
         context.collect(context) ;    //先回收资源，然后再初始化
+        
         var inx = 0 ;
-        for(var i=0 ; i<data.length ; i++){
-            let temp = data[i] ;
-           
-            if(temp.id != cc.beimi.user.id){
+        context.arry = [];
+        var players = context.playersarray; 
+        for(let i =0;i< players.length;i++){
+            context.playerspool.put(players[i]);
+        }
+        context.playersarray=[] ;
+        
+        
+
+
+        // player 是 配合 joinroom  joinroom 加入房间  立即显示  然后 player 记录数据   下一个玩家 根据 player 来完成之前的渲染 用joinroom 完成之后的   一旦完成joinroom  又发起player 进行存储
+        for(let i=0 ;i<data.players.length;i++){
+            var time = data.players[i].createtime;
+            context.arry.push(time);
+            if(data.players[i].id == cc.beimi.user.id ){
+                var mytime = context.arry.length;
+            }
+            //debugger
+        }
+        
+        if(mytime==1){
+
+            var player0 = context.playerspool.get();
+            var playerscript0 = player0.getComponent("MaJiangPlayer");
+            player0.setPosition(-584 , -269);
+            context.playersarray.push(player0) ;
+            player0.parent = context.root();
+            playerscript0.init(data.players[0] , 0 , 'current');                
+            cc.sys.localStorage.setItem('current',data.players[0].id);
+
+            if(data.players.length==2){          
+                
                 var player = context.playerspool.get();
                 var playerscript = player.getComponent("MaJiangPlayer");
-                var tablepos = "" ;
-                if(data.peoNum == 2){
-                    player.parent= context.top_player;
-                    tablepos = "top" ;
-                    playerscript.init(temp , inx , tablepos);
-                    player.setPosition(0,0);
-                    context.playersarray.push(player) ;
-                    return;
-                }else{
-                    if(inx == 0){
-                        //var playerscript = player.getComponent("MaJiangPlayer");
-                        player.parent= context.right_player;
-                        tablepos = "right" ;
-                       
-                    }else if(inx == 1){
-                        //var playerscript = player.getComponent("MaJiangPlayer");
-                        player.parent= context.top_player;
-                        tablepos = "top" ;
-                        
-                    }else if(inx == 2){
-                        //var playerscript = player.getComponent("MaJiangPlayer");
-                        player.parent= context.left_player;
-                        tablepos = "left" ;
-    
-                    }
-                }
-                playerscript.init(temp , inx , tablepos);
+                player.parent = context.right_player;
+                playerscript.init(data.players[1] , 0 , 'right');
                 player.setPosition(0,0);
                 context.playersarray.push(player) ;
-                inx++;
+                cc.sys.localStorage.setItem('right',data.players[1].id);
+            }else if(data.players.length ==3){
+
+                var player = context.playerspool.get();
+                var playerscript = player.getComponent("MaJiangPlayer");
+                player.parent = context.right_player;
+                playerscript.init(data.players[1] , 0 , 'right');
+                player.setPosition(0,0);
+                context.playersarray.push(player) ;
+                cc.sys.localStorage.setItem('right',data.players[1].id);
+                var player2 = context.playerspool.get();
+                var playerscript2 = player2.getComponent("MaJiangPlayer");
+                player2.parent = context.top_player;
+                playerscript2.init(data.players[2] , 1 , 'top');
+                player2.setPosition(0,0);
+                context.playersarray.push(player2) ;
+                cc.sys.localStorage.setItem('top',data.players[2].id);
+
+            }else if(data.players.length ==4){
+
+                var player = context.playerspool.get();
+                var playerscript = player.getComponent("MaJiangPlayer");
+                player.parent = context.right_player;
+                playerscript.init(data.players[1] , 0 , 'right');
+                player.setPosition(0,0);
+                context.playersarray.push(player) ;
+                cc.sys.localStorage.setItem('right',data.players[1].id);
+
+                var player2 = context.playerspool.get();
+                var playerscript2 = player2.getComponent("MaJiangPlayer");
+                player2.parent = context.top_player;
+                playerscript2.init(data.players[2] , 1 , 'top');
+                player2.setPosition(0,0);
+                context.playersarray.push(player2) ;
+                cc.sys.localStorage.setItem('top',data.players[2].id);
+
+                var player3 = context.playerspool.get();
+                var playerscript3 = player3.getComponent("MaJiangPlayer");
+                player3.parent = context.left_player;
+                playerscript3.init(data.players[3] , 2 , 'left');
+                player3.setPosition(0,0);
+                context.playersarray.push(player3) ;
+                cc.sys.localStorage.setItem('left',data.players[3].id);
+            }
+        }else if(mytime == 2){
+            var player = context.playerspool.get();
+            var playerscript = player.getComponent("MaJiangPlayer");
+            player.parent = context.left_player;
+            playerscript.init(data.players[0] , 2 , 'left');
+            player.setPosition(0,0);
+            context.playersarray.push(player) ;
+            cc.sys.localStorage.setItem('left',data.players[0].id);
+
+            var player0 = context.playerspool.get();
+            var playerscript0 = player0.getComponent("MaJiangPlayer");
+            player0.setPosition(-584 , -269);
+            context.playersarray.push(player0) ;
+            player0.parent = context.root();
+            playerscript0.init(data.players[1] , 0 , 'current');                
+            cc.sys.localStorage.setItem('current',data.players[1].id);
+
+            if(data.players.length ==3){
+                var player2 = context.playerspool.get();
+                var playerscript2 = player2.getComponent("MaJiangPlayer");
+                player2.parent = context.right_player;
+                playerscript2.init(data.players[2] , 0 , 'right');
+                player2.setPosition(0,0);
+                context.playersarray.push(player2) ;
+                cc.sys.localStorage.setItem('right',data.players[2].id);
+
+            }else if(data.players.length ==4){
+                var player2 = context.playerspool.get();
+                var playerscript2 = player2.getComponent("MaJiangPlayer");
+                player2.parent = context.right_player;
+                playerscript2.init(data.players[2] , 0 , 'right');
+                player2.setPosition(0,0);
+                context.playersarray.push(player2) ;
+                cc.sys.localStorage.setItem('right',data.players[2].id);
+
+                var player3 = context.playerspool.get();
+                var playerscript3 = player3.getComponent("MaJiangPlayer");
+                player3.parent = context.top_player;
+                playerscript3.init(data.players[3] , 1 , 'top');
+                player3.setPosition(0,0);
+                context.playersarray.push(player3) ;
+                cc.sys.localStorage.setItem('top',data.players[3].id);
+            }
+
+        }else if(mytime ==3){
+            var player = context.playerspool.get();
+            var playerscript = player.getComponent("MaJiangPlayer");
+            player.parent = context.top_player;
+            playerscript.init(data.players[0] , 1 , 'top');
+            player.setPosition(0,0);
+            context.playersarray.push(player) ;
+            cc.sys.localStorage.setItem('top',data.players[0].id);
+
+            var player2 = context.playerspool.get();
+            var playerscript2 = player2.getComponent("MaJiangPlayer");
+            player2.parent = context.left_player;
+            playerscript2.init(data.players[1] , 2 , 'left');
+            player2.setPosition(0,0);
+            context.playersarray.push(player2) ;
+            cc.sys.localStorage.setItem('left',data.players[1].id);
+
+            var player0 = context.playerspool.get();
+            var playerscript0 = player0.getComponent("MaJiangPlayer");
+            player0.setPosition(-584 , -269);
+            context.playersarray.push(player0) ;
+            player0.parent = context.root();
+            playerscript0.init(data.players[2] , 0 , 'current');                
+            cc.sys.localStorage.setItem('current',data.players[2].id);
+            if(data.players.length ==4){
+                var player3 = context.playerspool.get();
+                var playerscript3 = player3.getComponent("MaJiangPlayer");
+                player3.parent = context.right_player;
+                playerscript3.init(data.players[3] , 0 , 'right');
+                player3.setPosition(0,0);
+                context.playersarray.push(player3) ;
+                cc.sys.localStorage.setItem('right',data.players[3].id);
+            }
+        }else if(mytime == 4){
+            var player = context.playerspool.get();
+            var playerscript = player.getComponent("MaJiangPlayer");
+            player.parent = context.right_player;
+            playerscript.init(data.players[0] , 0 , 'right');
+            player.setPosition(0,0);
+            context.playersarray.push(player) ;
+            cc.sys.localStorage.setItem('right',data.players[0].id);
+
+            var player2 = context.playerspool.get();
+            var playerscript2 = player2.getComponent("MaJiangPlayer");
+            player2.parent = context.top_player;
+            playerscript2.init(data.players[1] , 1 , 'top');
+            player2.setPosition(0,0);
+            context.playersarray.push(player2) ;
+            cc.sys.localStorage.setItem('top',data.players[1].id);
+
+            var player3 = context.playerspool.get();
+            var playerscript3 = player3.getComponent("MaJiangPlayer");
+            player3.parent = context.left_player;
+            playerscript3.init(data.players[2] , 2 , 'left');
+            player3.setPosition(0,0);
+            context.playersarray.push(player3) ;
+            cc.sys.localStorage.setItem('left',data.players[2].id);
+
+            var player0 = context.playerspool.get();
+            var playerscript0 = player0.getComponent("MaJiangPlayer");
+            player0.setPosition(-584 , -269);
+            context.playersarray.push(player0) ;
+            player0.parent = context.root();
+            playerscript0.init(data.players[3] , 0 , 'current');                
+            cc.sys.localStorage.setItem('current',data.players[3].id);
+        }
+        var peo = context.playersarray;
+        for(let i = 0 ; i< data.players.length;i++){
+            for(let j=0; j<peo.length; j++){
+                var py = peo[j].getComponent('MaJiangPlayer');
+                if(data.players[i].id == py.data.id){
+                    if(data.players[i].status&&data.players[i].status=='READY'){
+                        context.readyTrue(py.tablepos,context);                   
+                    }
+                }
             }
         }
+    },
+    readyTrue: function(fangwei,context){
+        if(fangwei == 'left'){
+            context.left_ready.active = true;
+        }else if(fangwei=='right'){
+            context.right_ready.active = true;
+        }else if(fangwei == 'top'){
+            context.top_ready.active = true ;
+        }
+    },
+    publicData:function(len,data,fangwei,OPparent,int,context){
+            let player = context.playerspool.get();
+            let playerscript = player.getComponent("MaJiangPlayer");
+            player.parent = OPparent;
+            playerscript.init(data , int , 'right');
+            player.setPosition(0,0);
+            context.playersarray.push(player) ;
+            cc.sys.localStorage.setItem('right',data.id);
+
     },
     /**
      * 接受新的庄家数据
@@ -1159,10 +1355,10 @@ cc.Class({
                 opCards = data.cards;
             }
             cc.sys.localStorage.setItem('take','true');
-            context.cardModle(opCards,opParent,back,fangwei,context);//补杠和补蛋的时候，逻辑需要区分。    
+            context.cardModle(opCards,opParent,back,fangwei,context,data.action);//补杠和补蛋的时候，逻辑需要区分。    
         }else{//对家
             opParent = cc.find("Canvas/content/handcards/"+player.tablepos+"desk/kong") ;
-            context.otherHandCardRemove(data,cotext);
+            context.otherHandCardRemove(data,context,player.tablepos);
             let opCards , back = false , fangwei = player.tablepos ;
             if(data.action =='chi'){
                 function sortNumber(a,b){return b - a}
@@ -1183,7 +1379,7 @@ cc.Class({
             }else if(data.action == 'dan'){
                 opCards = data.cards;
             }
-            context.cardModle(opCards,opParent,back,fangwei,context);
+            context.cardModle(opCards,opParent,back,fangwei,context,data.action);
          
         }
         if(data.action == 'peng'||(data.action == 'gang'&&data.card!=-1)||data.action=='chi'||data.action == 'hu'){
@@ -1217,6 +1413,7 @@ cc.Class({
         if(data.peoNum){
             var peoNum = data.peoNum;
         }
+        //开局后  头像位移到相应位置
         {
         var action = cc.moveTo(0.2,570,50);
         context.right_player.runAction(action);
@@ -1238,15 +1435,34 @@ cc.Class({
         var groupNums = 0 ;
         for(var times = 0 ; times < 4 ; times++){
             setTimeout(function(){
-
+                // console.log('------------');
+                // console.log(cards);
                 context.initMjCards(groupNums , context , cards , temp_player.banker) ;
                 /**
                  * 初始化其他玩家数据
                  */
                 var inx = 0 ;
+                var sabi = 0;
                 for(var i=0 ; i<data.players.length ; i++){
                     if(data.players[i].playuser != cc.beimi.user.id){
-                        context.initPlayerHandCards(groupNums , data.players[inx++].deskcards , inx,context , false,peoNum);
+                        
+                        //通过判断 id 来确定位置上的牌的张数
+                        var arry = context.playersarray;
+                        for(let j =0 ; j< arry.length;j++){
+                            var card = arry[j].getComponent('MaJiangPlayer');                            
+                            if(data.players[i].playuser==card.data.id&&card.tablepos!='current'){
+                                if(card.tablepos=='left'){
+                                    sabi = 2;
+                                    break;
+                                }else if(card.tablepos=='top'){
+                                    sabi = 1;
+                                    break;
+                                }   
+                                sabi=0;
+                                break;
+                            }
+                        }
+                        context.initPlayerHandCards(groupNums , data.players[inx++].deskcards , sabi,context ,false, data.players[i].banker,peoNum);
                     }
                 }
                 groupNums = groupNums + 1 ;
@@ -1259,6 +1475,7 @@ cc.Class({
             ani.play("majiang_reorder") ;
             var maxvalue  = -100;
             var maxvalluecard ;
+            //排序 
             for(var i=0 ; i<context.playercards.length ; i++ ){
                 let temp_script = context.playercards[i].getComponent("HandCards") ;
                 if(temp_script.value >= 0){
@@ -1271,7 +1488,7 @@ cc.Class({
                     maxvalluecard = context.playercards[i] ;
                 }
             }
-            if(temp_player.banker == true){
+            if(temp_player.banker == true&&data.player.actions.length==0){
                 maxvalluecard.getComponent("HandCards").lastone() ;
             }
         } , 1000);
@@ -1304,7 +1521,96 @@ cc.Class({
                 laiziFM.parent = context.godcard.children[0];
                 console.log(laiziFM.position);
             }
-        }      
+        }   
+        setTimeout(function(){
+            if(data.player.actions.length>0){
+                if(data.player.banker == true){
+                    for(var inx = 0 ; inx<context.playersarray.length ; inx++){
+                        let temp = context.playersarray[inx].getComponent("MaJiangPlayer") ;
+                        if(temp.data.id == data.player.playuser){
+                            temp.banker(); break ;
+                        }
+                    }
+                }
+                var action = data.player.actions;
+                for(let i = 0;i< action.length;i++){
+                    var isGang = false;
+                    var cards = context.decode(action[i].card);
+                    if(action[i].type =='an'){
+                        isGang =true;
+                    }
+                    context.cardModle(cards,cc.find('Canvas/content/handcards/deskcard/kong'),isGang,'',context,action[i].action)         
+                }
+            }  
+            for(let i=0 ; i< data.players.length;i++){
+                var player = context.player(data.players[i].playuser, context);
+                if(data.players[i].banker==true){
+                    for(var inx = 0 ; inx<context.playersarray.length ; inx++){
+                        let temp = context.playersarray[inx].getComponent("MaJiangPlayer") ;
+                        if(temp.data.id == data.players[i].playuser){
+                            temp.banker(); break ;
+                        }
+                    }
+                }
+                if(data.players[i].actions.length>0){
+                    
+                    var action = data.players[i].actions;                    
+                    for(let j =0 ; j< action.length ;j++){
+                        var isGang =false;
+                        var cards = context.decode(action[j].card);
+                        if(action[j].type =='an'){
+                            isGang =true;
+                        }
+                        context.cardModle(cards,cc.find('Canvas/content/handcards/'+player.tablepos+'desk/kong'),isGang,player.tablepos,context,action[j].action)         
+                        
+                    }
+                }
+            } 
+            if(data.player.deskcards.length>0){
+                var deskcards  = context.decode(data.player.deskcards);
+                for(let i ;i <deskcards.length;i++){
+                    let desk_card = cc.instantiate(context.takecards_one);
+                    let temp = desk_card.getComponent("DeskCards");
+                    temp.init(deskcards[i],'B');
+    
+                    context.deskcards.push(desk_card);
+                    desk_card.parent = context.deskcards_current_panel;
+                }
+            }
+            for(let i=0; i<data.players.lenth;i++){
+                if(data.players.deskcards.length>0){
+                    var deskcards = context.decode(data.players[i].deskcards);
+                    var player = context.player(data.players[i].playuser, context);
+                    for(let j =0 ; j< deskcards.length;j++){
+                        context.initDeskCards(deskcards[j],player.tablepos,context)
+                    }
+                }
+            }
+            context.right_ready.active = false;
+            context.left_ready.active = false;
+            context.top_ready.active = false;
+            context.current_ready.active =false;
+        },2000)
+       
+        
+    },
+    initDeskCards: function(card,fangwei,context){
+        if(fangwei =='left'){
+            let desk_card = cc.instantiate(context.takecards_left);
+            let desk_script = desk_card.getComponent("DeskCards");
+            desk_script.init(card,'L');
+            desk_card.parent = context.deskcards_left_panel ;
+        }else if(fangwei == 'right'){
+            let desk_card = cc.instantiate(context.takecards_right);
+            let desk_script = desk_card.getComponent("DeskCards");
+            desk_script.init(card,'R');
+            desk_card.parent = context.deskcards_right_panel ;
+        }else if(fangwei=='top'){
+            let desk_card = cc.instantiate(context.takecards_one);
+            let desk_script = desk_card.getComponent("DeskCards");
+            desk_script.init(card,'B');
+            desk_card.parent = context.deskcards_top_panel ;
+        }   
     },
     /**
      * 开始定缺
@@ -1429,7 +1735,7 @@ cc.Class({
      * @param context
      * @param spec 是否特殊的牌，即刚抓起来的牌
      */
-    initPlayerHandCards:function(groupNums , deskcards , inx , context , spec,peoNum){
+    initPlayerHandCards:function(groupNums , deskcards , inx , context , spec,banker,peoNum){
         let parent = context.right_panel  ;
         let cardarray = context.rightcards;
         let prefab = context.cards_right ;
@@ -1449,10 +1755,13 @@ cc.Class({
             }
         }
       
-        context.initOtherCards(groupNums , context , deskcards , prefab , cardarray , parent , spec , inx);    //左侧，
+        context.initOtherCards(groupNums , context , deskcards , prefab , cardarray , parent , spec , inx,banker);    //左侧，
     },
-    initOtherCards:function(group , context , cards , prefab , cardsarray, parent , spec , inx){
+    initOtherCards:function(group , context , cards , prefab , cardsarray, parent , spec , inx,banker){
+
         for(var i=group*4 ; i< cards && i<(group+1)*4 ; i++) {
+            // console.log('==========');
+            // console.log(cardsarray);
             //let temp = context.cardpool.get();
             //temp.parent = parent ;
             let temp = cc.instantiate(prefab) ;
@@ -1522,6 +1831,7 @@ cc.Class({
      * 状态切换，使用状态参数 切换，避免直接修改 对象状态，避免混乱
      */
     exchange_state:function(state , object){
+        console.log('zhuangtai gaibian');
         let readybtn = null , waitting = null , selectbtn = null , banker = null ,ready2 = null ;
 
         for(var i=0 ; i<object.statebtn.children.length ; i++){
@@ -1538,10 +1848,7 @@ cc.Class({
                 ready2 = target;
             }
             target.active = false ;
-            object.right_ready.active = false;
-            object.left_ready.active = false;
-            object.top_ready.active = false;
-            object.current_ready.active =false;
+           
         };
         switch(state){
             case "init" :
@@ -1565,6 +1872,7 @@ cc.Class({
                 object.right_ready.active = false;
                 object.left_ready.active = false;
                 object.top_ready.active = false;
+                object.current_ready.active =false;
                 waitting.active = false ;
                 /**
                  * 显示 当前还有多少张底牌
@@ -1713,7 +2021,14 @@ cc.Class({
         context.destroycards('leftdesk',context);
         context.destroycards('rightdesk',context);
         context.destroycards('topdesk',context);
-     
+        context.destroyPlayer(context);
+    
+     },
+     destroyPlayer: function(context){
+        var array = context.playersarray;
+        for(let i=0;i<array.length;i++){
+            array[i].getComponent('MaJiangPlayer').creator.active =false;
+        }
      },
      destroycards :function(fangwei,context){
         let handcard =cc.find('Canvas/content/handcards/'+fangwei+'/layout').children.length;
@@ -1751,28 +2066,29 @@ cc.Class({
     // update: function (dt) {
 
     // },
-    cardModle: function(cards,parent,back,fangwei,context){
+    cardModle: function(cards,parent,back,fangwei,context,action){
         if(cards.length == 1){
             var cardOp,card,temp;
             if(fangwei == 'top'){
-                cardOp = context.findCardForKong(parent,cards[0]) ;
+                cardOp = context.findCardForKong(parent,cards[0],action) ;
                 card = cc.instantiate(context.dan_topcurrent);
                 temp = card.getComponent('DanAction');
             }else if(fangwei == 'left'){
-                cardOp = context.findCardForKong(parent,cards[0]) ;
+                cardOp = context.findCardForKong(parent,cards[0],action) ;
                 card = cc.instantiate(context.dan_leftcurrent);
                 temp = card.getComponent('DanAction');
             }else if(fangwei == 'right'){
-                cardOp = context.findCardForKong(parent,cards[0]) ;
+                cardOp = context.findCardForKong(parent,cards[0],action) ;
                 card = cc.instantiate(context.dan_rightcurrent);
                 temp = card.getComponent('DanAction');
             }else{
-                cardOp = context.findCardForKong(parent,cards[0]) ;
+                cardOp = context.findCardForKong(parent,cards[0],action) ;
                 card = cc.instantiate(context.dan_mycurrent);
                 temp = card.getComponent('DanAction');
             } 
             temp.init(cards[i],false,fangwei);
             if ( cardOp.isGang ) {
+                card.zIndex=-1;
                 card.parent = cardOp.cardNode ;
             } else {
                 var dan = cardOp.cardNode.children[cardOp.cardNum].getComponent('DanAction');
@@ -1791,6 +2107,7 @@ cc.Class({
                 cardParent = cc.instantiate(context.one_card_panel) ;
             }
             for(let i = 0 ; i< cards.length;i++){
+                
                 if(fangwei == 'top'){
                     var card = cc.instantiate(context.dan_topcurrent);
                 }else if(fangwei == 'left'){
@@ -1799,6 +2116,7 @@ cc.Class({
                     var card = cc.instantiate(context.dan_rightcurrent);
                 }else{
                     var card = cc.instantiate(context.dan_mycurrent);
+                   
                 }
                 
                 
@@ -1808,35 +2126,125 @@ cc.Class({
                 } else {
                     temp.init(cards[i],back,fangwei);
                 }
+                if(71<cards[i]&&cards[i]<76){
+                    
+                    card.zIndex =9999;
+                }else {
+                    card.zIndex =0;
+                }
                 card.parent = cardParent;
+                //cardParent.sortAllChildren ( )         
             }
+            cardParent.getComponent('Kongcards').init(action);
             cardParent.parent = parent ;
         }       
     },
-    findCardForKong: function(kong,card) {
+    findCardForKong: function(kong,card,action) {
+        // var resNode ;
+        // var isGang ;
+        // var cardNum;
+        // for ( let i = 0 ; i < kong.children.length ; i++ ) {
+        //     var cards = kong.children[i] ;
+        //     var dans = cards.children ;
+        //     isGang = true ;
+        //     if(dans.length>0){
+        //         for ( let j = 0 ; j<dans.length; j++ ){
+        //             var cardUnit = dans[j] ;
+        //             if ( parseInt((card%36)/4 ) == cardUnit.getComponent("DanAction").mjvalue ) {
+        //                 resNode = cards ;
+        //                 cardNum = j;
+        //             } else {
+        //                 isGang = false ;
+        //             }
+        //         }
+        //         if ( isGang ){
+        //             resNode = cards ;
+        //             break ;
+        //         }
+        //     }    
+        // }
+        // return {cardNode:resNode,isGang:isGang,cardNum:cardNum} ;
         var resNode ;
         var isGang ;
         var cardNum;
+        
+        
+        //遍历整个kong 的子集  cards、
         for ( let i = 0 ; i < kong.children.length ; i++ ) {
             var cards = kong.children[i] ;
-            var dans = cards.children ;
-            isGang = true ;
-            if(dans.length>0){
-                for ( let j = 0 ; j<dans.length; j++ ){
-                    var cardUnit = dans[j] ;
-                    if ( parseInt((card%36)/4 ) == cardUnit.getComponent("DanAction").mjvalue ) {
-                        resNode = cards ;
-                        cardNum = j;
-                    } else {
-                        isGang = false ;
+            var kcards = cards.getComponent('Kongcards');
+            var kaction = kcards.action;//获取 事件
+            var length = kcards.length;    //获取子集长度
+            var type =kcards.type; //获取类型  当为dan 事件时用来判定
+            
+            var cardcolors = parseInt(card/4 ) ;
+            var cardtype  = parseInt(cardcolors / 9);
+            var dans = cards.children ; 
+            //当这个牌是妖姬时
+            if(cardtype==2&& parseInt((card%36)/4)==0&&cards.children.length>0&&type!='yao'&&action!='gang'){
+                resNode = cards ;
+                cardNum = 0;
+                isGang = false;
+                break;
+            //当这个牌不是妖姬时
+            }else{
+                //cards是peng   action 为gang时
+                if(action == 'gang'&&dans.length>0&kaction == 'peng'){
+                    for(let j = 0 ; j<dans.length; j++){
+                        var cardUnit = dans[j] ;
+                        if ( parseInt((card%36)/4 ) == cardUnit.getComponent("DanAction").mjvalue ){
+                            resNode = cards ;
+                            cardNum = j;
+                            isGang = true;
+                            break;
+                        }
+                    }
+                //当action 为dan
+                }else if(action == kaction&&dans.length>0){
+                    isGang = false;
+                    //有两种情况  一种长度为4 和长度为3   
+                    for(let j = 0 ; j<dans.length; j++){
+                        var cardUnit = dans[j] ; 
+                        
+                        if(dans.length ==3 &&type=='wind'){
+                            if ( parseInt((card%36)/4 ) == parseInt(((cardUnit.getComponent("DanAction").value)%36)/4) ){   
+                                resNode = cards ;
+                                cardNum = j;
+                                break;
+                                //如果没有按 杠处理
+                            }else{
+                                resNode = cards;
+                                isGang =true ;
+                                cardNum = j;
+                                
+                            }
+                        }else if(card <0&&(type=='wind'||type =='xi')){
+                            if ( parseInt((card%36)/4 ) == parseInt(((cardUnit.getComponent("DanAction").value)%36)/4) ){   
+                                resNode = cards ;
+                                cardNum = j;
+                                break;
+                            }else if(cardUnit.getComponent("DanAction").cardtype == 2 && parseInt((cardUnit.getComponent("DanAction").value%36)/4) == 0){
+                                cardUnit.getComponent("DanAction").setValue(card);
+                                resNode = cards ;
+                                cardNum = j;
+                                break;
+                            }
+                        }else if(card >0&&(type == 'yao'||type == 'jiu')){
+                            if(parseInt((card%36)/4 ) == parseInt(((cardUnit.getComponent("DanAction").value)%36)/4)&&cardUnit.getComponent("DanAction").cardtype==parseInt(card/36)){
+                                resNode = cards ;
+                                cardNum = j;
+                                break;
+                            }else if(cardUnit.getComponent("DanAction").cardtype == 2 && parseInt((cardUnit.getComponent("DanAction").value%36)/4) == 0){
+                                cardUnit.getComponent("DanAction").setValue(card);
+                                resNode = cards ;
+                                cardNum = j;
+                                break;
+                            }
+                        }
                     }
                 }
-                if ( isGang ){
-                    resNode = cards ;
-                    break ;
-                }
-            }    
-        }
+            }
+        }   
         return {cardNode:resNode,isGang:isGang,cardNum:cardNum} ;
     },
     handCardRemove: function(data,context){
@@ -1864,10 +2272,18 @@ cc.Class({
             }
         }
     },
-    otherHandCardRemove: function(data,context){
+    otherHandCardRemove: function(data,context,tablepos){
         for(let i = 0 ; i<data.cards.length; i++){
-            context.right_panel.children[i].destroy();
-            context.rightcards.splice(i,1);
+            if(tablepos =='top'){
+                context.top_panel.children[i].destroy();
+                context.topcards.splice(i,1);
+            }else if(tablepos =='right'){
+                context.right_panel.children[i].destroy();
+                context.rightcards.splice(i,1);
+            }else if(tablepos =='left'){
+                context.left_panel.children[i].destroy();
+                context.leftcards.splice(i,1);
+            }
         }      
     },
     shouOperationMune: function(){
@@ -1892,25 +2308,51 @@ cc.Class({
     
     dosomething: function (data , context){
         // this.selectaction_event({userid:cc.beimi.user.id,cards:[45,57,13],action:'dan'},context)   
-         this.selectaction_event({userid:cc.beimi.user.id,cards:[6,8,34],action:'dan'},context)   
-         this.cardModle([11,12,13,14],cc.find('Canvas/content/handcards/leftdesk/kong'),true,'left',context)
-         this.cardModle([11,12,13,14],cc.find('Canvas/content/handcards/leftdesk/kong'),true,'left',context)
+        //  this.selectaction_event({userid:cc.beimi.user.id,cards:[6,8,34],action:'dan'},context)   
+        //  this.cardModle([11,12,13,14],cc.find('Canvas/content/handcards/leftdesk/kong'),true,'left',context)
+        //  this.cardModle([11,12,13,14],cc.find('Canvas/content/handcards/leftdesk/kong'),true,'left',context)
 
-         this.cardModle([11,12,13,14],cc.find('Canvas/content/handcards/rightdesk/kong'),true,'right',context)
-         this.cardModle([9,10,11,],cc.find('Canvas/content/handcards/deskcard/kong'),false,'',context)
+        //  this.cardModle([11,12,13,14],cc.find('Canvas/content/handcards/rightdesk/kong'),true,'right',context)
+         this.cardModle([72,1,3],cc.find('Canvas/content/handcards/topdesk/kong'),false,'top',context,'dan')
+         this.cardModle([72,1,3],cc.find('Canvas/content/handcards/leftdesk/kong'),false,'left',context,'dan')
+         this.cardModle([72,1,3],cc.find('Canvas/content/handcards/rightdesk/kong'),false,'right',context,'dan')
+         this.cardModle([72,1,3],cc.find('Canvas/content/handcards/deskcard/kong'),false,'',context,'dan')
 
-         this.cardModle([11,12,13,14],cc.find('Canvas/content/handcards/topdesk/kong'),true,'top',context)
+        //  this.cardModle([11,12,13,14],cc.find('Canvas/content/handcards/topdesk/kong'),true,'top',context)
          
         
-        this.selectaction_event({userid:data,cards:[4,5],card:[6],action:'peng'},context)  ; 
+        // this.selectaction_event({userid:data,cards:[4,5],card:[6],action:'peng'},context)  ; 
        
+        // this.cardModle([1,35,72],cc.find('Canvas/content/handcards/deskcard/kong'),false,'',context,'peng')
         
+        // this.cardModle([1,37,72],cc.find('Canvas/content/handcards/deskcard/kong'),false,'',context,'dan')
+        // this.cardModle([1,1,1],cc.find('Canvas/content/handcards/deskcard/kong'),false,'',context,'peng')
         
     },
     dosomethings: function (data , context){
-        this.selectaction_event({userid:cc.beimi.user.id,cards:[35],card:-1,action:'gang'},context)
-       
+        this.selectaction_event({userid:cc.beimi.user.id,cards:[1],card:-1,action:'dan'},context)
+        
        
    },
+   dosomethings2: function (data , context){
+    this.selectaction_event({userid:cc.beimi.user.id,cards:[-5],card:-1,action:'dan'},context)
+    
+   
+},
+dosomethings3: function (data , context){
+    this.selectaction_event({userid:'54f40e2d56fc4d519d0c0bf282894b85',cards:[72],card:-1,action:'dan'},context)
+    this.selectaction_event({userid:'b84edfa4ccae4e299da17a8b2111fdb4',cards:[72],card:-1,action:'dan'},context)
 
+    this.selectaction_event({userid:'512fa36b5894479ebf9f43579d00e314',cards:[72],card:-1,action:'dan'},context)
+
+    this.selectaction_event({userid:'f4343f1e7066423a8591a6f3a54b2a6c',cards:[72],card:-1,action:'dan'},context)
+    
+    
+   
+},
+dosomethings4: function (data , context){
+    this.selectaction_event({userid:cc.beimi.user.id,cards:[1],card:-1,action:'gang'},context)
+    
+   
+},
 });
