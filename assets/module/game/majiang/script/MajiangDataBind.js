@@ -286,23 +286,23 @@ cc.Class({
             this.map("unOver" , this.unOver_event);
             //this.dosomething({player:{power:[3,2]}},this);
             socket.on("command" , function(result){
-                var data = self.parse(result) ;
+                var data = self.getSelf().parse(result) ;
                 console.log(data.command);
                 console.log(data);
-                self.route(data.command)(data , self);
+                self.getSelf().route(data.command)(data , self);
             });
             /**
              * 接受传送的 玩家列表（含AI）
              */
             socket.on("players" , function(result){
-                var data = self.parse(result) ;
+                var data = self.getSelf().parse(result) ;
                 console.log('players');
                 
                 console.log(data);
                 /**
                  * 处理 Players
                  */
-                self.route("players")(data, self);
+                self.getSelf().route("players")(data, self);
             });
         }
 
@@ -323,12 +323,12 @@ cc.Class({
 
         });
         this.node.on('leaveGame',function(){
-            let socket = self.socket();
+            let socket = self.getSelf().socket();
             socket.emit('leaveGame',JSON.stringify({
             }))
         });
         this.node.on('overGame',function(event){
-            let socket = self.socket();
+            let socket = self.getSelf().socket();
             if(event.getUserData()){
                 console.log('-----------');
                 console.log(event.getUserData());
@@ -347,18 +347,18 @@ cc.Class({
                 let card = event.target.getComponent("TakeMJCard");
                 if(card != null){
                     let cardValue = card.target.getComponent('HandCards');
-                    self.takecard_event({userid:cc.beimi.user.id,card:cardValue.value},self);
-                    self.shouOperationMune();
+                    self.getSelf().takecard_event({userid:cc.beimi.user.id,card:cardValue.value},self);
+                    self.getSelf().shouOperationMune();
                     let card_script = card.target.getComponent("HandCards") ;
                     /**
                      * 提交数据，等待服务器返回
                      */
     
                         //开始匹配
-                    let socket = self.socket();
+                    let socket = self.getSelf().socket();
                     
                     if (cc.sys.localStorage.getItem('ting') == 'true') {
-                        let socket = self.socket();
+                        let socket = self.getSelf().socket();
                         socket.emit("selectaction" , JSON.stringify({
                             action:"ting",
                             actionCard:[card_script.value]
@@ -368,7 +368,7 @@ cc.Class({
                         socket.emit("doplaycards" , card_script.value) ;
                     }
                     //cc.find("");
-                    self.shouOperationMune();
+                    self.getSelf().shouOperationMune();
                 }
                 event.stopPropagation();
             }
@@ -377,7 +377,7 @@ cc.Class({
          * ActionEvent发射的事件 ， 点击 杠 , 通知服务器端，用户点击了 杠 动作，服务器端进行处理，处理完毕后通知客户端后续动作
          */
         // this.node.on("gang",function(event){
-        //     let socket = self.socket();
+        //     let socket = self.getSelf().socket();
         //     socket.emit("selectaction" , JSON.stringify({
         //         action:"gang",
         //         actionCard:[]
@@ -386,7 +386,7 @@ cc.Class({
         // });
         this.node.on('readyGM',function(event){ 
             //alert();
-            let socket = self.socket();
+            let socket = self.getSelf().socket();
             socket.emit('readyGame',JSON.stringify({
             }))
         });
@@ -409,13 +409,13 @@ cc.Class({
             context.reinitGame(context);
             //context.collect(context);
              //cc.find("");
-             self.shouOperationMune();
+             self.getSelf().shouOperationMune();
              event.target.parent.destroy();             
         });
         this.node.on('mjSelection',function(event){
             event.target.parent.parent.active= false;
             event.target.parent.children.splice(0,event.target.parent.children.length) ;
-            let socket = self.socket();
+            let socket = self.getSelf().socket();
             let params = [];
             let sendEvent ;
             console.log(event);
@@ -428,7 +428,7 @@ cc.Class({
                 actionCard:params
             }));
             //cc.find("");
-            self.shouOperationMune();
+            self.getSelf().shouOperationMune();
             event.stopPropagation();
         });
         /**
@@ -436,13 +436,13 @@ cc.Class({
          */
         this.node.on("peng",function(event){
             
-            let socket = self.socket();
+            let socket = self.getSelf().socket();
             socket.emit("selectaction" , JSON.stringify({
                 action:"peng",
                 actionCard:[]
             }));
             //cc.find("");
-            self.shouOperationMune();
+            self.getSelf().shouOperationMune();
             event.stopPropagation();
         });
         this.node.on("dan",function(event){
@@ -450,7 +450,7 @@ cc.Class({
             if ( context.dans && context.dans.length > 1 ) {
                 context.mjOperation('dan', context.dans,context);
             } else {
-                let socket = self.socket();
+                let socket = self.getSelf().socket();
                 let danParam = [];
                 if ( context.dans ) {
                     danParam = context.dans[0] ;
@@ -461,7 +461,7 @@ cc.Class({
                 }));
             }
             //cc.find("");
-            self.shouOperationMune();
+            self.getSelf().shouOperationMune();
             event.stopPropagation();
         });
         this.node.on("gang",function(event){
@@ -469,7 +469,7 @@ cc.Class({
             if ( context.gangs && context.gangs.length > 1 ) {
                 context.mjOperation('gang', context.gangs,context);
             } else {
-                let socket = self.socket();
+                let socket = self.getSelf().socket();
                 let gangParam = [];
                 if ( context.gangs ) {
                     gangParam = context.gangs[0] ;
@@ -480,7 +480,7 @@ cc.Class({
                 }));
             }
             //cc.find("");
-            self.shouOperationMune();
+            self.getSelf().shouOperationMune();
             event.stopPropagation();
         });
 
@@ -492,21 +492,21 @@ cc.Class({
             if ( context.chis && context.chis.length > 1 ) {
                 context.mjOperation('chi', context.chis,context);
             } else {
-                let socket = self.socket();
+                let socket = self.getSelf().socket();
                 socket.emit("selectaction" , JSON.stringify({
                     action:'chi',
                     actionCard:context.chis[0]
                 }));
             }
             //cc.find("");
-            self.shouOperationMune();
+            self.getSelf().shouOperationMune();
             event.stopPropagation();
         });
         /**
          * ActionEvent发射的事件 ， 点击 听
          */
         this.node.on("ting",function(event){
-            /*let socket = self.socket();
+            /*let socket = self.getSelf().socket();
             socket.emit("selectaction" , JSON.stringify({
                 action:"ting",
                 actionCard:[]
@@ -519,26 +519,26 @@ cc.Class({
          * ActionEvent发射的事件 ， 点击 胡
          */
         this.node.on("hu",function(event){
-            let socket = self.socket();
+            let socket = self.getSelf().socket();
             socket.emit("selectaction" , JSON.stringify({
                 action:"hu",
                 actionCard:[]
             }));
             //cc.find("");
-            self.shouOperationMune();
+            self.getSelf().shouOperationMune();
             event.stopPropagation();
         });
         /**
          * ActionEvent发射的事件 ， 点击 过
          */
         this.node.on("guo",function(event){
-            let socket = self.socket();
+            let socket = self.getSelf().socket();
             socket.emit("selectaction" , JSON.stringify({
                 action:"guo",
                 actionCard:[]
             }));
             //cc.find("");
-            self.shouOperationMune();
+            self.getSelf().shouOperationMune();
             event.stopPropagation();
         });
         
@@ -618,6 +618,7 @@ cc.Class({
      */
     joinroom_event:function(data , context){
         //如果是2人的模式  就只加自己和对家
+        context = cc.find('Canvas').getComponent('MajiangDataBind') ;
         if(data.peoNum == 2){
             if(data.id!=cc.sys.localStorage.getItem('current')&&data.id!=cc.sys.localStorage.getItem('top')){
                 var player = context.playerspool.get();
@@ -936,6 +937,7 @@ cc.Class({
      * @param context
      */
     players_event:function(data,context){
+        context = cc.find("Canvas").getComponent("MajiangDataBind") ;
         context.collect(context) ;    //先回收资源，然后再初始化
         
         var inx = 0 ;
@@ -1572,10 +1574,39 @@ cc.Class({
            
         setTimeout(function(){
             //重连判断action
-            var deskcards  = context.decode(data.player.played);
-           
-            if(deskcards.length>0){
+            
+            var istake =false;
+            for(let i=0;i<data.players.length;i++){
+                if(data.players[i].played){
+                    istake =true;
+                }
+                if(data.players[i].actions.length>0){
+                    istake=true;
+                }
+            }
+            if(data.player.banker == true){
+                for(var inx = 0 ; inx<context.playersarray.length ; inx++){
+                    let temp = context.playersarray[inx].getComponent("MaJiangPlayer") ;
+                    if(temp.data.id == data.player.playuser){
+                        temp.banker(); break ;
+                    }
+                }
+            }
+                //重连判断 其他人的desk和action
+                for(let i=0 ; i< data.players.length;i++){
+                var player = context.player(data.players[i].playuser, context);
+                if(data.players[i].banker==true){
+                    for(var inx = 0 ; inx<context.playersarray.length ; inx++){
+                        let temp = context.playersarray[inx].getComponent("MaJiangPlayer") ;
+                        if(temp.data.id == data.players[i].playuser){
+                            temp.banker(); break ;
+                        }
+                    }
+                }
+
+            if(data.player.played||istake){
                 //重连判断deskcard
+                var deskcards  = context.decode(data.player.played);
                 for(let i=0;i <deskcards.length;i++){
                     let desk_card = cc.instantiate(context.takecards_one);
                     let temp = desk_card.getComponent("DeskCards");
@@ -1585,23 +1616,16 @@ cc.Class({
                     desk_card.parent = context.deskcards_current_panel;
                 }
 
-                if(data.player.banker == true){
-                    for(var inx = 0 ; inx<context.playersarray.length ; inx++){
-                        let temp = context.playersarray[inx].getComponent("MaJiangPlayer") ;
-                        if(temp.data.id == data.player.playuser){
-                            temp.banker(); break ;
-                        }
-                    }
-                }
+                
                 var action = data.player.actions;
             
                 for(let i = 0;i< action.length;i++){
                     var isGang = false;
                     var cards = context.decode(action[i].card);
-                    if(action[i].action =='an'){
+                    if(action[i].type =='an'){
                         isGang =true;
                     }
-                    if(cards.length<4||isGang||action[i].action=='ming'||action[i].action=='peng'){
+                    if(cards.length<4||isGang||action[i].action=='gang'||action[i].action=='peng'){
                         context.cardModle(cards,cc.find('Canvas/content/handcards/deskcard/kong'),isGang,'',context,action[i].action);   
                     }else {
                         var a = cards.slice(0,3);
@@ -1617,31 +1641,21 @@ cc.Class({
             }  
             
           
-            //重连判断 其他人的desk和action
-            for(let i=0 ; i< data.players.length;i++){
-                var player = context.player(data.players[i].playuser, context);
-                if(data.players[i].banker==true){
-                    for(var inx = 0 ; inx<context.playersarray.length ; inx++){
-                        let temp = context.playersarray[inx].getComponent("MaJiangPlayer") ;
-                        if(temp.data.id == data.players[i].playuser){
-                            temp.banker(); break ;
-                        }
-                    }
-                }
+      
                 if(data.players[i].actions.length>0){
                     
                     var action = data.players[i].actions;                    
                     for(let j =0 ; j< action.length ;j++){
                         var isGang =false;
                         var cards = context.decode(action[j].card);
-                        if(action[j].action =='an'){
+                        if(action[j].type =='an'){
                             isGang =true;
                         }
-                        if(cards<4||isGang||action[j].action=='ming'||action[j].action=='peng'){
-                            context.cardModle(cards,cc.find('Canvas/content/handcards/'+player.tablepos+'desk/kong'),isGang,player.tablepos,context,action[i].action);   
+                        if(cards<4||isGang||action[j].action=='gang'||action[j].action=='peng'){
+                            context.cardModle(cards,cc.find('Canvas/content/handcards/'+player.tablepos+'desk/kong'),isGang,player.tablepos,context,action[j].action);   
                         }else {
                             var a = cards.slice(0,3);
-                            context.cardModle(a,cc.find('Canvas/content/handcards/'+player.tablepos+'desk/kong'),isGang,player.tablepos,context,action[i].action);
+                            context.cardModle(a,cc.find('Canvas/content/handcards/'+player.tablepos+'desk/kong'),isGang,player.tablepos,context,action[j].action);
                             for(let h =3 ; h<cards.length; h++){
                                 context.selectaction_event({userid:player.data.id,cards:cards[h],card:-1,action:'dan'},context)
                                 
@@ -1651,8 +1665,9 @@ cc.Class({
                         
                     }
                 }
-                var deskcardss = context.decode(data.players[i].played);
-                if(deskcardss.length>0){ 
+                //其他玩家的桌牌     
+                if(data.players[i].played){
+                    var deskcardss = context.decode(data.players[i].played); 
                     var player = context.player(data.players[i].playuser, context);
                     for(let j =0 ; j< deskcardss.length;j++){
                         context.initDeskCards(deskcardss[j],player.tablepos,context)
@@ -2075,10 +2090,10 @@ cc.Class({
         object.schedule(object.callback, 1, times, 0);
     },
     onDestroy:function(){
-        if(this.ready()) {
+        /*if(this.ready()) {
             let socket = this.socket();
             socket.disconnect();
-        }
+        }*/
     },
     mjOperation : function(event,params,context){
             this.selectfather.active = true;
@@ -2372,6 +2387,10 @@ cc.Class({
         this.actionnode_two.runAction(action);
         //this.actionnode_two.active = false;
         
+    },
+    getSelf: function(){
+        var self =cc.find("Canvas").getComponent("MajiangDataBind");
+        return self;
     },
     //其他玩家准备
     // allReady_event(data,context){

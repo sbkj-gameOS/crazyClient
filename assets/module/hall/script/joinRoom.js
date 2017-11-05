@@ -122,7 +122,9 @@ cc.Class({
         if(data.playway&&data.room){
             //cc.beimi.room = data.room;
             cc.beimi.playway = data.playway;
-            cc.director.loadScene('majiang');
+            cc.director.preloadScene('majiang',function(){
+                cc.director.loadScene('majiang');
+            });
         }else{
             object.notice.getComponent('cc.Label').string ='房间不存在';
         }     

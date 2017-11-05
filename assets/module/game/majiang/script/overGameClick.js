@@ -75,9 +75,9 @@ cc.Class({
         mj.alert.put(dialog);
     },
     leaveGameClick:function(){
-        
-                this.scene("gameMain" , this);
-                this.node.dispatchEvent( new cc.Event.EventCustom('leaveGame', true) );
+        this.disconnect();
+        this.scene("gameMain" , this);
+        //this.node.dispatchEvent( new cc.Event.EventCustom('leaveGame', true) );
             },
     // setting:function(){
 
