@@ -864,8 +864,9 @@ cc.Class({
         if(data.peoNum){
             var peoNum = data.peoNum;
         }
+      
         
-        context.shouOperationMune();
+        //context.shouOperationMune();
         let player = context.player(data.userid , context);
         context.select_action_searchlight(data, context , player);
         if(data.userid == cc.beimi.user.id){
@@ -1223,7 +1224,7 @@ cc.Class({
                 console.log(context.actionnode_two);
                 //context.actionnode_deal.active = true ;
 
-                context.action = "deal" ;
+                //context.action = "deal" ;
             }else{
                 // if((data.gang == true || data.peng == true || data.chi == true) && data.hu == true){
                 //     let desk_script = context.actionnode_three.getComponent("DeskCards") ;
@@ -1298,7 +1299,7 @@ cc.Class({
                 console.log(context.actionnode_two);
                 // let ani = context.actionnode_two.getComponent(cc.Animation);
                 // ani.play("majiang_action") ;
-                context.action = "two" ;
+                //context.action = "two" ;
             }
        // }
     },
@@ -1433,6 +1434,10 @@ cc.Class({
             context.calcdesc_cards(context , 136 , data.deskcards) ;
         } , 0) ;
         var groupNums = 0 ;
+        var reinit = 0;
+        // if(data.){
+        //     reinit = 0;
+        // }
         for(var times = 0 ; times < 4 ; times++){
             setTimeout(function(){
                 // console.log('------------');
@@ -1466,7 +1471,7 @@ cc.Class({
                     }
                 }
                 groupNums = groupNums + 1 ;
-            } , (times+1) * 200);
+            } , (times+1) * 200* reinit);
         }
 
         setTimeout(function(){
@@ -1566,9 +1571,11 @@ cc.Class({
                     }
                 }
             } 
-            if(data.player.deskcards.length>0){
-                var deskcards  = context.decode(data.player.deskcards);
-                for(let i ;i <deskcards.length;i++){
+            
+            //debugger
+            if(data.player.played){    
+                var deskcards  = context.decode(data.player.played);
+                for(let i=0;i <deskcards.length;i++){
                     let desk_card = cc.instantiate(context.takecards_one);
                     let temp = desk_card.getComponent("DeskCards");
                     temp.init(deskcards[i],'B');
@@ -1577,9 +1584,9 @@ cc.Class({
                     desk_card.parent = context.deskcards_current_panel;
                 }
             }
-            for(let i=0; i<data.players.lenth;i++){
-                if(data.players.deskcards.length>0){
-                    var deskcards = context.decode(data.players[i].deskcards);
+            for(let i=0; i<data.players.length;i++){
+                if(data.players[i].played){
+                    var deskcards = context.decode(data.players[i].played);
                     var player = context.player(data.players[i].playuser, context);
                     for(let j =0 ; j< deskcards.length;j++){
                         context.initDeskCards(deskcards[j],player.tablepos,context)

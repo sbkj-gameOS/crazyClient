@@ -100,6 +100,7 @@ cc.Class({
         if(this.lastonecard == false){
             this.lastonecard = true;
             this.target.width = 80 ;
+
         }
     },
     selected:function(){
