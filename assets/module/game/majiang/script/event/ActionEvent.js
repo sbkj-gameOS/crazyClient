@@ -20,11 +20,7 @@ cc.Class({
     onLoad: function () {
 
     },
-    onClick:function(event , data){
-       
-        if(data!='ting'&&data!='dan'&&data!='guo'){
-            cc.beimi.audio.playSFX('nv/'+data+'.mp3');
-        }
+    onClick:function(event , data){        
         this.node.dispatchEvent( new cc.Event.EventCustom(data, true) );
     },
     click: function(event){

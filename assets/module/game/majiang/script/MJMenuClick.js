@@ -30,8 +30,9 @@ cc.Class({
             alert.parent = cc.find("Canvas");
             let node = alert.getComponent('overGameClick') ;
             node.init();
-            node.txt.string = '是否发起解散' ;
-            
+            node.txt.string = '确定解散房间么？' ;
+            node.sure.string = '确定';
+            node.nosure.string = '取消';
         }
     },
     //离开游戏  不结束游戏
