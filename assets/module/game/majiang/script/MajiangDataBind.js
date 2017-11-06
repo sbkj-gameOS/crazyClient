@@ -26,6 +26,11 @@ cc.Class({
         dan_childrend: cc.Node,
         isOver: cc.Prefab,
 
+        buhua_top:cc.Prefab,
+        buhua_lef:cc.Prefab,
+        buhua_right:cc.Prefab,
+        buhua_my:cc.Prefab,
+
         ready2: cc.Node,
         readybth: cc.Node,
         right_player: cc.Node,
@@ -284,7 +289,7 @@ cc.Class({
             this.map("isOver" , this.isOver_event);
             this.map("over" , this.over_event);
             this.map("unOver" , this.unOver_event);
-            //this.dosomething({player:{power:[3,2]}},this);
+            //this.doSomethingBH({action:'buhua'},this);
             socket.on("command" , function(result){
                 var data = self.getSelf().parse(result) ;
                 console.log(data.command);
@@ -1363,6 +1368,9 @@ cc.Class({
                 opCards = data.cards;
             } else if ( data.action == "dan" ) {
                 opCards = data.cards;
+            }else if(data.action == "buhua"){
+                opParent = cc.find("Canvas/content/handcards/deskcard/bh-bottom");
+                context.buhuaModle(opCards,opParent,back,fangwei,context,data.action);
             }
             cc.sys.localStorage.setItem('take','true');
             context.cardModle(opCards,opParent,back,fangwei,context,data.action);//补杠和补蛋的时候，逻辑需要区分。    
@@ -1388,6 +1396,9 @@ cc.Class({
                 opCards = data.cards;
             }else if(data.action == 'dan'){
                 opCards = data.cards;
+            }else if(data.action == "buhua"){
+                opParent = cc.find("Canvas/content/handcards/"+player.tablepos+"desk/buhua") ;
+                context.buhuaModle(opCards,opParent,back,fangwei,context,data.action);
             }
             context.cardModle(opCards,opParent,back,fangwei,context,data.action);
          
@@ -2157,11 +2168,26 @@ cc.Class({
             cc.find('Canvas/content/handcards/'+fangwei+'/kong').children[i].destroy();
         }
     },
-    
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
-
-    // },
+    buhuaModle:function(cards,parent,back,fangwei,context,action){
+        var card,temp;
+        if(fangwei == 'top'){
+            card = cc.instantiate(context.buhua_top);
+            temp = card.getComponent('BuHuaAction');
+        }else if(fangwei == 'left'){
+            card = cc.instantiate(context.buhua_lef);
+            temp = card.getComponent('BuHuaAction');
+        }else if(fangwei == 'right'){
+            card = cc.instantiate(context.buhua_right);
+            temp = card.getComponent('BuHuaAction');
+        }else{
+            card = cc.instantiate(context.buhua_my);
+            temp = card.getComponent('BuHuaAction');
+        }
+        //填充内容元素
+        temp.init(cards[i],fangwei);
+        //挂载父节点元素
+        card.parent = parent ;
+    },
     cardModle: function(cards,parent,back,fangwei,context,action){
         if(cards.length == 1){
             var cardOp,card,temp;
@@ -2185,7 +2211,8 @@ cc.Class({
             temp.init(cards[i],false,fangwei);
             if ( cardOp.isGang ) {
                 card.zIndex=-1;
-                card.parent = cardOp.cardNode ;
+                card
+                .parent = cardOp.cardNode ;
             } else {
                 var dan = cardOp.cardNode.children[cardOp.cardNum].getComponent('DanAction');
                 dan.count.string = Number(Number(dan.count.string)+1);
@@ -2454,5 +2481,9 @@ dosomethings4: function (data , context){
     this.selectaction_event({userid:cc.beimi.user.id,cards:[1],card:-1,action:'dan'},context)
     
    
+},
+doSomethingBH: function (data , context){
+    let opParent = cc.find("Canvas/content/handcards/rightdesk/buhua");
+    context.buhuaModle('',opParent,'','right',context,data.action);
 },
 });
