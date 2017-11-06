@@ -134,6 +134,7 @@ cc.Class({
 	//创建包厢
 	createRoom:function(){
 		if(roomNum){
+			cc.beimi.room = roomNum;
 			cc.director.loadScene('majiang');
 		}else{
 			cc.beimi.dialog = cc.instantiate(this.creatRoom) ;
@@ -145,6 +146,7 @@ cc.Class({
 	//加入包厢
 	joinInRoom:function(){
 		if(roomNum){
+			cc.beimi.room = roomNum;
 			cc.director.loadScene('majiang');
 		}else{
 			cc.beimi.dialog = cc.instantiate(this.joinRoom) ;
@@ -184,7 +186,8 @@ cc.Class({
 	roomSuccess: function(result,object){
 		result = JSON.parse(result);
         if(result.room){
-        	roomNum = result.room;
+			roomNum = result.room;
+			
         	//cc.beimi.room = result.room;
             cc.beimi.playway = result.playway;
             var sprite = object.ganmeBtn.getComponent(cc.Sprite);

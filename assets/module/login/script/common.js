@@ -27,10 +27,10 @@ cc.Class({
         // this.loginFormPool = new cc.NodePool();
         // this.loginFormPool.put(cc.instantiate(this.prefab)); // 创建节点
         var xySuccess = localStorage.getItem("xySuccess");
+        this.tourist();        
         if(xySuccess == 1){
             this.successBtn.active = false;
-            this.login();
-            //this.tourist();
+            // this.login();
         }
         
         cc.beimi.game = {

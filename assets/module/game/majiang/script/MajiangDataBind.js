@@ -194,7 +194,7 @@ cc.Class({
      * 重构后，只有两个消息类型
      */
     onLoad: function () {
-
+        this.connect();
         //ljh追加 房号的显示
         if(cc.beimi.room&&cc.beimi.room.length==6){
             this.room_num.getComponent(cc.Label).string = cc.beimi.room;
@@ -401,10 +401,10 @@ cc.Class({
             bth.active =true;  
             bth.x= -10;
 
-            if(context.playerspool.length>0){
-                cc.find('Canvas/global/main/button/ready2').active =true;
-                bth.x = -158;
-            }
+            // if(context.playerspool.length>0){
+            //     cc.find('Canvas/global/main/button/ready2').active =true;
+            //     bth.x = -158;
+            // }
             var laizi = cc.find('Canvas/global/main/godcard/child').children
             if(laizi){
                 for(let i =0 ; i < laizi.length ; i ++ ){
@@ -668,11 +668,11 @@ cc.Class({
                 }
             }
             //如果人满了 要求好友的按钮自动消失
-            if(context.playersarray.length == 2){
-                context.ready2.active = false;
-                var action = cc.moveTo(0.2,-21,-151);
-                context.readybth.runAction(action);
-            }
+            // if(context.playersarray.length == 2){
+            //     context.ready2.active = false;
+            //     var action = cc.moveTo(0.2,-21,-151);
+            //     context.readybth.runAction(action);
+            // }
         }
         else{
             //这是默认的4人模式 
@@ -708,6 +708,10 @@ cc.Class({
                 context.playersarray.push(player) ;
                 if(data.status == 'READY'){    
                     cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
+                    if(data.id == cc.beimi.user.id){
+                        context.readybth.active = false ;
+                       // context.ready2.active = false ;
+                    }  
                 }
             }else{
                 var playerarray = context.playersarray;
@@ -724,7 +728,7 @@ cc.Class({
                                 cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
                                 if(data.id == cc.beimi.user.id){
                                     context.readybth.active = false ;
-                                    context.ready2.active = false ;
+                                    //context.ready2.active = false ;
                                 }  
                             }
                             if(data.online == false){
@@ -738,11 +742,11 @@ cc.Class({
                     }
                 }
             }
-            if(context.playersarray.length == 4){
-                context.ready2.active = false;
-                var action = cc.moveTo(0.2,-21,-151);
-                context.readybth.runAction(action);
-            }
+            // if(context.playersarray.length == 4){
+            //     context.ready2.active = false;
+            //     var action = cc.moveTo(0.2,-21,-151);
+            //     context.readybth.runAction(action);
+            // }
         }
     },
     /**
@@ -1378,7 +1382,7 @@ cc.Class({
             } else if ( data.action == "dan" ) {
                 opCards = data.cards;
             }else if(data.action == "buhua"){
-                opParent = cc.find("Canvas/content/handcards/deskcard/bh-bottom");
+                opParent = cc.find("Canvas/content/handcards/my/bh-bottom");
                 context.buhuaModle(opCards,opParent,back,fangwei,context,data.action);
             }
             cc.sys.localStorage.setItem('take','true');
@@ -1406,7 +1410,7 @@ cc.Class({
             }else if(data.action == 'dan'){
                 opCards = data.cards;
             }else if(data.action == "buhua"){
-                opParent = cc.find("Canvas/content/handcards/"+player.tablepos+"desk/buhua") ;
+                opParent = cc.find("Canvas/content/handcards/"+player.tablepos+"/buhua") ;
                 context.buhuaModle(opCards,opParent,back,fangwei,context,data.action);
             }
             context.cardModle(opCards,opParent,back,fangwei,context,data.action);
@@ -1470,7 +1474,7 @@ cc.Class({
             for(let h=0 ;h<data.players.length;h++){
                 var players = data.players[h];
                 //这里有一个判定 如果是重连的话 就不用setouttime   
-                if(data.player.played||players.played){
+                if(data.player.played||players.played||data.player.actions.length>0||players.action){
                     context.initMjCards(groupNums , context , cards , temp_player.banker) ;
                     /**
                      * 初始化其他玩家数据
@@ -1561,6 +1565,12 @@ cc.Class({
             if(temp_player.banker == true&&!data.player.played){
                 maxvalluecard.getComponent("HandCards").lastone() ;
             }
+            let length  = cc.find('Canvas/content/handcards/deskcard/layout').children.length;
+            for(let i =0; i<length;i++){
+                let cards =cc.find('Canvas/content/handcards/deskcard/layout').children[i];
+                cards.width=59;
+                cards.y = 0;
+            }
         } , 1000);
         setTimeout(function(){
             context.exchange_state("play" , context);
@@ -1614,18 +1624,19 @@ cc.Class({
                 }
             }
             //如果自己有已经打的牌或者其他人有打牌 或者有action的时候
-            if(data.player.played||istake){
+            if(data.player.played||istake||data.player.actions.length>0){
                 //重连判断deskcard
-                var deskcards  = context.decode(data.player.played);
-                for(let i=0;i <deskcards.length;i++){
-                    let desk_card = cc.instantiate(context.takecards_one);
-                    let temp = desk_card.getComponent("DeskCards");
-                    temp.init(deskcards[i],'B');
-    
-                    context.deskcards.push(desk_card);
-                    desk_card.parent = context.deskcards_current_panel;
+                if(data.player.played){
+                    var deskcards  = context.decode(data.player.played);
+                    for(let i=0;i <deskcards.length;i++){
+                        let desk_card = cc.instantiate(context.takecards_one);
+                        let temp = desk_card.getComponent("DeskCards");
+                        temp.init(deskcards[i],'B');
+        
+                        context.deskcards.push(desk_card);
+                        desk_card.parent = context.deskcards_current_panel;
+                    }
                 }
-
                 
                 var action = data.player.actions;
                 for(let i = 0;i< action.length;i++){
@@ -1977,7 +1988,7 @@ cc.Class({
             case "init" :
                 object.desk_tip.active = false;
                 readybtn.active = true ;
-                ready2.active = true ;
+                //ready2.active = true ;
                 object.actionnode_deal.active =false ;
 
                 /**
@@ -2118,10 +2129,10 @@ cc.Class({
         object.schedule(object.callback, 1, times, 0);
     },
     onDestroy:function(){
-        /*if(this.ready()) {
+        if(this.ready()) {
             let socket = this.socket();
             socket.disconnect();
-        }*/
+        }
     },
     mjOperation : function(event,params,context){
             this.selectfather.active = true;
@@ -2500,7 +2511,7 @@ dosomethings4: function (data , context){
    
 },
 doSomethingBH: function (data , context){
-    let opParent = cc.find("Canvas/content/handcards/rightdesk/buhua");
+    let opParent = cc.find("Canvas/content/handcards/right/buhua");
     context.buhuaModle('',opParent,'','right',context,data.action);
 },
 });
