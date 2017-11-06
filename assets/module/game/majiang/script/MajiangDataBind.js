@@ -605,6 +605,8 @@ cc.Class({
             node.txt.string = '你的好友请求解散房间' ;
             node.sure.string = '同意';
             node.nosure.string = '拒绝';
+            node.button.active = true;
+            node.labei.active =false;
         }
     },
     over_event: function(){
@@ -663,7 +665,11 @@ cc.Class({
                                 on_off_line.active = false;
                                 headimg.color = new cc.Color(255, 255, 255);
                             }
-                        }    
+                            if(data.deskcards){
+                                cc.find('Canvas/ready/'+tablepos+'_ready').active =false;
+                            }
+                        }
+                            
                     }
                 }
             }
