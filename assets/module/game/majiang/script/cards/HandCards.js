@@ -91,6 +91,7 @@ cc.Class({
             cardframe = this.atlas.getSpriteFrame(deskcard);
         // }
         this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
+        this.target.width = 59;
         if(pd == null){
             var anim = this.getComponent(cc.Animation);
             anim.play("majiang_current");
