@@ -113,6 +113,12 @@ cc.Class({
         }else{
             array = "";
             this.notice.getComponent('cc.Label').string ='not found token';
+            object.inputNum1.string = "";
+            object.inputNum2.string = "";
+            object.inputNum3.string = "";
+            object.inputNum4.string = "";
+            object.inputNum5.string = "";
+            object.inputNum6.string = "";
             
         }
         
@@ -127,6 +133,13 @@ cc.Class({
             });
         }else{
             object.notice.getComponent('cc.Label').string ='房间不存在';
+            object.inputNum1.string = "";
+            object.inputNum2.string = "";
+            object.inputNum3.string = "";
+            object.inputNum4.string = "";
+            object.inputNum5.string = "";
+            object.inputNum6.string = "";
+            array = "";
         }     
     },
     
