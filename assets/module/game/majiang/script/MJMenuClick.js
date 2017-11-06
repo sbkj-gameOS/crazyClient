@@ -15,7 +15,7 @@ cc.Class({
         // ...
         button:cc.Node,
         labei: cc.Node,
-        txt: cc.Label
+        txt: cc.Label,
     },
 
     // use this for initialization

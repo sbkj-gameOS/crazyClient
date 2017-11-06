@@ -649,6 +649,7 @@ cc.Class({
                         if(data.id == playerinfo.data.id) {
                             if(data.status == 'READY'){    
                                 cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
+
                             }
                             if(data.online == false){
                                 on_off_line.active = true;
@@ -716,6 +717,10 @@ cc.Class({
                         if(data.id == playerinfo.data.id) {
                             if(data.status == 'READY'){    
                                 cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
+                                if(data.id == cc.beimi.user.id){
+                                    context.readybth.active = false ;
+                                    context.ready2.active = false ;
+                                }  
                             }
                             if(data.online == false){
                                 on_off_line.active = true;
@@ -744,6 +749,7 @@ cc.Class({
  
 
     takecard_event:function(data , context){
+        context = cc.find('Canvas').getComponent('MajiangDataBind');
         cc.beimi.audio.playSFX('give.mp3');
         if(data.userid == cc.beimi.user.id) {
            
@@ -863,7 +869,8 @@ cc.Class({
      * @param data
      * @param context
      */
-    dealcard_event:function(data , context){      
+    dealcard_event:function(data , context){   
+        cc.find('Canvas').getComponent('MajiangDataBind');   
         if(data.peoNum){
             var peoNum = data.peoNum;
         }
@@ -1173,6 +1180,7 @@ cc.Class({
         /**
          *
          */
+        context = cc.find('Canvas').getComponent('MajiangDataBind');
         for(var inx = 0 ; inx<context.playersarray.length ; inx++){
             let temp = context.playersarray[inx].getComponent("MaJiangPlayer") ;
             if(temp.data.id == data.userid){
@@ -1186,6 +1194,7 @@ cc.Class({
      * @param context
      */
     action_event:function(data, context){
+        context = cc.find('Canvas').getComponent('MajiangDataBind');        
        // if(cc.beimi.user.id == data.userid){
             let gang , peng , chi , hu , guo ,dan,ting;
             context.chis = data["chis"]?data["chis"]:[];
@@ -1416,6 +1425,7 @@ cc.Class({
      * @param context
      */
     play_event:function(data , context){
+        context = cc.find('Canvas').getComponent('MajiangDataBind');        
         /**
          * 改变状态，开始发牌
          * 
@@ -1592,18 +1602,7 @@ cc.Class({
                     }
                 }
             }
-                //重连判断 其他人的desk和action
-                for(let i=0 ; i< data.players.length;i++){
-                var player = context.player(data.players[i].playuser, context);
-                if(data.players[i].banker==true){
-                    for(var inx = 0 ; inx<context.playersarray.length ; inx++){
-                        let temp = context.playersarray[inx].getComponent("MaJiangPlayer") ;
-                        if(temp.data.id == data.players[i].playuser){
-                            temp.banker(); break ;
-                        }
-                    }
-                }
-
+            //如果自己有已经打的牌或者其他人有打牌 或者有action的时候
             if(data.player.played||istake){
                 //重连判断deskcard
                 var deskcards  = context.decode(data.player.played);
@@ -1618,7 +1617,6 @@ cc.Class({
 
                 
                 var action = data.player.actions;
-            
                 for(let i = 0;i< action.length;i++){
                     var isGang = false;
                     var cards = context.decode(action[i].card);
@@ -1629,9 +1627,12 @@ cc.Class({
                         context.cardModle(cards,cc.find('Canvas/content/handcards/deskcard/kong'),isGang,'',context,action[i].action);   
                     }else {
                         var a = cards.slice(0,3);
+                        console.log('------------');
+                        console.log(a);
                         context.cardModle(a,cc.find('Canvas/content/handcards/deskcard/kong'),isGang,'',context,action[i].action);
                         for(let h =3 ; h<cards.length; h++){
-                            context.selectaction_event({userid:cc.beimi.user.id,cards:cards[h],card:-1,action:'dan'},context)
+                            console.log(cards[h]);
+                            context.selectaction_event({userid:cc.beimi.user.id,cards:[cards[h]],card:-1,action:'dan'},context);
                             
                         }
                         
@@ -1639,11 +1640,21 @@ cc.Class({
 
                 }
             }  
-            
-          
-      
-                if(data.players[i].actions.length>0){
-                    
+
+                //重连判断 其他人的desk和action
+                for(let i=0 ; i< data.players.length;i++){
+                    //判断谁是庄家
+                var player = context.player(data.players[i].playuser, context);
+                if(data.players[i].banker==true){
+                    for(var inx = 0 ; inx<context.playersarray.length ; inx++){
+                        let temp = context.playersarray[inx].getComponent("MaJiangPlayer") ;
+                        if(temp.data.id == data.players[i].playuser){
+                            temp.banker(); break ;
+                        }
+                    }
+                }
+                //其他玩家的kong 牌
+                if(data.players[i].actions.length>0){            
                     var action = data.players[i].actions;                    
                     for(let j =0 ; j< action.length ;j++){
                         var isGang =false;
@@ -1752,6 +1763,7 @@ cc.Class({
      * @param context
      */
     lasthands_event:function(data, context){
+        context = cc.find('Canvas').getComponent('MajiangDataBind');        
         if(data.userid == cc.beimi.user.id){    //该我出牌 , 庄家出牌，可以不用判断是否庄家了 ，不过，庄家数据已经传过来了
             context.exchange_state("lasthands" , context);
             context.exchange_searchlight("current",context);
@@ -1799,6 +1811,7 @@ cc.Class({
         }
     },
     initDealHandCards:function(context , data){
+        context = cc.find('Canvas').getComponent('MajiangDataBind');        
         let length  = cc.find('Canvas/content/handcards/deskcard/layout').children.length;
         for(let i =0; i<length;i++){
             let cards =cc.find('Canvas/content/handcards/deskcard/layout').children[i];
@@ -1854,7 +1867,8 @@ cc.Class({
         context.initOtherCards(groupNums , context , deskcards , prefab , cardarray , parent , spec , inx,banker);    //左侧，
     },
     initOtherCards:function(group , context , cards , prefab , cardsarray, parent , spec , inx,banker){
-
+    context = cc.find('Canvas').getComponent('MajiangDataBind');        
+        
         for(var i=group*4 ; i< cards && i<(group+1)*4 ; i++) {
             // console.log('==========');
             // console.log(cardsarray);
@@ -1869,7 +1883,7 @@ cc.Class({
         }
     },
     initMjCards:function(group , context , cards , banker){
-        
+        //context = cc.find('Canvas').getComponent('MajiangDataBind');        
         for(var i=group*4 ; i< cards.length && i<(group+1)*4 ; i++){
             if(context.cardpool){
                 let temp = context.cardpool.get();
@@ -1915,6 +1929,7 @@ cc.Class({
     },
     player:function(pid , context){
         let player ;
+        context= cc.find('Canvas').getComponent('MajiangDataBind');
         for(var inx = 0 ; inx<context.playersarray.length ; inx++){
             let temp = context.playersarray[inx].getComponent("MaJiangPlayer") ;
             if(temp.data.id == pid){
@@ -1927,6 +1942,7 @@ cc.Class({
      * 状态切换，使用状态参数 切换，避免直接修改 对象状态，避免混乱
      */
     exchange_state:function(state , object){
+        object = cc.find('Canvas').getComponent('MajiangDataBind');
         console.log('zhuangtai gaibian');
         let readybtn = null , waitting = null , selectbtn = null , banker = null ,ready2 = null ;
 
@@ -2051,6 +2067,7 @@ cc.Class({
         }
     },
     exchange_searchlight:function(direction , context){
+        context = cc.find('Canvas').getComponent('MajiangDataBind');
         for(var inx = 0 ; inx<context.searchlight.children.length ; inx++){
             if(direction == context.searchlight.children[inx].name){
                 context.searchlight.children[inx].active = true ;
