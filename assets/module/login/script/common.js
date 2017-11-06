@@ -12,6 +12,10 @@ cc.Class({
             default:null,
             type: cc.Prefab
         },
+        successBtn:{
+            default:null,
+            type: cc.Node
+        },
     },
     // 首次加载页面方法
     onLoad: function () {
@@ -23,10 +27,10 @@ cc.Class({
         // this.loginFormPool = new cc.NodePool();
         // this.loginFormPool.put(cc.instantiate(this.prefab)); // 创建节点
         var xySuccess = localStorage.getItem("xySuccess");
-        this.tourist();
         if(xySuccess == 1){
-            // this.login();
-            this.tourist();
+            this.successBtn.active = false;
+            this.login();
+            //this.tourist();
         }
         
         cc.beimi.game = {
