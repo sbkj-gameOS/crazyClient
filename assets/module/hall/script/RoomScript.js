@@ -189,7 +189,9 @@ cc.Class({
             cc.beimi.playway = result.playway;
             var sprite = object.ganmeBtn.getComponent(cc.Sprite);
         	sprite.spriteFrame = object.backRoomImg;
-        }
+        } else {
+			roomNum = null;
+		}
         
     },
     roomError: function(object){
