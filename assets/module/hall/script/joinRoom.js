@@ -131,8 +131,8 @@ cc.Class({
             cc.director.preloadScene('majiang',function(){
                 cc.director.loadScene('majiang');
             });
-        }else{
-            object.notice.getComponent('cc.Label').string ='房间不存在';
+        }else if(data.error){
+            object.notice.getComponent('cc.Label').string =data.msg;
             object.inputNum1.string = "";
             object.inputNum2.string = "";
             object.inputNum3.string = "";
