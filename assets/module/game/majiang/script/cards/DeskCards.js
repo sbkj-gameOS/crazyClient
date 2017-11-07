@@ -40,27 +40,20 @@ cc.Class({
         if(cardcolors < 0){
             if(cardcolors==-7){
                 deskcard = fangwei+'_wind_east';
-                cc.beimi.audio.playSFX('nv/wind_1.mp3');
             } else if(cardcolors==-6){
                 deskcard = fangwei+'_wind_south';
-                cc.beimi.audio.playSFX('nv/wind_2.mp3');
             } else if(cardcolors==-5){
                 deskcard = fangwei+'_wind_west';
-                cc.beimi.audio.playSFX('nv/wind_3.mp3');
             } else if(cardcolors == -4){
                 deskcard = fangwei+'_wind_north';
-                cc.beimi.audio.playSFX('nv/wind_4.mp3');
             }else if(cardcolors == -3){
                 deskcard = fangwei+'_red';
-                cc.beimi.audio.playSFX('nv/wind_5.mp3');
             }else if(cardcolors == -2){
                 deskcard = fangwei+'_green';
-                cc.beimi.audio.playSFX('nv/wind_6.mp3');
             }else if(cardcolors == -1){
                 deskcard = fangwei+'_white';
-                cc.beimi.audio.playSFX('nv/wind_7.mp3');
             }
-            
+            cc.beimi.audio.playSFX('nv/wind_'+(cardcolors+8)+'.mp3');
             //东南西北风 ， 中发白
         }else{
             if(cardtype == 0){ //万

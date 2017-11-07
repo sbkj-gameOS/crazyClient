@@ -56,6 +56,16 @@ cc.Class({
         }else if(inx == 1){
             this.selectcards.parent.x = this.selectcards.parent.x * -1 ;
         }
+        if(playerdata.headimgurl){
+            var imgurl = playerdata.headimgurl;
+            var sprite = this.headimg.getComponent(cc.Sprite);
+            var head = this.headimg;
+            cc.loader.load({url:imgurl,type:'jpg'},function(err,texture){
+                sprite.spriteFrame = new cc.SpriteFrame(texture);
+                head.width = 80;
+                head.height = 80;
+            });
+        }
         this.username.string = playerdata.username ;
         this.goldcoins.string = playerdata.goldcoins ;
     },
