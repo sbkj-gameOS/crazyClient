@@ -311,17 +311,17 @@ cc.Class({
                 self.getSelf().route("players")(data, self);
             });
         }
-        cc.beimi.socket.on("disconnect" , function(){
-            let mj = cc.find('Canvas').getComponent('MajiangDataBind');            
-            mj.duankai2.active = true;
-            mj.duankai.active = false;                
-            console.log('sadasdasdasdasd----duan----');
-        });
-        cc.beimi.socket.on("connect" , function(){
-            let mj = cc.find('Canvas').getComponent('MajiangDataBind');            
-            mj.duankai2.active = false;                
-            console.log('sadasdasdasdasd--lian------');
-        });
+        // cc.beimi.socket.on("disconnect" , function(){
+        //     let mj = cc.find('Canvas').getComponent('MajiangDataBind');            
+        //     mj.duankai2.active = true;
+        //     mj.duankai.active = false;                
+        //     console.log('sadasdasdasdasd----duan----');
+        // });
+        // cc.beimi.socket.on("connect" , function(){
+        //     let mj = cc.find('Canvas').getComponent('MajiangDataBind');            
+        //     mj.duankai2.active = false;                
+        //     console.log('sadasdasdasdasd--lian------');
+        // });
 
         /**
          * 发射的事件， 在 出牌双击 / 滑动出牌的时候发射的，此处用于接受后统一处理， 避免高度耦合
@@ -422,6 +422,7 @@ cc.Class({
         this.node.on('restar',function(event){
             var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
             var bth = cc.find('Canvas/global/main/button/readybtn');
+            context.desk_cards.string = 136;
             bth.active =true;  
             bth.x= -10;
 
