@@ -82,6 +82,7 @@ cc.Class({
         mj.alert.put(dialog);
     },
     leaveGameClick:function(){
+        cc.sys.localStorage.setItem('dis','true');        
         this.disconnect();
         this.scene("gameMain" , this);
         //this.node.dispatchEvent( new cc.Event.EventCustom('leaveGame', true) );

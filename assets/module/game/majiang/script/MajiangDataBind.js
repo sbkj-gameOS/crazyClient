@@ -196,6 +196,7 @@ cc.Class({
      */
     onLoad: function () {
         this.connect();
+        cc.sys.localStorage.removeItem('dis');        
         //ljh追加 房号的显示
         if(cc.beimi.room&&cc.beimi.room.length==6){
             this.room_num.getComponent(cc.Label).string = cc.beimi.room;
@@ -311,12 +312,24 @@ cc.Class({
                 self.getSelf().route("players")(data, self);
             });
         }
-        // cc.beimi.socket.on("disconnect" , function(){
-        //     let mj = cc.find('Canvas').getComponent('MajiangDataBind');            
-        //     mj.duankai2.active = true;
-        //     mj.duankai.active = false;                
-        //     console.log('sadasdasdasdasd----duan----');
-        // });
+        cc.beimi.socket.on("disconnect" , function(){
+            
+            let mjs = cc.find('Canvas');   
+            if(mjs){
+                var mj = mjs.getComponent('MajiangDataBind');
+                mj.duankai2.active = true;
+                mj.duankai.active = false;                
+                console.log('sadasdasdasdasd----duan----');
+                if(cc.sys.localStorage.getItem('dis')!='true'){
+                    console.log(cc.sys.localStorage.getItem('dis'));
+                    console.log('------------');
+                    
+                    cc.director.loadScene('majiang');
+                }
+            }         
+           
+           
+        });
         // cc.beimi.socket.on("connect" , function(){
         //     let mj = cc.find('Canvas').getComponent('MajiangDataBind');            
         //     mj.duankai2.active = false;                
@@ -346,13 +359,10 @@ cc.Class({
         this.node.on('overGame',function(event){
             let socket = self.getSelf().socket();
             if(event.getUserData()){
-                console.log('-----------');
-                console.log(event.getUserData());
                 socket.emit('overGame',JSON.stringify({
                     REFUSE : event.getUserData()
                 }))
             }else{
-                console.log('----\\\\-------');
                 socket.emit('overGame',JSON.stringify({
                 }))
             }
@@ -367,7 +377,10 @@ cc.Class({
         this.node.on('chonglian',function(event){
             //console.log('--------lian--------');
             let mj = cc.find('Canvas').getComponent('MajiangDataBind');
-            mj.duankai.active = false;    
+            mj.duankai.active = false;  
+            cc.director.loadScene('majiang');
+            
+            
         });
         this.node.on('takecard', function (event) {
             cc.beimi.audio.playSFX('select.mp3');
@@ -593,7 +606,8 @@ cc.Class({
             this.node.dispatchEvent( new cc.Event.EventCustom('duankai', true) )
             console.log('网络已断开');
             cc.sys.localStorage.removeItem('chonglian');
-        }else if(navigator.onLine){
+        }else if(navigator.onLine&&cc.sys.localStorage.getItem('chonglian')!='true'){
+            cc.sys.localStorage.setItem('chonglian','true');
             cc.sys.localStorage.removeItem('duankai');
             this.node.dispatchEvent( new cc.Event.EventCustom('chonglian', true) )
             //console.log('网络已重连');
@@ -663,6 +677,7 @@ cc.Class({
         }
     },
     over_event: function(){
+        cc.sys.localStorage.setItem('dis','true');        
         cc.director.loadScene('gameMain');
         let mj = cc.find('Canvas').getComponent('MajiangDataBind');
         clearTimeout(mj.t);
