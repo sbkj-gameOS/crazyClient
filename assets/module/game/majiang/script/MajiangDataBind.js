@@ -14,7 +14,8 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
-
+        duankai: cc.Node,
+        duankai2: cc.Node,
         gameSettingClick: cc.Prefab,
 
         leave_alert: cc.Prefab,
@@ -309,9 +310,18 @@ cc.Class({
                  */
                 self.getSelf().route("players")(data, self);
             });
-            
         }
-
+        cc.beimi.socket.on("disconnect" , function(){
+            let mj = cc.find('Canvas').getComponent('MajiangDataBind');            
+            mj.duankai2.active = true;
+            mj.duankai.active = false;                
+            console.log('sadasdasdasdasd----duan----');
+        });
+        cc.beimi.socket.on("connect" , function(){
+            let mj = cc.find('Canvas').getComponent('MajiangDataBind');            
+            mj.duankai2.active = false;                
+            console.log('sadasdasdasdasd--lian------');
+        });
 
         /**
          * 发射的事件， 在 出牌双击 / 滑动出牌的时候发射的，此处用于接受后统一处理， 避免高度耦合
@@ -346,6 +356,18 @@ cc.Class({
                 socket.emit('overGame',JSON.stringify({
                 }))
             }
+        });
+        this.node.on('duankai',function(event){
+            let mj = cc.find('Canvas').getComponent('MajiangDataBind');
+            mj.duankai.active = true;    
+            console.log('--------duan--------');
+            cc.sys.localStorage.setItem('duankai','true');
+        });
+       
+        this.node.on('chonglian',function(event){
+            //console.log('--------lian--------');
+            let mj = cc.find('Canvas').getComponent('MajiangDataBind');
+            mj.duankai.active = false;    
         });
         this.node.on('takecard', function (event) {
             cc.beimi.audio.playSFX('select.mp3');
@@ -391,6 +413,8 @@ cc.Class({
         // });
         this.node.on('readyGM',function(event){ 
             //alert();
+            var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
+            context.current_ready.active = true ;            
             let socket = self.getSelf().socket();
             socket.emit('readyGame',JSON.stringify({
             }))
@@ -563,11 +587,28 @@ cc.Class({
             }
         }
     },
-    // update: function(){
-    //     if(cc.sys.localStorage.getItem('closed')=='true'){
-    //         this.connect();
-    //     }
-    // },
+    update: function(){
+        if(!navigator.onLine&&cc.sys.localStorage.getItem('duankai')!='true'){
+            this.node.dispatchEvent( new cc.Event.EventCustom('duankai', true) )
+            console.log('网络已断开');
+            cc.sys.localStorage.removeItem('chonglian');
+        }else if(navigator.onLine){
+            cc.sys.localStorage.removeItem('duankai');
+            this.node.dispatchEvent( new cc.Event.EventCustom('chonglian', true) )
+            //console.log('网络已重连');
+            
+        }
+        // else{
+        //     console.log('已重新连接');    
+        // }
+        // if(cc.beimi.socket.disconnect){
+        //     console.log('已和服务器断开连接')
+        // }else{
+        //     console.log('已和服务器重新连接');
+            
+        // }
+
+    },
     //播放音乐的事件  data {url：路径，userid：内容}
     // playMusic_event:function(data,context){
     //     let playerarray = context.playersarray;
@@ -613,15 +654,22 @@ cc.Class({
             node.nosure.string = '拒绝';
             node.button.active = true;
             node.labei.active =false;
+            node.labei2.active = true;
+            node.time =30;
+            mj.t = setInterval(function(){node.daojishi()},1000)  ;  
+            
+                   
         }
     },
     over_event: function(){
         cc.director.loadScene('gameMain');
-        
+        let mj = cc.find('Canvas').getComponent('MajiangDataBind');
+        clearTimeout(mj.t);
     },
     unOver_event: function(){
         let mj = cc.find('Canvas').getComponent('MajiangDataBind')
         let dialog = cc.find("Canvas/isover") ;
+        clearTimeout(mj.t);
         mj.alert.put(dialog);
     },
     /**
@@ -1186,6 +1234,9 @@ cc.Class({
             context.right_ready.active = true;
         }else if(fangwei == 'top'){
             context.top_ready.active = true ;
+        }else if(fangwei == 'current'){
+            context.current_ready.active = true ;
+            
         }
     },
     publicData:function(len,data,fangwei,OPparent,int,context){
@@ -2092,6 +2143,7 @@ cc.Class({
         object.unscheduleAllCallbacks();
         object.mjtimer.string = "00" ;
     },
+   
     timer:function(object , times){
         if(times > 9){
             object.mjtimer.string = times ;

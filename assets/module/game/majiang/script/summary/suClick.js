@@ -12,6 +12,7 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
+        time: cc.Label
     },
 
     // use this for initialization

@@ -28,7 +28,7 @@ cc.Class({
         if(userInfo.playOvers){
             for(let i = 0 ; i< userInfo.playOvers.length; i++){
                 var list = cc.instantiate(this.list);
-                list.getComponent('endUserInfo').setData(userInfo.playOvers[i]);
+                list.getComponent('EndCards').setData(userInfo.playOvers[i]);
                 list.parent = this.layout;   
             }
         }
