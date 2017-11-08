@@ -1,9 +1,10 @@
 #splash {
-  background-size: 80% !important;
+  background-size: 90% !important;
 }
 
 .progress-bar {
-    background-color: #1a1a1a;
+    background-color: white !important;
+	box-shadow: 0 1px 5px #fff inset, 0 1px 0 #fff !important;
     left: 2% !important;
     top: 50% !important;
 	border:2px solid #DDDDDD !important;  
