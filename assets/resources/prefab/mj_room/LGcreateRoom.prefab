@@ -288,7 +288,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "经典",
+    "_name": "classic",
     "_objFlags": 0,
     "_parent": {
       "__id__": 6
@@ -4108,7 +4108,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "一蛊",
+    "_name": "yiGu",
     "_objFlags": 0,
     "_parent": {
       "__id__": 6

@@ -707,7 +707,7 @@
       "__id__": 1
     },
     "component": "createroominfo",
-    "handler": "checkBoxClicked",
+    "handler": "radioButtonClicked",
     "customEventData": ""
   },
   {
@@ -1122,7 +1122,7 @@
       "__id__": 1
     },
     "component": "createroominfo",
-    "handler": "checkBoxClicked",
+    "handler": "radioButtonClicked",
     "customEventData": ""
   },
   {
@@ -1537,7 +1537,7 @@
       "__id__": 1
     },
     "component": "createroominfo",
-    "handler": "checkBoxClicked",
+    "handler": "radioButtonClicked",
     "customEventData": ""
   },
   {
@@ -1819,7 +1819,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "点泡泡三家",
+    "_name": "both",
     "_objFlags": 0,
     "_parent": {
       "__id__": 55
@@ -2216,7 +2216,7 @@
       "__id__": 1
     },
     "component": "createroominfo",
-    "handler": "radioButtonClicked",
+    "handler": "checkBoxClicked",
     "customEventData": ""
   },
   {
@@ -2232,7 +2232,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "小鸡飞弹",
+    "_name": "xjmissile",
     "_objFlags": 0,
     "_parent": {
       "__id__": 55
@@ -2629,7 +2629,7 @@
       "__id__": 1
     },
     "component": "createroominfo",
-    "handler": "radioButtonClicked",
+    "handler": "checkBoxClicked",
     "customEventData": ""
   },
   {
@@ -2645,7 +2645,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "三风弹",
+    "_name": "sfmissile",
     "_objFlags": 0,
     "_parent": {
       "__id__": 55
@@ -3042,7 +3042,7 @@
       "__id__": 1
     },
     "component": "createroominfo",
-    "handler": "radioButtonClicked",
+    "handler": "checkBoxClicked",
     "customEventData": ""
   },
   {
@@ -3058,7 +3058,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "下单算战立",
+    "_name": "xdszl",
     "_objFlags": 0,
     "_parent": {
       "__id__": 55
@@ -3455,7 +3455,7 @@
       "__id__": 1
     },
     "component": "createroominfo",
-    "handler": "radioButtonClicked",
+    "handler": "checkBoxClicked",
     "customEventData": ""
   },
   {
@@ -3471,7 +3471,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "带缺门",
+    "_name": "bandgap",
     "_objFlags": 0,
     "_parent": {
       "__id__": 55
@@ -3868,7 +3868,7 @@
       "__id__": 1
     },
     "component": "createroominfo",
-    "handler": "radioButtonClicked",
+    "handler": "checkBoxClicked",
     "customEventData": ""
   },
   {

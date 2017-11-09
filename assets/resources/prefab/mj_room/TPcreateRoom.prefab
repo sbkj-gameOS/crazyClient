@@ -306,7 +306,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "大炮",
+    "_name": "bigGun",
     "_objFlags": 0,
     "_parent": {
       "__id__": 6
@@ -862,11 +862,12 @@
     },
     "TPText": {
       "__id__": 79
-    }
+    },
+    "LGText": null
   },
   {
     "__type__": "cc.Node",
-    "_name": "双翻",
+    "_name": "doublef",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -1279,7 +1280,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "15台番",
+    "_name": "15tf",
     "_objFlags": 0,
     "_parent": {
       "__id__": 38
@@ -1407,7 +1408,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "13台番",
+    "_name": "13tf",
     "_objFlags": 0,
     "_parent": {
       "__id__": 38
@@ -1832,7 +1833,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "10台番",
+    "_name": "10tf",
     "_objFlags": 0,
     "_parent": {
       "__id__": 38
@@ -2712,7 +2713,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "小炮",
+    "_name": "smallGun",
     "_objFlags": 0,
     "_parent": {
       "__id__": 6
@@ -3202,7 +3203,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "不限起胡",
+    "_name": "unlimitedHu",
     "_objFlags": 0,
     "_parent": {
       "__id__": 98
@@ -3627,7 +3628,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "10台起胡",
+    "_name": "10Hu",
     "_objFlags": 0,
     "_parent": {
       "__id__": 98
@@ -4042,7 +4043,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "15台起胡",
+    "_name": "15Hu",
     "_objFlags": 0,
     "_parent": {
       "__id__": 98
@@ -4778,7 +4779,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "4人",
+    "_name": "4people",
     "_objFlags": 0,
     "_parent": {
       "__id__": 148
@@ -5203,7 +5204,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "3人",
+    "_name": "3people",
     "_objFlags": 0,
     "_parent": {
       "__id__": 148
@@ -5618,7 +5619,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "2人",
+    "_name": "2people",
     "_objFlags": 0,
     "_parent": {
       "__id__": 148
@@ -6351,7 +6352,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "房主支付",
+    "_name": "householderPay",
     "_objFlags": 0,
     "_parent": {
       "__id__": 198
@@ -6776,7 +6777,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "AA支付",
+    "_name": "AAPay",
     "_objFlags": 0,
     "_parent": {
       "__id__": 198

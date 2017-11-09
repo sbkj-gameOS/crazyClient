@@ -1,5 +1,5 @@
 var beiMiCommon = require("BeiMiCommon");
-var moShi = "2-part",playerData = "点泡泡三家@@",userType = "4-pep";
+var moShi = "2",playerData = "both@@",userType = "4";
 cc.Class({
     extends: beiMiCommon,
     properties: {
@@ -25,11 +25,11 @@ cc.Class({
 	radioButtonClicked: function(toggle) {
 		var moShiId = toggle.node.name;
 		if(moShiId == "toggle1"){
-			moShi = "2-part";
+			moShi = "2";
 		}else if(moShiId == "toggle2"){
-			moShi = "4-part";
+			moShi = "4";
 		}else if(moShiId == "toggle3"){
-			moShi = "8-part";
+			moShi = "8";
 		}
     },
 	
@@ -46,16 +46,16 @@ cc.Class({
 	radioButtonClickedUser: function(toggle) {
 		var moShiId = toggle.node.name;
 		if(moShiId == "toggle1"){
-			userType = "4-pep";
+			userType = "4";
 		}else if(moShiId == "toggle2"){
 			userType = 2;
 		}
     },
 
     onLoad: function () {
-        moShi = "2-part";
-        playerData = "点泡泡三家@@";
-        userType = "4-pep";
+        moShi = "2";
+        playerData = "both@@";
+        userType = "4";
     },
 
     //创建房间点击按钮
@@ -69,8 +69,9 @@ cc.Class({
 		 //玩法类型
          garams.waytype = playerData;
          //人数
-         garams.pep_nums = userType;
-		 
+         garams.pepNums = userType;
+		 //游戏玩法
+         garams.game = 'CH';
 		//token值
          if(cc.beimi.authorization){
              garams.token = cc.beimi.authorization;
@@ -81,6 +82,7 @@ cc.Class({
          
     },
     sucess: function(result,object){
+        debugger
         var data = JSON.parse(result);
         if(data.room&&data.playway){
             cc.beimi.room = data.room;
