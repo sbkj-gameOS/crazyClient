@@ -1074,7 +1074,7 @@ cc.Class({
 
 
 
-        if(cc.beimi.playerNum=2){
+        if(cc.beimi.playerNum==2){
             if(mytime==1){
                 if(cc.sys.localStorage.getItem('current')!=data.players[0].id){
                     var player0 = context.playerspool.get();
