@@ -35,8 +35,15 @@ cc.Class({
                 let cards =cc.find('Canvas/content/handcards/deskcard/layout').children[i];
                 let handCards = cards.getComponent("HandCards");
                 handCards.take = false;
-                cards.y=0;
-                cards.width = 59;
+                
+                let card = cards.getComponent('HandCards');
+                if(cc.beimi.cardNum == 17){ 
+                    card.cardvalue.width = 61;
+                    cards.width=59; 
+                }else{
+                    cards.width=68;    
+                }
+                cards.y = 0;
                 handCards.mj.color = new cc.Color(255, 255, 255);
             }
             this.target.y = this.target.y + 20 ;

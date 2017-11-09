@@ -91,7 +91,14 @@ cc.Class({
             cardframe = this.atlas.getSpriteFrame(deskcard);
         // }
         this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
-        this.target.width = 59;
+       
+        if(cc.beimi.cardNum == 16){ 
+            this.cardvalue.width = 61;
+            this.target.width=59;
+        }else{
+            this.target.width = 68;
+        }
+       
         if(pd == null){
             var anim = this.getComponent(cc.Animation);
             anim.play("majiang_current");
@@ -100,7 +107,12 @@ cc.Class({
     lastone:function(){
         if(this.lastonecard == false){
             this.lastonecard = true;
-            this.target.width = 80 ;
+            if(cc.beimi.cardNum == 17){ 
+                this.target.width=80;   
+            }else{
+                this.target.width=90;    
+            }
+            this.target.y = 0;
 
         }
     },
@@ -111,7 +123,12 @@ cc.Class({
     relastone:function(){
         if(this.lastonecard == true){
             this.lastonecard = false;
-            this.target.width = 59 ;
+            if(cc.beimi.cardNum == 17){ 
+                this.cardvalue.width = 61;
+                this.target.width=59;
+            }else{
+                this.target.width = 68;
+            }
             this.target.y=0;
         }
     },

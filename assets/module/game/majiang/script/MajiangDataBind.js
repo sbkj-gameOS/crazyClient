@@ -195,6 +195,7 @@ cc.Class({
      * 重构后，只有两个消息类型
      */
     onLoad: function () {
+        //cc.beimi.cardNum = 17;
         //cc.beimi.playerNum = 2;
         this.connect();
         cc.sys.localStorage.removeItem('dis');        
@@ -257,7 +258,7 @@ cc.Class({
          * 初始化当前玩家的麻将牌 对象池
          */
         if(cc.beimi.cardNum){
-            for(var i=0;i<cc.beimi.cardNum+1;i++){
+            for(var i=0;i<cc.beimi.cardNum;i++){
                 this.cardpool.put(cc.instantiate(this.cards_current));
             }
         }else{
@@ -1789,12 +1790,9 @@ cc.Class({
             if(temp_player.banker == true&&!data.player.played){
                 maxvalluecard.getComponent("HandCards").lastone() ;
             }
-            let length  = cc.find('Canvas/content/handcards/deskcard/layout').children.length;
-            for(let i =0; i<length;i++){
-                let cards =cc.find('Canvas/content/handcards/deskcard/layout').children[i];
-                cards.width=59;
-                cards.y = 0;
-            }
+           
+            context.initcardwidth();
+                
         } , 1000);
         setTimeout(function(){
             context.exchange_state("play" , context);
@@ -1953,7 +1951,20 @@ cc.Class({
        
        
     },
-   
+    initcardwidth: function(){
+        let length  = cc.find('Canvas/content/handcards/deskcard/layout').children.length; 
+        for(let i =0; i<length;i++){
+            let target =cc.find('Canvas/content/handcards/deskcard/layout').children[i];
+            let card = target.getComponent('HandCards');
+            if(cc.beimi.cardNum == 17){ 
+                card.cardvalue.width = 61;
+                target.width=59;
+            }else{
+                target.width=68;    
+            }
+            target.y = 0;
+        }
+    },
     initDeskCards: function(card,fangwei,context){
         if(fangwei =='left'){
             let desk_card = cc.instantiate(context.takecards_left);
@@ -2069,11 +2080,7 @@ cc.Class({
     initDealHandCards:function(context , data){
         context = cc.find('Canvas').getComponent('MajiangDataBind');        
         let length  = cc.find('Canvas/content/handcards/deskcard/layout').children.length;
-        for(let i =0; i<length;i++){
-            let cards =cc.find('Canvas/content/handcards/deskcard/layout').children[i];
-            cards.width=59;
-            cards.y = 0;
-        }
+        context.initcardwidth();
         if(true){
             let temp = context.cardpool.get();
             let temp_script = temp.getComponent("HandCards") ;
