@@ -49,11 +49,19 @@ cc.Class({
                 let card = cc.instantiate(this.card);
                 //console.log(cd[j]);
                 let a = false;
-                if(action[j]==-1){
+                if(this.data.actions[i].type=='an'){
                     a = true;
                 }
+                if(action[3]&&this.data.actions[i].type=='an'){
+                    a =false;
+                }
+                if(this.data.actions[i].action=='gang'&&action.length ==1){
+                    c=[action[j],action[j],action[j],action[j]];
+                }
                 let b = card.getComponent('DanAction');
-                b.init(action[j],a,'');
+                let c = action[j];
+               
+                b.init(c,a,'');
                 b.target.height = 53;
                 b.target.width= 32;
                 card.parent = kong;            }

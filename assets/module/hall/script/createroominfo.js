@@ -82,9 +82,16 @@ cc.Class({
     },
     sucess: function(result,object){
         var data = JSON.parse(result);
+        //playerNum,cardNum
         if(data.room&&data.playway){
             cc.beimi.room = data.room;
             cc.beimi.playway = data.playway;
+            if(data.playerNum){
+                cc.beimi.playerNum = data.playerNum;
+            }
+            if(data.cardNum){
+                cc.beimi.cardNum = data.cardNum;
+            }
             cc.director.loadScene("majiang");
         }else{
             object.notice.getComponent('cc.Label').string ='请求失败';

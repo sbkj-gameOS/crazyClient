@@ -128,6 +128,12 @@ cc.Class({
         if(data.playway&&data.room){
             //cc.beimi.room = data.room;
             cc.beimi.playway = data.playway;
+            if(data.playerNum){
+                cc.beimi.playerNum = data.playerNum;
+            }
+            if(data.cardNum){
+                cc.beimi.cardNum = data.cardNum;
+            }
             cc.director.preloadScene('majiang',function(){
                 cc.director.loadScene('majiang');
             });
