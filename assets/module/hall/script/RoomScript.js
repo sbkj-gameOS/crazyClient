@@ -187,9 +187,15 @@ cc.Class({
 		result = JSON.parse(result);
         if(result.room){
 			roomNum = result.room;
-			
+			//playerNum,cardNum
         	//cc.beimi.room = result.room;
-            cc.beimi.playway = result.playway;
+			cc.beimi.playway = result.playway;
+			if(result.playerNum){
+                cc.beimi.playerNum = result.playerNum;
+            }
+            if(result.cardNum){
+                cc.beimi.cardNum = result.cardNum;
+            }
             var sprite = object.ganmeBtn.getComponent(cc.Sprite);
         	sprite.spriteFrame = object.backRoomImg;
         } else {

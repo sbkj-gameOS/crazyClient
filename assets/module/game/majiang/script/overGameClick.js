@@ -17,13 +17,15 @@ cc.Class({
         labei: cc.Node,
         txt:cc.Label,
         sure:cc.Label,
-        nosure:cc.Label
+        nosure:cc.Label,
+        labei2:cc.Node
     },
 
     // use this for initialization
     onLoad: function () {
         this.button.active = true;
         this.labei.active = false;
+        this.time;
     },
     // 解散游戏按钮  弹出弹窗
     // overGamenotice:function(){
@@ -47,12 +49,17 @@ cc.Class({
     init: function(){
         this.button.active = true;
         this.labei.active =false;
+        this.labei2.active =false;
+        this.time=30;
     },
     overGameClick:function(){
         
         //this.scene("gameMain" , this);
         this.button.active = false;
         this.labei.active = true;
+        this.labei2.active =true;
+        // this.daojishi();
+        // this.labei2.string = '还有'+this.time +'自动解散'
         this.node.dispatchEvent( new cc.Event.EventCustom('overGame', true) );
         
     },
@@ -75,10 +82,17 @@ cc.Class({
         mj.alert.put(dialog);
     },
     leaveGameClick:function(){
+        cc.sys.localStorage.setItem('dis','true');        
         this.disconnect();
         this.scene("gameMain" , this);
         //this.node.dispatchEvent( new cc.Event.EventCustom('leaveGame', true) );
             },
+    daojishi: function(){
+        this.time =this.time-1;
+        this.labei2.getComponent(cc.Label).string = this.time;
+        console.log(this.time);
+        }
+       
     // setting:function(){
 
     //     let mjdata = cc.find('Canvas').getComponent('MajiangDataBind');

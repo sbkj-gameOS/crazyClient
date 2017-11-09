@@ -14,7 +14,8 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
-
+        duankai: cc.Node,
+        duankai2: cc.Node,
         gameSettingClick: cc.Prefab,
 
         leave_alert: cc.Prefab,
@@ -194,7 +195,9 @@ cc.Class({
      * 重构后，只有两个消息类型
      */
     onLoad: function () {
+        //cc.beimi.playerNum = 2;
         this.connect();
+        cc.sys.localStorage.removeItem('dis');        
         //ljh追加 房号的显示
         if(cc.beimi.room&&cc.beimi.room.length==6){
             this.room_num.getComponent(cc.Label).string = cc.beimi.room;
@@ -253,9 +256,16 @@ cc.Class({
         /**
          * 初始化当前玩家的麻将牌 对象池
          */
-        for(var i=0 ; i<14 ; i++){
-            this.cardpool.put(cc.instantiate(this.cards_current));
+        if(cc.beimi.cardNum){
+            for(var i=0;i<cc.beimi.cardNum+1;i++){
+                this.cardpool.put(cc.instantiate(this.cards_current));
+            }
+        }else{
+            for(var i=0 ; i<14 ; i++){
+                this.cardpool.put(cc.instantiate(this.cards_current));
+            }
         }
+       
         
         this.exchange_state("init" , this);
         let self = this ;
@@ -309,9 +319,30 @@ cc.Class({
                  */
                 self.getSelf().route("players")(data, self);
             });
-            
         }
-
+        cc.beimi.socket.on("disconnect" , function(){
+            
+            let mjs = cc.find('Canvas');   
+            if(mjs){
+                var mj = mjs.getComponent('MajiangDataBind');
+                mj.duankai2.active = true;
+                mj.duankai.active = false;                
+                console.log('sadasdasdasdasd----duan----');
+                if(cc.sys.localStorage.getItem('dis')!='true'){
+                    console.log(cc.sys.localStorage.getItem('dis'));
+                    console.log('------------');
+                    
+                    cc.director.loadScene('majiang');
+                }
+            }         
+           
+           
+        });
+        // cc.beimi.socket.on("connect" , function(){
+        //     let mj = cc.find('Canvas').getComponent('MajiangDataBind');            
+        //     mj.duankai2.active = false;                
+        //     console.log('sadasdasdasdasd--lian------');
+        // });
 
         /**
          * 发射的事件， 在 出牌双击 / 滑动出牌的时候发射的，此处用于接受后统一处理， 避免高度耦合
@@ -336,16 +367,28 @@ cc.Class({
         this.node.on('overGame',function(event){
             let socket = self.getSelf().socket();
             if(event.getUserData()){
-                console.log('-----------');
-                console.log(event.getUserData());
                 socket.emit('overGame',JSON.stringify({
                     REFUSE : event.getUserData()
                 }))
             }else{
-                console.log('----\\\\-------');
                 socket.emit('overGame',JSON.stringify({
                 }))
             }
+        });
+        this.node.on('duankai',function(event){
+            let mj = cc.find('Canvas').getComponent('MajiangDataBind');
+            mj.duankai.active = true;    
+            console.log('--------duan--------');
+            cc.sys.localStorage.setItem('duankai','true');
+        });
+       
+        this.node.on('chonglian',function(event){
+            //console.log('--------lian--------');
+            let mj = cc.find('Canvas').getComponent('MajiangDataBind');
+            mj.duankai.active = false;  
+            cc.director.loadScene('majiang');
+            
+            
         });
         this.node.on('takecard', function (event) {
             cc.beimi.audio.playSFX('select.mp3');
@@ -391,6 +434,8 @@ cc.Class({
         // });
         this.node.on('readyGM',function(event){ 
             //alert();
+            var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
+            context.current_ready.active = true ;            
             let socket = self.getSelf().socket();
             socket.emit('readyGame',JSON.stringify({
             }))
@@ -398,6 +443,7 @@ cc.Class({
         this.node.on('restar',function(event){
             var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
             var bth = cc.find('Canvas/global/main/button/readybtn');
+            context.desk_cards.string = 136;
             bth.active =true;  
             bth.x= -10;
 
@@ -554,7 +600,7 @@ cc.Class({
         cc.sys.localStorage.removeItem('top');
         this.joinRoom();
         if(cc.beimi.game.type){
-            if(cc.beimi.game.type.peoNum == 2){
+            if(cc.beimi.playerNum == 2){
                 this.left_player.active = false;
                 this.right_player.active = false;
             }
@@ -563,11 +609,29 @@ cc.Class({
             }
         }
     },
-    // update: function(){
-    //     if(cc.sys.localStorage.getItem('closed')=='true'){
-    //         this.connect();
-    //     }
-    // },
+    update: function(){
+        if(!navigator.onLine&&cc.sys.localStorage.getItem('duankai')!='true'){
+            this.node.dispatchEvent( new cc.Event.EventCustom('duankai', true) )
+            console.log('网络已断开');
+            cc.sys.localStorage.removeItem('chonglian');
+        }else if(navigator.onLine&&cc.sys.localStorage.getItem('chonglian')!='true'){
+            cc.sys.localStorage.setItem('chonglian','true');
+            cc.sys.localStorage.removeItem('duankai');
+            this.node.dispatchEvent( new cc.Event.EventCustom('chonglian', true) )
+            //console.log('网络已重连');
+            
+        }
+        // else{
+        //     console.log('已重新连接');    
+        // }
+        // if(cc.beimi.socket.disconnect){
+        //     console.log('已和服务器断开连接')
+        // }else{
+        //     console.log('已和服务器重新连接');
+            
+        // }
+
+    },
     //播放音乐的事件  data {url：路径，userid：内容}
     // playMusic_event:function(data,context){
     //     let playerarray = context.playersarray;
@@ -613,15 +677,26 @@ cc.Class({
             node.nosure.string = '拒绝';
             node.button.active = true;
             node.labei.active =false;
+            node.labei2.active = true;
+            node.time =30;
+            mj.t = setInterval(function(){node.daojishi()},1000)  ;  
+            
+                   
         }
     },
     over_event: function(){
+        cc.beimi.playerNum = null;
+        cc.beimi.room=null;
+        cc.beimi.cardNum = null;
+        cc.sys.localStorage.setItem('dis','true');        
         cc.director.loadScene('gameMain');
-        
+        let mj = cc.find('Canvas').getComponent('MajiangDataBind');
+        clearTimeout(mj.t);
     },
     unOver_event: function(){
         let mj = cc.find('Canvas').getComponent('MajiangDataBind')
         let dialog = cc.find("Canvas/isover") ;
+        clearTimeout(mj.t);
         mj.alert.put(dialog);
     },
     /**
@@ -632,7 +707,9 @@ cc.Class({
     joinroom_event:function(data , context){
         //如果是2人的模式  就只加自己和对家
         context = cc.find('Canvas').getComponent('MajiangDataBind') ;
-        if(data.peoNum == 2){
+        if(cc.beimi.playerNum == 2){
+            // context.left_player.active = false;
+            // context.right_player.active = false;
             if(data.id!=cc.sys.localStorage.getItem('current')&&data.id!=cc.sys.localStorage.getItem('top')){
                 var player = context.playerspool.get();
                 var playerscript = player.getComponent("MaJiangPlayer");
@@ -690,36 +767,36 @@ cc.Class({
             // }
         }
         else{
-            //这是默认的4人模式 
-            //因为 加入会触发 改变状态也会触发该事件，所以用getitem保存一个数据 如果有了这个数据则 只判断状态的改变  如果没有则表示新玩家加入
+            // 这是默认的4人模式 
+            // 因为 加入会触发 改变状态也会触发该事件，所以用getitem保存一个数据 如果有了这个数据则 只判断状态的改变  如果没有则表示新玩家加入
             if(data.id!=cc.sys.localStorage.getItem('current')&&data.id!=cc.sys.localStorage.getItem('right')&&data.id!=cc.sys.localStorage.getItem('left')&&data.id!=cc.sys.localStorage.getItem('top')){
                 var player = context.playerspool.get();
                 var playerscript = player.getComponent("MaJiangPlayer");
-                var inx = 0 , tablepos = "";
+                context.inx , tablepos = "";
                 if(data.id == cc.beimi.user.id){
                     player.setPosition(-584 , -269);
                     player.parent = context.root();
                     tablepos = "current" ;
                     cc.sys.localStorage.setItem('current',data.id);
                 }else{
-                    if(inx == 0){
+                    if(context.inx == null){
                         player.parent= context.right_player;
                         tablepos = "right" ;
                         cc.sys.localStorage.setItem('right',data.id);
-                       inx++
-                    }else if(inx == 1){
+                       context.inx = 1;
+                    }else if(context.inx == 1){
                         player.parent= context.top_player;
                         tablepos = "top" ;
                         cc.sys.localStorage.setItem('top',data.id);
-                        inx ++
-                    }else if(inx == 2){
+                        context.inx = 2;
+                    }else if(context.inx == 2){
                         player.parent= context.left_player;
                         tablepos = "left" ;
                         cc.sys.localStorage.setItem('left',data.id);
                     }
                     player.setPosition(0,0);
                 }
-                playerscript.init(data , inx , tablepos);
+                playerscript.init(data , context.inx , tablepos);
                 context.playersarray.push(player) ;
                 //这里是用来判定自己重连的时候 如果已经准备了 则准备按钮消失
                 if(data.status == 'READY'){    
@@ -769,8 +846,8 @@ cc.Class({
             //     context.ready2.active = false;
             //     var action = cc.moveTo(0.2,-21,-151);
             //     context.readybth.runAction(action);
-            // }
-        }
+            }
+        
     },
     /**
      * 新创建牌局，首个玩家加入，进入等待状态，等待其他玩家加入，服务端会推送 players数据
@@ -903,8 +980,8 @@ cc.Class({
      */
     dealcard_event:function(data , context){   
         cc.find('Canvas').getComponent('MajiangDataBind');   
-        if(data.peoNum){
-            var peoNum = data.peoNum;
+        if(cc.beimi.playerNum){
+            var peoNum = cc.beimi.playerNum;
         }
         let player = context.player(data.userid , context);
         context.select_action_searchlight(data, context , player);
@@ -972,15 +1049,15 @@ cc.Class({
      */
     players_event:function(data,context){
         context = cc.find("Canvas").getComponent("MajiangDataBind") ;
-        context.collect(context) ;    //先回收资源，然后再初始化
+        //context.collect(context) ;    //先回收资源，然后再初始化
         
         var inx = 0 ;
         context.arry = [];
         var players = context.playersarray; 
-        for(let i =0;i< players.length;i++){
-            context.playerspool.put(players[i]);
-        }
-        context.playersarray=[] ;
+        // for(let i =0;i< players.length;i++){
+        //     context.playerspool.put(players[i]);
+        // }
+        // context.playersarray=[] ;
         
         
 
@@ -994,179 +1071,330 @@ cc.Class({
             }
             //debugger
         }
-        
-        if(mytime==1){
 
-            var player0 = context.playerspool.get();
-            var playerscript0 = player0.getComponent("MaJiangPlayer");
-            player0.setPosition(-584 , -269);
-            context.playersarray.push(player0) ;
-            player0.parent = context.root();
-            playerscript0.init(data.players[0] , 0 , 'current');                
-            cc.sys.localStorage.setItem('current',data.players[0].id);
 
-            if(data.players.length==2){          
+
+        if(cc.beimi.playerNum==2){
+            if(mytime==1){
+                if(cc.sys.localStorage.getItem('current')!=data.players[0].id){
+                    var player0 = context.playerspool.get();
+                    var playerscript0 = player0.getComponent("MaJiangPlayer");
+                    player0.setPosition(-584 , -269);
+                    context.playersarray.push(player0) ;
+                    player0.parent = context.root();
+                    playerscript0.init(data.players[0] , 0 , 'current');                
+                    cc.sys.localStorage.setItem('current',data.players[0].id);
+                    //cc.sys.localStorage.setItem('current','true');
+                }
                 
-                var player = context.playerspool.get();
-                var playerscript = player.getComponent("MaJiangPlayer");
-                player.parent = context.right_player;
-                playerscript.init(data.players[1] , 0 , 'right');
-                player.setPosition(0,0);
-                context.playersarray.push(player) ;
-                cc.sys.localStorage.setItem('right',data.players[1].id);
-            }else if(data.players.length ==3){
-
-                var player = context.playerspool.get();
-                var playerscript = player.getComponent("MaJiangPlayer");
-                player.parent = context.right_player;
-                playerscript.init(data.players[1] , 0 , 'right');
-                player.setPosition(0,0);
-                context.playersarray.push(player) ;
-                cc.sys.localStorage.setItem('right',data.players[1].id);
-                var player2 = context.playerspool.get();
-                var playerscript2 = player2.getComponent("MaJiangPlayer");
-                player2.parent = context.top_player;
-                playerscript2.init(data.players[2] , 1 , 'top');
-                player2.setPosition(0,0);
-                context.playersarray.push(player2) ;
-                cc.sys.localStorage.setItem('top',data.players[2].id);
-
-            }else if(data.players.length ==4){
-
-                var player = context.playerspool.get();
-                var playerscript = player.getComponent("MaJiangPlayer");
-                player.parent = context.right_player;
-                playerscript.init(data.players[1] , 0 , 'right');
-                player.setPosition(0,0);
-                context.playersarray.push(player) ;
-                cc.sys.localStorage.setItem('right',data.players[1].id);
-
-                var player2 = context.playerspool.get();
-                var playerscript2 = player2.getComponent("MaJiangPlayer");
-                player2.parent = context.top_player;
-                playerscript2.init(data.players[2] , 1 , 'top');
-                player2.setPosition(0,0);
-                context.playersarray.push(player2) ;
-                cc.sys.localStorage.setItem('top',data.players[2].id);
-
-                var player3 = context.playerspool.get();
-                var playerscript3 = player3.getComponent("MaJiangPlayer");
-                player3.parent = context.left_player;
-                playerscript3.init(data.players[3] , 2 , 'left');
-                player3.setPosition(0,0);
-                context.playersarray.push(player3) ;
-                cc.sys.localStorage.setItem('left',data.players[3].id);
+    
+                if(data.players.length==2){          
+                    
+                    if(cc.sys.localStorage.getItem('top')!=data.players[1].id){
+                        var player = context.playerspool.get();
+                        var playerscript = player.getComponent("MaJiangPlayer");
+                        player.parent = context.top_player;
+                        playerscript.init(data.players[1] , 0 , 'top');
+                        player.setPosition(0,0);
+                        context.playersarray.push(player) ;
+                        cc.sys.localStorage.setItem('top',data.players[1].id);
+                        //cc.sys.localStorage.setItem('right','true');     
+                    }
+                }
+            }else{
+                if(cc.sys.localStorage.getItem('top')!=data.players[0].id){
+                    var player = context.playerspool.get();
+                    var playerscript = player.getComponent("MaJiangPlayer");
+                    player.parent = context.top_player;
+                    playerscript.init(data.players[0] , 0 , 'top');
+                    player.setPosition(0,0);
+                    context.playersarray.push(player) ;
+                    cc.sys.localStorage.setItem('top',data.players[0].id);
+                    //cc.sys.localStorage.setItem('right','true');     
+                }
+                if(cc.sys.localStorage.getItem('current')!=data.players[1].id){
+                    var player0 = context.playerspool.get();
+                    var playerscript0 = player0.getComponent("MaJiangPlayer");
+                    player0.setPosition(-584 , -269);
+                    context.playersarray.push(player0) ;
+                    player0.parent = context.root();
+                    playerscript0.init(data.players[1] , 0 , 'current');                
+                    cc.sys.localStorage.setItem('current',data.players[1].id);
+                    //cc.sys.localStorage.setItem('current','true');
+                }
+            }       
+        }else{
+            if(mytime==1){
+                if(cc.sys.localStorage.getItem('current')!=data.players[0].id){
+                    var player0 = context.playerspool.get();
+                    var playerscript0 = player0.getComponent("MaJiangPlayer");
+                    player0.setPosition(-584 , -269);
+                    context.playersarray.push(player0) ;
+                    player0.parent = context.root();
+                    playerscript0.init(data.players[0] , 0 , 'current');                
+                    cc.sys.localStorage.setItem('current',data.players[0].id);
+                    //cc.sys.localStorage.setItem('current','true');
+                }
+                
+    
+                if(data.players.length==2){          
+                    
+                    if(cc.sys.localStorage.getItem('right')!=data.players[1].id){
+                        var player = context.playerspool.get();
+                        var playerscript = player.getComponent("MaJiangPlayer");
+                        player.parent = context.right_player;
+                        playerscript.init(data.players[1] , 0 , 'right');
+                        player.setPosition(0,0);
+                        context.playersarray.push(player) ;
+                        cc.sys.localStorage.setItem('right',data.players[1].id);
+                        //cc.sys.localStorage.setItem('right','true');     
+                    }
+                    
+                }else if(data.players.length ==3){
+    
+                    if(cc.sys.localStorage.getItem('right')!=data.players[1].id){
+                        var player = context.playerspool.get();
+                        var playerscript = player.getComponent("MaJiangPlayer");
+                        player.parent = context.right_player;
+                        playerscript.init(data.players[1] , 0 , 'right');
+                        player.setPosition(0,0);
+                        context.playersarray.push(player) ;
+                        cc.sys.localStorage.setItem('right',data.players[1].id);
+                        //cc.sys.localStorage.setItem('right','true');     
+                        
+                    }
+                    if(cc.sys.localStorage.getItem('top')!=data.players[2].id){
+                        var player2 = context.playerspool.get();
+                        var playerscript2 = player2.getComponent("MaJiangPlayer");
+                        player2.parent = context.top_player;
+                        playerscript2.init(data.players[2] , 1 , 'top');
+                        player2.setPosition(0,0);
+                        context.playersarray.push(player2) ;
+                        cc.sys.localStorage.setItem('top',data.players[2].id);
+                        //cc.sys.localStorage.setItem('top','true');     
+                        
+                    }                    
+                    
+    
+                }else if(data.players.length ==4){
+    
+                    if(cc.sys.localStorage.getItem('right')!=data.players[1].id){
+                        var player = context.playerspool.get();
+                        var playerscript = player.getComponent("MaJiangPlayer");
+                        player.parent = context.right_player;
+                        playerscript.init(data.players[1] , 0 , 'right');
+                        player.setPosition(0,0);
+                        context.playersarray.push(player) ;
+                        cc.sys.localStorage.setItem('right',data.players[1].id);
+                        //cc.sys.localStorage.setItem('right','true');     
+                        
+                    }
+                        
+                    
+                    if(cc.sys.localStorage.getItem('top')!=data.players[2].id){
+                        var player2 = context.playerspool.get();
+                        var playerscript2 = player2.getComponent("MaJiangPlayer");
+                        player2.parent = context.top_player;
+                        playerscript2.init(data.players[2] , 1 , 'top');
+                        player2.setPosition(0,0);
+                        context.playersarray.push(player2) ;
+                        cc.sys.localStorage.setItem('top',data.players[2].id);
+                        //cc.sys.localStorage.setItem('top','true');     
+                    }
+                        
+                    
+                    
+                    if(cc.sys.localStorage.getItem('left')!=data.players[3].id){
+                        var player3 = context.playerspool.get();
+                        var playerscript3 = player3.getComponent("MaJiangPlayer");
+                        player3.parent = context.left_player;
+                        playerscript3.init(data.players[3] , 2 , 'left');
+                        player3.setPosition(0,0);
+                        context.playersarray.push(player3) ;
+                        cc.sys.localStorage.setItem('left',data.players[3].id);
+                        //cc.sys.localStorage.setItem('left','true');          
+                    }     
+                }
+            }else if(mytime == 2){
+                if(cc.sys.localStorage.getItem('left')!=data.players[0].id){
+                    var player = context.playerspool.get();
+                    var playerscript = player.getComponent("MaJiangPlayer");
+                    player.parent = context.left_player;
+                    playerscript.init(data.players[0] , 2 , 'left');
+                    player.setPosition(0,0);
+                    context.playersarray.push(player) ;
+                    cc.sys.localStorage.setItem('left',data.players[0].id);
+                    //cc.sys.localStorage.setItem('left','true');                          
+                }
+                    
+                
+                if(cc.sys.localStorage.getItem('current')!=data.players[1].id){
+                    var player0 = context.playerspool.get();
+                    var playerscript0 = player0.getComponent("MaJiangPlayer");
+                    player0.setPosition(-584 , -269);
+                    context.playersarray.push(player0) ;
+                    player0.parent = context.root();
+                    playerscript0.init(data.players[1] , 0 , 'current');                
+                    cc.sys.localStorage.setItem('current',data.players[1].id);
+                    //cc.sys.localStorage.setItem('current','true');                          
+                    
+                }
+                    
+               
+                if(data.players.length ==3){
+                    if(cc.sys.localStorage.getItem('right')!=data.players[2].id){
+                        var player2 = context.playerspool.get();
+                        var playerscript2 = player2.getComponent("MaJiangPlayer");
+                        player2.parent = context.right_player;
+                        playerscript2.init(data.players[2] , 0 , 'right');
+                        player2.setPosition(0,0);
+                        context.playersarray.push(player2) ;
+                        cc.sys.localStorage.setItem('right',data.players[2].id);
+                        //cc.sys.localStorage.setItem('right','true');                          
+                        
+                    }                    
+                    
+    
+                }else if(data.players.length ==4){
+                    if(cc.sys.localStorage.getItem('right')!=data.players[2].id){
+                        var player2 = context.playerspool.get();
+                        var playerscript2 = player2.getComponent("MaJiangPlayer");
+                        player2.parent = context.right_player;
+                        playerscript2.init(data.players[2] , 0 , 'right');
+                        player2.setPosition(0,0);
+                        context.playersarray.push(player2) ;
+                        cc.sys.localStorage.setItem('right',data.players[2].id);
+                        //cc.sys.localStorage.setItem('right','true');                          
+                        
+                    }                    
+                    
+                    if(cc.sys.localStorage.getItem('top')!=data.players[3].id){
+                        var player3 = context.playerspool.get();
+                        var playerscript3 = player3.getComponent("MaJiangPlayer");
+                        player3.parent = context.top_player;
+                        playerscript3.init(data.players[3] , 1 , 'top');
+                        player3.setPosition(0,0);
+                        context.playersarray.push(player3) ;
+                        cc.sys.localStorage.setItem('top',data.players[3].id);
+                        //cc.sys.localStorage.setItem('top','true');                          
+                        
+                    }
+                        
+                   
+                }
+    
+            }else if(mytime ==3){
+                if(cc.sys.localStorage.getItem('top')!=data.players[0].id){
+                    var player = context.playerspool.get();
+                    var playerscript = player.getComponent("MaJiangPlayer");
+                    player.parent = context.top_player;
+                    playerscript.init(data.players[0] , 1 , 'top');
+                    player.setPosition(0,0);
+                    context.playersarray.push(player) ;
+                    cc.sys.localStorage.setItem('top',data.players[0].id);
+                    //cc.sys.localStorage.setItem('top','true');                          
+                    
+                }
+                    
+                
+                if(cc.sys.localStorage.getItem('left')!=data.players[1].id){
+                    var player2 = context.playerspool.get();
+                    var playerscript2 = player2.getComponent("MaJiangPlayer");
+                    player2.parent = context.left_player;
+                    playerscript2.init(data.players[1] , 2 , 'left');
+                    player2.setPosition(0,0);
+                    context.playersarray.push(player2) ;
+                    cc.sys.localStorage.setItem('left',data.players[1].id);
+                    //cc.sys.localStorage.setItem('left','true');                          
+                    
+                }
+                    
+               
+    
+                if(cc.sys.localStorage.getItem('current')!=data.players[2].id){
+                    var player0 = context.playerspool.get();
+                    var playerscript0 = player0.getComponent("MaJiangPlayer");
+                    player0.setPosition(-584 , -269);
+                    context.playersarray.push(player0) ;
+                    player0.parent = context.root();
+                    playerscript0.init(data.players[2] , 0 , 'current');  
+                    cc.sys.localStorage.setItem('current',data.players[2].id);                
+                    //cc.sys.localStorage.setItem('current','true');                          
+                    
+                }
+                    
+                           
+                if(data.players.length ==4){
+                    if(cc.sys.localStorage.getItem('right')!=data.players[3].id){
+                        var player3 = context.playerspool.get();
+                        var playerscript3 = player3.getComponent("MaJiangPlayer");
+                        player3.parent = context.right_player;
+                        playerscript3.init(data.players[3] , 0 , 'right');
+                        player3.setPosition(0,0);
+                        context.playersarray.push(player3) ;
+                        cc.sys.localStorage.setItem('right',data.players[3].id);
+                        //cc.sys.localStorage.setItem('right','true');                          
+                        
+                    }
+                        
+                    
+                }
+            }else if(mytime == 4){
+                if(cc.sys.localStorage.getItem('right')!=data.players[0].id){
+                    var player = context.playerspool.get();
+                    var playerscript = player.getComponent("MaJiangPlayer");
+                    player.parent = context.right_player;
+                    playerscript.init(data.players[0] , 0 , 'right');
+                    player.setPosition(0,0);
+                    context.playersarray.push(player) ;
+                    cc.sys.localStorage.setItem('right',data.players[0].id);
+                    //cc.sys.localStorage.setItem('right','true');                          
+                    
+                }
+    
+                    
+                
+                if(cc.sys.localStorage.getItem('top')!=data.players[1].id){
+                    var player2 = context.playerspool.get();
+                    var playerscript2 = player2.getComponent("MaJiangPlayer");
+                    player2.parent = context.top_player;
+                    playerscript2.init(data.players[1] , 1 , 'top');
+                    player2.setPosition(0,0);
+                    context.playersarray.push(player2) ;
+                    cc.sys.localStorage.setItem('top',data.players[1].id);
+                    //cc.sys.localStorage.setItem('top','true');                          
+                    
+                }
+                    
+                
+                if(cc.sys.localStorage.getItem('left')!=data.players[2].id){
+                    var player3 = context.playerspool.get();
+                    var playerscript3 = player3.getComponent("MaJiangPlayer");
+                    player3.parent = context.left_player;
+                    playerscript3.init(data.players[2] , 2 , 'left');
+                    player3.setPosition(0,0);
+                    context.playersarray.push(player3) ;
+                    cc.sys.localStorage.setItem('left',data.players[2].id);
+                    //cc.sys.localStorage.setItem('left','true');                          
+                    
+                }
+                    
+                
+                if(cc.sys.localStorage.getItem('current')!=data.players[3].id){
+                    var player0 = context.playerspool.get();
+                    var playerscript0 = player0.getComponent("MaJiangPlayer");
+                    player0.setPosition(-584 , -269);
+                    context.playersarray.push(player0) ;
+                    player0.parent = context.root();
+                    playerscript0.init(data.players[3] , 0 , 'current');                
+                    cc.sys.localStorage.setItem('current',data.players[3].id);
+                    //cc.sys.localStorage.setItem('current','true');                          
+                    
+                }                
+                
             }
-        }else if(mytime == 2){
-            var player = context.playerspool.get();
-            var playerscript = player.getComponent("MaJiangPlayer");
-            player.parent = context.left_player;
-            playerscript.init(data.players[0] , 2 , 'left');
-            player.setPosition(0,0);
-            context.playersarray.push(player) ;
-            cc.sys.localStorage.setItem('left',data.players[0].id);
-
-            var player0 = context.playerspool.get();
-            var playerscript0 = player0.getComponent("MaJiangPlayer");
-            player0.setPosition(-584 , -269);
-            context.playersarray.push(player0) ;
-            player0.parent = context.root();
-            playerscript0.init(data.players[1] , 0 , 'current');                
-            cc.sys.localStorage.setItem('current',data.players[1].id);
-
-            if(data.players.length ==3){
-                var player2 = context.playerspool.get();
-                var playerscript2 = player2.getComponent("MaJiangPlayer");
-                player2.parent = context.right_player;
-                playerscript2.init(data.players[2] , 0 , 'right');
-                player2.setPosition(0,0);
-                context.playersarray.push(player2) ;
-                cc.sys.localStorage.setItem('right',data.players[2].id);
-
-            }else if(data.players.length ==4){
-                var player2 = context.playerspool.get();
-                var playerscript2 = player2.getComponent("MaJiangPlayer");
-                player2.parent = context.right_player;
-                playerscript2.init(data.players[2] , 0 , 'right');
-                player2.setPosition(0,0);
-                context.playersarray.push(player2) ;
-                cc.sys.localStorage.setItem('right',data.players[2].id);
-
-                var player3 = context.playerspool.get();
-                var playerscript3 = player3.getComponent("MaJiangPlayer");
-                player3.parent = context.top_player;
-                playerscript3.init(data.players[3] , 1 , 'top');
-                player3.setPosition(0,0);
-                context.playersarray.push(player3) ;
-                cc.sys.localStorage.setItem('top',data.players[3].id);
-            }
-
-        }else if(mytime ==3){
-            var player = context.playerspool.get();
-            var playerscript = player.getComponent("MaJiangPlayer");
-            player.parent = context.top_player;
-            playerscript.init(data.players[0] , 1 , 'top');
-            player.setPosition(0,0);
-            context.playersarray.push(player) ;
-            cc.sys.localStorage.setItem('top',data.players[0].id);
-
-            var player2 = context.playerspool.get();
-            var playerscript2 = player2.getComponent("MaJiangPlayer");
-            player2.parent = context.left_player;
-            playerscript2.init(data.players[1] , 2 , 'left');
-            player2.setPosition(0,0);
-            context.playersarray.push(player2) ;
-            cc.sys.localStorage.setItem('left',data.players[1].id);
-
-            var player0 = context.playerspool.get();
-            var playerscript0 = player0.getComponent("MaJiangPlayer");
-            player0.setPosition(-584 , -269);
-            context.playersarray.push(player0) ;
-            player0.parent = context.root();
-            playerscript0.init(data.players[2] , 0 , 'current');                
-            cc.sys.localStorage.setItem('current',data.players[2].id);
-            if(data.players.length ==4){
-                var player3 = context.playerspool.get();
-                var playerscript3 = player3.getComponent("MaJiangPlayer");
-                player3.parent = context.right_player;
-                playerscript3.init(data.players[3] , 0 , 'right');
-                player3.setPosition(0,0);
-                context.playersarray.push(player3) ;
-                cc.sys.localStorage.setItem('right',data.players[3].id);
-            }
-        }else if(mytime == 4){
-            var player = context.playerspool.get();
-            var playerscript = player.getComponent("MaJiangPlayer");
-            player.parent = context.right_player;
-            playerscript.init(data.players[0] , 0 , 'right');
-            player.setPosition(0,0);
-            context.playersarray.push(player) ;
-            cc.sys.localStorage.setItem('right',data.players[0].id);
-
-            var player2 = context.playerspool.get();
-            var playerscript2 = player2.getComponent("MaJiangPlayer");
-            player2.parent = context.top_player;
-            playerscript2.init(data.players[1] , 1 , 'top');
-            player2.setPosition(0,0);
-            context.playersarray.push(player2) ;
-            cc.sys.localStorage.setItem('top',data.players[1].id);
-
-            var player3 = context.playerspool.get();
-            var playerscript3 = player3.getComponent("MaJiangPlayer");
-            player3.parent = context.left_player;
-            playerscript3.init(data.players[2] , 2 , 'left');
-            player3.setPosition(0,0);
-            context.playersarray.push(player3) ;
-            cc.sys.localStorage.setItem('left',data.players[2].id);
-
-            var player0 = context.playerspool.get();
-            var playerscript0 = player0.getComponent("MaJiangPlayer");
-            player0.setPosition(-584 , -269);
-            context.playersarray.push(player0) ;
-            player0.parent = context.root();
-            playerscript0.init(data.players[3] , 0 , 'current');                
-            cc.sys.localStorage.setItem('current',data.players[3].id);
         }
+       
         var peo = context.playersarray;
         for(let i = 0 ; i< data.players.length;i++){
             for(let j=0; j<peo.length; j++){
@@ -1186,6 +1414,9 @@ cc.Class({
             context.right_ready.active = true;
         }else if(fangwei == 'top'){
             context.top_ready.active = true ;
+        }else if(fangwei == 'current'){
+            context.current_ready.active = true ;
+            
         }
     },
     publicData:function(len,data,fangwei,OPparent,int,context){
@@ -1436,8 +1667,8 @@ cc.Class({
          * 改变状态，开始发牌
          * 
          */
-        if(data.peoNum){
-            var peoNum = data.peoNum;
+        if(cc.beimi.playerNum){
+            var peoNum = cc.beimi.playerNum;
         }
         //开局后  头像位移到相应位置
         {
@@ -1639,7 +1870,13 @@ cc.Class({
                         isGang =true;
                     }
                     if(cards.length<4||isGang||action[i].action=='gang'||action[i].action=='peng'){
-                        context.cardModle(cards,cc.find('Canvas/content/handcards/deskcard/kong'),isGang,'',context,action[i].action);   
+                        if(action[i].action=='gang'&&cards.length==1){
+                            let a =cards.concat(cards);
+                            let b = a.concat(a)
+                            context.cardModle(b,cc.find('Canvas/content/handcards/deskcard/kong'),isGang,'',context,action[i].action);  
+                        }else{
+                            context.cardModle(cards,cc.find('Canvas/content/handcards/deskcard/kong'),isGang,'',context,action[i].action);  
+                        }
                     }else {
                         var a = cards.slice(0,3);
                         console.log('------------');
@@ -1678,9 +1915,16 @@ cc.Class({
                             isGang =true;
                         }
                         if(cards<4||isGang||action[j].action=='gang'||action[j].action=='peng'){
-                            context.cardModle(cards,cc.find('Canvas/content/handcards/'+player.tablepos+'desk/kong'),isGang,player.tablepos,context,action[j].action);   
-                        }else {
-                            var a = cards.slice(0,3);
+                            if(action[j].action=='gang'&&cards.length==1){
+                                let a =cards.concat(cards);
+                                let b = a.concat(a)
+                                context.cardModle(b,cc.find('Canvas/content/handcards/'+player.tablepos+'desk/kong'),isGang,player.tablepos,context,action[j].action);   
+                            }else{
+                                context.cardModle(cards,cc.find('Canvas/content/handcards/'+player.tablepos+'desk/kong'),isGang,player.tablepos,context,action[j].action);   
+
+                            }
+                            }else {
+                            let a = cards.slice(0,3);
                             context.cardModle(a,cc.find('Canvas/content/handcards/'+player.tablepos+'desk/kong'),isGang,player.tablepos,context,action[j].action);
                             for(let h =3 ; h<cards.length; h++){
                                 context.selectaction_event({userid:player.data.id,cards:[cards[h]],card:-1,action:'dan'},context)
@@ -2092,6 +2336,7 @@ cc.Class({
         object.unscheduleAllCallbacks();
         object.mjtimer.string = "00" ;
     },
+   
     timer:function(object , times){
         if(times > 9){
             object.mjtimer.string = times ;
