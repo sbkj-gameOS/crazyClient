@@ -57,7 +57,7 @@ cc.Class({
         //this.scene("gameMain" , this);
         this.button.active = false;
         this.labei.active = true;
-        this.labei2.active =true;
+        this.labei2.active =false;
         // this.daojishi();
         // this.labei2.string = '还有'+this.time +'自动解散'
         this.node.dispatchEvent( new cc.Event.EventCustom('overGame', true) );
