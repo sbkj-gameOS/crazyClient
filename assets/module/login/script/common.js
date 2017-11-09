@@ -27,10 +27,10 @@ cc.Class({
         // this.loginFormPool = new cc.NodePool();
         // this.loginFormPool.put(cc.instantiate(this.prefab)); // 创建节点
         var xySuccess = localStorage.getItem("xySuccess");
-        //this.tourist();        
+        this.tourist();        
         if(xySuccess == 1){
             this.successBtn.active = false;
-            this.login();
+            //this.login();
         }
         
         cc.beimi.game = {
@@ -105,26 +105,42 @@ cc.Class({
     },
     login:function(){
         this.io = require("IOUtils");
-        this.loadding();
-        if(this.getUrlParam("invitationcode")){
-            var code = values[i].split('=')[1];
-            this.loadding();
-            cc.beimi.http.httpGet('/wxController/getLoginCode?invitationcode='+this.getUrlParam("invitationcode"),this.wxseccess,this.error,this);
-        }
+        //this.loadding();
+        var url = window.location.href;
+        //console.log(url);
+        var data = url.split('?')[1];
+        var value='';
+        if(data){
+            var values= data.split('&');
+            //好友分享进入
+            for(let i in values){
+                var name = values[i].split('=')[0]
+                if (name =='invitationcode'){
+                    var code = values[i].split('=')[1];
+                    this.loadding();
+                    cc.beimi.http.httpGet('/wxController/getLoginCode?invitationcode='+code,this.wxseccess,this.error,this);
 
-        //判断是否有充值
-        if (this.getUrlParam('status')){
-            cc.beimi.paystatus = this.getUrlParam("invitationcode");
+                   
+                }
+            };
+            //判断是否有充值
+            for(let i in values){
+                var name = values[i].split('=')[0]
+                if (name =='status'){
+                    cc.beimi.paystatus = values[i].split('=')[1];
+                }
+            };
+            //直接点击链接登陆
+            for(let i in values){
+            var name = values[i].split('=')[0]
+            if (name == 'userId'){
+                value = values[i].split('=')[1];
+                //console.log(value);
+                this.loadding();
+                cc.beimi.http.httpGet('/wxController/getWxUserToken?userId='+value,this.sucess,this.error,this);
+                }
+            };
         }
-
-        //直接点击链接登陆
-        if (this.getUrlParam('userId')){
-            //console.log(value);
-            this.loadding();
-            cc.beimi.http.httpGet('/wxController/getWxUserToken?userId='+this.getUrlParam('userId'),this.sucess,this.error,this);
-        }
-
-        
     },
    sucess:function(result,object){
        var data = JSON.parse(result) ;
@@ -140,47 +156,12 @@ cc.Class({
             */
           
             object.loadding();
-            //房间号参数不为空    直接进入房间
-            if (object.getUrlParam('roomNum') != 'null'){
-                var room={};
-                room.room = object.getUrlParam('roomNum');
-                room.token = cc.beimi.authorization;
-                cc.beimi.http.httpPost('/api/room/query',room,object.JRsucess,object.JRerror,object);
-            }else{
-                object.connect();
-                object.scene('gameMain' , object) ;
-            }
+            object.connect();
+           object.scene('gameMain' , object) ;
        }
    },
    error:function(object){
        object.closeloadding(object.loaddingDialog);
        object.alert("网络异常，服务访问失败");
    },
-   JRsucess: function(result,object){
-        var data = JSON.parse(result);
-        if(data.playway&&data.room){
-            cc.beimi.room = object.getUrlParam('roomNum');
-            cc.beimi.playway = data.playway;
-            if(data.playerNum){
-                cc.beimi.playerNum = data.playerNum;
-            }
-            if(data.cardNum){
-                cc.beimi.cardNum = data.cardNum;
-            }
-            cc.director.preloadScene('majiang',function(){
-                cc.director.loadScene('majiang');
-            });
-        }else if(data.error){
-        }     
-    },
-    JRerror: function(object){
-       
-    },
-   //获取url中的参数
-   getUrlParam:function(name) {
-       var url = window.location.search.replace("amp;","");
-       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-       var r = url.substr(1).match(reg); //匹配目标参数
-       if (r != null) return unescape(r[2]); return null; //返回参数值
-    }
 });

@@ -2577,7 +2577,7 @@ cc.Class({
                 if(action == 'gang'&&dans.length>0&kaction == 'peng'){
                     for(let j = 0 ; j<dans.length; j++){
                         var cardUnit = dans[j] ;
-                        if ( parseInt((card%36)/4 ) == cardUnit.getComponent("DanAction").mjvalue ){
+                        if ((parseInt((card%36)/4 ) == cardUnit.getComponent("DanAction").mjvalue &&parseInt(card / 36)==cardUnit.getComponent("DanAction").cardtype)||(card<0&&parseInt(card/4 )==cardUnit.getComponent("DanAction").cardcolors)){
                             resNode = cards ;
                             cardNum = j;
                             isGang = true;
@@ -2702,10 +2702,10 @@ cc.Class({
         //  this.cardModle([11,12,13,14],cc.find('Canvas/content/handcards/leftdesk/kong'),true,'left',context)
 
         //  this.cardModle([11,12,13,14],cc.find('Canvas/content/handcards/rightdesk/kong'),true,'right',context)
-         this.cardModle([0,1,2],cc.find('Canvas/content/handcards/topdesk/kong'),false,'top',context,'dan')
-         this.cardModle([0,1,2],cc.find('Canvas/content/handcards/leftdesk/kong'),false,'left',context,'dan')
-         this.cardModle([2,1,3],cc.find('Canvas/content/handcards/rightdesk/kong'),false,'right',context,'dan')
-         this.cardModle([2,1,3],cc.find('Canvas/content/handcards/deskcard/kong'),false,'',context,'dan')
+         this.cardModle([-8,-9,-10],cc.find('Canvas/content/handcards/deskcard/kong'),false,'',context,'peng')
+        //  this.cardModle([0,1,2],cc.find('Canvas/content/handcards/leftdesk/kong'),false,'left',context,'dan')
+        //  this.cardModle([2,1,3],cc.find('Canvas/content/handcards/rightdesk/kong'),false,'right',context,'dan')
+        //  this.cardModle([2,1,3],cc.find('Canvas/content/handcards/deskcard/kong'),false,'',context,'dan')
 
         //  this.cardModle([11,12,13,14],cc.find('Canvas/content/handcards/topdesk/kong'),true,'top',context)
          
@@ -2719,7 +2719,7 @@ cc.Class({
         
     },
     dosomethings: function (data , context){
-        this.selectaction_event({userid:cc.beimi.user.id,cards:[1],card:-1,action:'dan'},context)
+        this.selectaction_event({userid:cc.beimi.user.id,cards:[-11],card:-1,action:'gang'},context)
         
        
    },

@@ -60,7 +60,7 @@ cc.Class({
             var imgurl = playerdata.headimgurl;
             var sprite = this.headimg.getComponent(cc.Sprite);
             var head = this.headimg;
-            cc.loader.load({url:imgurl,type:'jpg'},function(err,texture){
+            cc.loader.load({url:imgurl,type:'jpg'},function(suc,texture){
                 sprite.spriteFrame = new cc.SpriteFrame(texture);
                 head.width = 80;
                 head.height = 80;
