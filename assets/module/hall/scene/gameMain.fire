@@ -526,7 +526,8 @@
     "node": {
       "__id__": 11
     },
-    "_enabled": true
+    "_enabled": true,
+    "typeStatus": 1
   },
   {
     "__type__": "4ee59TGB3VFZLQuujavmCxG",
