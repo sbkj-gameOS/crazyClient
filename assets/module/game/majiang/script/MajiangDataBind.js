@@ -1813,8 +1813,9 @@ cc.Class({
         //this.statusbtn.active = true ;
         //ljh改  神牌
         if(data.player.power){
+            cc.find('Canvas/global/main/godcard/child').children[0].active =true;
             if(data.player.powerCard&&data.player.powerCard.length>0){
-                cc.find('Canvas/global/main/godcard/child').children[0].destroy();
+                cc.find('Canvas/global/main/godcard/child').children[1].destroy();
                 for(let i= 0 ; i<data.player.powerCard.length;i++){
                     var laiziZM = cc.instantiate(context.ZM);
                     laiziZM.parent = context.godcard.children[0];
