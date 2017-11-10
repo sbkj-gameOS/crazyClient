@@ -2336,7 +2336,8 @@ cc.Class({
         }
     },
     exchange_searchlight:function(direction , context){
-        cc.sys.localStorage.removeItem('cl');        
+        cc.sys.localStorage.removeItem('cl');      
+        context.shouOperationMune();
         context = cc.find('Canvas').getComponent('MajiangDataBind');
         for(var inx = 0 ; inx<context.searchlight.children.length ; inx++){
             if(direction == context.searchlight.children[inx].name){
