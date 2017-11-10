@@ -696,7 +696,8 @@ cc.Class({
         let mj = cc.find('Canvas').getComponent('MajiangDataBind');
         clearTimeout(mj.t);
         var desk = require("DeskCards");
-        desk.xiaochu();
+        var jiantou = new desk();
+        jiantou.xiaochu();
     },
     unOver_event: function(){
         let mj = cc.find('Canvas').getComponent('MajiangDataBind')
