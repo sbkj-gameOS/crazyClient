@@ -92,13 +92,13 @@ cc.Class({
         // }
         this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
        
-        if(cc.beimi.cardNum == 16){ 
+        if(cc.beimi.cardNum == 16){        
             this.cardvalue.width = 61;
             this.target.width=59;
         }else{
-            this.target.width = 68;
+            this.target.width = 73;
         }
-       
+        this.cardvalue.color = new cc.Color(255, 255, 255);
         if(pd == null){
             var anim = this.getComponent(cc.Animation);
             anim.play("majiang_current");
@@ -110,7 +110,7 @@ cc.Class({
             if(cc.beimi.cardNum == 17){ 
                 this.target.width=80;   
             }else{
-                this.target.width=90;    
+                this.target.width=100;    
             }
             this.target.y = 0;
 
@@ -127,7 +127,7 @@ cc.Class({
                 this.cardvalue.width = 61;
                 this.target.width=59;
             }else{
-                this.target.width = 68;
+                this.target.width = 73;
             }
             this.target.y=0;
         }

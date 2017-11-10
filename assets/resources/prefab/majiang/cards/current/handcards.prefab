@@ -112,8 +112,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 70,
-      "height": 90
+      "width": 75,
+      "height": 115
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -166,8 +166,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 70,
-      "height": 87
+      "width": 75,
+      "height": 115
     },
     "_rotationX": 0,
     "_rotationY": 0,

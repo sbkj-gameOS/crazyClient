@@ -28,9 +28,23 @@ cc.Class({
             default: null,
             type: cc.Node
         },
+        jiantou:cc.Node,
+        jiantou2:cc.Node
     },
 
     init:function(cvalue,fangwei){
+        //this.jiantou.active  = true;
+        this.xiaochu();
+        // let ani = this.jiantou.getComponent(cc.Animation);
+        // let c = fangwei;
+        // if(fangwei =='B'){
+        //     c='top';
+        // }else if(fangwei =='L'){
+        //     c='left';
+        // }else if(fangwei =='R'){
+        //     c='right';
+        // }
+        // ani.play(c) ;  
         this.value = cvalue ;
         let cardframe ;
         let cardcolors = parseInt(this.value/4 ) ;
@@ -38,6 +52,7 @@ cc.Class({
         let deskcard ;
         
         if(cardcolors < 0){
+            
             if(cardcolors==-7){
                 deskcard = fangwei+'_wind_east';
             } else if(cardcolors==-6){
@@ -73,10 +88,24 @@ cc.Class({
             cardframe = this.atlas.getSpriteFrame(deskcard);
         // }
         this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
+        if(cc.sys.localStorage.getItem('cl')!='true'){
+            this.jiantou.active = true;
+        }
+       
     },
-
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
-
-    // },
+    initjiantou: function(cards){
+        if(cards.children){
+            for(let i =0; i< cards.children.length;i++){
+                var card = cards.children[i].getComponent('DeskCards');
+                card.jiantou2.destroy();
+            }
+        }
+    },
+    xiaochu: function(){
+         let context = cc.find('Canvas').getComponent('MajiangDataBind');
+         this.initjiantou(context.deskcards_current_panel);
+         this.initjiantou(context.deskcards_right_panel);
+         this.initjiantou(context.deskcards_top_panel);
+         this.initjiantou(context.deskcards_left_panel);
+    }
 });

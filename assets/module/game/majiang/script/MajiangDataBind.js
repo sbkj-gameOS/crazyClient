@@ -258,7 +258,7 @@ cc.Class({
          * 初始化当前玩家的麻将牌 对象池
          */
         if(cc.beimi.cardNum){
-            for(var i=0;i<cc.beimi.cardNum;i++){
+            for(var i=0;i<cc.beimi.cardNum+1;i++){
                 this.cardpool.put(cc.instantiate(this.cards_current));
             }
         }else{
@@ -300,6 +300,7 @@ cc.Class({
             this.map("isOver" , this.isOver_event);
             this.map("over" , this.over_event);
             this.map("unOver" , this.unOver_event);
+            this.map('talk',this.talk_event);
             //this.doSomethingBH({action:'buhua'},this);
             socket.on("command" , function(result){
                 var data = self.getSelf().parse(result) ;
@@ -686,6 +687,9 @@ cc.Class({
         }
     },
     over_event: function(){
+
+        var desk = require("Audio");
+        desk.xiaochu();
         cc.beimi.playerNum = null;
         cc.beimi.room=null;
         cc.beimi.cardNum = null;
@@ -980,7 +984,7 @@ cc.Class({
      * @param context
      */
     dealcard_event:function(data , context){   
-        cc.find('Canvas').getComponent('MajiangDataBind');   
+        context=cc.find('Canvas').getComponent('MajiangDataBind');   
         if(cc.beimi.playerNum){
             var peoNum = cc.beimi.playerNum;
         }
@@ -1493,7 +1497,7 @@ cc.Class({
                     count++;
                 }
                
-                var action = cc.moveTo(0.1,940 - count*285,-147);
+                var action = cc.moveTo(0.1,940 - count*285,-100);
                 //context.actionnode_two.active = true;
                 context.actionnode_two.runAction(action);
                 console.log(context.actionnode_two);
@@ -1537,7 +1541,7 @@ cc.Class({
                     count++;
                 }
                 
-                var action = cc.moveTo(0.1,940 - count*285,-147);
+                var action = cc.moveTo(0.1,940 - count*285,-100);
                 console.log(940 - count*85);
                 context.actionnode_two.runAction(action);
                 console.log(context.actionnode_two);
@@ -1847,6 +1851,7 @@ cc.Class({
             }
             //如果自己有已经打的牌或者其他人有打牌 或者有action的时候
             if(data.player.played||istake||data.player.actions.length>0){
+                cc.sys.localStorage.setItem('cl','true');
                 //重连判断deskcard
                 if(data.player.played){
                     var deskcards  = context.decode(data.player.played);
@@ -1960,9 +1965,11 @@ cc.Class({
                 card.cardvalue.width = 61;
                 target.width=59;
             }else{
-                target.width=68;    
+                target.width=73;    
             }
             target.y = 0;
+            card.cardvalue.color = new cc.Color(255, 255, 255);
+            
         }
     },
     initDeskCards: function(card,fangwei,context){
@@ -2077,9 +2084,7 @@ cc.Class({
             } , 5) ;
         }
     },
-    initDealHandCards:function(context , data){
-        context = cc.find('Canvas').getComponent('MajiangDataBind');        
-        let length  = cc.find('Canvas/content/handcards/deskcard/layout').children.length;
+    initDealHandCards:function(context , data){      
         context.initcardwidth();
         if(true){
             let temp = context.cardpool.get();
@@ -2330,6 +2335,7 @@ cc.Class({
         }
     },
     exchange_searchlight:function(direction , context){
+        cc.sys.localStorage.removeItem('cl');        
         context = cc.find('Canvas').getComponent('MajiangDataBind');
         for(var inx = 0 ; inx<context.searchlight.children.length ; inx++){
             if(direction == context.searchlight.children[inx].name){
@@ -2679,7 +2685,7 @@ cc.Class({
         }      
     },
     shouOperationMune: function(){
-        var action = cc.moveTo(0.5,1122,-147);
+        var action = cc.moveTo(0.5,1122,-100);
         this.actionnode_two.runAction(action);
         //this.actionnode_two.active = false;
         
@@ -2687,6 +2693,28 @@ cc.Class({
     getSelf: function(){
         var self =cc.find("Canvas").getComponent("MajiangDataBind");
         return self;
+    },
+    talk_event:function(data,context){
+        let time = new Date(data.end - data.start).getSeconds();
+        let player = context.player(data.userid , context);
+        //下载语音
+        wx.downloadVoice({
+            serverId: data.serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
+            isShowProgressTips: 1, // 默认为1，显示进度提示
+            success: function (res) {
+                wx.playVoice({
+                    localId: res.localId // 需要播放的音频的本地ID，由stopRecord接口获得
+                });
+            }
+        });
+        var dz = cc.find('Canvas/music/'+player.tablepos);
+        dz.active = true;
+        setTimeout(function(){
+            dz.active = false;
+        },time);
+        // wx.playVoice({
+        //     localId: res.localId // 需要播放的音频的本地ID，由stopRecord接口获得
+        // });
     },
     //其他玩家准备
     // allReady_event(data,context){

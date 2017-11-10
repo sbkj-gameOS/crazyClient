@@ -1,5 +1,6 @@
+var beiMiCommon = require("BeiMiCommon");
 cc.Class({
-    extends: cc.Component,
+    extends: beiMiCommon,
 
     properties: {
         typeStatus:0,
@@ -8,6 +9,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+        let self = this;
         this.START = 0;
         this.END = 0;
         this.recordTimer = 0;
@@ -19,11 +21,12 @@ cc.Class({
             this.urlAppend = '?roomNum='+cc.beimi.room;
             this.descName = "加入房间:"+cc.beimi.room+",开始游戏！";
         }
+        if(this.tape != null){
         //按下开始录音
         this.tape.node.on('touchstart', this.touchstartClick, this);
         //松手结束录音
         this.tape.node.on('touchend', this.touchendClick, this);
-
+        }
         console.log("this.urlAppend:"+this.urlAppend);
         cc.beimi.http.httpPost("/wxController/getWxConfig",{url:window.location.href}, this.sucess , this.error , this);
         
@@ -130,12 +133,19 @@ cc.Class({
                 isShowProgressTips: 1, // 默认为1，显示进度提示
                 success: function (res) {
                     //复制微信服务器返回录音id
-                    cc.beimi.serverId = res.serverId;
+                    let socket = self.socket();
+                    socket.emit('sayOnSound',JSON.stringify({
+                        userid : cc.beimi.userid,
+                        serverId : res.serverId,
+                        start : self.START,
+                        end : self.END
+                    }))
+                    //cc.beimi.serverId = res.serverId;
                 }
             });
           },
           fail: function (res) {
-            alert(JSON.stringify(res));
+            //alert(JSON.stringify(res));
           }
         });
     },

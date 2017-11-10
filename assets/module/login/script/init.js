@@ -56,6 +56,9 @@ cc.Class({
             cc.beimi = {};
             cc.beimi.http = require("HTTP");
             cc.beimi.seckey = "beimi";
+            cc.beimi.wx = document.createElement('script') ;
+            cc.beimi.wx.async = true;
+            cc.beimi.wx.src ='http://res.wx.qq.com/open/js/jweixin-1.2.0.js';
 
             cc.beimi.dialog = null ;
             cc.beimi.dialogtwo = null;
