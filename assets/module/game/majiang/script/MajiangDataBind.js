@@ -688,8 +688,6 @@ cc.Class({
     },
     over_event: function(){
 
-        var desk = require("Audio");
-        desk.xiaochu();
         cc.beimi.playerNum = null;
         cc.beimi.room=null;
         cc.beimi.cardNum = null;
@@ -697,6 +695,8 @@ cc.Class({
         cc.director.loadScene('gameMain');
         let mj = cc.find('Canvas').getComponent('MajiangDataBind');
         clearTimeout(mj.t);
+        var desk = require("DeskCards");
+        desk.xiaochu();
     },
     unOver_event: function(){
         let mj = cc.find('Canvas').getComponent('MajiangDataBind')
