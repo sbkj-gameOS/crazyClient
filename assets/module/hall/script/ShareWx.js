@@ -9,7 +9,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        let self = this;
+        let selfs = this;
         this.START = 0;
         this.END = 0;
         this.recordTimer = 0;
@@ -133,18 +133,19 @@ cc.Class({
                 isShowProgressTips: 1, // 默认为1，显示进度提示
                 success: function (res) {
                     //复制微信服务器返回录音id
-                    let socket = self.socket();
+                    let socket = selfs.socket();
                     socket.emit('sayOnSound',JSON.stringify({
                         userid : cc.beimi.userid,
                         serverId : res.serverId,
-                        start : self.START,
-                        end : self.END
+                        start : selfs.START,
+                        end : selfs.END
                     }))
                     //cc.beimi.serverId = res.serverId;
                 }
             });
           },
           fail: function (res) {
+              console.log(selfs);
             //alert(JSON.stringify(res));
           }
         });

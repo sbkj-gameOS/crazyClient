@@ -46,7 +46,7 @@ cc.Class({
             let kong = cc.instantiate(this.mjkong);
             kong.parent = this.mjloyad;
             let action = this.decode(this.data.actions[i].card);
-                 if(this.data.actions[i].action=='gang'&&action.length ==1){
+                if(this.data.actions[i].action=='gang'&&action.length ==1){
                         let c=[action[0],action[0],action[0],action[0]];
                         for(let h = 0; h<4 ;h++){
                             let card = cc.instantiate(this.card);
@@ -61,19 +61,50 @@ cc.Class({
                             b.target.width= 32;
                             card.parent = kong;   
                         }
-                    }else{
-                        for(let j=0;j<action.length;j++){
-                            let card = cc.instantiate(this.card);
-                            //console.log(cd[j]);
-                            let a = false;
-                            let c = action[j];
-                            let b = card.getComponent('DanAction');                          
-                            b.init(c,a,'');
-                            b.target.height = 53;
-                            b.target.width= 32;
-                            card.parent = kong;           
-                         }
+                }else if(this.data.actions[i].action=='dan'){
+
+                    for(let i =0 ;i<3 ;i++){
+                        let card =cc.instantiate(this.card);    
+                        let b = card.getComponent('DanAction');  
+                        var c = action[i];                        
+                        b.init(c,false,'');
+                        b.target.height = 53;
+                        b.target.width= 32;
+                        card.parent = kong;                               
                     }
+                    for(let j=3 ; j<action.length;j++){
+                        let card = action[j];   
+                        for(let h=0 ;h<kong.children.length;h++){
+                            let kcard = kong.children[h];
+                            let b = kcard.getComponent('DanAction');
+                            if((card < 0 && parseInt(card/4 ) == b.cardcolors)||(card>0&&parseInt((card%36)/4 ) == parseInt(((b.value)%36)/4)&&b.cardtype==parseInt(card/36))){              
+                                b.count.string = Number(Number(b.count.string)+1);
+                                b.count.node.active=true;
+                                break;
+                            }else{
+                                let card =cc.instantiate(this.card);    
+                                let b = card.getComponent('DanAction');  
+                                var c = action[j];                        
+                                b.init(c,false,'');
+                                b.target.height = 53;
+                                b.target.width= 32;
+                                card.parent = kong;  
+                            }
+                        }    
+                    }
+                }else{
+                    for(let j=0;j<action.length;j++){
+                        let card = cc.instantiate(this.card);
+                        //console.log(cd[j]);
+                        let a = false;
+                        let c = action[j];
+                        let b = card.getComponent('DanAction');                          
+                        b.init(c,a,'');
+                        b.target.height = 53;
+                        b.target.width= 32;
+                        card.parent = kong;           
+                    }
+                }
             }
         {
             let kong = cc.instantiate(this.mjkong);

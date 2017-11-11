@@ -596,6 +596,7 @@ cc.Class({
         });
         //初始化 干掉所有缓存
         //cc.sys.localStorage.removeItem('take') ;
+        cc.sys.localStorage.setItem('count','0');
         cc.sys.localStorage.removeItem('current');
         cc.sys.localStorage.removeItem('right');
         cc.sys.localStorage.removeItem('left');
@@ -778,27 +779,31 @@ cc.Class({
             if(data.id!=cc.sys.localStorage.getItem('current')&&data.id!=cc.sys.localStorage.getItem('right')&&data.id!=cc.sys.localStorage.getItem('left')&&data.id!=cc.sys.localStorage.getItem('top')){
                 var player = context.playerspool.get();
                 var playerscript = player.getComponent("MaJiangPlayer");
-                context.inx , tablepos = "";
+                tablepos = "";
+                var inx = cc.sys.localStorage.getItem('count');
                 if(data.id == cc.beimi.user.id){
                     player.setPosition(-584 , -269);
                     player.parent = context.root();
                     tablepos = "current" ;
                     cc.sys.localStorage.setItem('current',data.id);
+                    
                 }else{
-                    if(context.inx == null){
+                    if(inx == 0||inx ==3){
                         player.parent= context.right_player;
                         tablepos = "right" ;
                         cc.sys.localStorage.setItem('right',data.id);
-                       context.inx = 1;
-                    }else if(context.inx == 1){
+                        cc.sys.localStorage.setItem('count','1')
+                    }else if(inx == 1){
                         player.parent= context.top_player;
                         tablepos = "top" ;
                         cc.sys.localStorage.setItem('top',data.id);
-                        context.inx = 2;
-                    }else if(context.inx == 2){
+                        cc.sys.localStorage.setItem('count','2')
+                        
+                    }else if(inx == 2){
                         player.parent= context.left_player;
                         tablepos = "left" ;
                         cc.sys.localStorage.setItem('left',data.id);
+                        cc.sys.localStorage.setItem('count','3')
                     }
                     player.setPosition(0,0);
                 }
@@ -985,7 +990,7 @@ cc.Class({
      * @param context
      */
     dealcard_event:function(data , context){   
-        context=cc.find('Canvas').getComponent('MajiangDataBind');   
+        context=cc.find('Canvas').getComponent('MajiangDataBind');  
         if(cc.beimi.playerNum){
             var peoNum = cc.beimi.playerNum;
         }
@@ -1001,6 +1006,7 @@ cc.Class({
             //     handcards.relastone();
             // }     
         }else{
+            context.shouOperationMune();                    
             let inx = 0 ;
             if(player.tablepos == "top"){
                 //context.right_panel ;
@@ -1139,7 +1145,7 @@ cc.Class({
                     player0.parent = context.root();
                     playerscript0.init(data.players[0] , 0 , 'current');                
                     cc.sys.localStorage.setItem('current',data.players[0].id);
-                    //cc.sys.localStorage.setItem('current','true');
+                    cc.sys.localStorage.setItem('count','0');                          
                 }
                 
     
@@ -1153,7 +1159,7 @@ cc.Class({
                         player.setPosition(0,0);
                         context.playersarray.push(player) ;
                         cc.sys.localStorage.setItem('right',data.players[1].id);
-                        //cc.sys.localStorage.setItem('right','true');     
+                        cc.sys.localStorage.setItem('count','1');     
                     }
                     
                 }else if(data.players.length ==3){
@@ -1166,7 +1172,7 @@ cc.Class({
                         player.setPosition(0,0);
                         context.playersarray.push(player) ;
                         cc.sys.localStorage.setItem('right',data.players[1].id);
-                        //cc.sys.localStorage.setItem('right','true');     
+                        cc.sys.localStorage.setItem('count','1');     
                         
                     }
                     if(cc.sys.localStorage.getItem('top')!=data.players[2].id){
@@ -1177,7 +1183,7 @@ cc.Class({
                         player2.setPosition(0,0);
                         context.playersarray.push(player2) ;
                         cc.sys.localStorage.setItem('top',data.players[2].id);
-                        //cc.sys.localStorage.setItem('top','true');     
+                        cc.sys.localStorage.setItem('count','2');     
                         
                     }                    
                     
@@ -1192,7 +1198,7 @@ cc.Class({
                         player.setPosition(0,0);
                         context.playersarray.push(player) ;
                         cc.sys.localStorage.setItem('right',data.players[1].id);
-                        //cc.sys.localStorage.setItem('right','true');     
+                        cc.sys.localStorage.setItem('count','1');     
                         
                     }
                         
@@ -1205,7 +1211,7 @@ cc.Class({
                         player2.setPosition(0,0);
                         context.playersarray.push(player2) ;
                         cc.sys.localStorage.setItem('top',data.players[2].id);
-                        //cc.sys.localStorage.setItem('top','true');     
+                        cc.sys.localStorage.setItem('count','2');     
                     }
                         
                     
@@ -1218,7 +1224,7 @@ cc.Class({
                         player3.setPosition(0,0);
                         context.playersarray.push(player3) ;
                         cc.sys.localStorage.setItem('left',data.players[3].id);
-                        //cc.sys.localStorage.setItem('left','true');          
+                        cc.sys.localStorage.setItem('count','3');          
                     }     
                 }
             }else if(mytime == 2){
@@ -1230,7 +1236,7 @@ cc.Class({
                     player.setPosition(0,0);
                     context.playersarray.push(player) ;
                     cc.sys.localStorage.setItem('left',data.players[0].id);
-                    //cc.sys.localStorage.setItem('left','true');                          
+                    cc.sys.localStorage.setItem('count','3');                          
                 }
                     
                 
@@ -1242,7 +1248,7 @@ cc.Class({
                     player0.parent = context.root();
                     playerscript0.init(data.players[1] , 0 , 'current');                
                     cc.sys.localStorage.setItem('current',data.players[1].id);
-                    //cc.sys.localStorage.setItem('current','true');                          
+                    cc.sys.localStorage.setItem('count','0');                          
                     
                 }
                     
@@ -1256,7 +1262,7 @@ cc.Class({
                         player2.setPosition(0,0);
                         context.playersarray.push(player2) ;
                         cc.sys.localStorage.setItem('right',data.players[2].id);
-                        //cc.sys.localStorage.setItem('right','true');                          
+                        cc.sys.localStorage.setItem('count','1');                          
                         
                     }                    
                     
@@ -1270,7 +1276,7 @@ cc.Class({
                         player2.setPosition(0,0);
                         context.playersarray.push(player2) ;
                         cc.sys.localStorage.setItem('right',data.players[2].id);
-                        //cc.sys.localStorage.setItem('right','true');                          
+                        cc.sys.localStorage.setItem('count','1');                          
                         
                     }                    
                     
@@ -1282,7 +1288,7 @@ cc.Class({
                         player3.setPosition(0,0);
                         context.playersarray.push(player3) ;
                         cc.sys.localStorage.setItem('top',data.players[3].id);
-                        //cc.sys.localStorage.setItem('top','true');                          
+                        cc.sys.localStorage.setItem('count','2');                          
                         
                     }
                         
@@ -1298,7 +1304,7 @@ cc.Class({
                     player.setPosition(0,0);
                     context.playersarray.push(player) ;
                     cc.sys.localStorage.setItem('top',data.players[0].id);
-                    //cc.sys.localStorage.setItem('top','true');                          
+                    cc.sys.localStorage.setItem('count','2');                          
                     
                 }
                     
@@ -1311,7 +1317,7 @@ cc.Class({
                     player2.setPosition(0,0);
                     context.playersarray.push(player2) ;
                     cc.sys.localStorage.setItem('left',data.players[1].id);
-                    //cc.sys.localStorage.setItem('left','true');                          
+                    cc.sys.localStorage.setItem('count','3');                          
                     
                 }
                     
@@ -1325,7 +1331,7 @@ cc.Class({
                     player0.parent = context.root();
                     playerscript0.init(data.players[2] , 0 , 'current');  
                     cc.sys.localStorage.setItem('current',data.players[2].id);                
-                    //cc.sys.localStorage.setItem('current','true');                          
+                    cc.sys.localStorage.setItem('count','0');                          
                     
                 }
                     
@@ -1339,7 +1345,7 @@ cc.Class({
                         player3.setPosition(0,0);
                         context.playersarray.push(player3) ;
                         cc.sys.localStorage.setItem('right',data.players[3].id);
-                        //cc.sys.localStorage.setItem('right','true');                          
+                        cc.sys.localStorage.setItem('count','1');                          
                         
                     }
                         
@@ -1354,7 +1360,7 @@ cc.Class({
                     player.setPosition(0,0);
                     context.playersarray.push(player) ;
                     cc.sys.localStorage.setItem('right',data.players[0].id);
-                    //cc.sys.localStorage.setItem('right','true');                          
+                    cc.sys.localStorage.setItem('count','1');                          
                     
                 }
     
@@ -1368,7 +1374,7 @@ cc.Class({
                     player2.setPosition(0,0);
                     context.playersarray.push(player2) ;
                     cc.sys.localStorage.setItem('top',data.players[1].id);
-                    //cc.sys.localStorage.setItem('top','true');                          
+                    cc.sys.localStorage.setItem('count','2');                          
                     
                 }
                     
@@ -1381,7 +1387,7 @@ cc.Class({
                     player3.setPosition(0,0);
                     context.playersarray.push(player3) ;
                     cc.sys.localStorage.setItem('left',data.players[2].id);
-                    //cc.sys.localStorage.setItem('left','true');                          
+                    cc.sys.localStorage.setItem('count','3');                          
                     
                 }
                     
@@ -1394,7 +1400,7 @@ cc.Class({
                     player0.parent = context.root();
                     playerscript0.init(data.players[3] , 0 , 'current');                
                     cc.sys.localStorage.setItem('current',data.players[3].id);
-                    //cc.sys.localStorage.setItem('current','true');                          
+                    cc.sys.localStorage.setItem('count','0');                          
                     
                 }                
                 
@@ -1466,6 +1472,7 @@ cc.Class({
             context.dans = data["dans"]?data["dans"]:[];
             
             if(data.deal == true){  //发牌的动作
+                console.log('=-=-=-=-=-=-=-=');
                 // let desk_script = context.actionnode_two.getComponent("DeskCards") ;
                 // desk_script.init(data.card);
                 for(var inx = 0 ; inx < context.actionnode_two_list.children.length ; inx++){
@@ -1500,7 +1507,9 @@ cc.Class({
                
                 var action = cc.moveTo(0.1,940 - count*285,-100);
                 //context.actionnode_two.active = true;
-                context.actionnode_two.runAction(action);
+                console.log('=-=-=-=-=-=-=-=');                
+                context.actionnode_two.x=(940 - count*285);
+                //context.actionnode_two.runAction(action);
                 console.log(context.actionnode_two);
                 //context.actionnode_deal.active = true ;
 
@@ -1544,7 +1553,8 @@ cc.Class({
                 
                 var action = cc.moveTo(0.1,940 - count*285,-100);
                 console.log(940 - count*85);
-                context.actionnode_two.runAction(action);
+                context.actionnode_two.x=(940 - count*285);                
+                //context.actionnode_two.runAction(action);
                 console.log(context.actionnode_two);
                 // let ani = context.actionnode_two.getComponent(cc.Animation);
                 // ani.play("majiang_action") ;
@@ -1813,9 +1823,9 @@ cc.Class({
         //this.statusbtn.active = true ;
         //ljh改  神牌
         if(data.player.power){
-            cc.find('Canvas/global/main/godcard/child').children[0].active =true;
+            cc.find('Canvas/global/main/godcard').children[1].active =true;
             if(data.player.powerCard&&data.player.powerCard.length>0){
-                cc.find('Canvas/global/main/godcard/child').children[1].destroy();
+                cc.find('Canvas/global/main/godcard/child').children[0].destroy();
                 for(let i= 0 ; i<data.player.powerCard.length;i++){
                     var laiziZM = cc.instantiate(context.ZM);
                     laiziZM.parent = context.godcard.children[0];
@@ -2338,7 +2348,6 @@ cc.Class({
     },
     exchange_searchlight:function(direction , context){
         cc.sys.localStorage.removeItem('cl');      
-        context.shouOperationMune();
         context = cc.find('Canvas').getComponent('MajiangDataBind');
         for(var inx = 0 ; inx<context.searchlight.children.length ; inx++){
             if(direction == context.searchlight.children[inx].name){
@@ -2392,7 +2401,7 @@ cc.Class({
             for(var i = 0 ; i < params.length;i++ ){
                 var b = cc.instantiate(context.card4);
                 b.getComponent('operation').setAction({'name':event,'params':params[i]});
-                b.width = 47*(params[i].length);
+                //b.width = 47*(params[i].length);
                 b.parent = context.dan_childrend;
                 for(var j = 0 ; j< params[i].length; j++){
                     var a = cc.instantiate(context.mjUnit);
@@ -2608,19 +2617,21 @@ cc.Class({
                         var cardUnit = dans[j] ; 
                         
                         if(dans.length ==3 &&type=='wind'){
-                            if ( parseInt((card%36)/4 ) == parseInt(((cardUnit.getComponent("DanAction").value)%36)/4) ){   
-                                resNode = cards ;
-                                cardNum = j;
-                                break;
-                                //如果没有按 杠处理
-                            }else{
+                            isGang =true;
+                            for(let h = 0 ; h< dans.length;h++){
+                                let cardUnit = dans[h]
+                                if ( parseInt(card/4 ) == cardUnit.getComponent("DanAction").cardcolors ){
+                                    isGang = false;
+                                    resNode = cards;
+                                    cardNum = h;
+                                    break;              
+                                }
                                 resNode = cards;
-                                isGang =true ;
-                                cardNum = j;
-                                
+                                cardNum = h;
                             }
+                            break;  
                         }else if(card <0&&(type=='wind'||type =='xi')){
-                            if ( parseInt((card%36)/4 ) == parseInt(((cardUnit.getComponent("DanAction").value)%36)/4) ){   
+                            if ( parseInt(card/4 ) == parseInt(cardUnit.getComponent("DanAction").value/4) ){   
                                 resNode = cards ;
                                 cardNum = j;
                                 break;
@@ -2689,7 +2700,8 @@ cc.Class({
     },
     shouOperationMune: function(){
         var action = cc.moveTo(0.5,1122,-100);
-        this.actionnode_two.runAction(action);
+        this.actionnode_two.x=1122;
+        //this.actionnode_two.runAction(action);
         //this.actionnode_two.active = false;
         
     },

@@ -89,7 +89,9 @@ cc.Class({
         // }
         this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
         if(cc.sys.localStorage.getItem('cl')!='true'){
-            this.jiantou.active = true;
+            if(this.jiantou){
+                this.jiantou.active = true;                
+            }
         }
        
     },
