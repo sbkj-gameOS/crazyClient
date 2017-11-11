@@ -109,9 +109,10 @@ cc.Class({
    },
    //开始录音
    touchstartClick: function (event) {
-        this.START = new Date().getTime();
+        var share = cc.find("Canvas/script/ShareWx").getComponent("ShareWx") ;
+        share.START = new Date().getTime();
 
-        this.recordTimer = setTimeout(function(){
+        share.recordTimer = setTimeout(function(){
             wx.startRecord({
                 success: function(){
                     localStorage.rainAllowRecord = 'true';
@@ -124,7 +125,8 @@ cc.Class({
     },
     //停止录音
     touchendClick: function (event) {
-        this.END = new Date().getTime();
+        var share = cc.find("Canvas/script/ShareWx").getComponent("ShareWx") ;
+        share.END = new Date().getTime();
         wx.stopRecord({
           success: function (res) {
             //录音上传到微信服务器
@@ -133,19 +135,19 @@ cc.Class({
                 isShowProgressTips: 1, // 默认为1，显示进度提示
                 success: function (res) {
                     //复制微信服务器返回录音id
-                    let socket = selfs.socket();
+                    let socket = share.socket();
                     socket.emit('sayOnSound',JSON.stringify({
-                        userid : cc.beimi.userid,
+                        userid : cc.beimi.user.id,
                         serverId : res.serverId,
-                        start : selfs.START,
-                        end : selfs.END
-                    }))
+                        start : share.START,
+                        end : share.END
+                    })) ;
                     //cc.beimi.serverId = res.serverId;
                 }
             });
           },
           fail: function (res) {
-              console.log(selfs);
+              console.log(share);
             //alert(JSON.stringify(res));
           }
         });

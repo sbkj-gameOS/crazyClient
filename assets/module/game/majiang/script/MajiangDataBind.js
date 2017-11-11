@@ -300,7 +300,6 @@ cc.Class({
             this.map("isOver" , this.isOver_event);
             this.map("over" , this.over_event);
             this.map("unOver" , this.unOver_event);
-            this.map('talk',this.talk_event);
             //this.doSomethingBH({action:'buhua'},this);
             socket.on("command" , function(result){
                 var data = self.getSelf().parse(result) ;
@@ -320,6 +319,9 @@ cc.Class({
                  * 处理 Players
                  */
                 self.getSelf().route("players")(data, self);
+            });
+            socket.on("talkOnSay" , function(result){
+                self.talk_event(result,null) ;
             });
         }
         cc.beimi.socket.on("disconnect" , function(){
@@ -2710,11 +2712,13 @@ cc.Class({
         return self;
     },
     talk_event:function(data,context){
-        let time = new Date(data.end - data.start).getSeconds();
-        let player = context.player(data.userid , context);
+        var mj = cc.find('Canvas').getComponent('MajiangDataBind');
+        var datas = JSON.parse(data) ;
+        let time = new Date(datas.end - datas.start).getSeconds();
+        let player = mj.player(datas.userid , mj);
         //下载语音
         wx.downloadVoice({
-            serverId: data.serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
+            serverId: datas.serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
             isShowProgressTips: 1, // 默认为1，显示进度提示
             success: function (res) {
                 wx.playVoice({
