@@ -1359,7 +1359,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 44
@@ -1512,7 +1512,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 48
@@ -1538,8 +1538,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 535,
-      "height": 180
+      "width": 540,
+      "height": 149
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1547,8 +1547,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 273
+      "x": 3,
+      "y": 289
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1569,7 +1569,7 @@
       "__uuid__": "7550c091-9ca9-4963-9573-55e3f4b602d4"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -1605,7 +1605,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 51
@@ -1631,8 +1631,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 539,
-      "height": 180
+      "width": 544,
+      "height": 149
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1640,8 +1640,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 273
+      "x": 3,
+      "y": 291
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1662,7 +1662,7 @@
       "__uuid__": "f006c76e-56a9-4970-be96-52312916ea9b"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -1698,7 +1698,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 54
@@ -1724,8 +1724,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 535,
-      "height": 180
+      "width": 540,
+      "height": 149
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1733,8 +1733,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 273
+      "x": 3,
+      "y": 291
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1755,7 +1755,7 @@
       "__uuid__": "325d53c3-cdb8-4b43-bc9c-64dd0e951542"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",

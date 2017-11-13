@@ -14,7 +14,10 @@ cc.Class({
         // ...
         list: cc.Prefab,
         layout:cc.Node,
-        action:{default :null}
+        action:{default :null},
+        win:cc.Node,
+        lose:cc.Node,
+        liuju:cc.Node,
     },
 
     // use this for initialization
@@ -26,10 +29,20 @@ cc.Class({
         var userInfo = this.data;
         console.log(userInfo);
         if(userInfo.playOvers){
+            let win = false;
+            let lose = false;
+            let liuju;
+            let count = 0;
             for(let i = 0 ; i< userInfo.playOvers.length; i++){
                 var list = cc.instantiate(this.list);
                 list.getComponent('EndCards').setData(userInfo.playOvers[i]);
                 list.parent = this.layout;   
+                if(userInfo.playOvers[i].win ==false){
+                    count = count +1;
+                }
+            }
+            if(count == 4){
+                this.liuju.active =true;
             }
         }
         

@@ -973,14 +973,14 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "New Label",
+    "_name": "结算-winner",
     "_objFlags": 0,
     "_parent": {
       "__id__": 29
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 31
@@ -990,12 +990,12 @@
       "__id__": 32
     },
     "_id": "",
-    "_opacity": 150,
+    "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 248,
-      "g": 8,
-      "b": 8,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -1006,8 +1006,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
-      "height": 80
+      "width": 91,
+      "height": 68
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1015,8 +1015,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 388,
-      "y": 9
+      "x": 500,
+      "y": 3
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1026,26 +1026,32 @@
     "groupIndex": 0
   },
   {
-    "__type__": "cc.Label",
+    "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 30
     },
     "_enabled": true,
-    "_useOriginalSize": false,
-    "_actualFontSize": 60,
-    "_fontSize": 60,
-    "_lineHeight": 80,
-    "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
-    "_spacingX": 0,
-    "_N$string": "",
-    "_N$horizontalAlign": 1,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 0
+    "_spriteFrame": {
+      "__uuid__": "41d9ac8b-b65b-4be4-801b-ab1cdfe48f92"
+    },
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_atlas": {
+      "__uuid__": "79938bea-34a0-4ab7-8cdb-4ec11ac6ad4b"
+    }
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1055,7 +1061,7 @@
     "asset": {
       "__uuid__": "75378f1a-4707-4781-84db-4e5f23b5ae44"
     },
-    "fileId": "99lc0HdB9EqJlyRIy/FS1U",
+    "fileId": "97SqMrTpJOwo1+wDji4stP",
     "sync": false
   },
   {
@@ -1130,7 +1136,7 @@
       "__uuid__": "1912418a-eb7a-4296-b940-dac207d884b0"
     },
     "win": {
-      "__id__": 31
+      "__id__": 30
     }
   },
   {

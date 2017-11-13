@@ -110,6 +110,7 @@ cc.Class({
    //开始录音
    touchstartClick: function (event) {
         var share = cc.find("Canvas/script/ShareWx").getComponent("ShareWx") ;
+        cc.find('Canvas/录音/发送语音2').active =true;
         share.START = new Date().getTime();
 
         share.recordTimer = setTimeout(function(){
@@ -126,6 +127,7 @@ cc.Class({
     //停止录音
     touchendClick: function (event) {
         var share = cc.find("Canvas/script/ShareWx").getComponent("ShareWx") ;
+        cc.find('Canvas/录音/发送语音2').active =false;
         share.END = new Date().getTime();
         wx.stopRecord({
           success: function (res) {
@@ -148,6 +150,10 @@ cc.Class({
           },
           fail: function (res) {
               console.log(share);
+              cc.find('Canvas/录音/发送语音1').active =true;
+              setTimeout(function(){
+                cc.find('Canvas/录音/发送语音2').active =false;                
+              },1000);
             //alert(JSON.stringify(res));
           }
         });

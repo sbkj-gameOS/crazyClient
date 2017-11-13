@@ -11,7 +11,7 @@ cc.Class({
         mjkong:cc.Node,
         jifan:cc.Label,
         card:cc.Prefab,
-        win:cc.Label,
+        win:cc.Node,
     },
     
     // use this for initialization
@@ -39,7 +39,7 @@ cc.Class({
         this.jifan.string = this.data.jifan;
         if(this.data.win ==true){
             this.mjloyad2.active = true;
-            this.win.string = '赢！';
+            this.win.active = true;
         }
         
         for(let i = 0;i<this.data.actions.length;i++){
@@ -74,23 +74,26 @@ cc.Class({
                     }
                     for(let j=3 ; j<action.length;j++){
                         let card = action[j];   
+                        let jia =true;
                         for(let h=0 ;h<kong.children.length;h++){
                             let kcard = kong.children[h];
                             let b = kcard.getComponent('DanAction');
                             if((card < 0 && parseInt(card/4 ) == b.cardcolors)||(card>0&&parseInt((card%36)/4 ) == parseInt(((b.value)%36)/4)&&b.cardtype==parseInt(card/36))){              
                                 b.count.string = Number(Number(b.count.string)+1);
                                 b.count.node.active=true;
+                                jia = false;
                                 break;
-                            }else{
-                                let card =cc.instantiate(this.card);    
-                                let b = card.getComponent('DanAction');  
-                                var c = action[j];                        
-                                b.init(c,false,'');
-                                b.target.height = 53;
-                                b.target.width= 32;
-                                card.parent = kong;  
                             }
-                        }    
+                        }
+                        if(jia){
+                            let card =cc.instantiate(this.card);    
+                            let b = card.getComponent('DanAction');  
+                            var c = action[j];                        
+                            b.init(c,false,'');
+                            b.target.height = 53;
+                            b.target.width= 32;
+                            card.parent = kong;   
+                        }     
                     }
                 }else{
                     for(let j=0;j<action.length;j++){
