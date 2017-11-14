@@ -63,7 +63,7 @@ cc.Class({
         }
         selectlastToggle = toggle;
         var parm = {
-    		token:'12d622d439d747a495204e995f431f7e',//12d622d439d747a495204e995f431f7e
+    		token:cc.beimi.authorization,//12d622d439d747a495204e995f431f7e
     		gameType:gameType,
     		page:1,
     		limit:10
