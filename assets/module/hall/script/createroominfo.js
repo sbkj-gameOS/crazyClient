@@ -94,6 +94,9 @@ cc.Class({
             if(data.cardNum){
                 cc.beimi.cardNum = data.cardNum;
             }
+            if(data.maxRound){
+                cc.beimi.maxRound = data.maxRound;
+            }
             cc.director.loadScene("majiang");
         }else{
             object.notice.getComponent('cc.Label').string ='请求失败';

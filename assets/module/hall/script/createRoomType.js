@@ -224,6 +224,9 @@ cc.Class({
     sucess: function(result,object){
         var data = JSON.parse(result);
         if(data.room&&data.playway){
+            if(data.maxRound){
+                cc.beimi.maxRound = data.maxRound;
+            }
             cc.beimi.room = data.room;
             cc.beimi.playway = data.playway;
             cc.beimi.playType = 'longgang';

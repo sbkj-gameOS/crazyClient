@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "550ee707-b9c9-48f9-b51d-4cb4560ceaf0",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "宝牌_底部": {
+      "ver": "1.0.3",
+      "uuid": "05ecbf06-bd3b-40d2-8579-53e7862f4779",
+      "rawTextureUuid": "550ee707-b9c9-48f9-b51d-4cb4560ceaf0",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 150,
+      "height": 150,
+      "rawWidth": 150,
+      "rawHeight": 150,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

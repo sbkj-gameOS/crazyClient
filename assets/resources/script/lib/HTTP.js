@@ -16,10 +16,13 @@ var HTTP = cc.Class({
     },
 
         statics: {//127.0.0.1:8188 192.168.0.101
-        baseURL:"http://game.bizpartner.cn",
-        wsURL : "http://game.bizpartner.cn:9081",
-        authorization: null,
-        httpGet: function (url , success , error , object) {
+            // baseURL:"http://192.168.0.:8081",
+            // wsURL : "http://192.168.199.241:9082",
+            
+            baseURL:"http://game.bizpartner.cn:8081",
+            wsURL : "http://game.bizpartner.cn:9081",
+            authorization: null,
+            httpGet: function (url , success , error , object) {
             var xhr = cc.loader.getXMLHttpRequest();
             
             xhr.onreadystatechange = function () {

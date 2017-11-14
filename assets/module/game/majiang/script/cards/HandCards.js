@@ -92,9 +92,11 @@ cc.Class({
         // }
         this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
        
-        if(cc.beimi.cardNum == 16&&!pd){        
+        if(cc.beimi.cardNum == 17&&!pd){        
             this.cardvalue.width = 61;
             this.target.width=59;
+            this.cardvalue.height = 85;
+            this.cardvalue.y =this.cardvalue.y-18;
         }else if(!pd){
             this.target.width = 73;
         }

@@ -134,6 +134,9 @@ cc.Class({
             if(data.cardNum){
                 cc.beimi.cardNum = data.cardNum;
             }
+            if(data.maxRound){
+                cc.beimi.maxRound = data.maxRound;
+            }
             cc.director.preloadScene('majiang',function(){
                 cc.director.loadScene('majiang');
             });

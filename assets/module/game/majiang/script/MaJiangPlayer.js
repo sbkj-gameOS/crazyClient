@@ -68,6 +68,7 @@ cc.Class({
         }
         this.username.string = playerdata.username ;
         this.goldcoins.string = playerdata.goldcoins ;
+        
     },
     banker:function(){
         this.creator.active = true ;

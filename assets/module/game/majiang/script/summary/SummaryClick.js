@@ -13,11 +13,18 @@ cc.Class({
         // },
         // ...
         list: cc.Prefab,
+        endlist: cc.Prefab,
         layout:cc.Node,
+        layout2:cc.Node,        
         action:{default :null},
         win:cc.Node,
         lose:cc.Node,
         liuju:cc.Node,
+        bp:cc.Prefab,
+        bpb:cc.Prefab,
+        bpp:cc.Node,
+        num: cc.Label,
+        dabaopai:cc.Node
     },
 
     // use this for initialization
@@ -27,7 +34,19 @@ cc.Class({
     },
     init:function(){
         var userInfo = this.data;
+        this.dabaopai.active = true;
         console.log(userInfo);
+        let card,baopai;
+        if(cc.beimi.baopai){
+            card = cc.instantiate(this.bp);
+            baopai  = card.getComponent('DeskCards');    
+            baopai.init(cc.beimi.baopai,'B');
+            card.parent = this.bpp;    
+        }else{
+            card = cc.instantiate(this.bpb);
+            card.parent = this.bpp;
+        }
+        this.num.string = cc.find('Canvas').getComponent('MajiangDataBind').desk_cards.string;
         if(userInfo.playOvers){
             let win = false;
             let lose = false;
@@ -40,19 +59,43 @@ cc.Class({
                 if(userInfo.playOvers[i].win ==false){
                     count = count +1;
                 }
+                if(userInfo.playOvers[i].user == cc.beimi.user.id){
+                    if(userInfo.playOvers[i].win ==true){
+                        this.win.active =true;
+                    }else if(userInfo.playOvers[i]<0){
+                        this.lose.active =true;
+                    }  
+                }
             }
             if(count == 4){
                 this.liuju.active =true;
+                this.lose.active = false;
             }
         }
         
-    },    /**
+    },   
+    init2: function(){
+        var userInfo = this.data;
+        console.log(userInfo);
+        if(userInfo.playOvers){
+            let win = false;
+            let lose = false;
+            let liuju;
+            let count = 0;
+            for(let i = 0 ; i< userInfo.playOvers.length; i++){
+                var list = cc.instantiate(this.endlist);
+                list.getComponent('endUserInfo').setData(userInfo.playOvers[i]);
+                list.parent = this.layout2;   
+             }
+        }
+    },
+    /**
      * 结算页面上的 背景的 点击事件，主要是用于事件拦截，禁用冒泡
      * @param event
      */
     onBGClick:function(event){
-        //var myAction = event.target.getComponent('SummartClick').action ;
-       // oper.setUserData(myAction) ;
+       
+       //后期这里加个判定  当 数小于开局设定局数时 发射这个事件  当局数满了 发送游戏结束的事件，并且退出房间。
         this.node.dispatchEvent(new cc.Event.EventCustom('restar', true));
     },
     /**
@@ -64,8 +107,11 @@ cc.Class({
     setData: function(data){
         this.data = data;
         this.init();
+    },
+    setDataEnd: function(data){
+        this.data = data;
+        this.init2();
     }
-
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 

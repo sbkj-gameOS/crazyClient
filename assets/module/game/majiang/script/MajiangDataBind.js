@@ -4,6 +4,10 @@ cc.Class({
     extends: beiMiCommon,
     //extends: cc.Component,
     properties: {
+        //总局数和当前局数和玩法
+        totaljs:cc.Label,
+        wanfa:cc.Label,
+
         duankai: cc.Node,
         duankai2: cc.Node,
         gameSettingClick: cc.Prefab,
@@ -186,8 +190,8 @@ cc.Class({
      * 重构后，只有两个消息类型
      */
     onLoad: function () {
-        //cc.beimi.cardNum = 17;
-        //cc.beimi.playerNum = 2;
+        // cc.beimi.cardNum = 17;
+        // cc.beimi.playerNum = 2;
         this.connect();
         cc.sys.localStorage.removeItem('dis');        
         //ljh追加 房号的显示
@@ -196,6 +200,12 @@ cc.Class({
         }else{
             this.room_num.parent.active =false;
         };
+        this.maxRound = 0;
+        if(cc.beimi.maxRound){
+            this.maxRound = cc.beimi.maxRound;
+        }
+        this.totaljs.string = '圈数  '+this.maxRound;
+        
         this.routes = {} ;
         this.selectfather.active =false; 
         /**
@@ -291,6 +301,7 @@ cc.Class({
             this.map("isOver" , this.isOver_event);
             this.map("over" , this.over_event);
             this.map("unOver" , this.unOver_event);
+            this.map("gameOver",this.gameOver_event);
             //this.doSomethingBH({action:'buhua'},this);
             socket.on("command" , function(result){
                 var data = self.getSelf().parse(result) ;
@@ -653,6 +664,8 @@ cc.Class({
         }
     },
     over_event: function(){
+        cc.beimi.maxRound =null;
+        cc.beimi.op =null;
         cc.beimi.playerNum = null;
         cc.beimi.room=null;
         cc.beimi.cardNum = null;
@@ -962,6 +975,7 @@ cc.Class({
                     laiziZM.parent = context.godcard.children[1];
                     var LZH  = laiziZM.getComponent('DeskCards');
                     LZH.init(data.powerCard[i],'B');
+                    cc.beimi.baopai = data.powerCard[i];
                 }
             }else{
                 var laiziFM = cc.instantiate(context.FM);
@@ -982,6 +996,11 @@ cc.Class({
         let temp = cc.instantiate(context.summary) ;
         temp.parent = context.root() ;
         temp.getComponent('SummaryClick').setData(data); 
+    },
+    gameOver_event: function(data,context){
+        let temp = cc.instantiate(context.summary) ;
+        temp.parent = context.root() ;
+        temp.getComponent('SummaryClick').setDataEnd(data); 
     },
     /**
      * 恢复牌局数据， 等待服务端推送 Players数据后进行恢复
@@ -1132,22 +1151,22 @@ cc.Class({
                 var count = 0;
                 if(data.gang){
                     gang.active = true ;
-                    gang.x = - 250 + count * 100 ;
+                    gang.x = - 250 + count * 120 ;
                     count++;
                 }
                 if(data.dan){
                     dan.active = true ;
-                    dan.x = - 250 + count * 100 ;
+                    dan.x = - 250 + count * 120 ;
                     count++;
                 }
                 if(data.ting){
                     ting.active = true ;
-                    ting.x = - 250 + count * 100 ;
+                    ting.x = - 250 + count * 120 ;
                     count++;
                 }
                 if(data.hu){
                     hu.active = true ;
-                    hu.x = - 250 + count * 100 ;
+                    hu.x = - 250 + count * 120 ;
                     count++;
                 }
                
@@ -1173,27 +1192,27 @@ cc.Class({
                 var count = 0;
                 if(data.gang){
                     gang.active = true ;
-                    gang.x = - 250 + count * 100
+                    gang.x = - 250 + count * 120
                     count++;
                 }
                 if(data.peng){
                     peng.active = true ;
-                    peng.x = - 250 + count * 100
+                    peng.x = - 250 + count * 120
                     count++;
                 }
                 if(data.chi){
                     chi.active = true ;
-                    chi.x = - 250 + count * 100
+                    chi.x = - 250 + count * 120
                     count++;
                 }
                 if(data.hu){
                     hu.active = true ;
-                    hu.x = - 250 + count * 100
+                    hu.x = - 250 + count * 120
                     count++;
                 }
                 if(data.deal == false){
                     guo.active = true ;
-                    guo.x = - 250 + count * 100
+                    guo.x = - 250 + count * 120
                     count++;
                 }  
                 var action = cc.moveTo(0.1,940 - count*285,-100);
@@ -1312,6 +1331,10 @@ cc.Class({
      * @param context
      */
     play_event:function(data , context){
+        cc.beimi.baopai = null;
+        context.totaljs.string = '局数  '+(data.round+1) +'/'+context.maxRound;
+        context.wanfa.string = data.op;
+        //cc.beimi.op = data.op;
         context = cc.find('Canvas').getComponent('MajiangDataBind');   
         context.readyNoActive(context);   
         /**
@@ -2117,8 +2140,7 @@ cc.Class({
             }else{
                 cardParent = cc.instantiate(context.one_card_panel) ;
             }
-            for(let i = 0 ; i< cards.length;i++){
-                
+            for(let i = 0 ; i< cards.length;i++){               
                 if(fangwei == 'top'){
                     var card = cc.instantiate(context.dan_topcurrent);
                 }else if(fangwei == 'left'){
@@ -2126,26 +2148,22 @@ cc.Class({
                 }else if(fangwei == 'right'){
                     var card = cc.instantiate(context.dan_rightcurrent);
                 }else{
-                    var card = cc.instantiate(context.dan_mycurrent);
-                   
-                }
-                
-                
+                    var card = cc.instantiate(context.dan_mycurrent);             
+                }          
                 var temp = card.getComponent('DanAction');
                 if ( i == 2 && back == true ) {
                     temp.init(cards[i],false,fangwei);
                 } else {
                     temp.init(cards[i],back,fangwei);
                 }
-                if(71<cards[i]&&cards[i]<76){
-                    
+                if(71<cards[i]&&cards[i]<76){                  
                     card.zIndex =9999;
                 }else {
                     card.zIndex =0;
                 }
                 card.parent = cardParent;
-                cardParent.sortAllChildren();
-                
+                //马上进行排序如果不这个方法 会在所有方法执行完后再排序。
+                cardParent.sortAllChildren();               
                 //cardParent.sortAllChildren ( )         
             }
             cardParent.getComponent('Kongcards').init(action);
@@ -2318,14 +2336,14 @@ cc.Class({
         context.top_ready.active = false;
         context.current_ready.active =false;  
     },
-    dosomething: function (data , context){
+    dosomething: function (context){
+        context.gameOver_event({playOvers:[{huCount:1,dianCount:2,touchBao:3,bankerCount:4,pointCount:5},{huCount:1,dianCount:2,touchBao:3,bankerCount:4,pointCount:5},{huCount:1,dianCount:2,touchBao:3,bankerCount:4,pointCount:5},{huCount:1,dianCount:2,touchBao:3,bankerCount:4,pointCount:5}]},context)
         // this.selectaction_event({userid:cc.beimi.user.id,cards:[45,57,13],action:'dan'},context)   
         //  this.selectaction_event({userid:cc.beimi.user.id,cards:[6,8,34],action:'dan'},context)   
         //  this.cardModle([11,12,13,14],cc.find('Canvas/content/handcards/leftdesk/kong'),true,'left',context)
         //  this.cardModle([11,12,13,14],cc.find('Canvas/content/handcards/leftdesk/kong'),true,'left',context)
         //  this.cardModle([11,12,13,14],cc.find('Canvas/content/handcards/rightdesk/kong'),true,'right',context)
-         this.cardModle([-8,-9,-10],cc.find('Canvas/content/handcards/deskcard/kong'),false,'',context,'peng')
-        
+        //  this.cardModle([-8,-9,-10],cc.find('Canvas/content/handcards/deskcard/kong'),false,'',context,'peng')
     },
     dosomethings: function (data , context){
         this.selectaction_event({userid:cc.beimi.user.id,cards:[-11],card:-1,action:'gang'},context)  

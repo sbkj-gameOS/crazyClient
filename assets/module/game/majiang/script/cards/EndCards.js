@@ -12,6 +12,7 @@ cc.Class({
         jifan:cc.Label,
         card:cc.Prefab,
         win:cc.Node,
+        hu: cc.Label
     },
     
     // use this for initialization
@@ -19,12 +20,31 @@ cc.Class({
       
     },
     init: function(){
+        this.jifan.string = '';
+        this.hu.string='';
+        let dan = [];
+        let dan2= [];
+        let headimg;
+        let units = this.data.gang.units;
+        let units2;
+        if(this.data.balance){
+            units2 = this.data.balance.units;    
+        }
+        
+        let player = cc.find('Canvas').getComponent('MajiangDataBind').playersarray;
         var cardsss = this.decode(this.data.cards);
         function sortNumber(a,b){return a - b}
         cardsss.sort(sortNumber);
-        console.log(cardsss);
-        if(this.data.headimgurl){
-            var imgurl = playerdata.headimgurl;
+        
+        for(let i=0;i<player.length;i++){
+            let pl = player[i].getComponent('MaJiangPlayer');
+            if(pl.data.id == this.data.user){
+                headimg = pl.data.headimgurl;
+                this.peoname.string = pl.data.username;
+            }
+        }
+        if(headimg){
+            var imgurl = headimg;
             var sprite = this.headimg.getComponent(cc.Sprite);
             var head = this.headimg;
             cc.loader.load({url:imgurl,type:'jpg'},function(suc,texture){
@@ -33,13 +53,36 @@ cc.Class({
                 head.height = 64;
             });
         }
-        this.peoname.string = this.data.name;
-        console.log(this.data.name);
         this.count.string= this.data.count;
-        this.jifan.string = this.data.jifan;
         if(this.data.win ==true){
             this.mjloyad2.active = true;
             this.win.active = true;
+        }
+
+        for(let i ;i< units.length;i++){
+            if(units[i].point>0){
+                dan.push(units[i]);
+            }
+        }
+        if(units2!=null){
+            for(let i ;i< units2.length;i++){
+                if(units2[i].point>0){
+                    dan2.push(units2[i]);
+                }
+            }
+            for(let i ;i<dan2.length;i++){
+                let tip = dan2[i].tip;
+                let point = dan2[i].point;
+                this.hu.string +=  tip +':';
+                this.hu.string +=  point +'  ';
+            }
+        }
+        
+        for(let i ;i<dan.length;i++){
+            let tip = dan[i].tip;
+            let point = dan[i].point;
+            this.jifan.string +=  tip +':';
+            this.jifan.string +=  point +'  ';
         }
         
         for(let i = 0;i<this.data.actions.length;i++){
