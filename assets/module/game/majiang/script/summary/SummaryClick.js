@@ -84,10 +84,23 @@ cc.Class({
             let count = 0;
             for(let i = 0 ; i< userInfo.playOvers.length; i++){
                 var list = cc.instantiate(this.endlist);
-                list.getComponent('endUserInfo').setData(userInfo.playOvers[i]);
+                var dayingjia = this.dayingjia('pointCount',i);
+                var paoshou = this.dayingjia('dianCount',i);
+                list.getComponent('endUserInfo').setData(userInfo.playOvers[i],dayingjia,paoshou);
                 list.parent = this.layout2;   
              }
         }
+    },
+    dayingjia: function(counts,inx){
+        let zhen = true;
+        let count = this.data.playOvers[inx][counts];
+        for(let i = 0;i < this.data.playOvers.length;i++){
+            if(i!=inx && this.data.playOvers[i][counts] > count){
+                zhen = false;
+                break;
+            }
+        }
+        return zhen;
     },
     /**
      * 结算页面上的 背景的 点击事件，主要是用于事件拦截，禁用冒泡

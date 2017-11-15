@@ -730,9 +730,9 @@ cc.Class({
                                 on_off_line.active = false;
                                 headimg.color = new cc.Color(255, 255, 255);
                             }
-                            if(context.desk_cards.string!='136'){
-                                context.readyNoActive(context);
-                            }
+                            // if(context.desk_cards.string!='136'){
+                            //     context.readyNoActive(context);
+                            // }
                         }
                             
                     }
@@ -812,9 +812,9 @@ cc.Class({
                                 headimg.color = new cc.Color(255, 255, 255);
                             }
                             //如果已经过了发牌阶段  则隐藏所有的准备状态
-                            if(context.desk_cards.string !='136'){
-                                context.readyNoActive(context);
-                            }
+                            // if(context.desk_cards.string !='136'){
+                            //     context.readyNoActive(context);
+                            // }
                         }    
                     }
                 }
@@ -2337,7 +2337,7 @@ cc.Class({
         context.current_ready.active =false;  
     },
     dosomething: function (context){
-        context.gameOver_event({playOvers:[{huCount:1,dianCount:2,touchBao:3,bankerCount:4,pointCount:5},{huCount:1,dianCount:2,touchBao:3,bankerCount:4,pointCount:5},{huCount:1,dianCount:2,touchBao:3,bankerCount:4,pointCount:5},{huCount:1,dianCount:2,touchBao:3,bankerCount:4,pointCount:5}]},context)
+        context.gameOver_event({playOvers:[{huCount:1,dianCount:20,touchBao:3,bankerCount:4,pointCount:15},{huCount:1,dianCount:2,touchBao:3,bankerCount:4,pointCount:-5},{huCount:1,dianCount:2,touchBao:3,bankerCount:4,pointCount:5},{huCount:1,dianCount:2,touchBao:3,bankerCount:4,pointCount:5}]},context)
         // this.selectaction_event({userid:cc.beimi.user.id,cards:[45,57,13],action:'dan'},context)   
         //  this.selectaction_event({userid:cc.beimi.user.id,cards:[6,8,34],action:'dan'},context)   
         //  this.cardModle([11,12,13,14],cc.find('Canvas/content/handcards/leftdesk/kong'),true,'left',context)

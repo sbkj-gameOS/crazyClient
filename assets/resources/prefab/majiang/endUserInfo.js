@@ -13,6 +13,8 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
+        dianpao: cc.Node,
+        dayingjia: cc.Node,
         username : cc.Label,
         myself: cc.Node,
         totalcount: cc.Label,
@@ -22,7 +24,8 @@ cc.Class({
         touchBao: cc.Label,
         bankerCount :cc.Label,
         bk:cc.Node,
-
+        yinse: cc.SpriteFrame,
+        yintiao: cc.SpriteFrame,
     },
 
     // use this for initialization
@@ -46,8 +49,21 @@ cc.Class({
             }
             if(this.data.user == cc.beimi.user.id){
                 this.myself.active = true;
-                this.bk.color = new cc.Color(213,197,197);
             }
+        }
+        if(userInfo.pointCount<0){
+            this.bk.getComponent(cc.Sprite).spriteFrame = this.yinse;
+            this.huCount.node.parent.getComponent(cc.Sprite).spriteFrame = this.yintiao;
+            this.dianCount.node.parent.getComponent(cc.Sprite).spriteFrame = this.yintiao;
+            this.touchBao.node.parent.getComponent(cc.Sprite).spriteFrame = this.yintiao;            
+            this.bankerCount.node.parent.getComponent(cc.Sprite).spriteFrame = this.yintiao;
+
+        }
+        if(this.dyj){
+            this.dayingjia.active = true;
+        }
+        if(this.dp&&!this.dyj){
+            this.dianpao.active =true;
         }
         if(headimg){
             var imgurl = headimg;
@@ -96,8 +112,10 @@ cc.Class({
     //     //this.label3.string = data.count;
     // },
  
-    setData:function(data){
+    setData:function(data,dayingjia,dianpao){
         this.data = data ; 
+        this.dyj = dayingjia;
+        this.dp = dianpao;
         this.init();
     }
     // called every frame, uncomment this function to activate update callback
