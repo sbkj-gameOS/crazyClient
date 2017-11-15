@@ -123,7 +123,7 @@ cc.Class({
                             let b = kcard.getComponent('DanAction');
                             if((card < 0 && parseInt(card/4 ) == b.cardcolors)||(card>0&&parseInt((card%36)/4 ) == parseInt(((b.value)%36)/4)&&b.cardtype==parseInt(card/36))){              
                                 b.count.string = Number(Number(b.count.string)+1);
-                                b.count.node.active=true;
+                                b.countactive();
                                 jia = false;
                                 break;
                             }

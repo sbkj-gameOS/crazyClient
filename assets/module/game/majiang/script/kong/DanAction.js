@@ -26,7 +26,8 @@ cc.Class({
             default: null,
             type: cc.Node
         },
-        MJhead: cc.Node
+        MJhead: cc.Node,
+        x:cc.Node,
     },
 
     // use this for initialization
@@ -105,6 +106,7 @@ cc.Class({
     },
     countactive:function(){
         this.count.node.active =true ; 
+        this.x.active =true;
     },
     setValue: function(values){
         this.value = values;

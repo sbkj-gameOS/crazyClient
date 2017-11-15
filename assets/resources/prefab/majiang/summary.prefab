@@ -1406,7 +1406,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 45
@@ -2283,6 +2283,9 @@
     },
     "dabaopai": {
       "__id__": 60
+    },
+    "gameend": {
+      "__id__": 44
     }
   },
   {

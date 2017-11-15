@@ -40,6 +40,9 @@ cc.Class({
     },
     JJsucess: function(result,object){
         var data = JSON.parse(result);
+        if(data.maxRound){
+            cc.beimi.maxRound = data.maxRound;
+        }
         if(data.playway){
             cc.beimi.playway = data.playway;
             cc.director.loadScene('majiang');

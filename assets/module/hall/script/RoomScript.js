@@ -190,6 +190,9 @@ cc.Class({
 			//playerNum,cardNum
         	//cc.beimi.room = result.room;
 			cc.beimi.playway = result.playway;
+			if(result.maxRound){
+                cc.beimi.maxRound = result.maxRound;
+            }
 			if(result.playerNum){
                 cc.beimi.playerNum = result.playerNum;
             }

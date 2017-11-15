@@ -24,7 +24,8 @@ cc.Class({
         bpb:cc.Prefab,
         bpp:cc.Node,
         num: cc.Label,
-        dabaopai:cc.Node
+        dabaopai:cc.Node,
+        gameend:cc.Node
     },
 
     // use this for initialization
@@ -76,26 +77,27 @@ cc.Class({
     },   
     init2: function(){
         var userInfo = this.data;
+        this.gameend.active = true;
         console.log(userInfo);
-        if(userInfo.playOvers){
+        if(userInfo.players){
             let win = false;
             let lose = false;
             let liuju;
             let count = 0;
-            for(let i = 0 ; i< userInfo.playOvers.length; i++){
+            for(let i = 0 ; i< userInfo.players.length; i++){
                 var list = cc.instantiate(this.endlist);
                 var dayingjia = this.dayingjia('pointCount',i);
                 var paoshou = this.dayingjia('dianCount',i);
-                list.getComponent('endUserInfo').setData(userInfo.playOvers[i],dayingjia,paoshou);
+                list.getComponent('endUserInfo').setData(userInfo.players[i],dayingjia,paoshou);
                 list.parent = this.layout2;   
              }
         }
     },
     dayingjia: function(counts,inx){
         let zhen = true;
-        let count = this.data.playOvers[inx][counts];
-        for(let i = 0;i < this.data.playOvers.length;i++){
-            if(i!=inx && this.data.playOvers[i][counts] > count){
+        let count = this.data.players[inx][counts];
+        for(let i = 0;i < this.data.players.length;i++){
+            if(i!=inx && this.data.players[i][counts] > count){
                 zhen = false;
                 break;
             }

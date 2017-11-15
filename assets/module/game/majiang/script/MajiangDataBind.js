@@ -447,11 +447,17 @@ cc.Class({
             }))
         });
         this.node.on('restar',function(event){
-            var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
-            var bth = cc.find('Canvas/global/main/button/readybtn');
-            context.desk_cards.string = 136;
-            bth.active =true;  
-            bth.x= -10;
+            if(cc.sys.localStorage.getItem('gameover')=='true'){
+                cc.sys.localStorage.removeItem('gameover');
+                cc.director.loadScene('gameMain');
+            }else{
+                var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
+                var bth = cc.find('Canvas/global/main/button/readybtn');
+                context.desk_cards.string = 136;
+                bth.active =true;  
+                bth.x= -10;
+            }
+            
 
             // if(context.playerspool.length>0){
             //     cc.find('Canvas/global/main/button/ready2').active =true;
@@ -832,6 +838,7 @@ cc.Class({
      */
     //掉线 和上线
     takecard_event:function(data , context){
+        context.readyNoActive(context);           
         context = cc.find('Canvas').getComponent('MajiangDataBind');
         cc.beimi.audio.playSFX('give.mp3');
         if(data.userid == cc.beimi.user.id) {
@@ -969,7 +976,9 @@ cc.Class({
         context.desk_cards.string = data.deskcards ;
         if(data.power){
             if(data.powerCard&&data.powerCard.length>0){
-                cc.find('Canvas/global/main/godcard/child').children[0].destroy();
+                for(let i=0 ; i<cc.find('Canvas/global/main/godcard/child').children.length;i++){
+                    cc.find('Canvas/global/main/godcard/child').children[i].destroy();
+                }
                 for(let i= 0 ; i<data.powerCard.length;i++){
                     var laiziZM = cc.instantiate(context.ZM);
                     laiziZM.parent = context.godcard.children[1];
@@ -996,11 +1005,13 @@ cc.Class({
         let temp = cc.instantiate(context.summary) ;
         temp.parent = context.root() ;
         temp.getComponent('SummaryClick').setData(data); 
+        temp.zIndex = 999;
     },
     gameOver_event: function(data,context){
         let temp = cc.instantiate(context.summary) ;
         temp.parent = context.root() ;
         temp.getComponent('SummaryClick').setDataEnd(data); 
+        cc.sys.localStorage.setItem('gameover','true');
     },
     /**
      * 恢复牌局数据， 等待服务端推送 Players数据后进行恢复
@@ -2122,8 +2133,7 @@ cc.Class({
             temp.init(cards[i],false,fangwei);
             if ( cardOp.isGang ) {
                 card.zIndex=-1;
-                card
-                .parent = cardOp.cardNode ;
+                card.parent = cardOp.cardNode ;
             } else {
                 var dan = cardOp.cardNode.children[cardOp.cardNum].getComponent('DanAction');
                 dan.count.string = Number(Number(dan.count.string)+1);
@@ -2239,7 +2249,7 @@ cc.Class({
                                 break;
                             }
                         }else if(card >0&&(type == 'yao'||type == 'jiu')){
-                            if(parseInt((card%36)/4 ) == parseInt(((cardUnit.getComponent("DanAction").value)%36)/4)&&cardUnit.getComponent("DanAction").cardtype==parseInt(card/36)){
+                            if(parseInt((card%36)/4 ) == cardUnit.getComponent("DanAction").mjvalue&&cardUnit.getComponent("DanAction").cardtype==parseInt(parseInt(card/4)/9)){
                                 resNode = cards ;
                                 cardNum = j;
                                 break;
