@@ -51,20 +51,24 @@ cc.Class({
                 this.myself.active = true;
             }
         }
+        //如果分数低于0的时候就是银色的框
         if(userInfo.pointCount<0){
             this.bk.getComponent(cc.Sprite).spriteFrame = this.yinse;
-            this.huCount.node.parent.getComponent(cc.Sprite).spriteFrame = this.yintiao;
-            this.dianCount.node.parent.getComponent(cc.Sprite).spriteFrame = this.yintiao;
-            this.touchBao.node.parent.getComponent(cc.Sprite).spriteFrame = this.yintiao;            
-            this.bankerCount.node.parent.getComponent(cc.Sprite).spriteFrame = this.yintiao;
+            // this.huCount.node.parent.getComponent(cc.Sprite).spriteFrame = this.yintiao;
+            // this.dianCount.node.parent.getComponent(cc.Sprite).spriteFrame = this.yintiao;
+            // this.touchBao.node.parent.getComponent(cc.Sprite).spriteFrame = this.yintiao;            
+            // this.bankerCount.node.parent.getComponent(cc.Sprite).spriteFrame = this.yintiao;
 
         }
+        //这个值代表大赢家
         if(this.dyj){
             this.dayingjia.active = true;
         }
+        //大赢家和点炮不能同时出现  这个是点炮高手
         if(this.dp&&!this.dyj){
             this.dianpao.active =true;
         }
+        //头像
         if(headimg){
             var imgurl = headimg;
             var sprite = this.headimg.getComponent(cc.Sprite);
