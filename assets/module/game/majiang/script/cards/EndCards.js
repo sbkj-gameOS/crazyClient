@@ -20,17 +20,17 @@ cc.Class({
       
     },
     init: function(){
-        this.jifan.string = '';
-        this.hu.string='';
-        let dan = [];
-        let dan2= [];
         let headimg;
-        let units = this.data.gang.units;
-        let units2;
+        let units = this.data.balance.units;
+        let gang = this.data.gang.point;
+        let fan;
         if(this.data.balance){
-            units2 = this.data.balance.units;    
+            fan = this.data.balance.point + '  杠';    
         }
-        
+        this.jifan.string = fan +'番'+'   '+fan +'   '+this.data.point;
+        for(let i =0 ;i< units.length;i++){
+            this.hu.string += (units[i].tip+' ');
+        }
         let player = cc.find('Canvas').getComponent('MajiangDataBind').playersarray;
         var cardsss = this.decode(this.data.cards);
         function sortNumber(a,b){return a - b}
@@ -59,31 +59,7 @@ cc.Class({
             this.win.active = true;
         }
 
-        for(let i ;i< units.length;i++){
-            if(units[i].point>0){
-                dan.push(units[i]);
-            }
-        }
-        if(units2!=null){
-            for(let i ;i< units2.length;i++){
-                if(units2[i].point>0){
-                    dan2.push(units2[i]);
-                }
-            }
-            for(let i ;i<dan2.length;i++){
-                let tip = dan2[i].tip;
-                let point = dan2[i].point;
-                this.hu.string +=  tip +':';
-                this.hu.string +=  point +'  ';
-            }
-        }
         
-        for(let i ;i<dan.length;i++){
-            let tip = dan[i].tip;
-            let point = dan[i].point;
-            this.jifan.string +=  tip +':';
-            this.jifan.string +=  point +'  ';
-        }
         
         for(let i = 0;i<this.data.actions.length;i++){
             let kong = cc.instantiate(this.mjkong);
