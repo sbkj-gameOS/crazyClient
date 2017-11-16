@@ -457,24 +457,16 @@ cc.Class({
                 var bth = cc.find('Canvas/global/main/button/readybtn');
                 bth.active =true;  
                 bth.x= -10;
-            }
-            
-
-            // if(context.playerspool.length>0){
-            //     cc.find('Canvas/global/main/button/ready2').active =true;
-            //     bth.x = -158;
-            // }
-            var laizi = cc.find('Canvas/global/main/godcard/child').children
-            if(laizi){
-                for(let i =0 ; i < laizi.length ; i ++ ){
-                    cc.find('Canvas/global/main/godcard/child').children[i].destroy();
-                }
-            }     
-            context.reinitGame(context);
-            //context.collect(context);
-             //cc.find("");
-             self.getSelf().shouOperationMune();
-             event.target.parent.destroy();             
+                var laizi = cc.find('Canvas/global/main/godcard/child').children
+                if(laizi){
+                    for(let i =0 ; i < laizi.length ; i ++ ){
+                        cc.find('Canvas/global/main/godcard/child').children[i].destroy();
+                    }
+                }     
+                context.reinitGame(context);
+                self.getSelf().shouOperationMune();
+                event.target.parent.destroy(); 
+            }        
         });
         this.node.on('mjSelection',function(event){
             event.target.parent.parent.active= false;

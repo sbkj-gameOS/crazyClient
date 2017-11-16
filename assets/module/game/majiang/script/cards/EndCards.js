@@ -133,7 +133,22 @@ cc.Class({
                                     b.countactive();
                                     jia = false;
                                     break;
-                                }else if(( parseInt(card/4 ) ==parseInt(b.value/4))||(card>0&&parseInt((card%36)/4 ) == parseInt(((b.value)%36)/4)&&parseInt(b.value/36)==parseInt(card/36))){              
+                                }
+                                //当是wind 时 且仅当第四张出来  判断和先前3张是否一样，如果一样 退出第一个循环 并退出第二个循环 如果没有一样的 直接退出第二个循环  然后true 在3后面加一个
+                                else if(type == 'wind'&&kong.children.length==3){
+                                    for(let h = 0 ;h<3;h++){
+                                        let kcard = kong.children[h];
+                                        let b = kcard.getComponent('DanAction');
+                                        if(parseInt(card/4 ) == b.cardcolors){
+                                            b.count.string = Number(Number(b.count.string)+1);
+                                            b.countactive();
+                                            jia = false;
+                                            break;
+                                        }
+                                    }
+                                    break;
+                                }
+                                else if(( parseInt(card/4 ) ==parseInt(b.value/4))||(card>0&&parseInt((card%36)/4 ) == parseInt(((b.value)%36)/4)&&parseInt(b.value/36)==parseInt(card/36))){              
                                     b.count.string = Number(Number(b.count.string)+1);
                                     b.countactive();
                                     jia = false;
@@ -192,7 +207,7 @@ cc.Class({
         this.init();
     },
     isDan: function(action){
-        debugger
+        
         let type = 'yao';
         for(let i = 0 ; i< action.length; i ++){
             if(action[i]<0){
