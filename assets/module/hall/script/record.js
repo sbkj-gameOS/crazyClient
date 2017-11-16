@@ -24,6 +24,10 @@ cc.Class({
 		spacing: 0, // space between each item
 		totalCount: 0, // how many items we need for the whole list
 		spawnCount: 0, // how many items we actually spawn
+        nullDataText: {
+            default: null,
+            type: cc.Node
+        },
     },
 
     onLoad: function () {
@@ -72,6 +76,17 @@ cc.Class({
     },
     success:function(result,object){
         var data = JSON.parse(result);
+        //清空数据
+        for(var i = 0; i < object.content.children.length;i++){
+            object.content.children[i].destroy();
+            
+        }
+        //清空数据
+        if(object.items.length != 0){
+            for(var i = 0; i < object.items.length;i++){
+                object.items[i].destroy(); 
+            }
+        }
         if(data.count>0){
         	if(typeStatus == 1){
 				object.content.height = data.count * (160 + object.spacing) + object.spacing; // get total content height
@@ -90,7 +105,10 @@ cc.Class({
 				item.getComponent('recordItem').updateItem(roomNum, gameNum, time,id,gamerInfo);
 				object.items.push(item);
 			}
-        }              
+        }else{
+            
+            //object.content.addChild(this.nullDataText);
+        }         
     },
 	error:function(object){
         console.log('shibai');
