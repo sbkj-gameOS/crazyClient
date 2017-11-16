@@ -3994,7 +3994,7 @@
       }
     ],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 100
@@ -4021,7 +4021,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
+      "width": 20,
       "height": 31
     },
     "_rotationX": 0,
@@ -4060,9 +4060,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 207,
-      "g": 200,
-      "b": 200,
+      "r": 252,
+      "g": 252,
+      "b": 252,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -4105,8 +4105,10 @@
     "_fontSize": 20,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "7ab05ddd-d3d1-48f4-9e08-81e3377c0206"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_N$string": "",
     "_N$horizontalAlign": 1,
@@ -4152,7 +4154,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 0,
+      "width": 20,
       "height": 31
     },
     "_resize": 1,
@@ -4164,8 +4166,8 @@
       "height": 40
     },
     "_N$startAxis": 0,
-    "_N$paddingLeft": 0,
-    "_N$paddingRight": 0,
+    "_N$paddingLeft": 10,
+    "_N$paddingRight": 10,
     "_N$paddingTop": 0,
     "_N$paddingBottom": 0,
     "_N$spacingX": 0,
@@ -4425,8 +4427,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -401,
-      "y": 148
+      "x": -796,
+      "y": 83
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -14491,6 +14493,9 @@
       "__id__": 2
     },
     "_enabled": true,
+    "roomInfo": {
+      "__id__": 96
+    },
     "totaljs": {
       "__id__": 340
     },

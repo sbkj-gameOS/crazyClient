@@ -47,7 +47,7 @@ cc.Class({
             card = cc.instantiate(this.bpb);
             card.parent = this.bpp;
         }
-        this.num.string = cc.find('Canvas').getComponent('MajiangDataBind').desk_cards.string;
+        this.num.string = cc.find('Canvas').getComponent('MajiangDataBind').gddesk_cards;
         if(userInfo.playOvers){
             let win = false;
             let lose = false;

@@ -4,6 +4,8 @@ cc.Class({
     extends: beiMiCommon,
     //extends: cc.Component,
     properties: {
+        roomInfo: cc.Node,
+        
         //总局数和当前局数和玩法
         totaljs:cc.Label,
         wanfa:cc.Label,
@@ -453,7 +455,6 @@ cc.Class({
             }else{
                 var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
                 var bth = cc.find('Canvas/global/main/button/readybtn');
-                context.desk_cards.string = 136;
                 bth.active =true;  
                 bth.x= -10;
             }
@@ -736,9 +737,9 @@ cc.Class({
                                 on_off_line.active = false;
                                 headimg.color = new cc.Color(255, 255, 255);
                             }
-                            // if(context.desk_cards.string!='136'){
-                            //     context.readyNoActive(context);
-                            // }
+                            if(context.desk_cards.string!='136'){
+                                context.readyNoActive(context);
+                            }
                         }
                             
                     }
@@ -818,9 +819,9 @@ cc.Class({
                                 headimg.color = new cc.Color(255, 255, 255);
                             }
                             //如果已经过了发牌阶段  则隐藏所有的准备状态
-                            // if(context.desk_cards.string !='136'){
-                            //     context.readyNoActive(context);
-                            // }
+                            if(context.desk_cards.string !='136'){
+                                context.readyNoActive(context);
+                            }
                         }    
                     }
                 }
@@ -838,7 +839,6 @@ cc.Class({
      */
     //掉线 和上线
     takecard_event:function(data , context){
-        context.readyNoActive(context);           
         context = cc.find('Canvas').getComponent('MajiangDataBind');
         cc.beimi.audio.playSFX('give.mp3');
         if(data.userid == cc.beimi.user.id) {
@@ -1002,10 +1002,13 @@ cc.Class({
     },
     allcards_event:function(data , context){
         //结算界面，
+        context.gddesk_cards = context.desk_cards.string;
+        context.desk_cards.string = '136';
         let temp = cc.instantiate(context.summary) ;
         temp.parent = context.root() ;
         temp.getComponent('SummaryClick').setData(data); 
         temp.zIndex = 999;
+
     },
     gameOver_event: function(data,context){
         let temp = cc.instantiate(context.summary) ;
@@ -1343,6 +1346,7 @@ cc.Class({
      */
     play_event:function(data , context){
         cc.beimi.baopai = null;
+        context.roomInfo.active = true;                
         context.totaljs.string = '局数  '+(data.round+1) +'/'+context.maxRound;
         context.wanfa.string = data.op;
         //cc.beimi.op = data.op;

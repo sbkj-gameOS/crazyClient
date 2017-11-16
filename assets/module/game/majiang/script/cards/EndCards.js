@@ -105,28 +105,46 @@ cc.Class({
                             card.parent = kong;   
                         }
                 }else if(this.data.actions[i].action=='dan'){
-
+                    let type = this.isDan(action);
                     for(let i =0 ;i<3 ;i++){
                         let card =cc.instantiate(this.card);    
                         let b = card.getComponent('DanAction');  
-                        var c = action[i];                        
+                        var c = action[i];     
+                        if(71<c&&c<76){                  
+                            card.zIndex =9999;
+                        }else {
+                            card.zIndex =0;
+                        }                
                         b.init(c,false,'');
                         b.target.height = 53;
                         b.target.width= 32;
                         card.parent = kong;                               
                     }
+                    kong.sortAllChildren();
+
                     for(let j=3 ; j<action.length;j++){
                         let card = action[j];   
                         let jia =true;
                         for(let h=0 ;h<kong.children.length;h++){
                             let kcard = kong.children[h];
                             let b = kcard.getComponent('DanAction');
-                            if((card < 0 && parseInt(card/4 ) == b.cardcolors)||(card>0&&parseInt((card%36)/4 ) == parseInt(((b.value)%36)/4)&&b.cardtype==parseInt(card/36))){              
-                                b.count.string = Number(Number(b.count.string)+1);
-                                b.countactive();
-                                jia = false;
-                                break;
-                            }
+                                if(parseInt((card%36)/4)==0&& parseInt(card/36)==2){
+                                    b.count.string = Number(Number(b.count.string)+1);
+                                    b.countactive();
+                                    jia = false;
+                                    break;
+                                }else if(( parseInt(card/4 ) == b.cardcolors)||(card>0&&parseInt((card%36)/4 ) == parseInt(((b.value)%36)/4)&&b.cardtype==parseInt(card/36))){              
+                                    b.count.string = Number(Number(b.count.string)+1);
+                                    b.countactive();
+                                    jia = false;
+                                    break;
+                                }else if(b.cardtype==2&&parseInt((b%36)/4)==0){
+                                    b.value = card;
+                                    b.count.string = Number(Number(b.count.string)+1);
+                                    b.countactive();
+                                    jia = false;
+                                    break;  
+                                }
                         }
                         if(jia){
                             let card =cc.instantiate(this.card);    
@@ -172,7 +190,27 @@ cc.Class({
     setData:function(data){
         this.data = data ; 
         this.init();
-    }
+    },
+    isDan: function(action){
+        let type = 'yao';
+        for(let i = 0 ; i< action.length; i ++){
+            if(action[i]<0){
+                if(parseInt(action[i]/4)<-3){
+                    type = 'wind';
+                    break;
+                }else{
+                    type:'xi';
+                    break;
+                }
+            }else{
+                if(parseInt((this.value%36)/4)==8&&((parseInt(parseInt(card/4)/9)==0)||parseInt(parseInt(card/4)/9)==1||parseInt(parseInt(card/4)/9)==2)){
+                    type:'jiu';
+                    break;
+                }
+            }
+        }
+        return type;
+    },
 
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
