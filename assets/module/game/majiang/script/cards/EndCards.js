@@ -133,13 +133,13 @@ cc.Class({
                                     b.countactive();
                                     jia = false;
                                     break;
-                                }else if(( parseInt(card/4 ) == b.cardcolors)||(card>0&&parseInt((card%36)/4 ) == parseInt(((b.value)%36)/4)&&b.cardtype==parseInt(card/36))){              
+                                }else if(( parseInt(card/4 ) ==parseInt(b.value/4))||(card>0&&parseInt((card%36)/4 ) == parseInt(((b.value)%36)/4)&&parseInt(b.value/36)==parseInt(card/36))){              
                                     b.count.string = Number(Number(b.count.string)+1);
                                     b.countactive();
                                     jia = false;
                                     break;
-                                }else if(b.cardtype==2&&parseInt((b%36)/4)==0){
-                                    b.value = card;
+                                }else if(b.cardtype==2&&parseInt((b.value%36)/4)==0){
+                                    b.setValue(card);
                                     b.count.string = Number(Number(b.count.string)+1);
                                     b.countactive();
                                     jia = false;

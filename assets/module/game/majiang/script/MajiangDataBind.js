@@ -2253,7 +2253,7 @@ cc.Class({
                                 break;
                             }
                         }else if(card >0&&(type == 'yao'||type == 'jiu')){
-                            if(parseInt((card%36)/4 ) == cardUnit.getComponent("DanAction").mjvalue&&cardUnit.getComponent("DanAction").cardtype==parseInt(parseInt(card/4)/9)){
+                            if(parseInt((card%36)/4 ) == parseInt((cardUnit.getComponent("DanAction").value%36)/4 )&&parseInt(cardUnit.getComponent("DanAction").value/36)==parseInt(card/36)){
                                 resNode = cards ;
                                 cardNum = j;
                                 break;
