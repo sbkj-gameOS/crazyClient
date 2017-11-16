@@ -192,8 +192,8 @@ cc.Class({
      * 重构后，只有两个消息类型
      */
     onLoad: function () {
-        // cc.beimi.cardNum = 17;
-        // cc.beimi.playerNum = 2;
+         //cc.beimi.cardNum = 17;
+         //cc.beimi.playerNum = 2;
         this.connect();
         cc.sys.localStorage.removeItem('dis');        
         //ljh追加 房号的显示
@@ -716,6 +716,13 @@ cc.Class({
                 }
                 playerscript.init(data , inx , tablepos);
                 context.playersarray.push(player) ;
+                if(data.status == 'READY'){    
+                    cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
+                    if(data.id == cc.beimi.user.id){
+                        context.readybth.active = false ;
+                       // context.ready2.active = false ;
+                    }  
+                }
                 
             }else{
                 var playerarray = context.playersarray;
@@ -728,7 +735,6 @@ cc.Class({
                         if(data.id == playerinfo.data.id) {
                             if(data.status == 'READY'){    
                                 cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
-
                             }
                             if(data.online == false){
                                 on_off_line.active = true;
@@ -1618,13 +1624,13 @@ cc.Class({
         for(let i =0; i<length;i++){
             let target =cc.find('Canvas/content/handcards/deskcard/layout').children[i];
             let card = target.getComponent('HandCards');
-            if(cc.beimi.cardNum == 17){ 
+            if(cc.beimi.cardNum > 14){ 
                 card.cardvalue.width = 61;
                 target.width=59;
             }else{
                 target.width=73;    
             }
-            target.y = 0;
+            card.target.y = 0;
             card.cardvalue.color = new cc.Color(255, 255, 255);      
         }
     },

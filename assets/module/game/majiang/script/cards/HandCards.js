@@ -92,11 +92,11 @@ cc.Class({
         // }
         this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
        
-        if(cc.beimi.cardNum == 17&&!pd){        
+        if(cc.beimi.cardNum >14 &&!pd){        
             this.cardvalue.width = 61;
             this.target.width=59;
             this.cardvalue.height = 85;
-            this.cardvalue.y =this.cardvalue.y-18;
+            cc.find('Canvas/content/handcards/deskcard/layout').y =5;
         }else if(!pd){
             this.target.width = 73;
         }
@@ -109,7 +109,7 @@ cc.Class({
     lastone:function(){
         if(this.lastonecard == false){
             this.lastonecard = true;
-            if(cc.beimi.cardNum == 17){ 
+            if(cc.beimi.cardNum > 14){ 
                 this.target.width=80;   
             }else{
                 this.target.width=100;    
@@ -125,7 +125,7 @@ cc.Class({
     relastone:function(){
         if(this.lastonecard == true){
             this.lastonecard = false;
-            if(cc.beimi.cardNum == 17){ 
+            if(cc.beimi.cardNum > 14){ 
                 this.cardvalue.width = 61;
                 this.target.width=59;
             }else{

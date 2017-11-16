@@ -128,7 +128,7 @@ cc.Class({
                         for(let h=0 ;h<kong.children.length;h++){
                             let kcard = kong.children[h];
                             let b = kcard.getComponent('DanAction');
-                                if(parseInt((card%36)/4)==0&& parseInt(card/36)==2){
+                                if(parseInt((card%36)/4)==0&& parseInt(card/36)==2&&type!='yao'){
                                     b.count.string = Number(Number(b.count.string)+1);
                                     b.countactive();
                                     jia = false;

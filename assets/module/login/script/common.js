@@ -161,12 +161,14 @@ cc.Class({
         if(data.playway&&data.room){
             cc.beimi.room = object.getUrlParam('roomNum');
             cc.beimi.playway = data.playway;
-            cc.beimi.maxRound = result.maxRound;
             if(data.playerNum){
                 cc.beimi.playerNum = data.playerNum;
             }
             if(data.cardNum){
                 cc.beimi.cardNum = data.cardNum;
+            }
+            if(data.maxRound){
+                cc.beimi.maxRound = data.maxRound;
             }
             cc.director.preloadScene('majiang',function(){
                 cc.director.loadScene('majiang');

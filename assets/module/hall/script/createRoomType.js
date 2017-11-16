@@ -224,6 +224,12 @@ cc.Class({
     sucess: function(result,object){
         var data = JSON.parse(result);
         if(data.room&&data.playway){
+            if(data.playerNum){
+                cc.beimi.playerNum = data.playerNum;
+            }
+            if(data.cardNum){
+                cc.beimi.cardNum = data.cardNum;
+            }
             if(data.maxRound){
                 cc.beimi.maxRound = data.maxRound;
             }

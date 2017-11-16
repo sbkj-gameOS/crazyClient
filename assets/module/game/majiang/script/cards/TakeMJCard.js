@@ -37,16 +37,16 @@ cc.Class({
                 handCards.take = false;
                 
                 let card = cards.getComponent('HandCards');
-                if(cc.beimi.cardNum == 17){ 
+                if(cc.beimi.cardNum > 14){ 
                     card.cardvalue.width = 61;
                     cards.width=59; 
                 }else{
                     cards.width=73;    
                 }
-                cards.y = 0;
+                handCards.target.y = 0;
                 handCards.cardvalue.color = new cc.Color(255, 255, 255);
             }
-            this.target.y = this.target.y + 20 ;
+            handCards.target.y = handCards.target.y + 20 ;
             handCards.cardvalue.color = new cc.Color(230, 190, 190);
             handCards.take = true;
             }    
