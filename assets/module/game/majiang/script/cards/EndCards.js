@@ -49,8 +49,8 @@ cc.Class({
             var head = this.headimg;
             cc.loader.load({url:imgurl,type:'jpg'},function(suc,texture){
                 sprite.spriteFrame = new cc.SpriteFrame(texture);
-                head.width = 64;
-                head.height = 64;
+                head.width = 56;
+                head.height = 52;
             });
         }
         this.count.string= this.data.count;
@@ -192,6 +192,7 @@ cc.Class({
         this.init();
     },
     isDan: function(action){
+        debugger
         let type = 'yao';
         for(let i = 0 ; i< action.length; i ++){
             if(action[i]<0){
@@ -199,12 +200,12 @@ cc.Class({
                     type = 'wind';
                     break;
                 }else{
-                    type:'xi';
+                    type='xi';
                     break;
                 }
             }else{
-                if(parseInt((this.value%36)/4)==8&&((parseInt(parseInt(card/4)/9)==0)||parseInt(parseInt(card/4)/9)==1||parseInt(parseInt(card/4)/9)==2)){
-                    type:'jiu';
+                if(parseInt((action[i]%36)/4)==8&&((parseInt(parseInt(action[i]/4)/9)==0)||parseInt(parseInt(action[i]/4)/9)==1||parseInt(parseInt(action[i]/4)/9)==2)){
+                    type='jiu';
                     break;
                 }
             }

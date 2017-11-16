@@ -48,8 +48,10 @@ cc.Class({
 		if(moShiId == "toggle1"){
 			userType = "4";
 		}else if(moShiId == "toggle2"){
-			userType = 2;
-		}
+			userType = 3;
+		}else if(moShiId == "toggle3"){
+            userType = 2;
+        }
     },
 
     onLoad: function () {

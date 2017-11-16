@@ -578,6 +578,7 @@ cc.Class({
             //记录听得状态后，在出牌阶段判断状态并发送听牌事件。
             cc.sys.localStorage.setItem('ting','true') ;
             event.stopPropagation();
+            self.getSelf().shouOperationMune();            
         });
         /**
          * ActionEvent发射的事件 ， 点击 胡
@@ -617,6 +618,8 @@ cc.Class({
             if(cc.beimi.playerNum == 2){
                 this.left_player.active = false;
                 this.right_player.active = false;
+                this.deskcards_current_panel.width = 650;
+                this.deskcards_top_panel.width = 650;
             }
             if(cc.beimi.game.type.model == 'pipei'){
                 this.tuoguan.active = false;
@@ -1492,7 +1495,7 @@ cc.Class({
          */
         //this.statusbtn.active = true ;
         //ljh改  神牌
-        if(data.player.power){
+        
             cc.find('Canvas/global/main/godcard').children[0].active =true;
             if(data.player.powerCard&&data.player.powerCard.length>0){
                 cc.find('Canvas/global/main/godcard/child').children[0].destroy();
@@ -1509,7 +1512,7 @@ cc.Class({
                 laiziFM.parent = context.godcard.children[1];
                 console.log(laiziFM.position);
             }
-        }
+        
         setTimeout(function(){
             //重连判断action
             var istake =false;

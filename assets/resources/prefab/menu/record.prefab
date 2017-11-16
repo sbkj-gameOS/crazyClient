@@ -1399,7 +1399,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 163.13,
+      "width": 160,
       "height": 50
     },
     "_rotationX": 0,
@@ -1601,7 +1601,8 @@
     "itemID": 0,
     "spacing": 5,
     "totalCount": 20,
-    "spawnCount": 20
+    "spawnCount": 20,
+    "nullDataText": null
   },
   {
     "__type__": "cc.ScrollView",
@@ -2253,7 +2254,7 @@
       }
     ],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 81
@@ -2515,7 +2516,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 142.73,
+      "width": 140,
       "height": 50
     },
     "_rotationX": 0,
