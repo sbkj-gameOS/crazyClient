@@ -51,6 +51,7 @@ cc.Class({
         this.creator.active = false ;
         this.data = playerdata ;    //存放玩家数据
         this.tablepos = tablepos ;
+        
         if(inx == 0){
             this.selectcards.parent.x = this.selectcards.parent.x * -1 ;
         }else if(inx == 1){
@@ -62,8 +63,8 @@ cc.Class({
             var head = this.headimg;
             cc.loader.load({url:imgurl,type:'jpg'},function(suc,texture){
                 sprite.spriteFrame = new cc.SpriteFrame(texture);
-                head.width = 80;
-                head.height = 80;
+                head.width = 75;
+                head.height = 75;
             });
         }
         this.username.string = playerdata.username ;

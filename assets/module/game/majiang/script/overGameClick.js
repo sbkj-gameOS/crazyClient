@@ -89,9 +89,11 @@ cc.Class({
             },
     daojishi: function(){
         this.time =this.time-1;
-        this.labei2.getComponent(cc.Label).string = this.time;
-        console.log(this.time);
+        if(this.labei2){
+            this.labei2.getComponent(cc.Label).string = this.time;
+            console.log(this.time);
         }
+    }
        
     // setting:function(){
 

@@ -6448,7 +6448,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 450,
+      "width": 600,
       "height": 150
     },
     "_resize": 0,
@@ -6940,7 +6940,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 450,
+      "width": 600,
       "height": 5
     },
     "_resize": 0,

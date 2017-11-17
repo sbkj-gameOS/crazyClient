@@ -606,16 +606,23 @@ cc.Class({
         cc.sys.localStorage.removeItem('left');
         cc.sys.localStorage.removeItem('top');
         this.joinRoom();
-        if(cc.beimi.game.type){
+        if(cc.beimi.playerNum){
             if(cc.beimi.playerNum == 2){
                 this.left_player.active = false;
                 this.right_player.active = false;
                 this.deskcards_current_panel.width = 650;
                 this.deskcards_top_panel.width = 650;
+            }else if(cc.beimi.playerNum == 3){
+                this.left_player.active = false;      
+                this.deskcards_current_panel.width = 600;
+                this.deskcards_top_panel.width = 600;  
+                this.deskcards_current_panel.x = -154;
+                this.deskcards_top_panel.x = -144;     
+                this.deskcards_right_panel.x = -83;   
             }
-            if(cc.beimi.game.type.model == 'pipei'){
-                this.tuoguan.active = false;
-            }
+            // if(cc.beimi.game.type.model == 'pipei'){
+            //     this.tuoguan.active = false;
+            // }
         }
     },
     update: function(){
@@ -666,6 +673,7 @@ cc.Class({
         }
     },
     over_event: function(){
+        clearTimeout(mj.t);        
         cc.beimi.maxRound =null;
         cc.beimi.op =null;
         cc.beimi.playerNum = null;
@@ -674,10 +682,9 @@ cc.Class({
         cc.sys.localStorage.setItem('dis','true');        
         cc.director.loadScene('gameMain');
         let mj = cc.find('Canvas').getComponent('MajiangDataBind');
-        clearTimeout(mj.t);
-        var desk = require("DeskCards");
-        var jiantou = new desk();
-        jiantou.xiaochu();
+        // var desk = require("DeskCards");
+        // var jiantou = new desk();
+        // jiantou.xiaochu();
     },
     unOver_event: function(){
         let mj = cc.find('Canvas').getComponent('MajiangDataBind')
@@ -752,8 +759,75 @@ cc.Class({
             //     var action = cc.moveTo(0.2,-21,-151);
             //     context.readybth.runAction(action);
             // }
-        }
-        else{
+        }else if(cc.beimi.playerNum == 3){
+            if(data.id!=cc.sys.localStorage.getItem('current')&&data.id!=cc.sys.localStorage.getItem('right')&&data.id!=cc.sys.localStorage.getItem('top')){
+                var player = context.playerspool.get();
+                var playerscript = player.getComponent("MaJiangPlayer");
+                tablepos = "";
+                var inx = cc.sys.localStorage.getItem('count');
+                if(data.id == cc.beimi.user.id){
+                    player.setPosition(-584 , -269);
+                    player.parent = context.root();
+                    tablepos = "current" ;
+                    cc.sys.localStorage.setItem('current',data.id);
+                    
+                }else{
+                    if(inx == 0||inx ==2){
+                        player.parent= context.right_player;
+                        tablepos = "right" ;
+                        cc.sys.localStorage.setItem('right',data.id);
+                        cc.sys.localStorage.setItem('count','1')
+                    }else if(inx == 1){
+                        player.parent= context.top_player;
+                        tablepos = "top" ;
+                        cc.sys.localStorage.setItem('top',data.id);
+                        cc.sys.localStorage.setItem('count','2')   
+                    }
+                    player.setPosition(0,0);
+                }
+                playerscript.init(data , context.inx , tablepos);
+                context.playersarray.push(player) ;
+                //这里是用来判定自己重连的时候 如果已经准备了 则准备按钮消失
+                if(data.status == 'READY'){    
+                    cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
+                    if(data.id == cc.beimi.user.id){
+                        context.readybth.active = false ;
+                       // context.ready2.active = false ;
+                    }  
+                }
+            }else{
+                var playerarray = context.playersarray;
+                if(playerarray){
+                    for(let i =0 ; i< playerarray.length;i++){
+                        var playerinfo = playerarray[i].getComponent('MaJiangPlayer');
+                        var tablepos = playerinfo.tablepos;      
+                        var on_off_line = playerinfo.on_off_line;     
+                        var headimg = playerinfo.headimg;
+                        if(data.id == playerinfo.data.id) {
+                            if(data.status == 'READY'){    
+                                cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
+                                if(data.id == cc.beimi.user.id){
+                                    context.readybth.active = false ;
+                                    //context.ready2.active = false ;
+                                }  
+                            }
+                            if(data.online == false){
+                                on_off_line.active = true;
+                                headimg.color = new cc.Color(42, 25, 25);
+                            }else{
+                                on_off_line.active = false;
+                                headimg.color = new cc.Color(255, 255, 255);
+                            }
+                            //如果已经过了发牌阶段  则隐藏所有的准备状态
+                            if(context.desk_cards.string !='136'){
+                                context.readyNoActive(context);
+                            }
+                        }    
+                    }
+                }
+            }
+        
+        }else{
             // 这是默认的4人模式 
             // 因为 加入会触发 改变状态也会触发该事件，所以用getitem保存一个数据 如果有了这个数据则 只判断状态的改变  如果没有则表示新玩家加入
             if(data.id!=cc.sys.localStorage.getItem('current')&&data.id!=cc.sys.localStorage.getItem('right')&&data.id!=cc.sys.localStorage.getItem('left')&&data.id!=cc.sys.localStorage.getItem('top')){
@@ -1052,6 +1126,26 @@ cc.Class({
                 context.publicData(0,data,'top',context.top_player,1,2,context);
                 context.publicData(1,data,'current',context.current_player,0,0,context);
             }       
+        }else if(cc.beimi.playerNum==3){
+            if(mytime==1){
+                context.publicData(0,data,'current',context.current_player,0,0,context);
+                if(data.players.length==2){          
+                    context.publicData(1,data,'right',context.right_player,0,1,context);        
+                }else if(data.players.length==3){
+                    context.publicData(1,data,'right',context.right_player,0,1,context);        
+                    context.publicData(2,data,'top',context.top_player,1,2,context);
+                }
+            }else if(mytime==2){
+                context.publicData(0,data,'top',context.top_player,1,2,context);
+                context.publicData(1,data,'current',context.current_player,0,0,context);
+                if(data.players.length==3){
+                    context.publicData(2,data,'right',context.right_player,0,1,context);        
+                }
+            }else if(mytime==3){
+                context.publicData(0,data,'right',context.right_player,0,1,context);
+                context.publicData(1,data,'top',context.top_player,1,2,context);
+                context.publicData(2,data,'current',context.current_player,0,0,context);
+            }
         }else{
             if(mytime==1){
                 context.publicData(0,data,'current',context.current_player,0,0,context);
@@ -1769,6 +1863,10 @@ cc.Class({
         let cardarray = context.rightcards;
         let prefab = context.cards_right ;
         if(peoNum == 2){
+            parent = context.top_panel  ;
+            cardarray = context.topcards   ;
+            prefab = context.cards_top ;
+        }else if(peoNum ==3&&inx ==1){
             parent = context.top_panel  ;
             cardarray = context.topcards   ;
             prefab = context.cards_top ;

@@ -300,7 +300,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": -2
+      "y": 1
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -2317,6 +2317,9 @@
     },
     "yintiao": {
       "__uuid__": "176fd157-8cdc-4e99-8edd-cc845978fd3c"
+    },
+    "headimgs": {
+      "__id__": 4
     }
   },
   {

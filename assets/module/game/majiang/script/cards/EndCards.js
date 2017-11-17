@@ -3,7 +3,7 @@ var beiMiCommon = require("BeiMiCommon");
 cc.Class({
     extends: beiMiCommon,
     properties: {
-        headimg:cc.Node,
+        headimgs:cc.Node,
         peoname:cc.Label,
         count:cc.Label,
         mjloyad: cc.Node,
@@ -45,12 +45,12 @@ cc.Class({
         }
         if(headimg){
             var imgurl = headimg;
-            var sprite = this.headimg.getComponent(cc.Sprite);
-            var head = this.headimg;
+            var sprite = this.headimgs.getComponent(cc.Sprite);
+            var head = this.headimgs;
             cc.loader.load({url:imgurl,type:'jpg'},function(suc,texture){
                 sprite.spriteFrame = new cc.SpriteFrame(texture);
-                head.width = 56;
-                head.height = 52;
+                head.width = 52;
+                head.height = 47;
             });
         }
         this.count.string= this.data.count;

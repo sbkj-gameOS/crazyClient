@@ -26,6 +26,7 @@ cc.Class({
         bk:cc.Node,
         yinse: cc.SpriteFrame,
         yintiao: cc.SpriteFrame,
+        headimgs:cc.Node,
     },
 
     // use this for initialization
@@ -71,12 +72,12 @@ cc.Class({
         //头像
         if(headimg){
             var imgurl = headimg;
-            var sprite = this.headimg.getComponent(cc.Sprite);
-            var head = this.headimg;
+            var sprite = this.headimgs.getComponent(cc.Sprite);
+            var head = this.headimgs;
             cc.loader.load({url:imgurl,type:'jpg'},function(suc,texture){
                 sprite.spriteFrame = new cc.SpriteFrame(texture);
-                head.width = 64;
-                head.height = 64;
+                head.width = 90;
+                head.height = 90;
             });
         }
     //     this.username.string = userInfo.userName;
