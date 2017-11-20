@@ -459,7 +459,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 30,
+      "width": 96.74,
       "height": 40
     },
     "_rotationX": 0,
@@ -468,7 +468,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -11,
+      "x": 18,
       "y": -44
     },
     "_skewX": 0,
@@ -494,11 +494,11 @@
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_N$string": "名字",
+    "_N$string": "",
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
-    "_N$overflow": 0
+    "_N$overflow": 2
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -555,7 +555,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 108,
+      "x": 113,
       "y": -23
     },
     "_skewX": 0,
@@ -688,7 +688,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -138,
+      "x": -160,
       "y": 5
     },
     "_skewX": 0,
@@ -742,7 +742,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -252.235,
+      "x": -252.23500000000013,
       "y": 34
     },
     "_skewX": 0,
@@ -829,7 +829,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 88.935,
+      "x": 288.9349999999999,
       "y": 34
     },
     "_skewX": 0,
@@ -898,7 +898,7 @@
     "_N$paddingRight": 0,
     "_N$paddingTop": 0,
     "_N$paddingBottom": 0,
-    "_N$spacingX": 100,
+    "_N$spacingX": 300,
     "_N$spacingY": 0,
     "_N$verticalDirection": 1,
     "_N$horizontalDirection": 0

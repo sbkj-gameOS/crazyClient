@@ -21,16 +21,18 @@ cc.Class({
     },
     init: function(){
         let headimg;
-        let units = this.data.balance.units;
-        let gang = this.data.gang.point;
-        let fan;
+        let gang = this.data.gang.count;
+        let fan=0;
+        let units;
+        this.hu.string='';
         if(this.data.balance){
-            fan = this.data.balance.point + '  杠';    
+            units= this.data.balance.units;
+            fan = this.data.balance.count ;   
+            for(let i =0 ;i< units.length;i++){
+                this.hu.string += (units[i].tip+' ');
+            } 
         }
-        this.jifan.string = fan +'番'+'   '+fan +'   '+this.data.point;
-        for(let i =0 ;i< units.length;i++){
-            this.hu.string += (units[i].tip+' ');
-        }
+        this.jifan.string = gang +'番'+'   '+fan +'杠   ';
         let player = cc.find('Canvas').getComponent('MajiangDataBind').playersarray;
         var cardsss = this.decode(this.data.cards);
         function sortNumber(a,b){return a - b}
