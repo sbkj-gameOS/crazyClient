@@ -1029,6 +1029,7 @@ cc.Class({
      */
     dealcard_event:function(data , context){   
         context=cc.find('Canvas').getComponent('MajiangDataBind');  
+        context.initcardwidth();
         if(cc.beimi.playerNum){
             var peoNum = cc.beimi.playerNum;
         }
@@ -2425,6 +2426,7 @@ cc.Class({
         var datas = JSON.parse(data) ;
         let time = new Date(datas.end - datas.start).getSeconds();
         let player = mj.player(datas.userid , mj);
+        console.log(datas);
         //下载语音
         wx.downloadVoice({
             serverId: datas.serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得

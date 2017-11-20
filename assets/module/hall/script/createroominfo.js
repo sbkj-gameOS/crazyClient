@@ -84,7 +84,7 @@ cc.Class({
          
     },
     sucess: function(result,object){
-        debugger
+        
         var data = JSON.parse(result);
         //playerNum,cardNum
         if(data.room&&data.playway){

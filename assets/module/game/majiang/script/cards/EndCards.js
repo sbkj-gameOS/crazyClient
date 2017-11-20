@@ -30,10 +30,12 @@ cc.Class({
         }
         if(this.data.balance){
             units= this.data.balance.units;
-            fan = this.data.balance.count ;   
-            for(let i =0 ;i< units.length;i++){
-                this.hu.string += (units[i].tip+' ');
-            } 
+            fan = this.data.balance.count ; 
+            if(units){
+                for(let i =0 ;i< units.length;i++){
+                    this.hu.string += (units[i].tip+' ');
+                } 
+            }   
         }
         this.jifan.string = fan +'番'+'   '+gang +'杠   ';
         let player = cc.find('Canvas').getComponent('MajiangDataBind').playersarray;
@@ -86,74 +88,22 @@ cc.Class({
                             card.parent = kong;   
                         }
                 }else if(this.data.actions[i].action=='dan'){
-                    let type = this.isDan(action);
-                    for(let i =0 ;i<3 ;i++){
-                        let card =cc.instantiate(this.card);    
-                        let b = card.getComponent('DanAction');  
-                        var c = action[i];     
-                        if(71<c&&c<76){                  
-                            card.zIndex =9999;
-                        }else {
-                            card.zIndex =0;
-                        }                
-                        b.init(c,false,'');
-                        b.target.height = 53;
-                        b.target.width= 32;
-                        card.parent = kong;                               
+                    let mj = cc.find('Canvas').getComponent('MajiangDataBind');
+                    let player = mj.player(this.data.user,mj);
+                    let card ;
+                    if(player.tablepos == 'current' ){
+                        card = cc.find('Canvas/content/handcards/deskcard/kong').children[i+1];
+                    }else{
+                        card = cc.find('Canvas/content/handcards/'+player.tablepos+'desk/kong').children[i+1];
                     }
-                    kong.sortAllChildren();
-
-                    for(let j=3 ; j<action.length;j++){
-                        let card = action[j];   
-                        let jia =true;
-                        for(let h=0 ;h<kong.children.length;h++){
-                            let kcard = kong.children[h];
-                            let b = kcard.getComponent('DanAction');
-                                if(parseInt((card%36)/4)==0&& parseInt(card/36)==2&&type!='yao'){
-                                    b.count.string = Number(Number(b.count.string)+1);
-                                    b.countactive();
-                                    jia = false;
-                                    break;
-                                }
-                                //当是wind 时 且仅当第四张出来  判断和先前3张是否一样，如果一样 退出第一个循环 并退出第二个循环 如果没有一样的 直接退出第二个循环  然后true 在3后面加一个
-                                else if(type == 'wind'&&kong.children.length==3){
-                                    for(let h = 0 ;h<3;h++){
-                                        let kcard = kong.children[h];
-                                        let b = kcard.getComponent('DanAction');
-                                        if(parseInt(card/4 ) == b.cardcolors){
-                                            b.count.string = Number(Number(b.count.string)+1);
-                                            b.countactive();
-                                            jia = false;
-                                            break;
-                                        }
-                                    }
-                                    break;
-                                }
-                                else if(( parseInt(card/4 ) ==parseInt(b.value/4))||(card>0&&parseInt((card%36)/4 ) == parseInt(((b.value)%36)/4)&&parseInt(b.value/36)==parseInt(card/36))){              
-                                    b.count.string = Number(Number(b.count.string)+1);
-                                    b.countactive();
-                                    jia = false;
-                                    break;
-                                }else if(b.cardtype==2&&parseInt((b.value%36)/4)==0){
-                                    b.setValue(card);
-                                    b.count.string = Number(Number(b.count.string)+1);
-                                    b.countactive();
-                                    jia = false;
-                                    break;  
-                                }
-                        }
-                        if(jia){
-                            let card =cc.instantiate(this.card);   
-                            
-                            let b = card.getComponent('DanAction');  
-                            var c = action[j];                        
-                            b.init(c,false,'');
-                            b.target.height = 53;
-                            b.target.width= 32;
-                            card.parent = kong;   
-                            card.zIndex =1;
-                            kong.sortAllChildren;
-                        }     
+                    for(let q = 0 ; q< card.children.length; q++){
+                        let xiao = cc.instantiate(this.card);
+                        let xiaocard = xiao.getComponent('DanAction');
+                        let da = card.children[q].getComponent('DanAction');
+                        xiaocard.init(da.mjtype,false,'',da.count.string);
+                        xiaocard.target.height =53;
+                        xiaocard.target.width =32;
+                        xiao.parent =kong;
                     }
                 }else{
                     for(let j=0;j<action.length;j++){

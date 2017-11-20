@@ -34,7 +34,8 @@ cc.Class({
     onLoad: function () {
 
     },
-    init:function(cvalue,back,fangwei){
+    init:function(cvalue,back,fangwei,count){
+        this.count.string = count;
         this.value = cvalue ;
         this.back = back;
         this.fangwei = fangwei;
@@ -99,10 +100,15 @@ cc.Class({
             this.target.getComponent(cc.Sprite).spriteFrame = cardframe;
             
             }
-            this.count.string = '1';
-            if(this.count.string == '1'){
-                this.count.node.active = false;
-         }
+            if(this.count.string==undefined){
+                this.count.string = '1';
+            }else{
+            this.x.active = true;
+        }   
+        if(this.count.string == '1'){
+            this.count.node.active = false;
+            this.x.active = false;
+     }
     },
     countactive:function(){
         this.count.node.active =true ; 

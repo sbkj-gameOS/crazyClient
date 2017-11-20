@@ -63,7 +63,7 @@ cc.Class({
                 if(userInfo.playOvers[i].user == cc.beimi.user.id){
                     if(userInfo.playOvers[i].win ==true){
                         this.win.active =true;
-                    }else if(userInfo.playOvers[i]<0){
+                    }else if(userInfo.playOvers[i].count<0){
                         this.lose.active =true;
                     }  
                 }
