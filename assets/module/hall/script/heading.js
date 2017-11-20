@@ -95,6 +95,7 @@ cc.Class({
         this.right2.active = false; 
     },
     clickShop:function(){
+        cc.beimi.shopping = 1;
         var shop = cc.instantiate(this.shop);
         shop.parent = this.node;
         shop.setPosition(640,360);
