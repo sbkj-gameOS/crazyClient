@@ -1457,7 +1457,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 41
@@ -2664,7 +2664,7 @@
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_N$string": "00",
+    "_N$string": "0",
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -2784,7 +2784,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 217.23,
+      "width": 298.79,
       "height": 50
     },
     "_rotationX": 0,
@@ -2793,7 +2793,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -184,
+      "x": -227,
       "y": 0
     },
     "_skewX": 0,
@@ -2811,7 +2811,7 @@
       "__id__": 81
     },
     "_enabled": true,
-    "_N$string": "<color=#694110><b>待审批金额:</b></color>",
+    "_N$string": "<color=#694110><b>提现待审批金额:</b></color>",
     "_N$horizontalAlign": 0,
     "_N$fontSize": 40,
     "_N$font": null,
@@ -2974,7 +2974,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 258.01,
+      "width": 176.45,
       "height": 50
     },
     "_rotationX": 0,
@@ -2983,7 +2983,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -206,
+      "x": -165,
       "y": 0
     },
     "_skewX": 0,
@@ -3001,7 +3001,7 @@
       "__id__": 89
     },
     "_enabled": true,
-    "_N$string": "<color=#694110><b>分润剩余余额:</b></color>",
+    "_N$string": "<color=#694110><b>佣金余额:</b></color>",
     "_N$horizontalAlign": 0,
     "_N$fontSize": 40,
     "_N$font": null,
