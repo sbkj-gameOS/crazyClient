@@ -141,7 +141,7 @@ cc.Class({
           
             object.loadding();
             //房间号参数不为空    直接进入房间
-            if (object.getUrlParam('roomNum') != 'null'){
+            if (object.getUrlParam('roomNum') != 'null' && object.getUrlParam('roomNum') != null){
                 var room={};
                 room.room = object.getUrlParam('roomNum');
                 room.token = cc.beimi.authorization;
@@ -173,7 +173,9 @@ cc.Class({
             cc.director.preloadScene('majiang',function(){
                 cc.director.loadScene('majiang');
             });
-        }else if(data.error){
+        }else{
+            object.connect();
+            object.scene('gameMain' , object) ;
         }     
     },
     JRerror: function(object){

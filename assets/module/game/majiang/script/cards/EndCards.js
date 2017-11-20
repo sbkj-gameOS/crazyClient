@@ -21,10 +21,13 @@ cc.Class({
     },
     init: function(){
         let headimg;
-        let gang = this.data.gang.count;
+        let gang=0; 
         let fan=0;
         let units;
         this.hu.string='';
+        if(this.data.gang){
+            gang = this.data.gang.count;
+        }
         if(this.data.balance){
             units= this.data.balance.units;
             fan = this.data.balance.count ;   
@@ -32,7 +35,7 @@ cc.Class({
                 this.hu.string += (units[i].tip+' ');
             } 
         }
-        this.jifan.string = gang +'番'+'   '+fan +'杠   ';
+        this.jifan.string = fan +'番'+'   '+gang +'杠   ';
         let player = cc.find('Canvas').getComponent('MajiangDataBind').playersarray;
         var cardsss = this.decode(this.data.cards);
         function sortNumber(a,b){return a - b}
@@ -140,13 +143,16 @@ cc.Class({
                                 }
                         }
                         if(jia){
-                            let card =cc.instantiate(this.card);    
+                            let card =cc.instantiate(this.card);   
+                            
                             let b = card.getComponent('DanAction');  
                             var c = action[j];                        
                             b.init(c,false,'');
                             b.target.height = 53;
                             b.target.width= 32;
                             card.parent = kong;   
+                            card.zIndex =1;
+                            kong.sortAllChildren;
                         }     
                     }
                 }else{

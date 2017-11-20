@@ -2235,8 +2235,9 @@ cc.Class({
             } 
             temp.init(cards[i],false,fangwei);
             if ( cardOp.isGang ) {
-                card.zIndex=-1;
+                card.zIndex=1;
                 card.parent = cardOp.cardNode ;
+                cardOp.cardNode.sortAllChildren();
             } else {
                 var dan = cardOp.cardNode.children[cardOp.cardNum].getComponent('DanAction');
                 dan.count.string = Number(Number(dan.count.string)+1);
