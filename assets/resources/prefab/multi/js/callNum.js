@@ -55,6 +55,10 @@ cc.Class({
     },
     error: function(result){
 
+    },
+    closeBtn:function(){
+        var closrBtn = cc.find("Canvas/heading/js/heading/right");
+        closrBtn.destroy();
     }
 
     // called every frame, uncomment this function to activate update callback

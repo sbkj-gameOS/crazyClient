@@ -105,4 +105,8 @@ cc.Class({
         // 更新lastContentPosY
         this.lastContentPosY = this.scrollView.content.y;
     },
+    closeBtn:function(){
+        var closrBtn = cc.find("Canvas/heading/js/heading/right2");
+        closrBtn.destroy();
+    }
 });
