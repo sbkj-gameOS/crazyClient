@@ -54,4 +54,13 @@ cc.Class({
         }
        
     },
+    closeBtn:function(){
+        var closrBtn;
+        if(cc.beimi.shopping == 1){
+            closrBtn = cc.find("Canvas/heading/js/heading/shopping");
+        }else{
+            closrBtn = cc.find("Canvas/shopping");
+        }
+        closrBtn.destroy();
+    }
 })

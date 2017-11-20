@@ -63,6 +63,7 @@ cc.Class({
       
     },
     onShoppingClick:function(){
+        cc.beimi.shopping = 2;
         cc.beimi.dialog = cc.instantiate(this.shopping) ;
         cc.beimi.dialog.parent = this.root();        
     },
