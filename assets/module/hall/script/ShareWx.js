@@ -19,7 +19,7 @@ cc.Class({
             this.descName = "心缘长春棋牌";
         }else if(this.typeStatus == 2){//游戏中点击分享传递房间号参数
             this.urlAppend = '?roomNum='+cc.beimi.room;
-            this.descName = "加入房间:"+cc.beimi.room+",开始游戏！";
+            this.descName = cc.beimi.user.nickname+"邀请您加入房间:"+cc.beimi.room+",开始游戏！";
         }
         if(this.tape != null){
         //按下开始录音
@@ -68,7 +68,7 @@ cc.Class({
                 title: '心缘长春棋牌',
                 desc: object.descName,
                 link: 'http://game.bizpartner.cn/wxController/toWXAuth'+object.urlAppend,
-                imgUrl: '',
+                imgUrl: cc.beimi.user.headimgurl,
                 trigger: function (res) {
                     // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
                     console.log('用户点击发送给朋友');
@@ -88,7 +88,7 @@ cc.Class({
             wx.onMenuShareTimeline({
                 title: object.descName,
                 link: 'http://game.bizpartner.cn/wxController/toWXAuth'+object.urlAppend,
-                imgUrl: '',
+                imgUrl: cc.beimi.user.headimgurl,
                 trigger: function (res) {
                     // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
                     console.log('用户点击分享到朋友圈');

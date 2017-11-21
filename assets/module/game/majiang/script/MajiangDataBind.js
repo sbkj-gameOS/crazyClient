@@ -7,6 +7,7 @@ cc.Class({
         roomInfo: cc.Node,
         
         //总局数和当前局数和玩法
+        noticeShare:cc.Node,
         totaljs:cc.Label,
         wanfa:cc.Label,
 
@@ -194,6 +195,11 @@ cc.Class({
     onLoad: function () {
          //cc.beimi.cardNum = 17;
          //cc.beimi.playerNum = 2;
+        if(cc.sys.localStorage.getItem('notice')!='true'){
+            this.noticeShare.cascadeOpacity =false;
+            this.noticeShare.active = true;
+            cc.sys.localStorage.setItem('notice','true');
+        }
         this.connect();
         cc.sys.localStorage.removeItem('dis');        
         //ljh追加 房号的显示
@@ -365,7 +371,6 @@ cc.Class({
             let mjdata = cc.find('Canvas').getComponent('MajiangDataBind');
             var action = cc.moveTo(0.5,880,274);
             mjdata.setting_coin.runAction(action);
-
         });
         this.node.on('leaveGame',function(){
             let socket = self.getSelf().socket();
@@ -2446,6 +2451,7 @@ cc.Class({
         //     localId: res.localId // 需要播放的音频的本地ID，由stopRecord接口获得
         // });
     },
+  
     readyNoActive: function(context){
         context.right_ready.active = false;
         context.left_ready.active = false;

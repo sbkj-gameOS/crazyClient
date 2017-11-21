@@ -28,8 +28,10 @@ cc.Class({
     },
     onClick:function(){
         console.log(1);
+    },
+    unactive: function(event){
+        event.target.active = false;
     }
-
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 
