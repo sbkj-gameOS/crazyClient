@@ -689,7 +689,7 @@
     }
   },
   {
-    "__type__": "cc.EditBox",
+    "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -697,40 +697,22 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_string": "",
-    "_tabIndex": 0,
-    "editingDidBegan": [],
-    "textChanged": [],
-    "editingDidEnded": [],
-    "editingReturn": [],
-    "_N$backgroundImage": null,
-    "_N$returnType": 0,
-    "_N$inputFlag": 5,
-    "_N$inputMode": 3,
-    "_N$fontSize": 50,
-    "_N$lineHeight": 40,
-    "_N$fontColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_N$placeholder": "提现金额大于100",
-    "_N$placeholderFontSize": 30,
-    "_N$placeholderFontColor": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_N$maxLength": 8,
-    "_N$stayOnTop": false
+    "_actualFontSize": 30,
+    "_fontSize": 30,
+    "_lineHeight": 40,
+    "_enableWrapText": true,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
+    "_spacingX": 0,
+    "_N$string": "提现金额大于100",
+    "_N$horizontalAlign": 0,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 2
   },
   {
     "__type__": "cc.Node",
-    "_name": "New EditBox",
+    "_name": "label",
     "_objFlags": 0,
     "_parent": {
       "__id__": 23
@@ -772,7 +754,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -3,
+      "x": 0,
       "y": 0
     },
     "_skewX": 0,
@@ -791,10 +773,10 @@
     },
     "_children": [
       {
-        "__id__": 22
+        "__id__": 24
       },
       {
-        "__id__": 24
+        "__id__": 22
       }
     ],
     "_tag": -1,
@@ -977,7 +959,7 @@
     "asset": {
       "__uuid__": "5bae5cd4-da7e-4cd1-b365-fae6f67f2491"
     },
-    "fileId": "93AC73pB1LC7XsBuoSdfhB",
+    "fileId": "d1cddH/doRNQ4Aodz8556bh",
     "sync": false
   },
   {
