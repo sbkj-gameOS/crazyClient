@@ -1373,7 +1373,7 @@ cc.Class({
             //根据方位判断parent      
             opParent = cc.find("Canvas/content/handcards/deskcard/kong") ;
             if(data.action == "chi"){
-                function sortNumber(a,b){return b - a}
+                function sortNumber(a,b){return a - b}
                 data.cards.push(data.card); 
                 data.cards.sort(sortNumber);
                 opCards = data.cards;
@@ -1401,7 +1401,7 @@ cc.Class({
             context.otherHandCardRemove(data,context,player.tablepos);
             let opCards , back = false , fangwei = player.tablepos ;
             if(data.action =='chi'){
-                function sortNumber(a,b){return b - a}
+                function sortNumber(a,b){return a - b}
                 data.cards.push(data.card); 
                 data.cards.sort(sortNumber);
                 opCards = data.cards;
@@ -1643,6 +1643,8 @@ cc.Class({
                 for(let i = 0;i< action.length;i++){
                     var isGang = false;
                     var cards = context.decode(action[i].card);
+                    function sortNumber(a,b){return a - b}
+                    cards.sort(sortNumber);
                     if(action[i].type =='an'){
                         isGang =true;
                     }

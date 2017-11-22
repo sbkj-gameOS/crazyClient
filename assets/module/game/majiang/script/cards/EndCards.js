@@ -72,6 +72,8 @@ cc.Class({
             let kong = cc.instantiate(this.mjkong);
             kong.parent = this.mjloyad;
             let action = this.decode(this.data.actions[i].card);
+            function sortNumber(a,b){return a - b};
+            action.sort(sortNumber);
                 if(this.data.actions[i].action=='gang'&&action.length ==1){
                         let c=[action[0],action[0],action[0],action[0]];
                         for(let h = 0; h<4 ;h++){
@@ -108,12 +110,9 @@ cc.Class({
                 }else{
                     for(let j=0;j<action.length;j++){
                         let card = cc.instantiate(this.card);
-                        function sortNumber(a,b){return b - a}
-                        
                         //console.log(cd[j]);
                         let a = false;
                         let c = action[j];
-                        c.sort(sortNumber);
                         let b = card.getComponent('DanAction');                          
                         b.init(c,a,'');
                         b.target.height = 53;
