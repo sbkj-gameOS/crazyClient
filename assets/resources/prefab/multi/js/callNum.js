@@ -13,10 +13,7 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
-        text: {
-            default:0,
-            type:cc.EditBox
-        },
+        text:cc.Label,
         notice: cc.Label
     },
     

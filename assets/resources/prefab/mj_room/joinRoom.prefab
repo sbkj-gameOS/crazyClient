@@ -4761,9 +4761,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 90,
-      "g": 78,
-      "b": 78,
+      "r": 190,
+      "g": 171,
+      "b": 170,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -4774,8 +4774,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 76.67,
-      "height": 30
+      "width": 76,
+      "height": 49
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -4794,26 +4794,30 @@
     "groupIndex": 0
   },
   {
-    "__type__": "cc.Label",
+    "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 148
     },
     "_enabled": true,
-    "_useOriginalSize": false,
-    "_actualFontSize": 30,
-    "_fontSize": 30,
-    "_lineHeight": 30,
-    "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
-    "_spacingX": 0,
-    "_N$string": "删  除",
-    "_N$horizontalAlign": 1,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 0
+    "_spriteFrame": {
+      "__uuid__": "8aa806a7-483e-45a1-a702-e292d553851b"
+    },
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_atlas": null
   },
   {
     "__type__": "cc.PrefabInfo",
