@@ -10,6 +10,26 @@ cc.Class({
             default: null,
             type: cc.Node
         },
+        b_chun:{
+            default: null,
+            type: cc.SpriteFrame
+        },
+        b_ju:{
+            default: null,
+            type: cc.SpriteFrame
+        },
+        b_lan:{
+            default: null,
+            type: cc.SpriteFrame
+        },
+        b_xia:{
+            default: null,
+            type: cc.SpriteFrame
+        },
+        b_zhu:{
+            default: null,
+            type: cc.SpriteFrame
+        },
     },
 
     // use this for initialization
@@ -28,26 +48,56 @@ cc.Class({
         }else if(fangwei == 'right'){
             fw = 'R'
         }
-
-        if(cvalue==-8){
-            deskcard = fw+'_autumn';//秋
-        } else if(cvalue==-7){
-            deskcard = fw+'_bamboo';//竹
-        } else if(cvalue==-6){
-            deskcard = fw+'_chrysanthemum';//菊
-        } else if(cvalue==-5){
-            deskcard = fw+'_orchid';//兰
-        } else if(cvalue == -4){
-            deskcard = fw+'_plum';//梅
-        }else if(cvalue == -3){
-            deskcard = fw+'_spring';//春
-        }else if(cvalue == -2){
-            deskcard = fw+'_summer';//夏
-        }else if(cvalue == -1){
-            deskcard = fw+'_winter';//冬
-        }       
-        cardframe = this.beimi0.getSpriteFrame(deskcard);
-        this.target.getComponent(cc.Sprite).spriteFrame = cardframe;
+        if(fw == 'B'){
+            if(cvalue==-38){
+                deskcard = fw+'_autumn';//秋
+                cardframe = this.beimi0.getSpriteFrame(deskcard);
+                this.target.getComponent(cc.Sprite).spriteFrame = cardframe;
+            } else if(cvalue==-35){
+                deskcard = this.b_zhu;//竹
+                this.target.getComponent(cc.Sprite).spriteFrame = deskcard;
+            } else if(cvalue==-34){
+                deskcard = this.b_ju;//菊
+                this.target.getComponent(cc.Sprite).spriteFrame = deskcard;
+            } else if(cvalue==-33){
+                deskcard = this.b_lan;//兰
+                this.target.getComponent(cc.Sprite).spriteFrame = deskcard;
+            } else if(cvalue == -32){
+                deskcard = fw+'_plum';//梅
+                cardframe = this.beimi0.getSpriteFrame(deskcard);
+                this.target.getComponent(cc.Sprite).spriteFrame = cardframe;
+            }else if(cvalue == -36){
+                deskcard = this.b_chun;//春
+                this.target.getComponent(cc.Sprite).spriteFrame = deskcard;
+            }else if(cvalue == -37){
+                deskcard = this.b_xia;//夏
+                this.target.getComponent(cc.Sprite).spriteFrame = deskcard;
+            }else if(cvalue == -39){
+                deskcard = fw+'_winter';//冬
+                cardframe = this.beimi0.getSpriteFrame(deskcard);
+                this.target.getComponent(cc.Sprite).spriteFrame = cardframe;
+            } 
+        }else{
+            if(cvalue==-38){
+                deskcard = fw+'_autumn';//秋
+            } else if(cvalue==-35){
+                deskcard = fw+'_bamboo';//竹
+            } else if(cvalue==-34){
+                deskcard = fw+'_chrysanthemum';//菊
+            } else if(cvalue==-33){
+                deskcard = fw+'_orchid';//兰
+            } else if(cvalue == -32){
+                deskcard = fw+'_plum';//梅
+            }else if(cvalue == -36){
+                deskcard = fw+'_spring';//春
+            }else if(cvalue == -37){
+                deskcard = fw+'_summer';//夏
+            }else if(cvalue == -39){
+                deskcard = fw+'_winter';//冬
+            } 
+            cardframe = this.beimi0.getSpriteFrame(deskcard);
+            this.target.getComponent(cc.Sprite).spriteFrame = cardframe;
+        }
     },
 
 

@@ -188,9 +188,10 @@ cc.Class({
          //双翻
          garams.twoFan = this.TPTwoF;
         //token值
-         if(cc.beimi.authorization){
+        if(cc.beimi.authorization){
              garams.token = cc.beimi.authorization;
-         }
+        }
+        cc.beimi.playType = 'TP';
         cc.beimi.http.httpPost('/api/room/create',garams,this.sucess,this.error,this);
         console.log(this.TPPlayer +':' +':'+ this.TPTaiFan +':'+ this.TPQiHu +':'+ this.TPUser +':'+ this.TPPayType +':'+ this.TPJuShu);
     },
@@ -215,9 +216,10 @@ cc.Class({
             garams.count = this.LGJuShu;
         }
         //token值
-         if(cc.beimi.authorization){
+        if(cc.beimi.authorization){
              garams.token = cc.beimi.authorization;
-         }
+        }
+        cc.beimi.playType = 'LG';
         cc.beimi.http.httpPost('/api/room/create',garams,this.sucess,this.error,this);
         console.log(JSON.stringify(jsonData));
     },
@@ -235,7 +237,6 @@ cc.Class({
             }
             cc.beimi.room = data.room;
             cc.beimi.playway = data.playway;
-            cc.beimi.playType = 'longgang';
             cc.director.loadScene("majiang");
         }else{
             object.notice.getComponent('cc.Label').string ='请求失败';
