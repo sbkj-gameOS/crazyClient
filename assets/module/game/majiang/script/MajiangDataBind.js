@@ -195,11 +195,8 @@ cc.Class({
     onLoad: function () {
          //cc.beimi.cardNum = 17;
          //cc.beimi.playerNum = 2;
-        if(cc.sys.localStorage.getItem('notice')!='true'){
-            this.noticeShare.cascadeOpacity =false;
-            this.noticeShare.active = true;
-            cc.sys.localStorage.setItem('notice','true');
-        }
+        this.noticeShare.cascadeOpacity =false;
+           
         this.connect();
         cc.sys.localStorage.removeItem('dis');        
         //ljh追加 房号的显示
@@ -574,6 +571,7 @@ cc.Class({
             }));*/
             //记录听得状态后，在出牌阶段判断状态并发送听牌事件。
             cc.sys.localStorage.setItem('ting','true') ;
+
             event.stopPropagation();
             self.getSelf().shouOperationMune();            
         });
@@ -617,13 +615,16 @@ cc.Class({
                 this.right_player.active = false;
                 this.deskcards_current_panel.width = 650;
                 this.deskcards_top_panel.width = 650;
+                this.deskcards_top_panel.y =10;
             }else if(cc.beimi.playerNum == 3){
                 this.left_player.active = false;      
                 this.deskcards_current_panel.width = 600;
                 this.deskcards_top_panel.width = 600;  
                 this.deskcards_current_panel.x = -154;
                 this.deskcards_top_panel.x = -144;     
-                this.deskcards_right_panel.x = -83;   
+                this.deskcards_right_panel.x = -83;  
+                this.deskcards_top_panel.y =10;
+                
             }
             // if(cc.beimi.game.type.model == 'pipei'){
             //     this.tuoguan.active = false;
@@ -678,7 +679,7 @@ cc.Class({
         }
     },
     over_event: function(){
-        clearTimeout(mj.t);        
+              
         cc.beimi.maxRound =null;
         cc.beimi.op =null;
         cc.beimi.playerNum = null;
@@ -687,6 +688,7 @@ cc.Class({
         cc.sys.localStorage.setItem('dis','true');        
         cc.director.loadScene('gameMain');
         let mj = cc.find('Canvas').getComponent('MajiangDataBind');
+        clearTimeout(mj.t);  
         // var desk = require("DeskCards");
         // var jiantou = new desk();
         // jiantou.xiaochu();
@@ -727,7 +729,7 @@ cc.Class({
                     cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
                     if(data.id == cc.beimi.user.id){
                         context.readybth.active = false ;
-                       // context.ready2.active = false ;
+                        context.ready2.active = false ;
                     }  
                 }
                 
@@ -761,8 +763,7 @@ cc.Class({
             //如果人满了 要求好友的按钮自动消失
             // if(context.playersarray.length == 2){
             //     context.ready2.active = false;
-            //     var action = cc.moveTo(0.2,-21,-151);
-            //     context.readybth.runAction(action);
+            //     context.readybth.x = -13;
             // }
         }else if(cc.beimi.playerNum == 3){
             if(data.id!=cc.sys.localStorage.getItem('current')&&data.id!=cc.sys.localStorage.getItem('right')&&data.id!=cc.sys.localStorage.getItem('top')){
@@ -797,7 +798,7 @@ cc.Class({
                     cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
                     if(data.id == cc.beimi.user.id){
                         context.readybth.active = false ;
-                       // context.ready2.active = false ;
+                        context.ready2.active = false ;
                     }  
                 }
             }else{
@@ -813,7 +814,7 @@ cc.Class({
                                 cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
                                 if(data.id == cc.beimi.user.id){
                                     context.readybth.active = false ;
-                                    //context.ready2.active = false ;
+                                    context.ready2.active = false ;
                                 }  
                             }
                             if(data.online == false){
@@ -872,7 +873,7 @@ cc.Class({
                     cc.find('Canvas/ready/'+tablepos+'_ready').active =true;
                     if(data.id == cc.beimi.user.id){
                         context.readybth.active = false ;
-                       // context.ready2.active = false ;
+                        context.ready2.active = false ;
                     }  
                 }
             }else{
@@ -1462,9 +1463,9 @@ cc.Class({
         }
         //开局后  头像位移到相应位置
         {
-        var action = cc.moveTo(0.2,570,50);
+        var action = cc.moveTo(0.2,570,80);
         context.right_player.runAction(action);
-        var action = cc.moveTo(0.2,-570,50);
+        var action = cc.moveTo(0.2,-570,80);
         context.left_player.runAction(action);
         var action = cc.moveTo(0.2,-325,297);
         context.top_player.runAction(action);
@@ -1990,7 +1991,7 @@ cc.Class({
             case "init" :
                 object.desk_tip.active = false;
                 readybtn.active = true ;
-                //ready2.active = true ;
+                ready2.active = true ;
                 object.actionnode_deal.active =false ;
 
                 /**
@@ -2431,22 +2432,29 @@ cc.Class({
         var datas = JSON.parse(data) ;
         let time = new Date(datas.end - datas.start).getSeconds();
         let player = mj.player(datas.userid , mj);
+        var dz = cc.find('Canvas/music/'+player.tablepos);
+        dz.active = true;        
+        console.log('talk--------');
         console.log(datas);
         //下载语音
         wx.downloadVoice({
             serverId: datas.serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
             isShowProgressTips: 1, // 默认为1，显示进度提示
             success: function (res) {
+                //dz.active = false;
                 wx.playVoice({
                     localId: res.localId // 需要播放的音频的本地ID，由stopRecord接口获得
                 });
+                setTimeout(function(){
+                    dz.active = false;                    
+                },time)
             }
         });
-        var dz = cc.find('Canvas/music/'+player.tablepos);
-        dz.active = true;
-        setTimeout(function(){
-            dz.active = false;
-        },time);
+        //dz.active = false;
+        
+        // setTimeout(function(){
+            
+        // },time);
         // wx.playVoice({
         //     localId: res.localId // 需要播放的音频的本地ID，由stopRecord接口获得
         // });

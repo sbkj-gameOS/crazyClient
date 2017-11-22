@@ -40,7 +40,7 @@ cc.Class({
         this.jifan.string = fan +'番'+'   '+gang +'杠   ';
         let player = cc.find('Canvas').getComponent('MajiangDataBind').playersarray;
         var cardsss = this.decode(this.data.cards);
-        function sortNumber(a,b){return a - b}
+        function sortNumber(a,b){return b - a}
         cardsss.sort(sortNumber);
         
         for(let i=0;i<player.length;i++){
@@ -108,9 +108,12 @@ cc.Class({
                 }else{
                     for(let j=0;j<action.length;j++){
                         let card = cc.instantiate(this.card);
+                        function sortNumber(a,b){return b - a}
+                        
                         //console.log(cd[j]);
                         let a = false;
                         let c = action[j];
+                        c.sort(sortNumber);
                         let b = card.getComponent('DanAction');                          
                         b.init(c,a,'');
                         b.target.height = 53;

@@ -28,6 +28,9 @@ cc.Class({
     },
     onClick:function(event){
         //开始匹配
+        let mjdata = cc.find('Canvas').getComponent('MajiangDataBind');
+        var action = cc.moveTo(0.5,880,274);
+        mjdata.setting_coin.runAction(action);
         var count = event.target.getComponent('Ready').count;
 
         let socket = this.socket();

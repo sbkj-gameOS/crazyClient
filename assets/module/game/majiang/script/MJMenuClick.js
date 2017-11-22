@@ -59,7 +59,12 @@ cc.Class({
 
         let mjdata = cc.find('Canvas').getComponent('MajiangDataBind');
         //var action = cc.moveTo(0.5,cc.p(390,265));
-        mjdata.setting_coin.x = 390;
+       if(mjdata.setting_coin.x != 390){
+            mjdata.setting_coin.x = 390;
+       }else{
+            var action = cc.moveTo(0.5,880,274);
+            mjdata.setting_coin.runAction(action);
+       }
         this.node.dispatchEvent( new cc.Event.EventCustom('settingclick', true) );
         
     },

@@ -31,6 +31,9 @@ cc.Class({
     },
     unactive: function(event){
         event.target.active = false;
+    },
+    showActive :function(){
+        let mj = cc.find('Canvas').getComponent('MajiangDataBind').noticeShare.active = true;
     }
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
