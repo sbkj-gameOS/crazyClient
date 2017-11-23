@@ -12,6 +12,10 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
+        dong:cc.Node,
+        nan:cc.Node,
+        xi:cc.Node,
+        bei:cc.Node,
         headimg:cc.Node,
         on_off_line:cc.Node,
         username:{
@@ -47,11 +51,11 @@ cc.Class({
         this.creator.active = false ;
         
     },
-    init:function(playerdata , inx , tablepos){
+    init:function(playerdata , inx , tablepos,count){
         this.creator.active = false ;
         this.data = playerdata ;    //存放玩家数据
         this.tablepos = tablepos ;
-        
+        this.count = count;
         if(inx == 0){
             this.selectcards.parent.x = this.selectcards.parent.x * -1 ;
         }else if(inx == 1){
@@ -97,6 +101,13 @@ cc.Class({
                 this.animState.stop("majiang_select");
             }
         }
+    },
+    winds:function(wind){
+       this[wind].active = true;
+       this.wind = wind;
+    },
+    nowind: function(){
+        this[this.wind].active = false;
     }
 
     // called every frame, uncomment this function to activate update callback
