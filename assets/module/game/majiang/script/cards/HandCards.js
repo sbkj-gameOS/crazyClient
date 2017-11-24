@@ -43,9 +43,7 @@ cc.Class({
             console.log('Hello Mover!');
         });
     },
-    init:function(cvalue,pd){
-        //console.log('width:   '+this.target.width)
-        //this.mj.color = new cc.Color(255, 255, 255);        
+    init:function(cvalue,pd){   
         this.take = false;
         this.value = cvalue ;
         let cardframe ;
@@ -146,8 +144,10 @@ cc.Class({
             this.target.y=0;
             this.take = false ;
         }
+    },
+    tingcolor:function(){
+        this.cardvalue.color = new cc.Color(118, 118, 118);
     }
-
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 

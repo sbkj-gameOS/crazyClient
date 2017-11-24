@@ -12,7 +12,12 @@ cc.Class({
         jifan:cc.Label,
         card:cc.Prefab,
         win:cc.Node,
-        hu: cc.Label
+        hu: cc.Label,
+        dong:cc.Node,
+        xi:cc.Node,
+        nan:cc.Node,        
+        bei:cc.Node,
+        
     },
     
     // use this for initialization
@@ -40,12 +45,15 @@ cc.Class({
         this.jifan.string = fan +'番'+'   '+gang +'杠   ';
         let player = cc.find('Canvas').getComponent('MajiangDataBind').playersarray;
         var cardsss = this.decode(this.data.cards);
-        function sortNumber(a,b){return b - a}
+        function sortNumber(a,b){return a - b}
         cardsss.sort(sortNumber);
         
         for(let i=0;i<player.length;i++){
             let pl = player[i].getComponent('MaJiangPlayer');
             if(pl.data.id == this.data.user){
+                if(this[pl.wind]){
+                    this[pl.wind].active = true;                    
+                }
                 headimg = pl.data.headimgurl;
                 this.peoname.string = pl.data.username;
             }
@@ -65,9 +73,6 @@ cc.Class({
             this.mjloyad2.active = true;
             this.win.active = true;
         }
-
-        
-        
         for(let i = 0;i<this.data.actions.length;i++){
             let kong = cc.instantiate(this.mjkong);
             kong.parent = this.mjloyad;
@@ -75,20 +80,20 @@ cc.Class({
             function sortNumber(a,b){return a - b};
             action.sort(sortNumber);
                 if(this.data.actions[i].action=='gang'&&action.length ==1){
-                        let c=[action[0],action[0],action[0],action[0]];
-                        for(let h = 0; h<4 ;h++){
-                            let card = cc.instantiate(this.card);
-                            //console.log(cd[j]);
-                            let a = false;
-                            if(this.data.actions[i].type=='an'&&(h!=2)){
-                                a = true;
-                            }
-                            let b = card.getComponent('DanAction');
-                            b.init(c[h],a,'');
-                            b.target.height = 53;
-                            b.target.width= 32;
-                            card.parent = kong;   
+                    let c=[action[0],action[0],action[0],action[0]];
+                    for(let h = 0; h<4 ;h++){
+                        let card = cc.instantiate(this.card);
+                        //console.log(cd[j]);
+                        let a = false;
+                        if(this.data.actions[i].type=='an'&&(h!=2)){
+                            a = true;
                         }
+                        let b = card.getComponent('DanAction');
+                        b.init(c[h],a,'');
+                        b.target.height = 53;
+                        b.target.width= 32;
+                        card.parent = kong;   
+                    }
                 }else if(this.data.actions[i].action=='dan'){
                     let mj = cc.find('Canvas').getComponent('MajiangDataBind');
                     let player = mj.player(this.data.user,mj);

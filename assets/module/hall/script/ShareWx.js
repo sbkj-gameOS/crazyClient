@@ -26,6 +26,7 @@ cc.Class({
         this.tape.node.on('touchstart', this.touchstartClick, this);
         //松手结束录音
         this.tape.node.on('touchend', this.touchendClick, this);
+        this.tape.node.on('touchmove',this.touchendClick, this);        
         }
         console.log("this.urlAppend:"+this.urlAppend);
         cc.beimi.http.httpPost("/wxController/getWxConfig",{url:window.location.href}, this.sucess , this.error , this);

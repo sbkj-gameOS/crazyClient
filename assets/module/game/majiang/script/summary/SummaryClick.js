@@ -34,6 +34,7 @@ cc.Class({
 
     },
     init:function(){
+    
         var userInfo = this.data;
         this.dabaopai.active = true;
         console.log(userInfo);
