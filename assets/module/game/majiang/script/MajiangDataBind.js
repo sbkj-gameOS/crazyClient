@@ -613,12 +613,14 @@ cc.Class({
          */
         this.node.on("guo",function(event){
             cc.sys.localStorage.setItem('take','true');
-            let socket = self.getSelf().socket();
-            socket.emit("selectaction" , JSON.stringify({
-                action:"guo",
-                actionCard:[]
-            }));
-            //cc.find("");
+            if(cc.sys.localStorage.getItem('guo')!='true'){
+                let socket = self.getSelf().socket();
+                socket.emit("selectaction" , JSON.stringify({
+                    action:"guo",
+                    actionCard:[]
+                }));
+            }
+            cc.sys.localStorage.removeItem('guo');
             self.getSelf().shouOperationMune();
             event.stopPropagation();
         });
@@ -629,7 +631,10 @@ cc.Class({
         cc.sys.localStorage.removeItem('right');
         cc.sys.localStorage.removeItem('left');
         cc.sys.localStorage.removeItem('top');
-        cc.sys.localStorage.removeItem('altake');        
+        cc.sys.localStorage.removeItem('altake');      
+        cc.sys.localStorage.removeItem('alting');
+        cc.sys.localStorage.removeItem('guo');        
+    
         this.joinRoom();
         if(cc.beimi.playerNum){
             if(cc.beimi.playerNum == 2){
@@ -949,11 +954,15 @@ cc.Class({
         let playerss = context.player(data.userid , context);
         if(data.ting){
             context[playerss.tablepos+'ting'].active = true ; 
+            
         }
         if(data.userid == cc.beimi.user.id) {
             context.initcardwidth();
             if(cc.sys.localStorage.getItem('take') != 'true'){
                 return;
+            }
+            if(data.ting){
+                cc.sys.localStorage.setItem('alting','true');                
             }
             cc.sys.localStorage.removeItem('altake');
             cc.sys.localStorage.removeItem('take');
@@ -1367,6 +1376,7 @@ cc.Class({
                     if(temp.name == "hu"){hu = temp ;}
                     if(temp.name == "guo"){guo = temp ;}
                     temp.active = false ;
+                    cc.sys.localStorage.setItem('guo','true');
                 }
                 var count = 0;
                 if(data.gang){
@@ -1731,6 +1741,7 @@ cc.Class({
             }
             if(data.player.ting){
                 context.currentting.active = true ; 
+                cc.sys.localStorage.setItem('alting','true');
             }
             //如果自己有已经打的牌或者其他人有打牌 或者有action的时候
             if(data.player.played||istake||data.player.actions.length>0){
@@ -2271,7 +2282,7 @@ cc.Class({
         context.destroyPlayer(context);  
         context.tingactivefalse();  
         cc.sys.localStorage.removeItem('altake');
-
+        cc.sys.localStorage.removeItem('alting');
      },
      destroyPlayer: function(context){
         var array = context.playersarray;

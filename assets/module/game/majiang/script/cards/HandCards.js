@@ -113,7 +113,9 @@ cc.Class({
                 this.target.width=100;    
             }
             this.target.y = 0;
-
+            if(cc.sys.localStorage.getItem('alting')=='true'){
+                this.mj.getComponent(cc.Button).interactable = false;
+            }
         }
     },
     selected:function(){
