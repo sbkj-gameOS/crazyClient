@@ -115,6 +115,8 @@ cc.Class({
             this.target.y = 0;
             if(cc.sys.localStorage.getItem('alting')=='true'){
                 this.mj.getComponent(cc.Button).interactable = false;
+            }else{
+                this.mj.getComponent(cc.Button).interactable = true;
             }
         }
     },
@@ -136,7 +138,7 @@ cc.Class({
     },
     reinit:function(){
         this.relastone();
-
+        this.mj.getComponent(cc.Button).interactable = true;
         this.lastonecard = false;
 
         this.selectcolor = false ;

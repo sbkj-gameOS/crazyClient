@@ -493,7 +493,7 @@ cc.Class({
          * ActionEvent发射的事件 ， 点击 碰
          */
         this.node.on("peng",function(event){
-            
+            cc.sys.localStorage.removeItem('guo');            
             let socket = self.getSelf().socket();
             socket.emit("selectaction" , JSON.stringify({
                 action:"peng",
@@ -504,6 +504,7 @@ cc.Class({
             event.stopPropagation();
         });
         this.node.on("dan",function(event){
+            cc.sys.localStorage.removeItem('guo');            
             var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
             if ( context.dans && context.dans.length > 1 ) {
                 cc.sys.localStorage.removeItem('take');
@@ -524,6 +525,7 @@ cc.Class({
             event.stopPropagation();
         });
         this.node.on("gang",function(event){
+            cc.sys.localStorage.removeItem('guo');            
             var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
             if ( context.gangs && context.gangs.length > 1 ) {
                 cc.sys.localStorage.removeItem('take');                
@@ -548,6 +550,7 @@ cc.Class({
          * ActionEvent发射的事件 ， 点击 吃
          */
         this.node.on("chi",function(event){
+            cc.sys.localStorage.removeItem('guo');            
             var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
             if ( context.chis && context.chis.length > 1 ) {
                 cc.sys.localStorage.removeItem('take');
@@ -567,6 +570,7 @@ cc.Class({
          * ActionEvent发射的事件 ， 点击 听
          */
         this.node.on("ting",function(event){
+            cc.sys.localStorage.removeItem('guo');            
             /*let socket = self.getSelf().socket();
             socket.emit("selectaction" , JSON.stringify({
                 action:"ting",
@@ -599,6 +603,7 @@ cc.Class({
          * ActionEvent发射的事件 ， 点击 胡
          */
         this.node.on("hu",function(event){
+            cc.sys.localStorage.removeItem('guo');            
             let socket = self.getSelf().socket();
             socket.emit("selectaction" , JSON.stringify({
                 action:"hu",
@@ -1366,6 +1371,7 @@ cc.Class({
             context.dans = data["dans"]?data["dans"]:[];
             context.tings = data["tings"]?data["tings"]:[];
             if(data.deal == true){  //发牌的动作
+                cc.sys.localStorage.setItem('guo','true');
                 // let desk_script = context.actionnode_two.getComponent("DeskCards") ;
                 // desk_script.init(data.card);
                 for(var inx = 0 ; inx < context.actionnode_two_list.children.length ; inx++){
@@ -1376,7 +1382,7 @@ cc.Class({
                     if(temp.name == "hu"){hu = temp ;}
                     if(temp.name == "guo"){guo = temp ;}
                     temp.active = false ;
-                    cc.sys.localStorage.setItem('guo','true');
+                    
                 }
                 var count = 0;
                 if(data.gang){
@@ -2283,6 +2289,7 @@ cc.Class({
         context.tingactivefalse();  
         cc.sys.localStorage.removeItem('altake');
         cc.sys.localStorage.removeItem('alting');
+        cc.sys.localStorage.removeItem('guo');
      },
      destroyPlayer: function(context){
         var array = context.playersarray;
