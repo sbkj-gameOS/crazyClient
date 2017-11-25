@@ -15,12 +15,40 @@ cc.Class({
         target:{
             default:null ,
             type : cc.Node
-        }
+        },
+        tape:cc.Button,
+        
     },
 
     // use this for initialization
     onLoad: function () {
+        this.tape.node.on('touchmove',this.touchendClick, this);
+        this.tape.node.on('mouseup',this.mouseupClick, this);
         
+    },
+    mouseupClick: function(event){
+        console.log(this.y);
+        if(cc.sys.localStorage.getItem('delta')>90){
+            event.target.x = 0;
+            event.target.y = 0;
+            this.node.dispatchEvent( new cc.Event.EventCustom('takecard', true));
+        }
+        event.target.x = 0;
+        event.target.y = 0;
+        cc.sys.localStorage.removeItem('delta');
+    },
+    touchendClick:function(event){
+        var delta = event.touch.getDelta();
+        event.target.x += delta.x;
+        event.target.y += delta.y;
+        cc.sys.localStorage.setItem('delta',event.target.y);
+        console.log(delta);
+        // console.log('currentTarget:'+event.currentTarget.x);
+        // console.log('currentTouch:'+event.currentTouch._point.x);
+        // console.log('target:'+event.target.x);
+        // console.log('touch:'+event.touch._point.x);
+        // console.log('parent:'+ event.target.parent.x+'  '+event.target.parent.name)
+        // console.log('------'+Number(event.touch._point.x - event.target.parent.x));
     },
     onClick:function(event){
         let context = cc.find('Canvas').getComponent('MajiangDataBind');         
@@ -35,6 +63,8 @@ cc.Class({
                     context.tingSelect.children[0].children[i].destroy();
                 }
             }
+            event.target.x = 0;
+            event.target.y = 0;
             this.node.dispatchEvent( new cc.Event.EventCustom('takecard', true) );
         }else{
             

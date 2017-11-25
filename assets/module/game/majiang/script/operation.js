@@ -26,6 +26,7 @@ cc.Class({
             // event.target.scaleX=1.2;
             // event.target.scaleY=1.2;
             var myAction = event.target.getComponent('operation').action ;
+            cc.sys.localStorage.setItem('take','true');             
             var oper = new cc.Event.EventCustom('mjSelection', true) ;
             oper.setUserData(myAction) ;
             this.node.dispatchEvent( oper );
@@ -34,6 +35,7 @@ cc.Class({
         let father = cc.find('Canvas').getComponent('MajiangDataBind').selectfather;
         father.active= false;
         father.children[0].children[1].children.splice(0,father.children[0].children[1].children.length);
+        cc.sys.localStorage.setItem('take','true'); 
         this.node.dispatchEvent( new cc.Event.EventCustom('guo', true) );
     }
     // called every frame, uncomment this function to activate update callback

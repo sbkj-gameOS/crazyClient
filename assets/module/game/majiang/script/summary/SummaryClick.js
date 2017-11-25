@@ -25,16 +25,20 @@ cc.Class({
         bpp:cc.Node,
         num: cc.Label,
         dabaopai:cc.Node,
-        gameend:cc.Node
+        gameend:cc.Node,
+        op:cc.Label,
+        time:cc.Label,
     },
 
     // use this for initialization
     onLoad: function () {
-        
-
+        if(cc.beimi.wanfa){
+            this.op.string = cc.beimi.wanfa;
+        }
+        var time = new Date();
+        this.time.string = '时间：' + time.getHours() +': ' +time.getMinutes();
     },
     init:function(){
-    
         var userInfo = this.data;
         this.dabaopai.active = true;
         console.log(userInfo);

@@ -61,9 +61,17 @@ cc.Class({
             this.musicon.active = false ;
             this.musicoff.active =  true
         }
+        if(this.sound.fillRange==0){
+            this.soundon.active = false ;
+            this.soundoff.active =true;
+        }
 
     },
     onMusicSlide:function(slider){
+        if(cc.sys.localStorage.getItem('nobgm')=='true'){
+            cc.beimi.audio.playBGM("bgMain.mp3");
+            cc.sys.localStorage.removeItem('nobgm');
+        }
         this.music.fillRange  = slider.progress ;
         cc.beimi.audio.setBGMVolume(slider.progress) ;
         this.musicon.active = true ;
@@ -92,10 +100,14 @@ cc.Class({
             this.musicon.active = false ;
             this.musicoff.active =  true;
             cc.beimi.audio.pauseAll();
+            cc.beimi.audio.setBGMVolume(0);
+            cc.sys.localStorage.setItem('nobgm','true');
         }else{
             this.musicon.active = true ;
             this.musicoff.active =  false;
-            cc.beimi.audio.resumeAll();
+            cc.beimi.audio.playBGM("bgMain.mp3");
+            cc.beimi.audio.setBGMVolume(this.musicSlider.progress);
+            cc.sys.localStorage.removeItem('nobgm');
         }
     }
     // called every frame, uncomment this function to activate update callback

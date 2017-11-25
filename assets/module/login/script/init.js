@@ -79,8 +79,9 @@ cc.Class({
             }else{
                 window.io = require("socket.io");
             }
-            cc.beimi.audio.playBGM("bgMain.mp3");
-            cc.beimi.audio.setSFXVolume(0.5);
+            if(cc.sys.localStorage.getItem('nobgm') != 'true'){
+                cc.beimi.audio.playBGM("bgMain.mp3");
+            }
         }
     },
    

@@ -20,7 +20,8 @@ cc.Class({
     onLoad: function () {
 
     },
-    onClick:function(event , data){        
+    onClick:function(event , data){     
+        cc.sys.localStorage.setItem('take','true');                        
         this.node.dispatchEvent( new cc.Event.EventCustom(data, true) );
     },
     click: function(event){

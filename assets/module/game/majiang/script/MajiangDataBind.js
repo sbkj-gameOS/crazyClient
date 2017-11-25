@@ -241,6 +241,7 @@ cc.Class({
         this.right ='';
         this.left = '';
         this.top = '';
+        cc.beimi.wanfa=null;
 
         this.centertimer = null ;
         /**
@@ -397,7 +398,7 @@ cc.Class({
         });
         this.node.on('takecard', function (event) {
             var context = cc.find('Canvas').getComponent('MajiangDataBind');             
-            cc.beimi.audio.playSFX('select.mp3');
+            cc.beimi.audio.playSFX('select.mp3');                            
             if(cc.sys.localStorage.getItem('take') == 'true'){
                 let card = event.target.getComponent("TakeMJCard");
                 if(card != null){
@@ -412,7 +413,6 @@ cc.Class({
                     let socket = self.getSelf().socket();
                     
                     if (cc.sys.localStorage.getItem('ting') == 'true') {   
-                        cc.sys.localStorage.setItem('alting','true');                        
                         cc.beimi.audio.playSFX('nv/ting.mp3');                                
                         let socket = self.getSelf().socket();
                         cc.sys.localStorage.removeItem('ting') ;
@@ -506,6 +506,7 @@ cc.Class({
         this.node.on("dan",function(event){
             var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
             if ( context.dans && context.dans.length > 1 ) {
+                cc.sys.localStorage.removeItem('take');
                 context.mjOperation('dan', context.dans,context);
             } else {
                 let socket = self.getSelf().socket();
@@ -525,6 +526,7 @@ cc.Class({
         this.node.on("gang",function(event){
             var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
             if ( context.gangs && context.gangs.length > 1 ) {
+                cc.sys.localStorage.removeItem('take');                
                 context.mjOperation('gang', context.gangs,context);
             } else {
                 let socket = self.getSelf().socket();
@@ -548,6 +550,7 @@ cc.Class({
         this.node.on("chi",function(event){
             var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
             if ( context.chis && context.chis.length > 1 ) {
+                cc.sys.localStorage.removeItem('take');
                 context.mjOperation('chi', context.chis,context);
             } else {
                 let socket = self.getSelf().socket();
@@ -572,8 +575,9 @@ cc.Class({
             //记录听得状态后，在出牌阶段判断状态并发送听牌事件。
             var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
             cc.sys.localStorage.setItem('ting','true') ;
+            context.initcardwidth(true);
             self.getSelf().tingAction();                 
-            if ( context.tings && context.tings.length > 0 ){
+            if (context.tings){
                 let length =cc.find('Canvas/content/handcards/deskcard/layout').children.length;
                 for(let j = 0 ; j< context.tings.length;j++){
                     let cv = context.tings[j].card;                                    
@@ -608,6 +612,7 @@ cc.Class({
          * ActionEvent发射的事件 ， 点击 过
          */
         this.node.on("guo",function(event){
+            cc.sys.localStorage.setItem('take','true');
             let socket = self.getSelf().socket();
             socket.emit("selectaction" , JSON.stringify({
                 action:"guo",
@@ -624,7 +629,7 @@ cc.Class({
         cc.sys.localStorage.removeItem('right');
         cc.sys.localStorage.removeItem('left');
         cc.sys.localStorage.removeItem('top');
-        cc.sys.localStorage.removeItem('alting')
+        cc.sys.localStorage.removeItem('altake');        
         this.joinRoom();
         if(cc.beimi.playerNum){
             if(cc.beimi.playerNum == 2){
@@ -946,10 +951,11 @@ cc.Class({
             context[playerss.tablepos+'ting'].active = true ; 
         }
         if(data.userid == cc.beimi.user.id) {
-           
+            context.initcardwidth();
             if(cc.sys.localStorage.getItem('take') != 'true'){
                 return;
             }
+            cc.sys.localStorage.removeItem('altake');
             cc.sys.localStorage.removeItem('take');
             for (var inx = 0; inx < context.playercards.length;i++ ) {
                 let handcards = context.playercards[inx].getComponent("HandCards");
@@ -1064,7 +1070,11 @@ cc.Class({
         let player = context.player(data.userid , context);
         context.select_action_searchlight(data, context , player);
         if(data.userid == cc.beimi.user.id){
-            cc.sys.localStorage.setItem('take','true');
+            if(cc.sys.localStorage.getItem('altake')!='true'){
+                cc.sys.localStorage.setItem('take','true');
+            }else{
+                cc.sys.localStorage.removeItem('altake');                
+            }
             context.initDealHandCards(context , data);   
         }else{
             context.shouOperationMune();                    
@@ -1330,7 +1340,9 @@ cc.Class({
      * @param context
      */
     action_event:function(data, context){
-        context = cc.find('Canvas').getComponent('MajiangDataBind');        
+        context = cc.find('Canvas').getComponent('MajiangDataBind');     
+        cc.sys.localStorage.setItem('altake','true');
+        cc.sys.localStorage.removeItem('take');
        // if(cc.beimi.user.id == data.userid){
             let gang , peng , chi , hu , guo ,dan,ting;
             if(data.chis){
@@ -1353,12 +1365,13 @@ cc.Class({
                     if(temp.name == "dan"){dan = temp ;}
                     if(temp.name == "ting"){ting = temp ;}
                     if(temp.name == "hu"){hu = temp ;}
+                    if(temp.name == "guo"){guo = temp ;}
                     temp.active = false ;
                 }
                 var count = 0;
                 if(data.gang){
                     gang.active = true ;
-                    gang.x = - 250 + count * 120 ;
+                    gang.x = - 250 + count * 100 ;
                     count++;
                 }
                 if(data.dan){
@@ -1376,10 +1389,15 @@ cc.Class({
                     hu.x = - 250 + count * 120 ;
                     count++;
                 }
+                {
+                    guo.active =true;
+                    guo.x = - 250 + count * 120 ;
+                    count++;
+                }
                
-                var action = cc.moveTo(0.1,940 - count*285,-100);
+                var action = cc.moveTo(0.1,1140 - count*285,-100);
                 //context.actionnode_two.active = true;
-                context.actionnode_two.x=(940 - count*285);
+                context.actionnode_two.x=(1040 - count*285);
                 //context.actionnode_two.runAction(action);
                 //context.actionnode_deal.active = true ;
 
@@ -1420,8 +1438,8 @@ cc.Class({
                     guo.x = - 250 + count * 120
                     count++;
                 }  
-                var action = cc.moveTo(0.1,940 - count*285,-100);
-                context.actionnode_two.x=(940 - count*285);                
+                var action = cc.moveTo(0.1,1040 - count*285,-100);
+                context.actionnode_two.x=(1040 - count*285);                
                 //context.actionnode_two.runAction(action);
                 // let ani = context.actionnode_two.getComponent(cc.Animation);
                 // ani.play("majiang_action") ;
@@ -1481,7 +1499,6 @@ cc.Class({
                 opParent = cc.find("Canvas/content/handcards/my/bh-bottom");
                 context.buhuaModle(opCards,opParent,back,fangwei,context,data.action);
             }
-            cc.sys.localStorage.setItem('take','true');
             context.cardModle(opCards,opParent,back,fangwei,context,data.action);//补杠和补蛋的时候，逻辑需要区分。    
         }else{//对家
             opParent = cc.find("Canvas/content/handcards/"+player.tablepos+"desk/kong") ;
@@ -1538,6 +1555,7 @@ cc.Class({
         context.roomInfo.active = true;                
         context.totaljs.string = '局数  '+(data.round+1) +'/'+context.maxRound;
         context.wanfa.string = data.op;
+        cc.beimi.wanfa = data.op;
         //cc.beimi.op = data.op;
         context = cc.find('Canvas').getComponent('MajiangDataBind');   
         context.readyNoActive(context);   
@@ -1713,8 +1731,6 @@ cc.Class({
             }
             if(data.player.ting){
                 context.currentting.active = true ; 
-                cc.sys.localStorage.setItem('alting','true');
-                context.tingAction();
             }
             //如果自己有已经打的牌或者其他人有打牌 或者有action的时候
             if(data.player.played||istake||data.player.actions.length>0){
@@ -1734,17 +1750,19 @@ cc.Class({
                 for(let i = 0;i< action.length;i++){
                     var isGang = false;
                     var cards = context.decode(action[i].card);
-                    function sortNumber(a,b){return a - b}
-                    cards.sort(sortNumber);
+                    //console.log(cards);
+                    
                     if(action[i].type =='an'){
                         isGang =true;
                     }
-                    if(cards.length<4||isGang||action[i].action=='gang'||action[i].action=='peng'){
+                    if(cards.length<4||isGang||action[i].action=='gang'||action[i].action=='peng'||action[i].action=='chi'){
                         if(action[i].action=='gang'&&cards.length==1){
                             let a =cards.concat(cards);
                             let b = a.concat(a)
                             context.cardModle(b,cc.find('Canvas/content/handcards/deskcard/kong'),isGang,'',context,action[i].action);  
                         }else{
+                            function sortNumber(a,b){return a - b}
+                            cards.sort(sortNumber);
                             context.cardModle(cards,cc.find('Canvas/content/handcards/deskcard/kong'),isGang,'',context,action[i].action);  
                         }
                     }else {
@@ -1811,11 +1829,12 @@ cc.Class({
             } 
         },2000)      
     },
-    initcardwidth: function(){
+    initcardwidth: function(ting){
         let length  = cc.find('Canvas/content/handcards/deskcard/layout').children.length; 
         for(let i =0; i<length;i++){
             let target =cc.find('Canvas/content/handcards/deskcard/layout').children[i];
             let card = target.getComponent('HandCards');
+            card.take=false;
             if(cc.beimi.cardNum > 14){ 
                 card.cardvalue.width = 61;
                 target.width=59;
@@ -1823,10 +1842,8 @@ cc.Class({
                 target.width=73;    
             }
             card.target.y = 0; 
-            if(cc.sys.localStorage.getItem('alting')=='true'){
-                card.cardvalue.color = new cc.Color(118, 118, 118);            
-            }else{
-                card.cardvalue.color = new cc.Color(255, 255, 255);      
+            if(!ting){
+                card.cardvalue.color = new cc.Color(255, 255, 255); 
             }
         }
     },
@@ -2253,7 +2270,8 @@ cc.Class({
         context.destroycards('topdesk',context);
         context.destroyPlayer(context);  
         context.tingactivefalse();  
-        cc.sys.localStorage.removeItem('alting');
+        cc.sys.localStorage.removeItem('altake');
+
      },
      destroyPlayer: function(context){
         var array = context.playersarray;
@@ -2547,7 +2565,7 @@ cc.Class({
                 });
                 setTimeout(function(){
                     dz.active = false;                    
-                },time)
+                },time+4000)
             }
         });
         //dz.active = false;

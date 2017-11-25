@@ -12,7 +12,7 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
-        bgVolume:1.0,           // 背景音量
+        bgVolume:0.5,           // 背景音量
 
         deskVolume:1.0,         //   房间 房间音量
         
