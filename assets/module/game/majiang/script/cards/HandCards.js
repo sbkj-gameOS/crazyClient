@@ -103,6 +103,11 @@ cc.Class({
             var anim = this.getComponent(cc.Animation);
             anim.play("majiang_current");
         }   
+        if(cc.sys.localStorage.getItem('alting')=='true'&& pd!= true){
+            this.mj.getComponent(cc.Button).interactable = false;
+        }else if(pd != true){
+            this.mj.getComponent(cc.Button).interactable = true;
+        }
     },
     lastone:function(){
         if(this.lastonecard == false){
@@ -119,6 +124,7 @@ cc.Class({
                 this.mj.getComponent(cc.Button).interactable = true;
             }
         }
+       
     },
     selected:function(){
         this.cardvalue.opacity = 168 ;
@@ -138,7 +144,7 @@ cc.Class({
     },
     reinit:function(){
         this.relastone();
-        this.mj.getComponent(cc.Button).interactable = true;
+     
         this.lastonecard = false;
 
         this.selectcolor = false ;

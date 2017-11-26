@@ -963,11 +963,11 @@ cc.Class({
         }
         if(data.userid == cc.beimi.user.id) {
             context.initcardwidth();
-            if(cc.sys.localStorage.getItem('take') != 'true'){
-                return;
-            }
             if(data.ting){
                 cc.sys.localStorage.setItem('alting','true');                
+            }
+            if(cc.sys.localStorage.getItem('take') != 'true'){
+                return;
             }
             cc.sys.localStorage.removeItem('altake');
             cc.sys.localStorage.removeItem('take');
