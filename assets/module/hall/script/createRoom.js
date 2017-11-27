@@ -46,8 +46,15 @@ cc.Class({
         this.colorBrown = new cc.Color(122, 69, 11);//棕色
         this.init();
         
-        //设置第一个选中的状态
-        selectlastToggle = this.selectOne;
+        if(GameBase.gameModel == 'wz'){
+            selectlastToggle = this.tpBtn;
+        }else{
+            //设置第一个选中的状态
+            selectlastToggle = this.selectOne;
+        }
+        
+
+        
     },
     init:function(){
         this.right1 = cc.instantiate(this.ccMjType);
@@ -69,7 +76,6 @@ cc.Class({
             this.right3.active = false; 
             this.btnList.setPosition(0,75);//位置移动
             this.tpBtn.node.children[2].color = this.colorWhite;
-            selectlastToggle = this.tpBtn;
         }else{
             this.tpBtn.active = false;
             this.lgBtn.active = false;

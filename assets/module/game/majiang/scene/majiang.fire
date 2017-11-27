@@ -3848,7 +3848,7 @@
       }
     ],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 98
@@ -4098,7 +4098,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": -87
+      "y": -7
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -4150,7 +4150,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 3,
-      "y": 64
+      "y": 1
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -7740,7 +7740,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 319.5,
-      "y": 206
+      "y": 207
     },
     "_skewX": 0,
     "_skewY": 0,
