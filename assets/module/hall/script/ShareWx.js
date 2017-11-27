@@ -16,17 +16,17 @@ cc.Class({
         this.urlAppend = '';
         if(GameBase.gameModel == 'wz'){
             this.descNametitle = "首游宝·温州棋牌";
-            this.urlType = "?gameModel=wz";
+            this.urlType = "toWZAuth";
         }else{
             this.descNametitle = "心缘长春棋牌";
-            this.urlType = "?gameModel=ch";
+            this.urlType = "toCHAuth";
         }
 
         if(this.typeStatus == 1){//游戏首页分享
             this.urlAppend = '';
             this.descName = '';
         }else if(this.typeStatus == 2){//游戏中点击分享传递房间号参数
-            this.urlAppend = '&roomNum='+cc.beimi.room;
+            this.urlAppend = '?roomNum='+cc.beimi.room;
             this.descName = cc.beimi.user.nickname+"邀请您加入房间:"+cc.beimi.room+",开始游戏！";
         }
         if(this.tape != null){
@@ -76,7 +76,7 @@ cc.Class({
             wx.onMenuShareAppMessage({
                 title: this.descNametitle,
                 desc: object.descName,
-                link: 'http://game.bizpartner.cn/wxController/toWXAuth'+object.urlType+object.urlAppend,
+                link: 'http://game.bizpartner.cn/wxController/'+object.urlType+object.urlAppend,
                 imgUrl: cc.beimi.user.headimgurl,
                 trigger: function (res) {
                     // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
@@ -96,7 +96,7 @@ cc.Class({
             // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
             wx.onMenuShareTimeline({
                 title: object.descNametitle,
-                link: 'http://game.bizpartner.cn/wxController/toWXAuth'+object.urlType+object.urlAppend,
+                link: 'http://game.bizpartner.cn/wxController/'+object.urlType+object.urlAppend,
                 imgUrl: cc.beimi.user.headimgurl,
                 trigger: function (res) {
                     // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
