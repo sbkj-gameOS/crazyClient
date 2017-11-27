@@ -15,10 +15,19 @@ cc.Class({
             default:null,
             type:cc.Node,
         },
+        wzlogo:cc.Node,
+        chlogo:cc.Node,
     },
 
     // use this for initialization
     onLoad: function () {
+        if(GameBase.gameModel =='wz'){
+            this.wzlogo.active =true;
+            this.tpmjPlery.active =true;
+        }else{
+            this.selectOne.active =true;
+            this.ccmjPlery.active =true;
+        }
         this.colorWhite = new cc.Color(255, 255, 255);//白色
         this.colorBrown = new cc.Color(122, 69, 11);//棕色
         //设置第一个选中的状态

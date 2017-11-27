@@ -72,7 +72,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "3836d8d3-441e-4db9-a771-3d17e1233842"
+      "__uuid__": "ecd8d18c-8b8d-45a0-b0aa-0acc029f7fce"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -104,7 +104,12 @@
     },
     "target": {
       "__id__": 1
-    }
+    },
+    "b_chun": null,
+    "b_ju": null,
+    "b_lan": null,
+    "b_xia": null,
+    "b_zhu": null
   },
   {
     "__type__": "cc.PrefabInfo",

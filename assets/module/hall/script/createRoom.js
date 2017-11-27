@@ -22,13 +22,30 @@ cc.Class({
             default:null,
             type:cc.Toggle,
         },
+        btnList:{
+            default:null,
+            type:cc.Node,
+        },
+        ccBtn:{
+            default:null,
+            type:cc.Toggle,
+        },
+        tpBtn:{
+            default:null,
+            type:cc.Toggle,
+        },
+        lgBtn:{
+            default:null,
+            type:cc.Toggle,
+        },
     },
 
     // use this for initialization
     onLoad: function () {
-        this.init();
         this.colorWhite = new cc.Color(255, 255, 255);//白色
         this.colorBrown = new cc.Color(122, 69, 11);//棕色
+        this.init();
+        
         //设置第一个选中的状态
         selectlastToggle = this.selectOne;
     },
@@ -42,9 +59,26 @@ cc.Class({
         this.right3 = cc.instantiate(this.lgMjType);
         this.right3.parent = this.node;
         this.right3.setPosition(111,-18);
-        this.right1.active = true;
-        this.right2.active = false;
-        this.right3.active = false; 
+        if(GameBase.gameModel == 'wz'){
+            this.ccBtn.isChecked = false;
+            this.tpBtn.isChecked = true;
+            this.ccBtn.active = false;
+
+            this.right1.active = false;
+            this.right2.active = true;
+            this.right3.active = false; 
+            this.btnList.setPosition(0,75);//位置移动
+            this.tpBtn.node.children[2].color = this.colorWhite;
+            selectlastToggle = this.tpBtn;
+        }else{
+            this.tpBtn.active = false;
+            this.lgBtn.active = false;
+
+            this.right1.active = true;
+            this.right2.active = false;
+            this.right3.active = false;
+        }
+        
     },
     toggleClick: function(toggle) {
         //当前选中文字颜色切换白色

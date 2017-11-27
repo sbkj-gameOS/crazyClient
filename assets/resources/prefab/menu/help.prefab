@@ -658,7 +658,11 @@
     },
     "tpmjPlery": {
       "__id__": 103
-    }
+    },
+    "wzlogo": {
+      "__id__": 38
+    },
+    "chlogo": null
   },
   {
     "__type__": "cc.Toggle",
@@ -741,7 +745,7 @@
       }
     ],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 18
@@ -1413,7 +1417,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 2,
-      "y": -119
+      "y": -40
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -2087,7 +2091,7 @@
       }
     ],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 101

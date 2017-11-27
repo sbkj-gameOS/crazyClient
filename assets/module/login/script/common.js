@@ -16,10 +16,28 @@ cc.Class({
             default:null,
             type: cc.Node
         },
+        loginLogoNode:{
+            default:null,
+            type:cc.Node
+        },
+        WZLogo:{
+            default:null,
+            type:cc.SpriteFrame
+        },
+        CCLogo:{
+            default:null,
+            type:cc.SpriteFrame
+        }
     },
     // 首次加载页面方法
     onLoad: function () {
         tongyi = true;
+        var sprite = this.loginLogoNode.getComponent(cc.Sprite);
+        if(GameBase.gameModel =='wz'){
+            sprite.spriteFrame = this.WZLogo;
+        }else{
+            sprite.spriteFrame = this.CCLogo;
+        }
         /**
          * 游客登录，无需弹出注册对话框，先从本地获取是否有过期的对话数据，如果有过期的对话数据，则使用过期的对话数据续期
          * 如果没有对话数据，则重新使用游客注册接口
@@ -134,7 +152,11 @@ cc.Class({
            //cc.beimi.authorization = data.token;
            //cc.beimi.user = data.playUser;
            //cc.sys.localStorage.setItem('userinfo',result);
-           object.reset(data,result);
+           if(GameBase){
+             object.reset(data,result,GameBase);
+           }else{
+             object.reset(data,result);
+           }  
            /**
             * 登录成功后即创建Socket链接
             */

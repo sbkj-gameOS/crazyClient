@@ -225,6 +225,19 @@ cc.Class({
      * 重构后，只有两个消息类型
      */
     onLoad: function () {
+        var sprite = this.bkLogoImg.getComponent(cc.Sprite);
+        //切换游戏首页背景图logo
+        var sprite = this.bkLogoImg.getComponent(cc.Sprite);
+        
+        if(GameBase.gameModel =='wz'){
+            if(cc.beimi.playType == "LG"){
+                sprite.spriteFrame = this.bkLogoImgLG;//龙港游戏logo
+            }else{
+                sprite.spriteFrame = this.bkLogoImgTP;//台炮游戏logo
+            }
+        }else{
+            sprite.spriteFrame = this.bkLogoImgTP;//台炮游戏logo
+        }
          //cc.beimi.cardNum = 17;
          //cc.beimi.playerNum = 2;
         this.noticeShare.cascadeOpacity =false;
@@ -1632,34 +1645,52 @@ cc.Class({
         var temp_player = data.player ;
         var cards = context.decode(temp_player.cards);
 
-        // if(temp_player.powerCard){
-        //     var powerCard = context.decode(temp_player.powerCard);
-        //     context.csNode.active = true;
-        //     //切换财神图片
-        //     var sprite = context.csNode.getComponent(cc.Sprite);
-        //     if(powerCard.length == 1){//财神个数
-        //         sprite.spriteFrame = context.cs1;
-        //         context.csNode.width = 60;
-        //         context.csNode.setPosition(-568,301);
-        //     }else{
-        //         sprite.spriteFrame = context.cs2;
-        //         context.csNode.width = 110;
-        //         context.csNode.setPosition(-551,301);
-        //     }
-        //     if(powerCard&&powerCard.length>0){
-        //         for(let i=0 ; i<cc.find('Canvas/global/main/godcard/child').children.length;i++){
-        //             cc.find('Canvas/global/main/godcard/child').children[i].destroy();
-        //         }
-        //         for(let i= 0 ; i<powerCard.length;i++){
-        //             cc.beimi.caishenCard += powerCard[i]+",";
-        //             var laiziZM = cc.instantiate(context.ZM);
-        //             laiziZM.parent = context.godcard.children[1];
-        //             var LZH  = laiziZM.getComponent('DeskCards');
-        //             LZH.init(powerCard[i],'B',powerCard.length);
-        //             cc.beimi.baopai = powerCard[i];
-        //         }
-        //     }
-        // }
+        if(GameBase.gameModel == 'wz'){
+            if(temp_player.powerCard){
+                var powerCard = context.decode(temp_player.powerCard);
+                context.csNode.active = true;
+                //切换财神图片
+                var sprite = context.csNode.getComponent(cc.Sprite);
+                if(powerCard.length == 1){//财神个数
+                    sprite.spriteFrame = context.cs1;
+                    context.csNode.width = 60;
+                    context.csNode.setPosition(-568,301);
+                }else{
+                    sprite.spriteFrame = context.cs2;
+                    context.csNode.width = 110;
+                    context.csNode.setPosition(-551,301);
+                }
+                if(powerCard&&powerCard.length>0){
+                    for(let i=0 ; i<cc.find('Canvas/global/main/godcard/child').children.length;i++){
+                        cc.find('Canvas/global/main/godcard/child').children[i].destroy();
+                    }
+                    for(let i= 0 ; i<powerCard.length;i++){
+                        cc.beimi.caishenCard += powerCard[i]+",";
+                        var laiziZM = cc.instantiate(context.ZM);
+                        laiziZM.parent = context.godcard.children[1];
+                        var LZH  = laiziZM.getComponent('DeskCards');
+                        LZH.init(powerCard[i],'B',powerCard.length);
+                        cc.beimi.baopai = powerCard[i];
+                    }
+                }
+            }
+        }else{
+            cc.find('Canvas/global/main/godcard').children[0].active =true;
+            if(data.player.powerCard&&data.player.powerCard.length>0){
+                cc.find('Canvas/global/main/godcard/child').children[0].destroy();
+                for(let i= 0 ; i<data.player.powerCard.length;i++){
+                    var laiziZM = cc.instantiate(context.ZM);
+                    laiziZM.parent = context.godcard.children[1];
+                    var LZH  = laiziZM.getComponent('DeskCards');
+                    LZH.init(data.player.powerCard[i],'B',true);
+                }
+            }else{
+                var laiziFM = cc.instantiate(context.FM);
+                var LZH = laiziFM.getComponent('DeskCards');
+                //LZH.init(-4);
+                laiziFM.parent = context.godcard.children[1];
+            }
+        }
         //当前玩家补花 data.player
         var buhua;
         if(temp_player.buHua){
@@ -1796,21 +1827,7 @@ cc.Class({
         //this.statusbtn.active = true ;
         //ljh改  神牌
         
-            cc.find('Canvas/global/main/godcard').children[0].active =true;
-            if(data.player.powerCard&&data.player.powerCard.length>0){
-                cc.find('Canvas/global/main/godcard/child').children[0].destroy();
-                for(let i= 0 ; i<data.player.powerCard.length;i++){
-                    var laiziZM = cc.instantiate(context.ZM);
-                    laiziZM.parent = context.godcard.children[1];
-                    var LZH  = laiziZM.getComponent('DeskCards');
-                    LZH.init(data.player.powerCard[i],'B',true);
-                }
-            }else{
-                var laiziFM = cc.instantiate(context.FM);
-                var LZH = laiziFM.getComponent('DeskCards');
-                //LZH.init(-4);
-                laiziFM.parent = context.godcard.children[1];
-            }
+            
         
         setTimeout(function(){
             //重连判断action
