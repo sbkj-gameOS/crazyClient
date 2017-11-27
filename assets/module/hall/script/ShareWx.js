@@ -153,7 +153,7 @@ cc.Class({
               console.log(share);
               cc.find('Canvas/录音/发送语音1').active =true;
               setTimeout(function(){
-                cc.find('Canvas/录音/发送语音2').active =false;                
+                cc.find('Canvas/录音/发送语音1').active =false;                
               },1000);
             //alert(JSON.stringify(res));
           }

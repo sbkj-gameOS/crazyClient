@@ -28,6 +28,12 @@ cc.Class({
         gameend:cc.Node,
         op:cc.Label,
         time:cc.Label,
+
+        close1:cc.Node,
+        close2:cc.Node,
+
+        goon1:cc.Node,
+        goon2:cc.Node        
     },
 
     // use this for initialization
@@ -36,9 +42,20 @@ cc.Class({
             this.op.string = cc.beimi.wanfa;
         }
         var time = new Date();
-        this.time.string = '时间：' + time.getHours() +': ' +time.getMinutes();
+        var hours = time.getHours();
+        var minutes = time.getMinutes();
+        if(hours<10){
+            hours = '0' + hours;
+        }
+        if(minutes<10){
+            minutes = '0'+ minutes;
+        }
+
+        this.time.string = '时间：'+time.getFullYear()+'/'+(time.getMonth()+1)+'/'+time.getDate()+'  ' + hours +': ' +minutes;
     },
     init:function(){
+        this.goon1.active = true;
+        this.close1.active =true;
         var userInfo = this.data;
         this.dabaopai.active = true;
         console.log(userInfo);
@@ -81,6 +98,8 @@ cc.Class({
         
     },   
     init2: function(){
+        this.goon2.active = true;
+        this.close2.active =true;
         var userInfo = this.data;
         this.gameend.active = true;
         console.log(userInfo);

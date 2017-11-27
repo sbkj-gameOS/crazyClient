@@ -450,8 +450,8 @@ cc.Class({
             }))
         });
         this.node.on('restar',function(event){
-            if(cc.sys.localStorage.getItem('gameover')=='true'){
-                cc.sys.localStorage.removeItem('gameover');
+            console.log(event.getUserData());
+            if(event.getUserData()){
                 cc.director.loadScene('gameMain');
             }else{
                 var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
@@ -1111,7 +1111,7 @@ cc.Class({
                     var laiziZM = cc.instantiate(context.ZM);
                     laiziZM.parent = context.godcard.children[1];
                     var LZH  = laiziZM.getComponent('DeskCards');
-                    LZH.init(data.powerCard[i],'B');
+                    LZH.init(data.powerCard[i],'B',true);
                     cc.beimi.baopai = data.powerCard[i];
                 }
             }else{
@@ -1142,7 +1142,7 @@ cc.Class({
         let temp = cc.instantiate(context.summary) ;
         temp.parent = context.root() ;
         temp.getComponent('SummaryClick').setDataEnd(data); 
-        cc.sys.localStorage.setItem('gameover','true');
+        
     },
     /**
      * 恢复牌局数据， 等待服务端推送 Players数据后进行恢复
@@ -1716,7 +1716,7 @@ cc.Class({
                     var laiziZM = cc.instantiate(context.ZM);
                     laiziZM.parent = context.godcard.children[1];
                     var LZH  = laiziZM.getComponent('DeskCards');
-                    LZH.init(data.player.powerCard[i],'B');
+                    LZH.init(data.player.powerCard[i],'B',true);
                 }
             }else{
                 var laiziFM = cc.instantiate(context.FM);

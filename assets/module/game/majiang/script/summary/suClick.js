@@ -23,7 +23,15 @@ cc.Class({
         //var myAction = event.target.getComponent('SummartClick').action ;
        // oper.setUserData(myAction) ;
         this.node.dispatchEvent(new cc.Event.EventCustom('restar', true));
+  
     },
+    endclick: function(event){
+        var a = {};
+        a.key = true;
+        var oper = new cc.Event.EventCustom('restar', true) ;
+        oper.setUserData(a) ;
+        this.node.dispatchEvent( oper );
+            }
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 

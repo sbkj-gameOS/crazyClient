@@ -32,7 +32,7 @@ cc.Class({
         jiantou2:cc.Node
     },
 
-    init:function(cvalue,fangwei){
+    init:function(cvalue,fangwei,bol){
         //this.jiantou.active  = true;
         this.xiaochu();
         // let ani = this.jiantou.getComponent(cc.Animation);
@@ -68,18 +68,26 @@ cc.Class({
             }else if(cardcolors == -1){
                 deskcard = fangwei+'_white';
             }
-            cc.beimi.audio.playSFX('nv/wind_'+(cardcolors+8)+'.mp3');
+            if(bol != true){
+                cc.beimi.audio.playSFX('nv/wind_'+(cardcolors+8)+'.mp3');                
+            }
             //东南西北风 ， 中发白
         }else{
             if(cardtype == 0){ //万
                 deskcard = fangwei+"_character_"+ (parseInt((this.value%36)/4)+1) ;
-                cc.beimi.audio.playSFX('nv/wan_'+(parseInt((this.value%36)/4)+1)+'.mp3');
+                if(bol != true){
+                    cc.beimi.audio.playSFX('nv/wan_'+(parseInt((this.value%36)/4)+1)+'.mp3');
+                }
             }else if(cardtype == 1){ //筒
                 deskcard = fangwei+"_dot_"+ (parseInt((this.value%36)/4)+1) ;
-                cc.beimi.audio.playSFX('nv/tong_'+(parseInt((this.value%36)/4)+1)+'.mp3');
+                if(bol != true){
+                    cc.beimi.audio.playSFX('nv/tong_'+(parseInt((this.value%36)/4)+1)+'.mp3');
+                }
             }else if(cardtype == 2){  //条
                 deskcard = fangwei+"_bamboo_"+ (parseInt((this.value%36)/4)+1) ;
+                if(bol != true){
                 cc.beimi.audio.playSFX('nv/suo_'+(parseInt((this.value%36)/4)+1)+'.mp3');
+                }
             }
         }
         // if(deskcard == "suo2"){
