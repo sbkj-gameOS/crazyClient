@@ -152,11 +152,7 @@ cc.Class({
            //cc.beimi.authorization = data.token;
            //cc.beimi.user = data.playUser;
            //cc.sys.localStorage.setItem('userinfo',result);
-           if(GameBase){
-             object.reset(data,result,GameBase);
-           }else{
-             object.reset(data,result);
-           }  
+             object.reset(data,result);  
            /**
             * 登录成功后即创建Socket链接
             */

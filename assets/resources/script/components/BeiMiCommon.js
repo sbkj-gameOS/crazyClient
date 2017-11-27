@@ -119,20 +119,15 @@ cc.Class({
         }
         return data ;
     },
-    reset:function(data , result,token){
+    reset:function(data , result){
         //放在全局变量
-        if(token){
-            cc.beimi.authorization = token;
-        }else{
-            if ( data.token ) {
-                if ( data.token.id ) {
-                    cc.beimi.authorization = data.token.id;
-                } else {
-                    cc.beimi.authorization = data.token;
-                }
-            };
-        }
-   
+        if ( data.token ) {
+            if ( data.token.id ) {
+                cc.beimi.authorization = data.token.id;
+            } else {
+                cc.beimi.authorization = data.token;
+            }
+        };
     
         if(data.data){
             cc.beimi.user = data.data ;
