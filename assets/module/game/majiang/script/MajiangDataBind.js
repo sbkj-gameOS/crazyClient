@@ -235,8 +235,6 @@ cc.Class({
             }else{
                 sprite.spriteFrame = this.bkLogoImgTP;//台炮游戏logo
             }
-        }else{
-            sprite.spriteFrame = this.bkLogoImgTP;//台炮游戏logo
         }
          //cc.beimi.cardNum = 17;
          //cc.beimi.playerNum = 2;

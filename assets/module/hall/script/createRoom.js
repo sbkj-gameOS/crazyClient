@@ -48,6 +48,7 @@ cc.Class({
         
         if(GameBase.gameModel == 'wz'){
             selectlastToggle = this.tpBtn;
+            
         }else{
             //设置第一个选中的状态
             selectlastToggle = this.selectOne;
@@ -71,15 +72,14 @@ cc.Class({
             this.tpBtn.isChecked = true;
             this.ccBtn.active = false;
 
+            cc.find("Canvas/New Node/New ScrollView/view/content/New ToggleGroup/龙港麻将").active = true;
+            cc.find("Canvas/New Node/New ScrollView/view/content/New ToggleGroup/台炮麻将").active = true ; 
             this.right1.active = false;
             this.right2.active = true;
             this.right3.active = false; 
             this.btnList.setPosition(0,75);//位置移动
             this.tpBtn.node.children[2].color = this.colorWhite;
         }else{
-            this.tpBtn.active = false;
-            this.lgBtn.active = false;
-
             this.right1.active = true;
             this.right2.active = false;
             this.right3.active = false;
