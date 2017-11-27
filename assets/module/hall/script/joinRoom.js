@@ -128,6 +128,9 @@ cc.Class({
         if(data.playway&&data.room){
             //cc.beimi.room = data.room;
             cc.beimi.playway = data.playway;
+            if(data.game){
+                cc.beimi.playType = data.game;
+            }
             if(data.playerNum){
                 cc.beimi.playerNum = data.playerNum;
             }

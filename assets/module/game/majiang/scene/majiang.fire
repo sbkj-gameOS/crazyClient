@@ -13841,9 +13841,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 153,
+      "g": 143,
+      "b": 143,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -16749,6 +16749,24 @@
     },
     "room_num": {
       "__id__": 346
+    },
+    "bkLogoImg": {
+      "__id__": 29
+    },
+    "bkLogoImgLG": {
+      "__uuid__": "b421863f-6e75-49f8-be2b-95847ca791a8"
+    },
+    "bkLogoImgTP": {
+      "__uuid__": "566a4c00-ad01-4fc6-a80c-65102a9e7669"
+    },
+    "csNode": {
+      "__id__": 149
+    },
+    "cs1": {
+      "__uuid__": "c5e14cd6-8017-4e34-b210-aa727e4a3c7d"
+    },
+    "cs2": {
+      "__uuid__": "237125fa-dcf4-4f65-a26a-389e616777f0"
     }
   },
   {

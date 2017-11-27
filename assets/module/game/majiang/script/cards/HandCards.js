@@ -83,6 +83,25 @@ cc.Class({
                 deskcard = "M_bamboo_"+ (parseInt((this.value%36)/4)+1) ;
             }
         }
+        if(deskcard == null){
+            if(cvalue==-38){
+                deskcard = 'M_autumn';//秋
+            } else if(cvalue==-35){
+                deskcard = 'M_bamboo';//竹
+            } else if(cvalue==-34){
+                deskcard = 'M_chrysanthemum';//菊
+            } else if(cvalue==-33){
+                deskcard = 'M_orchid';//兰
+            } else if(cvalue == -32){
+                deskcard = 'M_plum';//梅
+            }else if(cvalue == -36){
+                deskcard = 'M_spring';//春
+            }else if(cvalue == -37){
+                deskcard = 'M_summer';//夏
+            }else if(cvalue == -39){
+                deskcard = 'M_winter';//冬
+            }
+        }
         // if(deskcard == "suo2"){
         //     cardframe = this.beimi0.getSpriteFrame('麻将牌-牌面-'+deskcard);
         // }else{

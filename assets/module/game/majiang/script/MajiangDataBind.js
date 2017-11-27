@@ -192,6 +192,31 @@ cc.Class({
         room_num:{
             default:null,
             type: cc.Node
+        },
+
+        bkLogoImg:{
+            default:null,
+            type:cc.Node
+        },
+        bkLogoImgLG:{
+            default:null,
+            type:cc.SpriteFrame
+        },
+        bkLogoImgTP:{
+            default:null,
+            type:cc.SpriteFrame
+        },
+        csNode:{
+            default:null,
+            type:cc.Node
+        },
+        cs1:{
+            default:null,
+            type:cc.SpriteFrame
+        },
+        cs2:{
+            default:null,
+            type:cc.SpriteFrame
         }
     },
 
@@ -1083,6 +1108,15 @@ cc.Class({
         }
         let player = context.player(data.userid , context);
         context.select_action_searchlight(data, context , player);
+
+        //摸牌补花
+        if(data.bu){
+            var buhua = context.decode(data.bu);//补花
+            for(var i = 0;i<buhua.length;i++){
+                context.buhuaModle(buhua[i],player.tablepos,'',player.tablepos,context,"");
+            }
+        }
+
         if(data.userid == cc.beimi.user.id){
             if(cc.sys.localStorage.getItem('altake')!='true'){
                 cc.sys.localStorage.setItem('take','true');
@@ -1597,6 +1631,59 @@ cc.Class({
         context.exchange_state("begin" , context);
         var temp_player = data.player ;
         var cards = context.decode(temp_player.cards);
+
+        // if(temp_player.powerCard){
+        //     var powerCard = context.decode(temp_player.powerCard);
+        //     context.csNode.active = true;
+        //     //切换财神图片
+        //     var sprite = context.csNode.getComponent(cc.Sprite);
+        //     if(powerCard.length == 1){//财神个数
+        //         sprite.spriteFrame = context.cs1;
+        //         context.csNode.width = 60;
+        //         context.csNode.setPosition(-568,301);
+        //     }else{
+        //         sprite.spriteFrame = context.cs2;
+        //         context.csNode.width = 110;
+        //         context.csNode.setPosition(-551,301);
+        //     }
+        //     if(powerCard&&powerCard.length>0){
+        //         for(let i=0 ; i<cc.find('Canvas/global/main/godcard/child').children.length;i++){
+        //             cc.find('Canvas/global/main/godcard/child').children[i].destroy();
+        //         }
+        //         for(let i= 0 ; i<powerCard.length;i++){
+        //             cc.beimi.caishenCard += powerCard[i]+",";
+        //             var laiziZM = cc.instantiate(context.ZM);
+        //             laiziZM.parent = context.godcard.children[1];
+        //             var LZH  = laiziZM.getComponent('DeskCards');
+        //             LZH.init(powerCard[i],'B',powerCard.length);
+        //             cc.beimi.baopai = powerCard[i];
+        //         }
+        //     }
+        // }
+        //当前玩家补花 data.player
+        var buhua;
+        if(temp_player.buHua){
+            buhua = context.decode(temp_player.buHua);//补花
+            let temp = context.player(temp_player.playuser, context);
+            //console.log(temp.tablepos);
+            for(var i = 0;i<buhua.length;i++){
+                context.buhuaModle(buhua[i],temp.tablepos,'',temp.tablepos,context,"");
+            }
+        }
+
+        //其他玩家补花 data.players
+        for(var i = 0; i <data.players.length;i++){
+            if(data.players[i].buHua){
+                buhua = context.decode(data.players[i].buHua);//补花
+                let temp = context.player(data.players[i].playuser, context);
+                //console.log(temp.tablepos);
+                for(var i = 0;i<buhua.length;i++){
+                    context.buhuaModle(buhua[i],temp.tablepos,'',temp.tablepos,context,"");
+                }
+            }
+        }
+		
+
         //var cards = temp_player.cards;
         setTimeout(function(){
             context.calcdesc_cards(context , 136 , data.deskcards) ;
@@ -2287,9 +2374,27 @@ cc.Class({
         context.destroycards('topdesk',context);
         context.destroyPlayer(context);  
         context.tingactivefalse();  
+
+        //清空补花数据
+        context.destroybuhuas('left',context);
+        context.destroybuhuas('right',context);
+        context.destroybuhuas('top',context);
+        context.destroybuhuas('my',context);
+
         cc.sys.localStorage.removeItem('altake');
         cc.sys.localStorage.removeItem('alting');
         cc.sys.localStorage.removeItem('guo');
+     },
+     destroybuhuas:function(fangwei,context){
+        let buhua,buhuaList;
+        if(fangwei == "my"){
+            buhuaList = cc.find('Canvas/content/handcards/my/bh-bottom');
+        }else{
+            buhuaList = cc.find('Canvas/content/handcards/'+fangwei+'/buhua');
+        }
+        for(let i = 0;i< buhuaList.children.length;i++ ){
+            buhuaList.children[i].destroy(); 
+        }
      },
      destroyPlayer: function(context){
         var array = context.playersarray;
@@ -2336,7 +2441,14 @@ cc.Class({
             cc.find('Canvas/content/handcards/'+fangwei+'/kong').children[i].destroy();
         }
     },
-    buhuaModle:function(cards,parent,back,fangwei,context,action){
+	buhuaModle:function(cards,parent,back,fangwei,context,action){
+        let opParent;
+        if(parent == "current"){
+            opParent = cc.find("Canvas/content/handcards/my/bh-bottom");
+        }else{
+            opParent = cc.find("Canvas/content/handcards/"+parent+"/buhua");
+        }
+
         var card,temp;
         if(fangwei == 'top'){
             card = cc.instantiate(context.buhua_top);
@@ -2351,10 +2463,12 @@ cc.Class({
             card = cc.instantiate(context.buhua_my);
             temp = card.getComponent('BuHuaAction');
         }
-        //填充内容元素
-        temp.init(cards[i],fangwei);
-        //挂载父节点元素
-        card.parent = parent ;
+        // for(var i = 0; i<cards.length;i++){
+            //填充内容元素
+            temp.init(cards,fangwei);
+            //挂载父节点元素
+            card.parent = opParent;
+        // }
     },
     cardModle: function(cards,parent,back,fangwei,context,action){
         if(cards.length == 1){

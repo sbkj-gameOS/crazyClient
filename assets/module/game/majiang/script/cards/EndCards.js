@@ -17,7 +17,8 @@ cc.Class({
         xi:cc.Node,
         nan:cc.Node,        
         bei:cc.Node,
-        
+        redwin:cc.SpriteFrame,
+        target:cc.Node
     },
     
     // use this for initialization
@@ -70,7 +71,8 @@ cc.Class({
         }
         this.count.string= this.data.count;
         if(this.data.win ==true){
-            this.mjloyad2.active = true;
+            cc.beimi.audio.playSFX('nv/hu.mp3');
+            this.target.getComponent(cc.Sprite).spriteFrame = this.redwin;
             this.win.active = true;
         }
         for(let i = 0;i<this.data.actions.length;i++){

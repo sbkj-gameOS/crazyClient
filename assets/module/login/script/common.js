@@ -160,6 +160,9 @@ cc.Class({
         var data = JSON.parse(result);
         if(data.playway&&data.room){
             cc.beimi.room = object.getUrlParam('roomNum');
+            if(data.game){
+                cc.beimi.playType = data.game;
+            }
             cc.beimi.playway = data.playway;
             if(data.playerNum){
                 cc.beimi.playerNum = data.playerNum;
