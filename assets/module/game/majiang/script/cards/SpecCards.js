@@ -29,19 +29,16 @@ cc.Class({
         if(this.spec == true){
             if(this.inx == 0 || this.inx == 2){
                 this.node.height = this.node.height + 50;
+                
             }else{
                 this.node.width = this.node.width + 30 ;
             }
         }
     },
     reinit:function(){
-        if(this.spec == true){
-            if(this.inx == 0 || this.inx == 2){
-                this.node.height = this.node.height - 50;
-            }else{
-                this.node.width = this.node.width - 30 ;
-            }
-        }
+       
+        this.node.height = this.node.height =0;    
+        this.node.width = this.node.width = 0 ;
         this.spec = false ;
     }
     // called every frame, uncomment this function to activate update callback

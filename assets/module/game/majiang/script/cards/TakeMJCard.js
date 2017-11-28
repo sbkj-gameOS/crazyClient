@@ -23,7 +23,7 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         this.tape.node.on('touchmove',this.touchendClick, this);
-        this.tape.node.on('mouseup',this.mouseupClick, this);
+        this.tape.node.on('touchend',this.mouseupClick, this);
         
     },
     mouseupClick: function(event){

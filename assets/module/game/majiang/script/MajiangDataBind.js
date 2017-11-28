@@ -2125,7 +2125,10 @@ cc.Class({
     },
     initOtherCards:function(group , context , cards , prefab , cardsarray, parent , spec , inx,banker){
     context = cc.find('Canvas').getComponent('MajiangDataBind');        
-        
+        for(let i = 0 ; i < parent.children.length; i ++){
+            parent.children[i].getComponent('SpecCards').node.height = 0;
+            parent.children[i].getComponent('SpecCards').node.width = 0 ;
+        }
         for(var i=group*4 ; i< cards && i<(group+1)*4 ; i++) {
             let temp = cc.instantiate(prefab) ;
             let temp_script = temp.getComponent("SpecCards") ;
