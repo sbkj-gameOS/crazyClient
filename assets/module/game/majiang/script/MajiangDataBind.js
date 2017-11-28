@@ -486,7 +486,6 @@ cc.Class({
             }))
         });
         this.node.on('restar',function(event){
-            console.log(event.getUserData());
             if(event.getUserData()){
                 cc.director.loadScene('gameMain');
             }else{
@@ -590,7 +589,24 @@ cc.Class({
             var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
             if ( context.chis && context.chis.length > 1 ) {
                 cc.sys.localStorage.removeItem('take');
-                context.mjOperation('chi', context.chis,context);
+                let array = [];
+                let array2 = [];
+                function sortNumber(a,b){return a - b}   
+                function sortNum(a,b){return b.id - a.id}              
+                for(let i = 0 ;i<context.chis.length;i++){
+                    let b = {};
+                    context.chis[i].sort(sortNumber);
+                    b.id = context.chis[i][0];
+                    b.value = context.chis[i];
+                    array.push(b);
+                }
+                array.sort(sortNum);
+                for(let i = 0 ; i<array.length;i++){
+                    array2.push(array[i].value);
+                }
+                
+
+                context.mjOperation('chi',array2,context);
             } else {
                 let socket = self.getSelf().socket();
                 socket.emit("selectaction" , JSON.stringify({
@@ -639,6 +655,7 @@ cc.Class({
          * ActionEvent发射的事件 ， 点击 胡
          */
         this.node.on("hu",function(event){
+            //cc.beimi.audio.playSFX('nv/hu.mp3');            
             cc.sys.localStorage.removeItem('guo');            
             let socket = self.getSelf().socket();
             socket.emit("selectaction" , JSON.stringify({
@@ -1614,7 +1631,7 @@ cc.Class({
     play_event:function(data , context){
         cc.beimi.baopai = null;
         context.roomInfo.active = true;                
-        context.totaljs.string = '局数  '+(data.round+1) +'/'+context.maxRound;
+        context.totaljs.string = '圈数  '+(data.round+1) +'/'+context.maxRound;
         context.wanfa.string = data.op;
         cc.beimi.wanfa = data.op;
         //cc.beimi.op = data.op;
@@ -2370,12 +2387,9 @@ cc.Class({
     mjOperation : function(event,params,context){
             this.selectfather.active = true;
             //context.card4.getComponent('operation').setAction(event);
-            
             for(var i = 0 ; i < params.length;i++ ){
                 var b = cc.instantiate(context.card4);
                 b.getComponent('operation').setAction({'name':event,'params':params[i]});
-                function sortNumber(a,b){return a - b} 
-                params[i].sort(sortNumber);
                 b.parent = context.dan_childrend;
                 for(var j = 0 ; j< params[i].length; j++){
                     var a = cc.instantiate(context.mjUnit);
