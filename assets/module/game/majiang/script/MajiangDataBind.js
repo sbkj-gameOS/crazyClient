@@ -2589,7 +2589,7 @@ cc.Class({
             var cardtype  = parseInt(cardcolors / 9);
             var dans = cards.children ;
             //当这个牌是妖姬时
-            if(cardtype==2&& parseInt((card%36)/4)==0&&cards.children.length>0&&type!='yao'&&action!='gang'){
+            if(cardtype==2&& parseInt((card%36)/4)==0&&cards.children.length>0&&type!='yao'&&action=='dan'){
                 resNode = cards ;
                 cardNum = 0;
                 isGang = false;
@@ -2780,13 +2780,13 @@ cc.Class({
         this.selectaction_event({userid:cc.beimi.user.id,cards:[-11],card:-1,action:'gang'},context)  
    },
    dosomethings2: function (data , context){
-    this.selectaction_event({userid:cc.beimi.user.id,cards:[-5],card:-1,action:'dan'},context) 
+    this.selectaction_event({userid:cc.beimi.user.id,cards:[1,37,74],card:1,action:'chi'},context) 
 },
 dosomethings3: function (data , context){
-    this.selectaction_event({userid:'54f40e2d56fc4d519d0c0bf282894b85',cards:[72],card:-1,action:'dan'},context)
-    this.selectaction_event({userid:'b84edfa4ccae4e299da17a8b2111fdb4',cards:[72],card:-1,action:'dan'},context)
-    this.selectaction_event({userid:'512fa36b5894479ebf9f43579d00e314',cards:[72],card:-1,action:'dan'},context)
-    this.selectaction_event({userid:'f4343f1e7066423a8591a6f3a54b2a6c',cards:[72],card:-1,action:'dan'},context)  
+    // this.selectaction_event({userid:'54f40e2d56fc4d519d0c0bf282894b85',cards:[72],card:-1,action:'dan'},context)
+    // this.selectaction_event({userid:'b84edfa4ccae4e299da17a8b2111fdb4',cards:[72],card:-1,action:'dan'},context)
+    // this.selectaction_event({userid:'512fa36b5894479ebf9f43579d00e314',cards:[72],card:-1,action:'dan'},context)
+    this.selectaction_event({userid:cc.beimi.user.id,cards:[72],card:-1,action:'dan'},context)  
 },
 dosomethings4: function (data , context){
     this.selectaction_event({userid:cc.beimi.user.id,cards:[1],card:-1,action:'dan'},context) 

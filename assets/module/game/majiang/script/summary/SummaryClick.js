@@ -57,6 +57,11 @@ cc.Class({
         this.goon1.active = true;
         this.close1.active =true;
         var userInfo = this.data;
+        if(userInfo.gameOver==true){
+            var a = this.goon1.children[0].getComponent(cc.Label);
+            a.string = '查看总成绩';
+            a.fontSize = 30;
+        }
         this.dabaopai.active = true;
         console.log(userInfo);
         let card,baopai;
@@ -74,13 +79,11 @@ cc.Class({
             let win = false;
             let lose = false;
             let liuju;
-            let count = 0;
             for(let i = 0 ; i< userInfo.playOvers.length; i++){
                 var list = cc.instantiate(this.list);
                 list.getComponent('EndCards').setData(userInfo.playOvers[i]);
                 list.parent = this.layout;   
                 if(userInfo.playOvers[i].win ==false){
-                    count = count +1;
                 }
                 if(userInfo.playOvers[i].user == cc.beimi.user.id){
                     if(userInfo.playOvers[i].win ==true){
@@ -90,7 +93,7 @@ cc.Class({
                     }  
                 }
             }
-            if(count == 4){
+            if(userInfo.unHu == true){
                 this.liuju.active =true;
                 this.lose.active = false;
             }
