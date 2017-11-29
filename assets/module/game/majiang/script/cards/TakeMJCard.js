@@ -38,11 +38,12 @@ cc.Class({
         cc.sys.localStorage.removeItem('delta');
     },
     touchendClick:function(event){
-        var delta = event.touch.getDelta();
-        event.target.x += delta.x;
-        event.target.y += delta.y;
-        cc.sys.localStorage.setItem('delta',event.target.y);
-        console.log(delta);
+        if(cc.sys.localStorage.getItem('alting')!='true'&&cc.sys.localStorage.getItem('ting')!='true'){
+            var delta = event.touch.getDelta();
+            event.target.x += delta.x;
+            event.target.y += delta.y;
+            cc.sys.localStorage.setItem('delta',event.target.y);
+        }
         // console.log('currentTarget:'+event.currentTarget.x);
         // console.log('currentTouch:'+event.currentTouch._point.x);
         // console.log('target:'+event.target.x);

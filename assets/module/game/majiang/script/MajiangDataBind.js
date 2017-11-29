@@ -1740,6 +1740,7 @@ cc.Class({
                 var players = data.players[h];
                 //这里有一个判定 如果是重连的话 就不用setouttime   
                 if(data.player.played||players.played||data.player.actions.length>0||players.action){
+                    context.loadding();                    
                     context.initMjCards(groupNums , context , cards , temp_player.banker) ;
 
                     /**
@@ -1821,12 +1822,12 @@ cc.Class({
                 if(context.playercards[i].zIndex > maxvalue){
                     maxvalue = context.playercards[i].zIndex ;
                     maxvalluecard = context.playercards[i] ;
-                }
+                }                
             }
+            context.initcardwidth(); 
             if(temp_player.banker == true&&!data.player.played){
                 maxvalluecard.getComponent("HandCards").lastone() ;
-            }
-            context.initcardwidth();        
+            }         
         } , 1000);
         setTimeout(function(){
             context.exchange_state("play" , context);
@@ -1963,6 +1964,7 @@ cc.Class({
                     }
                 }
             } 
+            context.closeloadding();
         },2000)      
     },
     initcardwidth: function(ting){
