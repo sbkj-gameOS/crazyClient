@@ -1063,6 +1063,10 @@ cc.Class({
                         }else{
                             context.playercards[inx].zIndex = 200 + handcards.value ;
                         }
+
+                        if(context.playercards[inx].children[1].active){
+                            context.playercards[inx].zIndex = -1;
+                        }
                     }
                     inx = inx + 1 ;     //遍历 ++,不处理移除的 牌
                 }
@@ -1573,9 +1577,6 @@ cc.Class({
                 opCards = data.cards;
             } else if ( data.action == "dan" ) {
                 opCards = data.cards;
-            }else if(data.action == "buhua"){
-                opParent = cc.find("Canvas/content/handcards/my/bh-bottom");
-                context.buhuaModle(opCards,opParent,back,fangwei,context,data.action);
             }
             context.cardModle(opCards,opParent,back,fangwei,context,data.action);//补杠和补蛋的时候，逻辑需要区分。    
         }else{//对家
@@ -1600,9 +1601,6 @@ cc.Class({
                 opCards = data.cards;
             }else if(data.action == 'dan'){
                 opCards = data.cards;
-            }else if(data.action == "buhua"){
-                opParent = cc.find("Canvas/content/handcards/"+player.tablepos+"/buhua") ;
-                context.buhuaModle(opCards,opParent,back,fangwei,context,data.action);
             }
             context.cardModle(opCards,opParent,back,fangwei,context,data.action);
         }
@@ -1663,6 +1661,7 @@ cc.Class({
         if(GameBase.gameModel == 'wz'){
             if(temp_player.powerCard){
                 var powerCard = context.decode(temp_player.powerCard);
+                cc.beimi.powerCard = powerCard;
                 context.csNode.active = true;
                 //切换财神图片
                 var sprite = context.csNode.getComponent(cc.Sprite);
@@ -1735,7 +1734,13 @@ cc.Class({
             context.calcdesc_cards(context , 136 , data.deskcards) ;
         } , 0) ;
         var groupNums = 0 ;
-        for(var times = 0 ; times < 4 ; times++){
+        var pTimes;
+        if(GameBase.gameModel =='wz'){
+            pTimes = 5;
+        }else{
+            pTimes = 4;
+        }
+        for(var times = 0 ; times < pTimes ; times++){
             for(let h=0 ;h<data.players.length;h++){
                 var players = data.players[h];
                 //这里有一个判定 如果是重连的话 就不用setouttime   
@@ -1813,16 +1818,19 @@ cc.Class({
             var maxvalluecard ;
             //排序 
             for(var i=0 ; i<context.playercards.length ; i++ ){
-                let temp_script = context.playercards[i].getComponent("HandCards") ;
-                if(temp_script.value >= 0){
-                    context.playercards[i].zIndex = temp_script.value ;
-                }else{
-                    context.playercards[i].zIndex = 200 + temp_script.value ;
+                if(context.playercards[i].children[1].active == false){
+                    let temp_script = context.playercards[i].getComponent("HandCards") ;
+                    if(temp_script.value >= 0){
+                        context.playercards[i].zIndex = temp_script.value ;
+                    }else{
+                        context.playercards[i].zIndex = 200 + temp_script.value ;
+                    }
+                    if(context.playercards[i].zIndex > maxvalue){
+                        maxvalue = context.playercards[i].zIndex ;
+                        maxvalluecard = context.playercards[i] ;
+                    } 
                 }
-                if(context.playercards[i].zIndex > maxvalue){
-                    maxvalue = context.playercards[i].zIndex ;
-                    maxvalluecard = context.playercards[i] ;
-                }                
+
             }
             context.initcardwidth(); 
             if(temp_player.banker == true&&!data.player.played){
