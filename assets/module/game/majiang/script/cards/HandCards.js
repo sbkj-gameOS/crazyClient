@@ -29,7 +29,10 @@ cc.Class({
             default: null,
             type: cc.Node
         },
-
+        csImageTop:{
+            default: null,
+            type: cc.Node
+        },
     },
 
     // use this for initialization
@@ -43,7 +46,8 @@ cc.Class({
             console.log('Hello Mover!');
         });
     },
-    init:function(cvalue,pd){   
+    init:function(cvalue,pd){
+
         this.take = false;
         this.value = cvalue ;
         let cardframe ;
@@ -55,6 +59,20 @@ cc.Class({
     
         let deskcard ;
         this.lastonecard = false;
+
+        let csType1,csType2;
+        let csCardColors1,csCardColors2;
+        let csValue1,csValue2;
+        if(cc.beimi.powerCard){
+            csCardColors1 = parseInt(cc.beimi.powerCard[0]/4 );
+            csType1 = parseInt(csCardColors1 / 9);//第一张财神牌类型 
+            csValue1 = (parseInt((cc.beimi.powerCard[0]%36)/4)+1);
+            if(cc.beimi.powerCard.length == 2){
+                csCardColors2 = parseInt(cc.beimi.powerCard[1]/4 );
+                csType2 = parseInt(csCardColors2 / 9);//第二张财神牌类型
+                csValue2 = (parseInt((cc.beimi.powerCard[1]%36)/4)+1);
+            }
+        }
        
         if(cardcolors < 0){
             if(cardcolors==-7){
@@ -74,15 +92,31 @@ cc.Class({
             }
             
             //东南西北风 ， 中发白
+            if(cardcolors == csCardColors1 || cardcolors == csCardColors2){
+                this.csImageTop.active = true;
+                this.target.zIndex = -999+cvalue;
+                this.target.children[0].getComponent(cc.Button).enabled = false;
+            }
         }else{
             if(cardtype == 0){ //万
-                deskcard = "M_character_"+ (parseInt((this.value%36)/4)+1) ;
+                deskcard = "M_character_"+ (parseInt((this.value%36)/4)+1);
             }else if(cardtype == 1){ //筒
                 deskcard = "M_dot_"+ (parseInt((this.value%36)/4)+1) ;
             }else if(cardtype == 2){  //条
                 deskcard = "M_bamboo_"+ (parseInt((this.value%36)/4)+1) ;
             }
+
+            if(cardtype == csType1 && (parseInt((this.value%36)/4)+1) == csValue1){
+                this.csImageTop.active = true;
+                this.target.zIndex = -1;
+                this.target.children[0].getComponent(cc.Button).enabled = false;
+            }else if(cardtype == csType2 && (parseInt((this.value%36)/4)+1) == csValue2){
+                this.csImageTop.active = true;
+                this.target.zIndex = -999+cvalue;
+                this.target.children[0].getComponent(cc.Button).enabled = false;
+            }
         }
+
         if(deskcard == null){
             if(cvalue==-38){
                 deskcard = 'M_autumn';//秋
@@ -100,6 +134,13 @@ cc.Class({
                 deskcard = 'M_summer';//夏
             }else if(cvalue == -39){
                 deskcard = 'M_winter';//冬
+            }
+
+            //牌面显示财神标志
+            if(cvalue.toString().indexOf("-") && cc.beimi.powerCard[0].toString().indexOf(cvalue.toString()) || cc.beimi.powerCard[1].toString().indexOf(cvalue.toString())){
+                this.csImageTop.active = true;
+                this.target.zIndex = -999+cvalue;
+                this.target.children[0].getComponent(cc.Button).enabled = false;
             }
         }
         // if(deskcard == "suo2"){
