@@ -1823,10 +1823,10 @@ cc.Class({
                     maxvalluecard = context.playercards[i] ;
                 }
             }
+            context.initcardwidth(); 
             if(temp_player.banker == true&&!data.player.played){
                 maxvalluecard.getComponent("HandCards").lastone() ;
-            }
-            context.initcardwidth();        
+            }         
         } , 1000);
         setTimeout(function(){
             context.exchange_state("play" , context);
