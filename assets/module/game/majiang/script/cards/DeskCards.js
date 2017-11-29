@@ -29,7 +29,31 @@ cc.Class({
             type: cc.Node
         },
         jiantou:cc.Node,
-        jiantou2:cc.Node
+        jiantou2:cc.Node,
+        b_chun:{
+            default: null,
+            type: cc.SpriteFrame
+        },
+        b_ju:{
+            default: null,
+            type: cc.SpriteFrame
+        },
+        b_lan:{
+            default: null,
+            type: cc.SpriteFrame
+        },
+        b_xia:{
+            default: null,
+            type: cc.SpriteFrame
+        },
+        b_zhu:{
+            default: null,
+            type: cc.SpriteFrame
+        },
+        beimi0: {
+            default: null,
+            type: cc.SpriteAtlas
+        },
     },
 
     init:function(cvalue,fangwei,bol){
@@ -90,12 +114,46 @@ cc.Class({
                 }
             }
         }
-        // if(deskcard == "suo2"){
-        //     cardframe = this.beimi0.getSpriteFrame('麻将牌-牌面-'+deskcard);
-        // }else{
+        var buhuaTrue = false;
+        if(deskcard == null){
+            var buhua = "-32,-33,-34,-35,-36,-37,-38,-39";
+            if(buhua.indexOf(cvalue) >= 0){
+                buhuaTrue = true;
+                if(cvalue==-38){
+                    deskcard = 'B_autumn';//秋
+                    cardframe = this.beimi0.getSpriteFrame(deskcard);
+                    this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
+                } else if(cvalue==-35){
+                    deskcard = this.b_zhu;//竹
+                    this.cardvalue.getComponent(cc.Sprite).spriteFrame = deskcard;
+                } else if(cvalue==-34){
+                    deskcard = this.b_ju;//菊
+                    this.cardvalue.getComponent(cc.Sprite).spriteFrame = deskcard;
+                } else if(cvalue==-33){
+                    deskcard = this.b_lan;//兰
+                    this.cardvalue.getComponent(cc.Sprite).spriteFrame = deskcard;
+                } else if(cvalue == -32){
+                    deskcard = 'B_plum';//梅
+                    cardframe = this.beimi0.getSpriteFrame(deskcard);
+                    this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
+                }else if(cvalue == -36){
+                    deskcard = this.b_chun;//春
+                    this.cardvalue.getComponent(cc.Sprite).spriteFrame = deskcard;
+                }else if(cvalue == -37){
+                    deskcard = this.b_xia;//夏
+                    this.cardvalue.getComponent(cc.Sprite).spriteFrame = deskcard;
+                }else if(cvalue == -39){
+                    deskcard = 'B_winter';//冬
+                    cardframe = this.beimi0.getSpriteFrame(deskcard);
+                    this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
+                } 
+            }
+        }
+
+        if(!buhuaTrue){
             cardframe = this.atlas.getSpriteFrame(deskcard);
-        // }
-        this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
+            this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
+        }
         if(cc.sys.localStorage.getItem('cl')!='true'){
             if(this.jiantou){
                 this.jiantou.active = true;                
