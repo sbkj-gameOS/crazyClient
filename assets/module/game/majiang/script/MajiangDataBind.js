@@ -1533,6 +1533,7 @@ cc.Class({
         //触发音效
         cc.beimi.audio.playSFX('nv/'+data.action+'.mp3');        
         let player = context.player(data.userid , context), opParent, count = 0;
+        context.exchange_searchlight(player.tablepos , context);
         /**
          * 杠碰吃，胡都需要将牌从 触发玩家的 桌牌 里 移除，然后放入当前玩家 桌牌列表里，如果是胡牌，则放到 胡牌 列表里，首先
          * 首先，需要找到触发对象，如果触发对象不是 all ， 则 直接找到 对象对应的玩家 桌牌列表，并找到 桌牌里 的最后 的 牌，
@@ -1935,6 +1936,16 @@ cc.Class({
                     // }
                 }
                 //其他玩家的kong 牌
+                if(data.touchPlay ){
+                    let player = context.player(data.touchPlay , context)
+                    context.exchange_searchlight(player.tablepos , context);
+                    if(data.touchPlay == cc.beimi.user.id){
+                        cc.sys.localStorage.setItem('take','true');
+                    }   
+                }
+                if(!data.player.played&&data.player.banker){
+                    cc.sys.localStorage.setItem('take','true');
+                }
                 if(data.players[i].actions.length>0){            
                     var action = data.players[i].actions;                    
                     for(let j =0 ; j< action.length ;j++){
