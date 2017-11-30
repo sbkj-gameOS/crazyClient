@@ -1723,8 +1723,8 @@ cc.Class({
                 buhua = context.decode(data.players[i].buHua);//补花
                 let temp = context.player(data.players[i].playuser, context);
                 //console.log(temp.tablepos);
-                for(var i = 0;i<buhua.length;i++){
-                    context.buhuaModle(buhua[i],temp.tablepos,'',temp.tablepos,context,"");
+                for(var j = 0;j<buhua.length;j++){
+                    context.buhuaModle(buhua[j],temp.tablepos,'',temp.tablepos,context,"");
                 }
             }
         }
