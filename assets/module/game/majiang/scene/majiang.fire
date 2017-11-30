@@ -7123,8 +7123,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -0.9,
-      "y": 200
+      "x": -1,
+      "y": 175
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -7415,7 +7415,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -398,
+      "x": -413,
       "y": 202
     },
     "_skewX": 0,
@@ -7577,8 +7577,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 455,
-      "y": -162.5
+      "x": 424,
+      "y": -125
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -7739,8 +7739,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 319.5,
-      "y": 207
+      "x": 319,
+      "y": 223
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -7901,8 +7901,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -469.5,
-      "y": -165
+      "x": -289.5,
+      "y": -169
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -11565,7 +11565,12 @@
       "__id__": 262
     },
     "jiantou": null,
-    "jiantou2": null
+    "jiantou2": null,
+    "b_chun": null,
+    "b_ju": null,
+    "b_lan": null,
+    "b_xia": null,
+    "b_zhu": null
   },
   {
     "__type__": "cc.Node",
