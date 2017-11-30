@@ -138,34 +138,41 @@ cc.Class({
         var share = cc.find("Canvas/script/ShareWx").getComponent("ShareWx") ;
         cc.find('Canvas/录音/发送语音2').active =false;
         share.END = new Date().getTime();
-        wx.stopRecord({
-          success: function (res) {
-            //录音上传到微信服务器
-            wx.uploadVoice({
-                localId: res.localId, // 需要上传的音频的本地ID，由stopRecord接口获得
-                isShowProgressTips: 1, // 默认为1，显示进度提示
+        let time = new Date(share.end - share.start).getSeconds();
+        if(time > 3){
+            wx.stopRecord({
                 success: function (res) {
-                    //复制微信服务器返回录音id
-                    let socket = share.socket();
-                    socket.emit('sayOnSound',JSON.stringify({
-                        userid : cc.beimi.user.id,
-                        serverId : res.serverId,
-                        start : share.START,
-                        end : share.END
-                    })) ;
-                    //cc.beimi.serverId = res.serverId;
+                  //录音上传到微信服务器
+                  wx.uploadVoice({
+                      localId: res.localId, // 需要上传的音频的本地ID，由stopRecord接口获得
+                      isShowProgressTips: 1, // 默认为1，显示进度提示
+                      success: function (res) {
+                          //复制微信服务器返回录音id
+                          let socket = share.socket();
+                          socket.emit('sayOnSound',JSON.stringify({
+                              userid : cc.beimi.user.id,
+                              serverId : res.serverId,
+                              start : share.START,
+                              end : share.END
+                          })) ;
+                          //cc.beimi.serverId = res.serverId;
+                      }
+                  });
+                },
+                fail: function (res) {
+                    cc.find('Canvas/录音/发送语音1').active =true;
+                    setTimeout(function(){
+                      cc.find('Canvas/录音/发送语音1').active =false;                
+                    },1000);
+                  //alert(JSON.stringify(res));
                 }
             });
-          },
-          fail: function (res) {
-              console.log(share);
-              cc.find('Canvas/录音/发送语音1').active =true;
-              setTimeout(function(){
-                cc.find('Canvas/录音/发送语音1').active =false;                
-              },1000);
-            //alert(JSON.stringify(res));
-          }
-        });
+        }else{
+            cc.find('Canvas/录音/发送语音1').active =true;
+            setTimeout(function(){
+              cc.find('Canvas/录音/发送语音1').active =false;                
+            },1000);
+        }
     },
     //播放语音
     startClick:function(){
