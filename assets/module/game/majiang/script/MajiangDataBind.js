@@ -1877,6 +1877,7 @@ cc.Class({
             if(data.player.ting){
                 context.currentting.active = true ; 
                 cc.sys.localStorage.setItem('alting','true');
+                context.tingAction(true);                
             }
             //如果自己有已经打的牌或者其他人有打牌 或者有action的时候
             if(data.player.played||istake||data.player.actions.length>0){
@@ -2750,7 +2751,7 @@ cc.Class({
                 });
                 setTimeout(function(){
                     dz.active = false;                    
-                },time+4000)
+                },time+2000)
             }
         });
         //dz.active = false;
@@ -2762,13 +2763,17 @@ cc.Class({
         //     localId: res.localId // 需要播放的音频的本地ID，由stopRecord接口获得
         // });
     },
-    tingAction: function(){
+    tingAction: function(dd){
         let length =cc.find('Canvas/content/handcards/deskcard/layout').children.length;
         for(let i =0; i<length;i++){
             let cards =cc.find('Canvas/content/handcards/deskcard/layout').children[i];
             let button = cc.find('Canvas/content/handcards/deskcard/layout').children[i].children[0];
             let handCards = cards.getComponent("HandCards");
-            handCards.cardvalue.color = new cc.Color(118, 118, 118);
+            if(dd){
+                handCards.cardvalue.color = new cc.Color(255, 255, 255); 
+            }else{
+                handCards.cardvalue.color = new cc.Color(118, 118, 118);                
+            }
             button.getComponent(cc.Button).interactable= false;
         }
     },
