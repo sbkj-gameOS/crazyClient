@@ -1237,16 +1237,19 @@ cc.Class({
         }
         if(cc.beimi.playerNum==2){
             if(mytime==1){
+                context.dong(0);
                 context.publicData(0,data,'current',context.current_player,0,0,context);
                 if(data.players.length==2){          
                     context.publicData(1,data,'top',context.top_player,1,2,context);
                 }
             }else{
+                context.dong(2);
                 context.publicData(0,data,'top',context.top_player,1,2,context);
                 context.publicData(1,data,'current',context.current_player,0,0,context);
             }       
         }else if(cc.beimi.playerNum==3){
             if(mytime==1){
+                context.dong(0);                
                 context.publicData(0,data,'current',context.current_player,0,0,context);
                 if(data.players.length==2){          
                     context.publicData(1,data,'right',context.right_player,0,1,context);        
@@ -1255,18 +1258,21 @@ cc.Class({
                     context.publicData(2,data,'top',context.top_player,1,2,context);
                 }
             }else if(mytime==2){
+                context.dong(1);                
                 context.publicData(0,data,'top',context.top_player,1,2,context);
                 context.publicData(1,data,'current',context.current_player,0,0,context);
                 if(data.players.length==3){
                     context.publicData(2,data,'right',context.right_player,0,1,context);        
                 }
             }else if(mytime==3){
+                context.dong(2);                
                 context.publicData(0,data,'right',context.right_player,0,1,context);
                 context.publicData(1,data,'top',context.top_player,1,2,context);
                 context.publicData(2,data,'current',context.current_player,0,0,context);
             }
         }else{
             if(mytime==1){
+                context.dong(0);                
                 context.publicData(0,data,'current',context.current_player,0,0,context);
                 if(data.players.length==2){          
                     context.publicData(1,data,'right',context.right_player,0,1,context);         
@@ -1279,6 +1285,7 @@ cc.Class({
                     context.publicData(3,data,'left',context.left_player,2,3,context);                                      
                 }
             }else if(mytime == 2){
+                context.dong(3);                
                 context.publicData(0,data,'left',context.left_player,2,3,context);
                 context.publicData(1,data,'current',context.current_player,0,0,context);         
                 if(data.players.length ==3){
@@ -1288,6 +1295,7 @@ cc.Class({
                     context.publicData(3,data,'top',context.top_player,1,2,context);         
                 }
             }else if(mytime ==3){
+                context.dong(2);                
                 context.publicData(0,data,'top',context.top_player,1,2,context);  
                 context.publicData(1,data,'left',context.left_player,2,3,context);
                 context.publicData(2,data,'current',context.current_player,0,0,context);                     
@@ -1295,6 +1303,7 @@ cc.Class({
                     context.publicData(3,data,'right',context.right_player,0,1,context);       
                 }
             }else if(mytime == 4){
+                context.dong(1);                
                 context.publicData(0,data,'right',context.right_player,0,1,context);
                 context.publicData(1,data,'top',context.top_player,1,2,context);
                 context.publicData(2,data,'left',context.left_player,2,3,context);               
@@ -1356,63 +1365,63 @@ cc.Class({
          */
         
         context = cc.find('Canvas').getComponent('MajiangDataBind');
-        let count ;
         for(var inx = 0 ; inx<context.playersarray.length ; inx++){
             let temp = context.playersarray[inx].getComponent("MaJiangPlayer") ;
             if(temp.data.id == data.userid){
                 temp.banker(); 
-                count = temp.count;
                 break ;
             }
         }
-        cc.beimi.bankercount = count;     
+    },
+    dong: function(count){
+        cc.beimi.bankercount = count;         
+    },
+    windFW: function(context){
         if(cc.beimi.playerNum==4){
-            if(count==0){
+            if(cc.beimi.bankercount==0){
                 context.playerint(0).winds('dong');
                 context.playerint(1).winds('nan');
                 context.playerint(2).winds('xi');
                 context.playerint(3).winds('bei');
-            }else if(count ==1){
+            }else if(cc.beimi.bankercount ==1){
                 context.playerint(1).winds('dong');                
                 context.playerint(2).winds('nan');
                 context.playerint(3).winds('xi');
                 context.playerint(0).winds('bei');
-            }else if(count ==2){
+            }else if(cc.beimi.bankercount ==2){
                 context.playerint(2).winds('dong');
                 context.playerint(3).winds('nan');
                 context.playerint(0).winds('xi');
                 context.playerint(1).winds('bei');
-            }else if(count ==3){                
+            }else if(cc.beimi.bankercount ==3){                
                 context.playerint(3).winds('dong');
                 context.playerint(0).winds('nan');
                 context.playerint(1).winds('xi');
                 context.playerint(2).winds('bei');
             }
         }else if(cc.beimi.playerNum==3){
-            if(count ==0){
+            if(cc.beimi.bankercount ==0){
                 context.playerint(0).winds('dong'); 
                 context.playerint(1).winds('nan'); 
                 context.playerint(2).winds('xi'); 
-            }else if(count ==1){
+            }else if(cc.beimi.bankercount ==1){
                 context.playerint(1).winds('dong'); 
                 context.playerint(2).winds('nan'); 
                 context.playerint(0).winds('bei'); 
-            }else if(count ==2){
+            }else if(cc.beimi.bankercount ==2){
                 context.playerint(2).winds('dong'); 
                 context.playerint(0).winds('xi'); 
                 context.playerint(1).winds('bei'); 
             }
         }else if(cc.beimi.playerNum==2){
-            if(count==0){
+            if(cc.beimi.bankercount==0){
                 context.playerint(0).winds('dong');
                 context.playerint(2).winds('xi');
-            }else if(count ==2){
+            }else if(cc.beimi.bankercount ==2){
                 context.playerint(2).winds('dong');
                 context.playerint(0).winds('xi');
             }
         }
-      
-       
     },
     /**
      * 接受服务端的数据，玩家杠碰、吃胡等动作
@@ -1628,6 +1637,7 @@ cc.Class({
      * @param context
      */
     play_event:function(data , context){
+        context.windFW(context);
         cc.beimi.baopai = null;
         context.roomInfo.active = true;                
         context.totaljs.string = '圈数  '+(data.round+1) +'/'+context.maxRound;
