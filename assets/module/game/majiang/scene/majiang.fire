@@ -13497,8 +13497,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 311.3,
-      "height": 44.9
+      "width": 374,
+      "height": 47
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -13506,8 +13506,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -17.4,
-      "y": 2.6
+      "x": -8,
+      "y": 3
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -13577,7 +13577,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 60,
+      "width": 90,
       "height": 30
     },
     "_rotationX": 0,
@@ -13586,7 +13586,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -101,
+      "x": -120,
       "y": 2
     },
     "_skewX": 0,
@@ -13605,8 +13605,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 20,
-    "_fontSize": 20,
+    "_actualFontSize": 30,
+    "_fontSize": 30,
     "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": {
@@ -13653,7 +13653,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 66.74,
+      "width": 100.11,
       "height": 30
     },
     "_rotationX": 0,
@@ -13681,8 +13681,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 20,
-    "_fontSize": 20,
+    "_actualFontSize": 30,
+    "_fontSize": 30,
     "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": null,
@@ -13727,7 +13727,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 64.5,
+      "width": 96.75,
       "height": 30
     },
     "_rotationX": 0,
@@ -13736,8 +13736,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 57.2,
-      "y": 2.8
+      "x": 80,
+      "y": 3
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -13755,8 +13755,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 20,
-    "_fontSize": 20,
+    "_actualFontSize": 30,
+    "_fontSize": 30,
     "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": {

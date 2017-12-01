@@ -1405,14 +1405,14 @@ cc.Class({
                 context.playerint(0).winds('dong'); 
                 context.playerint(1).winds('nan'); 
                 context.playerint(2).winds('xi'); 
-            }else if(cc.beimi.bankercount ==1){
+            }else if(cc.beimi.bankercount ==2){
                 context.playerint(1).winds('dong'); 
                 context.playerint(2).winds('nan'); 
-                context.playerint(0).winds('bei'); 
-            }else if(cc.beimi.bankercount ==2){
-                context.playerint(2).winds('dong'); 
                 context.playerint(0).winds('xi'); 
-                context.playerint(1).winds('bei'); 
+            }else if(cc.beimi.bankercount ==1){
+                context.playerint(2).winds('dong'); 
+                context.playerint(0).winds('nan'); 
+                context.playerint(1).winds('xi'); 
             }
         }else if(cc.beimi.playerNum==2){
             if(cc.beimi.bankercount==0){
