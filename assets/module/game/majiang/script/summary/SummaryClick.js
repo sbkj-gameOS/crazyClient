@@ -33,7 +33,15 @@ cc.Class({
         close2:cc.Node,
 
         goon1:cc.Node,
-        goon2:cc.Node        
+        goon2:cc.Node,
+        csNode:{
+            default:null,
+            type:cc.Node
+        },
+        cs1:{
+            default:null,
+            type:cc.SpriteFrame
+        },
     },
 
     // use this for initialization
@@ -49,6 +57,11 @@ cc.Class({
         }
         if(minutes<10){
             minutes = '0'+ minutes;
+        }
+        //切换游戏财神图片
+        var sprite = this.csNode.getComponent(cc.Sprite);
+        if(GameBase.gameModel =='wz'){
+            sprite.spriteFrame = this.cs1;
         }
 
         this.time.string = '时间：'+time.getFullYear()+'/'+(time.getMonth()+1)+'/'+time.getDate()+'  ' + hours +': ' +minutes;
@@ -66,10 +79,12 @@ cc.Class({
         console.log(userInfo);
         let card,baopai;
         if(cc.beimi.baopai){
-            card = cc.instantiate(this.bp);
-            baopai  = card.getComponent('DeskCards');    
-            baopai.init(cc.beimi.baopai,'B');
-            card.parent = this.bpp;    
+            for(var i = 0;i<cc.beimi.baopai.length; i++){
+                card = cc.instantiate(this.bp);
+                baopai  = card.getComponent('DeskCards');    
+                baopai.init(cc.beimi.baopai[i],'B');
+                card.parent = this.bpp;    
+            }
         }else{
             card = cc.instantiate(this.bpb);
             card.parent = this.bpp;

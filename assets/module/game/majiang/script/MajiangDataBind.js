@@ -1173,12 +1173,13 @@ cc.Class({
                 for(let i=0 ; i<cc.find('Canvas/global/main/godcard/child').children.length;i++){
                     cc.find('Canvas/global/main/godcard/child').children[i].destroy();
                 }
+                cc.beimi.baopai = data.powerCard;
                 for(let i= 0 ; i<data.powerCard.length;i++){
                     var laiziZM = cc.instantiate(context.ZM);
                     laiziZM.parent = context.godcard.children[1];
                     var LZH  = laiziZM.getComponent('DeskCards');
                     LZH.init(data.powerCard[i],'B',true);
-                    cc.beimi.baopai = data.powerCard[i];
+                    // cc.beimi.baopai = data.powerCard[i];
                 }
             }else{
                 var laiziFM = cc.instantiate(context.FM);
@@ -1689,13 +1690,14 @@ cc.Class({
                     for(let i=0 ; i<cc.find('Canvas/global/main/godcard/child').children.length;i++){
                         cc.find('Canvas/global/main/godcard/child').children[i].destroy();
                     }
+                    cc.beimi.baopai = powerCard;
                     for(let i= 0 ; i<powerCard.length;i++){
                         cc.beimi.caishenCard += powerCard[i]+",";
                         var laiziZM = cc.instantiate(context.ZM);
                         laiziZM.parent = context.godcard.children[1];
                         var LZH  = laiziZM.getComponent('DeskCards');
                         LZH.init(powerCard[i],'B',powerCard.length);
-                        cc.beimi.baopai = powerCard[i];
+                        // cc.beimi.baopai = powerCard[i];
                     }
                 }
             }
