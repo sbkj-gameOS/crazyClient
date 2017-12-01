@@ -79,7 +79,7 @@ cc.Class({
     dontLeaveGameClick: function(){
         let mj = cc.find('Canvas').getComponent('MajiangDataBind')        
         let dialog = cc.find("Canvas/isleave") ;
-        mj.alert.put(dialog);
+        dialog.destroy();
     },
     leaveGameClick:function(){
         cc.sys.localStorage.setItem('dis','true');        

@@ -26,7 +26,7 @@ cc.Class({
     overGamenotice:function(){
         var mj = cc.find('Canvas').getComponent('MajiangDataBind');
         if(mj.alert.size()>0){
-            var alert = mj.alert.get();
+            var alert = mj.alert.get('isOver');
             alert.parent = cc.find("Canvas");
             let node = alert.getComponent('overGameClick') ;
             node.init();
