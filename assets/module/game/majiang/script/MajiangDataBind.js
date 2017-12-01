@@ -1572,8 +1572,8 @@ cc.Class({
             opParent = cc.find("Canvas/content/handcards/deskcard/kong") ;
             if(data.action == "chi"){
                 function sortNumber(a,b){return a - b}
-                data.cards.push(data.card); 
                 data.cards.sort(sortNumber);
+                data.cards.splice(1,0,data.card);
                 opCards = data.cards;
             } else if ( data.action == "peng" ) {
                 data.cards.push(data.card); 
@@ -1596,8 +1596,8 @@ cc.Class({
             let opCards , back = false , fangwei = player.tablepos ;
             if(data.action =='chi'){
                 function sortNumber(a,b){return a - b}
-                data.cards.push(data.card); 
                 data.cards.sort(sortNumber);
+                data.cards.splice(1,0,data.card);                
                 opCards = data.cards;
             }else if(data.action == 'peng'){
                 data.cards.push(data.card); 
