@@ -4,6 +4,10 @@ cc.Class({
     extends: beiMiCommon,
     //extends: cc.Component,
     properties: {
+        liuju: cc.Node,
+        //huaction
+        current_hu:cc.Node,
+
         currentting: cc.Node,
         topting: cc.Node,
         rightting: cc.Node,
@@ -789,6 +793,8 @@ cc.Class({
      */
     joinroom_event:function(data , context){
         //如果是2人的模式  就只加自己和对家
+        console.log('------------join------');
+        console.log(this);
         context = cc.find('Canvas').getComponent('MajiangDataBind') ;
         if(cc.beimi.playerNum == 2){
             if(data.id!=cc.sys.localStorage.getItem('current')&&data.id!=cc.sys.localStorage.getItem('top')){
@@ -1197,13 +1203,30 @@ cc.Class({
     },
     allcards_event:function(data , context){
         //结算界面，
+        let playerid;
+        for(let i = 0;i<data.playOvers.length;i++){
+            if(data.playOvers[i].win){
+                playerid = data.playOvers[i].user;
+            }
+        }
+        context.huaction(playerid);
+        setTimeout(function(){context.endList(data,context,playerid)},3000)
+        
+
+    },
+    endList:function(data,context,playerid){
         context.gddesk_cards = context.desk_cards.string;
         context.desk_cards.string = '136';
         let temp = cc.instantiate(context.summary) ;
         temp.parent = context.root() ;
         temp.getComponent('SummaryClick').setData(data); 
         temp.zIndex = 999;
-
+        if(playerid){
+            context.huaction2();
+        }else{
+            context.liuju.active = false;
+        }
+        
     },
     gameOver_event: function(data,context){
         let temp = cc.instantiate(context.summary) ;
@@ -2075,6 +2098,42 @@ cc.Class({
                 context.changecolor(data , context);
             }
         }
+    },
+    huaction: function(playerid){
+        if(playerid){
+            let player = this.player(playerid , this);
+            if(player.tablepos == 'top'){
+                this.current_hu.x = 8;
+                this.current_hu.y = 228;
+                this.current_hu.children[2].x = -172;
+                this.current_hu.children[2].y = -47;
+            }else if(player.tablepos == 'left'){
+                this.current_hu.x = -398;
+                this.current_hu.y = 118;
+                this.current_hu.children[2].x = 3;
+                this.current_hu.children[2].y = -191;
+            }else if(player.tablepos == 'right'){
+                this.current_hu.x = 388;
+                this.current_hu.y = 27;
+                this.current_hu.children[2].x = 5;
+                this.current_hu.children[2].y = 82;
+            }else{
+                this.current_hu.x = 0;
+                this.current_hu.y = 0;
+                this.current_hu.children[2].x = 219;
+                this.current_hu.children[2].y = -65;
+            }
+            let ani = this.current_hu.getComponent(cc.Animation);
+            this.current_hu.active =true;
+            ani.play("current_hu") ;
+        }else{
+            context.liuju.active = true;
+        }
+    },
+    huaction2:function(){
+        let ani = this.current_hu.getComponent(cc.Animation);
+        this.current_hu.active =false;
+        ani.stop("current_hu") ;
     },
     /**
      * 开始打牌，状态标记
