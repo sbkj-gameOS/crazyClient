@@ -757,9 +757,8 @@ cc.Class({
             alert.parent = cc.find("Canvas");
             let node = alert.getComponent('overGameClick') ;
             node.txt.string = '你的好友请求解散房间' ;
-            node.sure.string = '同意';
-            node.nosure.string = '拒绝';
-            node.button.active = true;
+            node.button.active = false;
+            node.button2.active = true;
             node.labei.active =false;
             node.labei2.active = true;
             node.time =30;

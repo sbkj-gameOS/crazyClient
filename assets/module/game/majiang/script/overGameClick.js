@@ -16,7 +16,7 @@ cc.Class({
         button:cc.Node,
         labei: cc.Node,
         txt:cc.Label,
-        sure:cc.Label,
+        button2:cc.Node,
         nosure:cc.Label,
         labei2:cc.Node
     },
@@ -56,6 +56,8 @@ cc.Class({
         
         //this.scene("gameMain" , this);
         this.button.active = false;
+        this.button2.active = false;
+        
         this.labei.active = true;
         this.labei2.active =false;
         // this.daojishi();
