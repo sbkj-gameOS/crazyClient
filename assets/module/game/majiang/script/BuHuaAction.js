@@ -94,7 +94,9 @@ cc.Class({
                 deskcard = fw+'_summer';//夏
             }else if(cvalue == -39){
                 deskcard = fw+'_winter';//冬
-            } 
+            }else if(cvalue == -5){
+                deskcard = fw+'_white';//白
+            }
             cardframe = this.beimi0.getSpriteFrame(deskcard);
             this.target.getComponent(cc.Sprite).spriteFrame = cardframe;
         }
