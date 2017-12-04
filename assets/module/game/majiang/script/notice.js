@@ -50,6 +50,8 @@ cc.Class({
                 } 
                 this.noticecount = this.noticecount+1;
             }
+        }else{
+            clearTimeout(this.set);
         }
     },
     // called every frame, uncomment this function to activate update callback
