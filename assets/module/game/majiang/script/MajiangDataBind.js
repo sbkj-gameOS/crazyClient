@@ -1666,6 +1666,8 @@ cc.Class({
      * @param context
      */
     play_event:function(data , context){
+        cc.sys.localStorage.setItem('notice','true');
+        cc.find('Canvas/notice').active = false;
         context.windFW(context);
         cc.beimi.baopai = null;
         context.roomInfo.active = true;                
