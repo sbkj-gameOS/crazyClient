@@ -1515,7 +1515,7 @@ cc.Class({
                
                 var action = cc.moveTo(0.1,1140 - count*285,-100);
                 //context.actionnode_two.active = true;
-                context.actionnode_two.x=(1040 - count*285);
+                context.actionnode_two.x=(1240 - count*285);
                 //context.actionnode_two.runAction(action);
                 //context.actionnode_deal.active = true ;
 
@@ -1557,7 +1557,7 @@ cc.Class({
                     count++;
                 }  
                 var action = cc.moveTo(0.1,1040 - count*285,-100);
-                context.actionnode_two.x=(1040 - count*285);                
+                context.actionnode_two.x=(1240 - count*285);                
                 //context.actionnode_two.runAction(action);
                 // let ani = context.actionnode_two.getComponent(cc.Animation);
                 // ani.play("majiang_action") ;
