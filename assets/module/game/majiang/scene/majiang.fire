@@ -9713,7 +9713,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "current_hu",
+    "_name": "current_hu_current",
     "_objFlags": 0,
     "_parent": {
       "__id__": 242

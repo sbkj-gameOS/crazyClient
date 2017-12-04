@@ -14,15 +14,17 @@
           "frame": 0,
           "value": [
             0,
-            0
-          ]
+            -1
+          ],
+          "motionPath": []
         },
         {
           "frame": 0,
           "value": [
-            0,
-            -2
-          ]
+            1,
+            -1
+          ],
+          "motionPath": []
         }
       ]
     },

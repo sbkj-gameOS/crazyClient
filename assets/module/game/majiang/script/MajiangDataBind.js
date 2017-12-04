@@ -1205,8 +1205,9 @@ cc.Class({
         //结算界面，
         let playerid;
         for(let i = 0;i<data.playOvers.length;i++){
-            if(data.playOvers[i].win){
+            if(data.playOvers[i].win==true){
                 playerid = data.playOvers[i].user;
+                break;
             }
         }
         context.huaction(playerid);
@@ -1214,7 +1215,7 @@ cc.Class({
         
 
     },
-    endList:function(data,context,playerid){
+    endList:function(data,context,playerid,a){
         context.gddesk_cards = context.desk_cards.string;
         context.desk_cards.string = '136';
         let temp = cc.instantiate(context.summary) ;
@@ -1229,10 +1230,12 @@ cc.Class({
         
     },
     gameOver_event: function(data,context){
+        setTimeout(function(){context.endGameOver(data,context)},3000)   
+    },
+    endGameOver: function(data,context){
         let temp = cc.instantiate(context.summary) ;
         temp.parent = context.root() ;
         temp.getComponent('SummaryClick').setDataEnd(data); 
-        
     },
     /**
      * 恢复牌局数据， 等待服务端推送 Players数据后进行恢复
@@ -2101,30 +2104,39 @@ cc.Class({
     },
     huaction: function(playerid){
         if(playerid){
+            let hu_hu = this.current_hu.getComponent(cc.Animation);
             let player = this.player(playerid , this);
             if(player.tablepos == 'top'){
-                this.current_hu.x = 8;
-                this.current_hu.y = 228;
-                this.current_hu.children[2].x = -172;
-                this.current_hu.children[2].y = -47;
+                hu_hu.node.children[0].x = 7 ;
+                hu_hu.node.children[0].y = 142 ;
+                hu_hu.node.children[1].x = 11 ;
+                hu_hu.node.children[1].y = 121 ;
+                hu_hu.node.children[2].x = -156 ;
+                hu_hu.node.children[2].y = 146 ;
             }else if(player.tablepos == 'left'){
-                this.current_hu.x = -398;
-                this.current_hu.y = 118;
-                this.current_hu.children[2].x = 3;
-                this.current_hu.children[2].y = -191;
+                hu_hu.node.children[0].x = -369 ;
+                hu_hu.node.children[0].y = 76 ;
+                hu_hu.node.children[1].x = -365 ;
+                hu_hu.node.children[1].y = 55 ;
+                hu_hu.node.children[1].x = -358 ;
+                hu_hu.node.children[1].y = -72 ;              
             }else if(player.tablepos == 'right'){
-                this.current_hu.x = 388;
-                this.current_hu.y = 27;
-                this.current_hu.children[2].x = 5;
-                this.current_hu.children[2].y = 82;
+                hu_hu.node.children[0].x = 383 ;
+                hu_hu.node.children[0].y = -31 ;
+                hu_hu.node.children[1].x = 387 ;
+                hu_hu.node.children[1].y = -52 ;   
+                hu_hu.node.children[2].x = 372 ;
+                hu_hu.node.children[2].y = 115 ;             
             }else{
-                this.current_hu.x = 0;
-                this.current_hu.y = 0;
-                this.current_hu.children[2].x = 219;
-                this.current_hu.children[2].y = -65;
+                hu_hu.node.children[0].x = 7 ;
+                hu_hu.node.children[0].y = -69 ;
+                hu_hu.node.children[1].x = 11 ;
+                hu_hu.node.children[1].y = -90 ;
+                hu_hu.node.children[2].x = 219 ;
+                hu_hu.node.children[2].y = -65 ;              
             }
-            let ani = this.current_hu.getComponent(cc.Animation);
             this.current_hu.active =true;
+            let ani = this.current_hu.getComponent(cc.Animation);
             ani.play("current_hu") ;
         }else{
             context.liuju.active = true;
