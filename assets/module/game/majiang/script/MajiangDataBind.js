@@ -240,10 +240,13 @@ cc.Class({
                 sprite.spriteFrame = this.bkLogoImgTP;//台炮游戏logo
             }
         }
-         //cc.beimi.cardNum = 17;
+         if(cc.beimi.cardNum > 14){
+            this.top_panel.parent.x = -142;
+            this.top_panel.parent.y = 258;
+         }
          //cc.beimi.playerNum = 2;
         this.noticeShare.cascadeOpacity =false;
-           
+        
         this.connect();
         cc.sys.localStorage.removeItem('dis');        
         //ljh追加 房号的显示
@@ -2139,7 +2142,7 @@ cc.Class({
             let ani = this.current_hu.getComponent(cc.Animation);
             ani.play("current_hu") ;
         }else{
-            context.liuju.active = true;
+            this.liuju.active = true;
         }
     },
     huaction2:function(){
