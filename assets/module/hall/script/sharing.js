@@ -34,7 +34,7 @@ cc.Class({
         }
         //设置二维码
         if(cc.beimi.authorization){
-            var imgurl = "http://game.bizpartner.cn/registerPlayer/getEWMImage?token="+cc.beimi.authorization;    
+            var imgurl = "http://game.bizpartner.cn/registerPlayer/getEWMImage?gameType="+ GameBase.gameModel+"&token="+cc.beimi.authorization;    
             //var imgurl = "http://192.168.199.203/registerPlayer/getEWMImage?token=bb9f75b4c88b4f3d8b3ab5b0ef505e9a";
                 var sprite = this.img.getComponent(cc.Sprite);
                 cc.loader.load({url:imgurl,type:'jpg'},function(err,texture){
