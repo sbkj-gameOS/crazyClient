@@ -78,9 +78,9 @@ cc.Class({
                 
                 let card = cards.getComponent('HandCards');
                 if(cc.beimi.cardNum > 14){ 
-                    card.cardvalue.width = 65;
-                    card.cardvalue.height = 100;
-                    cards.width=63; 
+                    card.cardvalue.width = 67.5;
+                    card.cardvalue.height = 102.5;
+                    cards.width=65.5; 
                 }else{
                     cards.width=73;    
                 }

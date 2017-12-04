@@ -2032,9 +2032,9 @@ cc.Class({
             let card = target.getComponent('HandCards');
             card.take=false;
             if(cc.beimi.cardNum > 14){ 
-                card.cardvalue.width = 65;
-                card.cardvalue.height = 100;
-                target.width=63;
+                card.cardvalue.width = 67.5;
+                card.cardvalue.height = 102.5;
+                target.width=65.5;
             }else{
                 target.width=73;    
             }
