@@ -30,11 +30,37 @@ cc.Class({
         let gang=0; 
         let fan=0;
         let units;
+        let drop = '';
+        let noTing;
+        let hucards = -111;
         this.hu.string='';
         if(this.data.gang){
             gang = this.data.gang.count;
         }
         if(this.data.balance){
+                let card;
+                let baopai ;
+                let summary = cc.find('Canvas/summary').getComponent('SummaryClick');
+            if(this.data.balance.bao!= -1){
+                card = cc.instantiate(summary.bp);
+                baopai  = card.getComponent('DeskCards');    
+                baopai.init(this.data.balance.bao,'B');
+                card.parent = summary.bpp;   
+            }
+
+
+            if(this.data.balance.huCard){
+                hucards = this.data.balance.huCard;
+            }
+            if(this.data.balance.drop == true){
+                drop = '点炮';
+            }
+            if(this.data.balance.noTing == true){
+                noTing = '未听胡';
+            }else{
+                noTing = '听胡';
+            }
+            this.hu.string += noTing + '  '+drop + ' ';
             units= this.data.balance.units;
             fan = this.data.balance.count ; 
             if(units){
@@ -131,19 +157,29 @@ cc.Class({
         {
             let kong = cc.instantiate(this.mjkong);
             for(let i = 0;i<cardsss.length;i++){
+                if(cardsss[i] != hucards){
+                    kong.parent = this.mjloyad;
+                    let card = cc.instantiate(this.card);
+                    let b = card.getComponent('DanAction');
+                    b.init(cardsss[i],false,'');
+                    b.target.height = 53;
+                    b.target.width= 32;
+                    card.parent = kong;        
+                }  
+            }
+        }
+        {
+            if(this.data.win){
+                let kong = cc.instantiate(this.mjkong);
                 kong.parent = this.mjloyad;
-                let card = cc.instantiate(this.card);
-                   
+                let card = cc.instantiate(this.card);                 
                 let b = card.getComponent('DanAction');
-                b.init(cardsss[i],false,'');
+                b.init(this.data.balance.huCard,false,'');
                 b.target.height = 53;
                 b.target.width= 32;
-                card.parent = kong;        
-            }
-            
+                card.parent = kong;  
+            }       
         }
-        
-
     },
     setData:function(data){
         this.data = data ; 

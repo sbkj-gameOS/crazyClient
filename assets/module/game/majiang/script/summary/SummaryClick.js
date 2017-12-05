@@ -78,16 +78,18 @@ cc.Class({
         this.dabaopai.active = true;
         console.log(userInfo);
         let card,baopai;
-        if(cc.beimi.baopai){
-            for(var i = 0;i<cc.beimi.baopai.length; i++){
-                card = cc.instantiate(this.bp);
-                baopai  = card.getComponent('DeskCards');    
-                baopai.init(cc.beimi.baopai[i],'B');
-                card.parent = this.bpp;    
+        if(GameBase.gameModel =='wz'){
+            if(cc.beimi.baopai){
+                for(var i = 0;i<cc.beimi.baopai.length; i++){
+                    card = cc.instantiate(this.bp);
+                    baopai  = card.getComponent('DeskCards');    
+                    baopai.init(cc.beimi.baopai[i],'B');
+                    card.parent = this.bpp;    
+                }
+            }else{
+                card = cc.instantiate(this.bpb);
+                card.parent = this.bpp;
             }
-        }else{
-            card = cc.instantiate(this.bpb);
-            card.parent = this.bpp;
         }
         this.num.string = cc.find('Canvas').getComponent('MajiangDataBind').gddesk_cards;
         if(userInfo.playOvers){
@@ -97,6 +99,7 @@ cc.Class({
             for(let i = 0 ; i< userInfo.playOvers.length; i++){
                 var list = cc.instantiate(this.list);
                 list.getComponent('EndCards').setData(userInfo.playOvers[i]);
+                
                 list.parent = this.layout;   
                 if(userInfo.playOvers[i].win ==false){
                 }

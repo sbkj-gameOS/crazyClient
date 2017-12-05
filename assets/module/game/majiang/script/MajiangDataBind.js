@@ -1209,9 +1209,12 @@ cc.Class({
         for(let i = 0;i<data.playOvers.length;i++){
             if(data.playOvers[i].win==true){
                 playerid = data.playOvers[i].user;
+                var dan = context.current_hu.children[0].getComponent('DanAction');
+                dan.init(data.playOvers[i].balance.huCard,false,'current','');                
                 break;
             }
         }
+
         context.huaction(playerid);
         setTimeout(function(){context.endList(data,context,playerid)},3000)
         
@@ -1666,8 +1669,10 @@ cc.Class({
      * @param context
      */
     play_event:function(data , context){
-        cc.sys.localStorage.setItem('notice','true');
-        cc.find('Canvas/notice').active = false;
+        if(cc.find('Canvas/notice')){
+            cc.sys.localStorage.setItem('notice','true');
+            cc.find('Canvas/notice').active = false;
+        }
         context.windFW(context);
         cc.beimi.baopai = null;
         context.roomInfo.active = true;                
