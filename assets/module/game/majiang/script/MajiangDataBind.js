@@ -1210,7 +1210,7 @@ cc.Class({
             if(data.playOvers[i].win==true){
                 playerid = data.playOvers[i].user;
                 var dan = context.current_hu.children[0].getComponent('DanAction');
-                dan.init(data.playOvers[i].balance.huCard,false,'current','');                
+                dan.init(data.playOvers[i].balance.huCard,false,'current','1');                
                 break;
             }
         }
@@ -1574,6 +1574,10 @@ cc.Class({
         //触发音效
         cc.beimi.audio.playSFX('nv/'+data.action+'.mp3');        
         let player = context.player(data.userid , context), opParent, count = 0;
+        let jiantou;
+        if(data.target){
+            jiantou = context.player(data.target , context).tablepos;
+        }
         context.exchange_searchlight(player.tablepos , context);
         /**
          * 杠碰吃，胡都需要将牌从 触发玩家的 桌牌 里 移除，然后放入当前玩家 桌牌列表里，如果是胡牌，则放到 胡牌 列表里，首先
@@ -1620,7 +1624,7 @@ cc.Class({
             } else if ( data.action == "dan" ) {
                 opCards = data.cards;
             }
-            context.cardModle(opCards,opParent,back,fangwei,context,data.action);//补杠和补蛋的时候，逻辑需要区分。    
+            context.cardModle(opCards,opParent,back,fangwei,context,data.action,jiantou);//补杠和补蛋的时候，逻辑需要区分。    
         }else{//对家
             opParent = cc.find("Canvas/content/handcards/"+player.tablepos+"desk/kong") ;
             context.otherHandCardRemove(data,context,player.tablepos);
@@ -1644,7 +1648,7 @@ cc.Class({
             }else if(data.action == 'dan'){
                 opCards = data.cards;
             }
-            context.cardModle(opCards,opParent,back,fangwei,context,data.action);
+            context.cardModle(opCards,opParent,back,fangwei,context,data.action,jiantou);
         }
         if(data.action == 'peng'||(data.action == 'gang'&&data.card!=-1)||data.action=='chi'||data.action == 'hu'){
             //以下代码是用于找到 杠/碰/吃/胡牌的 目标牌  ， 然后将此牌 从 桌面牌中移除
@@ -1673,6 +1677,7 @@ cc.Class({
             cc.sys.localStorage.setItem('notice','true');
             cc.find('Canvas/notice').active = false;
         }
+        
         context.windFW(context);
         cc.beimi.baopai = null;
         context.roomInfo.active = true;                
@@ -2617,7 +2622,7 @@ cc.Class({
             card.parent = opParent;
         // }
     },
-    cardModle: function(cards,parent,back,fangwei,context,action){
+    cardModle: function(cards,parent,back,fangwei,context,action,target){
         if(cards.length == 1){
             var cardOp,card,temp;
             if(fangwei == 'top'){
@@ -2637,7 +2642,7 @@ cc.Class({
                 card = cc.instantiate(context.dan_mycurrent);
                 temp = card.getComponent('DanAction');
             } 
-            temp.init(cards[i],false,fangwei);
+            temp.init(cards[i],false,fangwei,'1');
             if ( cardOp.isGang ) {
                 card.zIndex=1;
                 card.parent = cardOp.cardNode ;
@@ -2670,9 +2675,11 @@ cc.Class({
                 }          
                 var temp = card.getComponent('DanAction');
                 if ( i == 2 && back == true ) {
-                    temp.init(cards[i],false,fangwei);
-                } else {
-                    temp.init(cards[i],back,fangwei);
+                    temp.init(cards[i],false,fangwei,'1');
+                }else if(action!='dan'&& i == 1&&back != true){
+                    temp.init(cards[i],false,fangwei,'1',target);                    
+                }else {
+                    temp.init(cards[i],back,fangwei,'1');
                 }
                 if(71<cards[i]&&cards[i]<76&&action!='chi'){                  
                     card.zIndex =9999;

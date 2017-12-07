@@ -4,6 +4,8 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        ch : cc.Node,
+        wz : cc.Node,
 		itemTemplate: { // item template to instantiate other items
             default: null,
             type: cc.Node
@@ -31,6 +33,7 @@ cc.Class({
     },
 
     onLoad: function () {
+    
 		this.content = this.scrollView.content;
         this.items = [];
         this.colorWhite = new cc.Color(255, 255, 255);//白色
@@ -42,12 +45,19 @@ cc.Class({
 		if(cc.beimi.authorization){
 			var parm = {
 	    		token:cc.beimi.authorization,//12d622d439d747a495204e995f431f7e
-	    		gameType:2,
 	    		page:1,
 	    		limit:10
 	    	};
             cc.beimi.http.httpPost('/record/perRecord',parm,this.success,this.error,this);
-        };  
+        };
+        if(GameBase.gameModel =='ch'||GameBase.gameModel =='CH'){
+            this.ch.active = true ;
+            this.wz.active = false ;
+            
+        }else{
+            this.wz.active = true ;
+            this.ch.active = false ;
+        }  
     },
     toggleClick: function(toggle) {
     	typeStatus = 1;
@@ -75,6 +85,7 @@ cc.Class({
         cc.beimi.http.httpPost('/record/perRecord',parm,this.success,this.error,this);
     },
     success:function(result,object){
+        
         var data = JSON.parse(result);
         //清空数据
         for(var i = 0; i < object.content.children.length;i++){
@@ -101,7 +112,7 @@ cc.Class({
 				var gameNum = data.data[i].gameNum;//局数
 				var time = data.data[i].time;//时间
 				var id = data.data[i].id;//id 
-				var gamerInfo = data.data[i].gamerInfo;//id 
+				var gamerInfo = data.data[i].overPoint;//id 
 				item.getComponent('recordItem').updateItem(roomNum, gameNum, time,id,gamerInfo);
 				object.items.push(item);
 			}

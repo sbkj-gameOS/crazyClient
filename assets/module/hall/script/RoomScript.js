@@ -95,7 +95,7 @@ cc.Class({
    
 
 	onLoad: function () {
-		this.message.string = "恭喜您已赢得一张周赛卡。";
+		this.message.string = "本游戏仅供娱乐，严禁赌博。   每月定期举办周赛、月赛，冠军赢万元大奖。";
         this.gundongText();
 		//请求获取当前用户是否已经参加了房间
         cc.beimi.http.httpGet('/api/room/reConnection?token='+cc.beimi.authorization,this.roomSuccess,this.roomError,this);

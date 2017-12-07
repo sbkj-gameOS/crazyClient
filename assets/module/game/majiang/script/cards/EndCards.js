@@ -117,7 +117,7 @@ cc.Class({
                             a = true;
                         }
                         let b = card.getComponent('DanAction');
-                        b.init(c[h],a,'');
+                        b.init(c[h],a,'','1');
                         b.target.height = 53;
                         b.target.width= 32;
                         card.parent = kong;   
@@ -147,7 +147,7 @@ cc.Class({
                         let a = false;
                         let c = action[j];
                         let b = card.getComponent('DanAction');                          
-                        b.init(c,a,'');
+                        b.init(c,a,'','1');
                         b.target.height = 53;
                         b.target.width= 32;
                         card.parent = kong;           
@@ -161,7 +161,7 @@ cc.Class({
                     kong.parent = this.mjloyad;
                     let card = cc.instantiate(this.card);
                     let b = card.getComponent('DanAction');
-                    b.init(cardsss[i],false,'');
+                    b.init(cardsss[i],false,'','1');
                     b.target.height = 53;
                     b.target.width= 32;
                     card.parent = kong;        
@@ -174,7 +174,7 @@ cc.Class({
                 kong.parent = this.mjloyad;
                 let card = cc.instantiate(this.card);                 
                 let b = card.getComponent('DanAction');
-                b.init(this.data.balance.huCard,false,'');
+                b.init(this.data.balance.huCard,false,'','1');
                 b.target.height = 53;
                 b.target.width= 32;
                 card.parent = kong;  

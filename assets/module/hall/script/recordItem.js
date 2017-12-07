@@ -46,7 +46,7 @@ cc.Class({
 		this.label1.string = "房间号："+roomNum;
         this.label2.string = "局数："+gameNum;
 		this.label3.string = this.getNowFormatDate(time);
-		this.gamerInfos.string = gamerInfo;
+		this.gamerInfos.string = '分数：'+gamerInfo + '分';
     },
 	//时间处理返回格式：yyyy-MM-dd HH:MM:SS
 	getNowFormatDate:function(time){

@@ -28,13 +28,28 @@ cc.Class({
         },
         MJhead: cc.Node,
         x:cc.Node,
+        current: cc.Node,
+        right: cc.Node,
+        left: cc.Node,
+        top: cc.Node,
     },
-
+    
     // use this for initialization
     onLoad: function () {
 
     },
-    init:function(cvalue,back,fangwei,count){
+    init:function(cvalue,back,fangwei,count,target){
+        if(target !=null){
+            if(target == 'current'){
+                this.current.active = true ;
+            }else if(target == 'right'){
+                this.right.active = true ; 
+            }else if(target == 'left'){
+                this.left.active = true ; 
+            }else if(target == 'top'){
+                this.top.active = true ; 
+            }
+        }
         this.count.string = count;
         this.value = cvalue ;
         this.back = back;
