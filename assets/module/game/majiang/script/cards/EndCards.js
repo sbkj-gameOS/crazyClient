@@ -56,9 +56,9 @@ cc.Class({
                 drop = '点炮';
             }
             if(this.data.balance.noTing == true){
-                noTing = '未听胡';
+                noTing = '未上听';
             }else{
-                noTing = '听胡';
+                noTing = '上听';
             }
             this.hu.string += noTing + '  '+drop + ' ';
             units= this.data.balance.units;
@@ -156,16 +156,14 @@ cc.Class({
             }
         {
             let kong = cc.instantiate(this.mjkong);
-            for(let i = 0;i<cardsss.length;i++){
-                if(cardsss[i] != hucards){
-                    kong.parent = this.mjloyad;
-                    let card = cc.instantiate(this.card);
-                    let b = card.getComponent('DanAction');
-                    b.init(cardsss[i],false,'','1');
-                    b.target.height = 53;
-                    b.target.width= 32;
-                    card.parent = kong;        
-                }  
+            for(let i = 0;i<cardsss.length;i++){   
+                kong.parent = this.mjloyad;
+                let card = cc.instantiate(this.card);
+                let b = card.getComponent('DanAction');
+                b.init(cardsss[i],false,'','1');
+                b.target.height = 53;
+                b.target.width= 32;
+                card.parent = kong;           
             }
         }
         {

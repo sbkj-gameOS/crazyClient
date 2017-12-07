@@ -1499,22 +1499,22 @@ cc.Class({
                 }
                 if(data.dan){
                     dan.active = true ;
-                    dan.x = - 250 + count * 120 ;
+                    dan.x = - 250 + count * 100 ;
                     count++;
                 }
                 if(data.ting){
                     ting.active = true ;
-                    ting.x = - 250 + count * 120 ;
+                    ting.x = - 250 + count * 100 ;
                     count++;
                 }
                 if(data.hu){
                     hu.active = true ;
-                    hu.x = - 250 + count * 120 ;
+                    hu.x = - 250 + count * 100 ;
                     count++;
                 }
                 {
                     guo.active =true;
-                    guo.x = - 250 + count * 120 ;
+                    guo.x = - 250 + count * 100 ;
                     count++;
                 }
                
@@ -1538,27 +1538,27 @@ cc.Class({
                 var count = 0;
                 if(data.gang){
                     gang.active = true ;
-                    gang.x = - 250 + count * 120
+                    gang.x = - 250 + count * 100
                     count++;
                 }
                 if(data.peng){
                     peng.active = true ;
-                    peng.x = - 250 + count * 120
+                    peng.x = - 250 + count * 100
                     count++;
                 }
                 if(data.chi){
                     chi.active = true ;
-                    chi.x = - 250 + count * 120
+                    chi.x = - 250 + count * 100
                     count++;
                 }
                 if(data.hu){
                     hu.active = true ;
-                    hu.x = - 250 + count * 120
+                    hu.x = - 250 + count * 100
                     count++;
                 }
                 if(data.deal == false){
                     guo.active = true ;
-                    guo.x = - 250 + count * 120
+                    guo.x = - 250 + count * 100
                     count++;
                 }  
                 var action = cc.moveTo(0.1,1040 - count*285,-100);
