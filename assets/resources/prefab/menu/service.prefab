@@ -814,7 +814,7 @@
       }
     ],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 39
@@ -1331,8 +1331,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 284,
-      "y": -31
+      "x": 80,
+      "y": 1
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1443,7 +1443,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 46
@@ -1479,7 +1479,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": -85,
-      "y": -9
+      "y": 15
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1562,8 +1562,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 244.71,
-      "height": 40
+      "width": 385,
+      "height": 80
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1572,7 +1572,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": -73,
-      "y": -70
+      "y": -94
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1590,14 +1590,14 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 40,
-    "_fontSize": 40,
+    "_actualFontSize": 35,
+    "_fontSize": 35,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_N$string": "14768776836",
+    "_N$string": "投诉建议请联系微信客服\nyangzhenxiaopi",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
