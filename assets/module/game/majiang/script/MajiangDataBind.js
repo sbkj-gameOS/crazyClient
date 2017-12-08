@@ -1141,8 +1141,17 @@ cc.Class({
      * @param context
      */
     dealcard_event:function(data , context){   
+        if(cc.sys.localStorage.getItem('cb') == 'true'){
+            setTimeout(function(){context.dealcards(data,context)},2100);
+            cc.sys.localStorage.removeItem('cb');
+        }else{
+            context.dealcards(data,context);
+        }
+    },
+    dealcards: function(data,context){
         context=cc.find('Canvas').getComponent('MajiangDataBind');  
         //context.initcardwidth();
+        context.closeloadding();
         if(cc.beimi.playerNum){
             var peoNum = cc.beimi.playerNum;
         }
@@ -1799,6 +1808,7 @@ cc.Class({
                 //这里有一个判定 如果是重连的话 就不用setouttime   
                 if(data.player.played||players.played||data.player.actions.length>0||players.action){
                     context.loadding();                    
+                    cc.sys.localStorage.setItem('cb','true');
                     context.initMjCards(groupNums , context , cards , temp_player.banker) ;
 
                     /**
@@ -2036,7 +2046,7 @@ cc.Class({
                     }
                 }
             } 
-            context.closeloadding();
+                context.closeloadding();
         },2000)      
     },
     initcardwidth: function(ting){
