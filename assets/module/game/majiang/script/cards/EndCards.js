@@ -18,7 +18,10 @@ cc.Class({
         nan:cc.Node,        
         bei:cc.Node,
         redwin:cc.SpriteFrame,
-        target:cc.Node
+        target:cc.Node,
+        hua: cc.Prefab,
+        buhua: cc.Prefab,
+        huaParent: cc.Node
     },
     
     // use this for initialization
@@ -31,45 +34,61 @@ cc.Class({
         let fan=0;
         let units;
         let drop = '';
-        let noTing;
+        let noTing= '';
         let hucards = -111;
+        let tai = '';
+        let hua ;
         this.hu.string='';
         if(this.data.gang){
             gang = this.data.gang.count;
         }
         if(this.data.balance){
-                let card;
-                let baopai ;
-                let summary = cc.find('Canvas/summary').getComponent('SummaryClick');
+            let huaCards;
+            let card;
+            let baopai ;
+            let summary = cc.find('Canvas/summary').getComponent('SummaryClick');
+            if(this.data.balance.bu){
+                huaCards = this.decode(this.data.balance.bu);
+                for(let i = 0 ; i< huaCards.length ; i ++){
+                    let card = cc.instantiate(this.buhua);
+                    card.getComponent('BuHuaAction').init(huaCards[i]);
+                    card.parent = this.huaParent;
+                }
+            }
             if(this.data.balance.bao!= -1){
                 card = cc.instantiate(summary.bp);
                 baopai  = card.getComponent('DeskCards');    
                 baopai.init(this.data.balance.bao,'B');
                 card.parent = summary.bpp;   
             }
-
-
             if(this.data.balance.huCard){
                 hucards = this.data.balance.huCard;
             }
             if(this.data.balance.drop == true){
                 drop = '点炮';
+            }    
+            if(this.data.balance.taishu){
+                tai = ' '+this.data.balance.taishu + '台';
             }
-            if(this.data.balance.noTing == true){
-                noTing = '未上听';
-            }else{
-                noTing = '上听';
-            }
-            this.hu.string += noTing + '  '+drop + ' ';
             units= this.data.balance.units;
             fan = this.data.balance.count ; 
+            
             if(units){
                 for(let i =0 ;i< units.length;i++){
                     this.hu.string += (units[i].tip+' ');
                 } 
             }   
         }
-        this.jifan.string = fan +'番'+'   '+gang +'杠   ';
+        if(GameBase.gameModel != 'wz'){
+            this.jifan.string = fan +'番'+'   '+gang +'杠   ';
+            if(this.data.balance.noTing == true){
+                noTing = '未上听';
+            }else{
+                noTing = '上听';
+            }
+        }
+        
+        this.hu.string += noTing + '  '+drop + ' ' + tai;
         let player = cc.find('Canvas').getComponent('MajiangDataBind').playersarray;
         var cardsss = this.decode(this.data.cards);
         function sortNumber(a,b){return a - b}
@@ -155,27 +174,48 @@ cc.Class({
                 }
             }
         {
+            
             let kong = cc.instantiate(this.mjkong);
             for(let i = 0;i<cardsss.length;i++){   
                 kong.parent = this.mjloyad;
-                let card = cc.instantiate(this.card);
-                let b = card.getComponent('DanAction');
-                b.init(cardsss[i],false,'','1');
-                b.target.height = 53;
-                b.target.width= 32;
-                card.parent = kong;           
+                if(cardsss[i]>-32){
+                    let card = cc.instantiate(this.card);
+                    let b = card.getComponent('DanAction');
+                    b.init(cardsss[i],false,'','1','',true);
+                    b.target.height = 53;
+                    b.target.width= 32;
+                    card.parent = kong;     
+                }else{
+                    let card = cc.instantiate(this.hua);
+                    let b = card.getComponent('BuHuaAction');
+                    b.init(cardsss[i],'',true);
+                    b.target.height = 53;
+                    b.target.width= 32;
+                    card.parent = kong;  
+                }
+                      
             }
         }
         {
             if(this.data.win){
                 let kong = cc.instantiate(this.mjkong);
                 kong.parent = this.mjloyad;
-                let card = cc.instantiate(this.card);                 
-                let b = card.getComponent('DanAction');
-                b.init(this.data.balance.huCard,false,'','1');
-                b.target.height = 53;
-                b.target.width= 32;
-                card.parent = kong;  
+                if(this.data.balance.huCard>-32){
+                    let card = cc.instantiate(this.card);                 
+                    let b = card.getComponent('DanAction');
+                    b.init(this.data.balance.huCard,false,'','1','',true);
+                    b.target.height = 53;
+                    b.target.width= 32;
+                    card.parent = kong; 
+                }else{
+                    let card = cc.instantiate(this.hua);                 
+                    let b = card.getComponent('BuHuaAction');
+                    b.init(this.data.balance.huCard,'',true);
+                    b.target.height = 53;
+                    b.target.width= 32;
+                    card.parent = kong; 
+                }
+                 
             }       
         }
     },

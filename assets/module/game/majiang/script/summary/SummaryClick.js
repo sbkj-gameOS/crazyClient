@@ -62,6 +62,9 @@ cc.Class({
         var sprite = this.csNode.getComponent(cc.Sprite);
         if(GameBase.gameModel =='wz'){
             sprite.spriteFrame = this.cs1;
+            this.csNode.width = this.csNode.width - 40 ;
+            this.csNode.y = this.csNode.y - 10 ;
+            this.csNode.x = this.csNode.x + 10;
         }
 
         this.time.string = '时间：'+time.getFullYear()+'/'+(time.getMonth()+1)+'/'+time.getDate()+'  ' + hours +': ' +minutes;

@@ -38,7 +38,8 @@ cc.Class({
         cc.sys.localStorage.removeItem('delta');
     },
     touchendClick:function(event){
-        if(cc.sys.localStorage.getItem('alting')!='true'&&cc.sys.localStorage.getItem('ting')!='true'){
+        let card = event.target.parent.getComponent('HandCards');
+        if(cc.sys.localStorage.getItem('alting')!='true'&&cc.sys.localStorage.getItem('ting')!='true'&&!card.caishen){
             var delta = event.touch.getDelta();
             event.target.x += delta.x;
             event.target.y += delta.y;
@@ -85,7 +86,7 @@ cc.Class({
                     cards.width=73;    
                 }
                 handCards.target.y = 0;
-                if(button.getComponent(cc.Button).interactable){
+                if(button.getComponent(cc.Button).interactable&&!card.caishen){
                     handCards.cardvalue.color = new cc.Color(255, 255, 255);
                 }
             }
@@ -106,8 +107,8 @@ cc.Class({
                         context.tingSelect.active = true;                            
                         for(let s = 0 ; s< tingcards.length;s++){
                             let limian = cc.instantiate(context.tingSelectch);
-                            if(context.tings[i].counts[s]){
-                                limian.getComponent('tingAction').label.string = '还剩:'+context.tings[j].counts[s]+'张';
+                            if(context.tings[i].counts){
+                                limian.getComponent('tingAction').label.string = '还剩:'+context.tings[j].counts.length+'张';
                             }
                             let cccc = limian.getComponent('tingAction').target.getComponent('HandCards');
                             cccc.init(tingcards[s],true);

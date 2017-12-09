@@ -32,13 +32,14 @@ cc.Class({
         right: cc.Node,
         left: cc.Node,
         top: cc.Node,
+        hua:cc.Node
     },
     
     // use this for initialization
     onLoad: function () {
 
     },
-    init:function(cvalue,back,fangwei,count,target){
+    init:function(cvalue,back,fangwei,count,target,dd){
         if(target !=null){
             if(target == 'current'){
                 this.current.active = true ;
@@ -60,6 +61,22 @@ cc.Class({
         this.cardtype =cardtype;
         this.mjtype = cvalue; 
         this.mjvalue = parseInt((this.value%36)/4 ) ;
+
+        let csType1,csType2;
+        let csCardColors1,csCardColors2;
+        let csValue1,csValue2;
+        if(cc.beimi.powerCard){
+            csCardColors1 = parseInt(cc.beimi.powerCard[0]/4 );
+            csType1 = parseInt(csCardColors1 / 9);//第一张财神牌类型 
+            csValue1 = (parseInt((cc.beimi.powerCard[0]%36)/4)+1);
+            if(cc.beimi.powerCard.length == 2){
+                csCardColors2 = parseInt(cc.beimi.powerCard[1]/4 );
+                csType2 = parseInt(csCardColors2 / 9);//第二张财神牌类型
+                csValue2 = (parseInt((cc.beimi.powerCard[1]%36)/4)+1);
+            }
+        }
+
+
 
         var deskcard , cardframe ;
         if(this.back == true){
@@ -99,7 +116,9 @@ cc.Class({
                 }else if(cardcolors == -1){
                     deskcard = fw+'_white';
                 }       
-               
+                if(dd&&(cardcolors == csCardColors1 || cardcolors == csCardColors2)){
+                    this.caishenCards();
+                }
             }else{
             
                 if(cardtype == 0){ //万
@@ -108,7 +127,13 @@ cc.Class({
                     deskcard = fw+"_dot_"+ (parseInt((this.value%36)/4)+1) ;
                 }else if(cardtype == 2){  //条
                     deskcard = fw+"_bamboo_"+ (parseInt((this.value%36)/4)+1) ;
-                }                // }
+                }   
+                
+                if(dd&&(cardtype == csType1 && (parseInt((this.value%36)/4)+1) == csValue1)){
+                    this.caishenCards();
+                }else if(dd&&(cardtype == csType2 && (parseInt((this.value%36)/4)+1) == csValue2)){
+                    this.caishenCards();
+                }// }
                 
             }
             cardframe = this.beimi0.getSpriteFrame(deskcard);
@@ -131,7 +156,11 @@ cc.Class({
     },
     setValue: function(values){
         this.value = values;
-    }
+    },
+    caishenCards: function(){
+        this.hua.active = true;
+        this.target.zIndex = -999+this.value;
+    },
 
 
     // called every frame, uncomment this function to activate update callback

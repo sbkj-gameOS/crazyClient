@@ -243,7 +243,9 @@ cc.Class({
          if(cc.beimi.cardNum > 14){
             this.top_panel.parent.x = -142;
             this.top_panel.parent.y = 258;
-         }
+            this.cards_panel.parent.y = this.cards_panel.parent.y + 12;
+            this.cards_panel.parent.x = this.cards_panel.parent.x - 20;
+        }
          //cc.beimi.playerNum = 2;
         this.noticeShare.cascadeOpacity =false;
         
@@ -698,8 +700,7 @@ cc.Class({
         cc.sys.localStorage.removeItem('top');
         cc.sys.localStorage.removeItem('altake');      
         cc.sys.localStorage.removeItem('alting');
-        cc.sys.localStorage.removeItem('guo');        
-    
+        cc.sys.localStorage.removeItem('guo');           
         this.joinRoom();
         if(cc.beimi.playerNum){
             if(cc.beimi.playerNum == 2){
@@ -2063,7 +2064,7 @@ cc.Class({
                 target.width=73;    
             }
             card.target.y = 0; 
-            if(!ting){
+            if(!ting&&!card.caishen){
                 card.cardvalue.color = new cc.Color(255, 255, 255); 
             }
         }
@@ -2536,7 +2537,7 @@ cc.Class({
         context.destroycards('topdesk',context);
         context.destroyPlayer(context);  
         context.tingactivefalse();  
-
+        context.inintBuHuan();
         //清空补花数据
         context.destroybuhuas('left',context);
         context.destroybuhuas('right',context);
@@ -2546,6 +2547,9 @@ cc.Class({
         cc.sys.localStorage.removeItem('altake');
         cc.sys.localStorage.removeItem('alting');
         cc.sys.localStorage.removeItem('guo');
+     },
+     inintBuHuan: function(){
+        cc.beimi.powerCard = null;  
      },
      destroybuhuas:function(fangwei,context){
         let buhua,buhuaList;
@@ -2579,6 +2583,10 @@ cc.Class({
         if(fangwei == 'deskcard'){
             for(let i =0 ; i< handcard; i++){
                 let handcards = context.playercards[i].getComponent("HandCards");
+                handcards.csImageTop.active = false;
+                handcards.target.zIndex = 0;
+                handcards.target.children[0].getComponent(cc.Button).enabled = true;
+                handcards.cardvalue.color = new cc.Color(255, 255, 255);
                 handcards.reinit();
                 context.cardpool.put(context.playercards[i]);
                 }

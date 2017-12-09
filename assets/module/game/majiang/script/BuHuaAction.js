@@ -30,17 +30,20 @@ cc.Class({
             default: null,
             type: cc.SpriteFrame
         },
+        hua: cc.Node
     },
 
     // use this for initialization
     onLoad: function () {
 
     },
-    init:function(cvalue,fangwei){
+    init:function(cvalue,fangwei,dd){
         this.value = cvalue ;
         this.fangwei = fangwei;
 
         var deskcard , cardframe ;
+
+        
         //确定牌的花色
         var  fw = 'B';
         if(fangwei == 'left'){
@@ -77,6 +80,9 @@ cc.Class({
                 cardframe = this.beimi0.getSpriteFrame(deskcard);
                 this.target.getComponent(cc.Sprite).spriteFrame = cardframe;
             } 
+            if(dd&&(cvalue.toString().indexOf("-") && cc.beimi.powerCard[0].toString().indexOf(cvalue.toString()) || cc.beimi.powerCard[1].toString().indexOf(cvalue.toString()))){
+                this.caishenCards();
+            }
         }else{
             if(cvalue==-38){
                 deskcard = fw+'_autumn';//秋
@@ -97,12 +103,16 @@ cc.Class({
             }else if(cvalue == -5){
                 deskcard = fw+'_white';//白
             }
+            
             cardframe = this.beimi0.getSpriteFrame(deskcard);
             this.target.getComponent(cc.Sprite).spriteFrame = cardframe;
         }
     },
 
-
+    caishenCards: function(){
+        this.hua.active = true;
+        this.target.zIndex = -999+this.value;
+    },
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 

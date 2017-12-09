@@ -47,7 +47,7 @@ cc.Class({
         });
     },
     init:function(cvalue,pd){
-
+        this.caishen = false ; 
         this.take = false;
         this.value = cvalue ;
         let cardframe ;
@@ -93,9 +93,7 @@ cc.Class({
             
             //东南西北风 ， 中发白
             if(cardcolors == csCardColors1 || cardcolors == csCardColors2){
-                this.csImageTop.active = true;
-                this.target.zIndex = -999+cvalue;
-                this.target.children[0].getComponent(cc.Button).enabled = false;
+                this.caishenCards();
             }
         }else{
             if(cardtype == 0){ //万
@@ -107,13 +105,9 @@ cc.Class({
             }
 
             if(cardtype == csType1 && (parseInt((this.value%36)/4)+1) == csValue1){
-                this.csImageTop.active = true;
-                this.target.zIndex = -1;
-                this.target.children[0].getComponent(cc.Button).enabled = false;
+                this.caishenCards();
             }else if(cardtype == csType2 && (parseInt((this.value%36)/4)+1) == csValue2){
-                this.csImageTop.active = true;
-                this.target.zIndex = -999+cvalue;
-                this.target.children[0].getComponent(cc.Button).enabled = false;
+                this.caishenCards();
             }
         }
 
@@ -138,9 +132,7 @@ cc.Class({
 
             //牌面显示财神标志
             if(cvalue.toString().indexOf("-") && cc.beimi.powerCard[0].toString().indexOf(cvalue.toString()) || cc.beimi.powerCard[1].toString().indexOf(cvalue.toString())){
-                this.csImageTop.active = true;
-                this.target.zIndex = -999+cvalue;
-                this.target.children[0].getComponent(cc.Button).enabled = false;
+                this.caishenCards();
             }
         }
         // if(deskcard == "suo2"){
@@ -158,7 +150,7 @@ cc.Class({
         }else if(!pd){
             this.target.width = 73;
         }
-        this.cardvalue.color = new cc.Color(255, 255, 255);
+        //this.cardvalue.color = new cc.Color(255, 255, 255);
         if(pd == null){
             var anim = this.getComponent(cc.Animation);
             anim.play("majiang_current");
@@ -168,6 +160,13 @@ cc.Class({
         }else if(pd != true){
             this.mj.getComponent(cc.Button).interactable = true;
         }
+    },
+    caishenCards: function(){
+        this.csImageTop.active = true;
+        this.target.zIndex = -999+this.value;
+        this.target.children[0].getComponent(cc.Button).enabled = false;
+        this.cardvalue.color = new cc.Color(118, 118, 118);
+        this.caishen = true;
     },
     lastone:function(){
         if(this.lastonecard == false){
