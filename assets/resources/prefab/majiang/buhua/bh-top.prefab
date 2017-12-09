@@ -44,8 +44,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 30,
-      "height": 54
+      "width": 21,
+      "height": 37
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -53,8 +53,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 72.5,
-      "y": 0
+      "x": 68,
+      "y": 9
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -119,7 +119,8 @@
     },
     "b_zhu": {
       "__uuid__": "2b5d43e3-c9d5-40e6-9a04-d7a5c60972c6"
-    }
+    },
+    "hua": null
   },
   {
     "__type__": "cc.PrefabInfo",

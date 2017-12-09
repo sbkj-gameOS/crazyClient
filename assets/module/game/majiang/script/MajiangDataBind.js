@@ -1017,6 +1017,7 @@ cc.Class({
     //掉线 和上线
     takecard_event:function(data , context){
         context = cc.find('Canvas').getComponent('MajiangDataBind');
+        let kongcard ; 
         cc.beimi.audio.playSFX('give.mp3');
         let playerss = context.player(data.userid , context);
         if(data.ting){
@@ -1024,6 +1025,7 @@ cc.Class({
             
         }
         if(data.userid == cc.beimi.user.id) {
+            //kongcard = cc.find('Canvas/content/handcards/deskcard/kong')
             context.initcardwidth();
             if(data.ting){
                 cc.sys.localStorage.setItem('alting','true');                

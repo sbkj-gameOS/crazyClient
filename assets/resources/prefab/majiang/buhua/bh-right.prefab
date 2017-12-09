@@ -44,8 +44,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 49,
-      "height": 40
+      "width": 29,
+      "height": 23
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -75,7 +75,7 @@
       "__uuid__": "ecd8d18c-8b8d-45a0-b0aa-0acc029f7fce"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -109,7 +109,8 @@
     "b_ju": null,
     "b_lan": null,
     "b_xia": null,
-    "b_zhu": null
+    "b_zhu": null,
+    "hua": null
   },
   {
     "__type__": "cc.PrefabInfo",

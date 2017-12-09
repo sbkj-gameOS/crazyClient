@@ -32,7 +32,8 @@ cc.Class({
         right: cc.Node,
         left: cc.Node,
         top: cc.Node,
-        hua:cc.Node
+        hua:cc.Node,
+        juju: cc.Node
     },
     
     // use this for initialization
@@ -41,6 +42,7 @@ cc.Class({
     },
     init:function(cvalue,back,fangwei,count,target,dd){
         if(target !=null){
+            //this.juju.active = active;
             if(target == 'current'){
                 this.current.active = true ;
             }else if(target == 'right'){
