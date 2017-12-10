@@ -9,7 +9,29 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+        let he = this;
+        this.promise=navigator.mediaDevices.getUserMedia({audio:true});
+        this.promise.then(function(stream){
+        he.recorder=new MediaRecorder(stream);
+        he.recorder.ondataavailable=function(event){
+            //收集媒体设备 获得到的 可以使用的 媒体流数据
+            console.log(event.data)
+            var file = new FileReader();
+            file.readAsArrayBuffer(event.data);
+            console.log(file);
+            file.onloadend = function() {              
+                let ab = he.ab2str(file.result);
+                let socket = he.socket();
+                socket.emit('sayOnSound',JSON.stringify({
+                    userid : cc.beimi.user.id,
+                    file : ab,
+                    start : he.START,
+                    end : he.END
+                }))}
+            }
+         });
         let selfs = this;
+        this.talk =false;
         this.START = 0;
         this.END = 0;
         this.recordTimer = 0;
@@ -31,10 +53,10 @@ cc.Class({
         }
         if(this.tape != null){
         //按下开始录音
-        this.tape.node.on('touchstart', this.touchstartClick, this);
-        //松手结束录音
-        this.tape.node.on('touchend', this.touchendClick, this);
-        this.tape.node.on('touchmove',this.touchendClick, this);        
+        // this.tape.node.on('touchstart', this.touchstartClick2, this);
+        // //松手结束录音
+        // this.tape.node.on('touchend', this.touchendClick2, this);
+        // this.tape.node.on('touchmove',this.touchendClick2, this);        
         }
         console.log("this.urlAppend:"+this.urlAppend);
         cc.beimi.http.httpPost("/wxController/getWxConfig",{url:window.location.href}, this.sucess , this.error , this);
@@ -133,6 +155,13 @@ cc.Class({
             });
         },300);
     },
+    touchstartClick2: function (event) {
+        var share = cc.find("Canvas/script/ShareWx").getComponent("ShareWx") ;
+        cc.find('Canvas/录音/发送语音2').active =true;
+        share.START = new Date().getTime();
+        share.recorder.start();
+        
+    },
     //停止录音
     touchendClick: function (event) {
         var share = cc.find("Canvas/script/ShareWx").getComponent("ShareWx") ;
@@ -174,6 +203,17 @@ cc.Class({
             },1000);
         }
     },
+    touchendClick2: function (event) {
+        var share = cc.find("Canvas/script/ShareWx").getComponent("ShareWx") ;
+        cc.find('Canvas/录音/发送语音2').active =false;
+        share.END = new Date().getTime();
+        if(share.recorder.state != 'inactive'){
+            share.recorder.stop();
+        }  
+    },
+    ab2str: function(buf) {
+        return String.fromCharCode.apply(null, new Uint8Array(buf));
+     },
     //播放语音
     startClick:function(){
         //下载语音
@@ -192,5 +232,49 @@ cc.Class({
         // wx.playVoice({
         //     localId: res.localId // 需要播放的音频的本地ID，由stopRecord接口获得
         // });
-    }
+    },
+    talkClick: function(){
+        var share = cc.find("Canvas/script/ShareWx").getComponent("ShareWx") ;
+        if(this.talk = true){
+            this.talk = false;
+            cc.find('Canvas/录音/发送语音2').active =false;
+            share.END = new Date().getTime();
+            let time = new Date(share.end - share.start).getSeconds();
+            wx.stopRecord({
+                success: function (res) {
+                    //录音上传到微信服务器
+                    wx.uploadVoice({
+                        localId: res.localId, // 需要上传的音频的本地ID，由stopRecord接口获得
+                        isShowProgressTips: 1, // 默认为1，显示进度提示
+                        success: function (res) {
+                            //复制微信服务器返回录音id
+                            let socket = share.socket();
+                            socket.emit('sayOnSound',JSON.stringify({
+                                userid : cc.beimi.user.id,
+                                serverId : res.serverId,
+                                start : share.START,
+                                end : share.END
+                            })) ;
+                            //cc.beimi.serverId = res.serverId;
+                        }
+                    });
+                }
+            });
+        }else{
+            this.talk = true;
+            cc.find('Canvas/录音/发送语音2').active =true;
+            share.START = new Date().getTime();
+    
+            share.recordTimer = setTimeout(function(){
+                wx.startRecord({
+                    success: function(){
+                        localStorage.rainAllowRecord = 'true';
+                    },
+                    cancel: function () {
+                        alert('用户拒绝授权录音');
+                    }
+                });
+            },300);
+        }
+    },
 });

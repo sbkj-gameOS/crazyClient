@@ -75,7 +75,7 @@ cc.Class({
             
             if(units){
                 for(let i =0 ;i< units.length;i++){
-                    this.hu.string += (units[i].tip+' ');
+                    this.hu.string += (units[i].tip+' '+units[i].point +' ');
                 } 
             }   
         }

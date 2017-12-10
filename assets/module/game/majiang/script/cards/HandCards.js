@@ -185,10 +185,6 @@ cc.Class({
         }
        
     },
-    selected:function(){
-        this.cardvalue.opacity = 168 ;
-        this.selectcolor = true ;
-    },
     relastone:function(){
         if(this.lastonecard == true){
             this.lastonecard = false;
@@ -203,13 +199,9 @@ cc.Class({
         }
     },
     reinit:function(){
-        this.relastone();
-     
+        this.relastone();     
         this.lastonecard = false;
-
-        this.selectcolor = false ;
         this.cardvalue.opacity = 255 ;
-
         if(this.take){
             this.target.y=0;
             this.take = false ;
