@@ -6,6 +6,7 @@ cc.Class({
     extends: beiMiCommon,
 
     properties: {
+		alertaa: cc.Node,		
 		singleLineText: {
             default: null,
             type: cc.EditBox,
@@ -213,4 +214,5 @@ cc.Class({
 	buttonClicked: function() {
 		cc.log("房间号："+roomNum);
 	},
+
 });

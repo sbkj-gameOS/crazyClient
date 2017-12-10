@@ -19,6 +19,7 @@ cc.Class({
             default: null,
             type : cc.Node
         },
+        alert2: cc.Node
     },
 	
 	//创建房间-模式类型值选择
@@ -100,11 +101,23 @@ cc.Class({
                 cc.beimi.maxRound = data.maxRound;
             }
             cc.director.loadScene("majiang");
+        }else if(data.error){
+            object.alert2.active = true;
+            object.closeloadding();            
+            // alert(data.msg);
+            // cc.beimi.dialog.destroy();
+            // cc.beimi.dialog = null ;
+            // object.closeloadding();
         }else{
             object.notice.getComponent('cc.Label').string ='请求失败';
         }  
     },
     error:function(object){
         object.notice.getComponent('cc.Label').string ='连接出错';
+    },
+    closeClick:function(){
+        this.alert2.active = false ;
+        cc.beimi.dialog.destroy();
+        cc.beimi.dialog = null ;
     }
 });
