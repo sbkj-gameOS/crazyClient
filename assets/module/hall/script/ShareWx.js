@@ -10,26 +10,26 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         let he = this;
-        this.promise=navigator.mediaDevices.getUserMedia({audio:true});
-        this.promise.then(function(stream){
-        he.recorder=new MediaRecorder(stream);
-        he.recorder.ondataavailable=function(event){
-            //收集媒体设备 获得到的 可以使用的 媒体流数据
-            console.log(event.data)
-            var file = new FileReader();
-            file.readAsArrayBuffer(event.data);
-            console.log(file);
-            file.onloadend = function() {              
-                let ab = he.ab2str(file.result);
-                let socket = he.socket();
-                socket.emit('sayOnSound',JSON.stringify({
-                    userid : cc.beimi.user.id,
-                    file : ab,
-                    start : he.START,
-                    end : he.END
-                }))}
-            }
-         });
+        // this.promise=navigator.mediaDevices.getUserMedia({audio:true});
+        // this.promise.then(function(stream){
+        // he.recorder=new MediaRecorder(stream);
+        // he.recorder.ondataavailable=function(event){
+        //     //收集媒体设备 获得到的 可以使用的 媒体流数据
+        //     console.log(event.data)
+        //     var file = new FileReader();
+        //     file.readAsArrayBuffer(event.data);
+        //     console.log(file);
+        //     file.onloadend = function() {              
+        //         let ab = he.ab2str(file.result);
+        //         let socket = he.socket();
+        //         socket.emit('sayOnSound',JSON.stringify({
+        //             userid : cc.beimi.user.id,
+        //             file : ab,
+        //             start : he.START,
+        //             end : he.END
+        //         }))}
+        //     }
+        //  });
         let selfs = this;
         this.talk =false;
         this.START = 0;
