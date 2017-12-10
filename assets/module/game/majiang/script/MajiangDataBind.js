@@ -4,6 +4,7 @@ cc.Class({
     extends: beiMiCommon,
     //extends: cc.Component,
     properties: {
+        top_hua: cc.Node,
         liuju: cc.Node,
         //huaction
         current_hu:cc.Node,
@@ -1221,9 +1222,16 @@ cc.Class({
         for(let i = 0;i<data.playOvers.length;i++){
             if(data.playOvers[i].win==true){
                 playerid = data.playOvers[i].user;
-                var dan = context.current_hu.children[0].getComponent('DanAction');
-                dan.init(data.playOvers[i].balance.huCard,false,'current','1');                
-                break;
+                if(data.playOvers[i].balance.huCard>-32){
+                    var dan = context.current_hu.children[0].getComponent('DanAction');
+                    dan.init(data.playOvers[i].balance.huCard,false,'current','1');                
+                    break;
+                }else{
+                   this.top_hua.active = true;
+                   var dan = context.current_hu.children[0].children[1].getComponent('BuHuaAction');
+                   dan.init(data.playOvers[i].balance.huCard,'',true);
+                   break;
+                }
             }
         }
 
@@ -1504,6 +1512,11 @@ cc.Class({
                     
                 }
                 var count = 0;
+                if(data.hu){
+                    hu.active = true ;
+                    hu.x = - 250 + count * 100 ;
+                    count++;
+                }
                 if(data.gang){
                     gang.active = true ;
                     gang.x = - 250 + count * 100 ;
@@ -1517,11 +1530,6 @@ cc.Class({
                 if(data.ting){
                     ting.active = true ;
                     ting.x = - 250 + count * 100 ;
-                    count++;
-                }
-                if(data.hu){
-                    hu.active = true ;
-                    hu.x = - 250 + count * 100 ;
                     count++;
                 }
                 {
@@ -1548,6 +1556,11 @@ cc.Class({
                     temp.active = false ;
                 }
                 var count = 0;
+                if(data.hu){
+                    hu.active = true ;
+                    hu.x = - 250 + count * 100
+                    count++;
+                }
                 if(data.gang){
                     gang.active = true ;
                     gang.x = - 250 + count * 100
@@ -1561,11 +1574,6 @@ cc.Class({
                 if(data.chi){
                     chi.active = true ;
                     chi.x = - 250 + count * 100
-                    count++;
-                }
-                if(data.hu){
-                    hu.active = true ;
-                    hu.x = - 250 + count * 100
                     count++;
                 }
                 if(data.deal == false){
@@ -1889,7 +1897,7 @@ cc.Class({
                     if(temp_script.value >= 0){
                         context.playercards[i].zIndex = temp_script.value ;
                     }else{
-                        context.playercards[i].zIndex = 200 + temp_script.value ;
+                        context.playercards[i].zIndex = 200+ temp_script.value ;
                     }
                     if(context.playercards[i].zIndex > maxvalue){
                         maxvalue = context.playercards[i].zIndex ;
@@ -2853,13 +2861,24 @@ cc.Class({
     },
     talk_event:function(data,context){
         var mj = cc.find('Canvas').getComponent('MajiangDataBind');
+        // var audio = cc.beimi.audiocontext ;
+        // var source = audio.createBufferSource();
         var datas = JSON.parse(data) ;
-        let time = new Date(datas.end - datas.start).getSeconds();
+        var time = new Date(datas.end - datas.start).getSeconds();  
         let player = mj.player(datas.userid , mj);
         var dz = cc.find('Canvas/music/'+player.tablepos);
         dz.active = true;        
-        console.log('talk--------');
+        // setTimeout(function(){
+        //     dz.active = false;                    
+        // },time*1000);
+        console.log('talk--------'+time);
         console.log(datas);
+        // audio.decodeAudioData(mj.str2ab(datas.file), function(buffer) {
+        //     source.buffer = buffer;
+        //     source.connect(audio.destination);
+        //     //source.loop = true;
+        //     source.start();
+        //   });
         //下载语音
         wx.downloadVoice({
             serverId: datas.serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
@@ -2871,17 +2890,18 @@ cc.Class({
                 });
                 setTimeout(function(){
                     dz.active = false;                    
-                },time+2000)
+                },time*1000)
             }
         });
-        //dz.active = false;
-        
-        // setTimeout(function(){
-            
-        // },time);
-        // wx.playVoice({
-        //     localId: res.localId // 需要播放的音频的本地ID，由stopRecord接口获得
-        // });
+      
+    },
+    str2ab: function(str) {
+        var buf = new ArrayBuffer(str.length*2); // 每个字符占用2个字节
+        var bufView = new Uint8Array(buf);
+        for (var i=0, strLen=str.length; i<strLen; i++) {
+             bufView[i] = str.charCodeAt(i);
+        }
+        return buf;
     },
     tingAction: function(dd){
         let length =cc.find('Canvas/content/handcards/deskcard/layout').children.length;
