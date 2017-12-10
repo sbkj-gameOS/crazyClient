@@ -1514,33 +1514,33 @@ cc.Class({
                 var count = 0;
                 if(data.hu){
                     hu.active = true ;
-                    hu.x = - 250 + count * 100 ;
+                    hu.x = - 250 + count * 110 ;
                     count++;
                 }
                 if(data.gang){
                     gang.active = true ;
-                    gang.x = - 250 + count * 100 ;
+                    gang.x = - 250 + count * 110 ;
                     count++;
                 }
                 if(data.dan){
                     dan.active = true ;
-                    dan.x = - 250 + count * 100 ;
+                    dan.x = - 250 + count * 110 ;
                     count++;
                 }
                 if(data.ting){
                     ting.active = true ;
-                    ting.x = - 250 + count * 100 ;
+                    ting.x = - 250 + count * 110 ;
                     count++;
                 }
                 {
                     guo.active =true;
-                    guo.x = - 250 + count * 100 ;
+                    guo.x = - 250 + count * 110 ;
                     count++;
                 }
                
                 var action = cc.moveTo(0.1,1140 - count*285,-100);
                 //context.actionnode_two.active = true;
-                context.actionnode_two.x=(1240 - count*285);
+                context.actionnode_two.x=(840 - count*100);
                 //context.actionnode_two.runAction(action);
                 //context.actionnode_deal.active = true ;
 
@@ -1558,31 +1558,31 @@ cc.Class({
                 var count = 0;
                 if(data.hu){
                     hu.active = true ;
-                    hu.x = - 250 + count * 100
+                    hu.x = - 250 + count * 110
                     count++;
                 }
                 if(data.gang){
                     gang.active = true ;
-                    gang.x = - 250 + count * 100
+                    gang.x = - 250 + count * 110
                     count++;
                 }
                 if(data.peng){
                     peng.active = true ;
-                    peng.x = - 250 + count * 100
+                    peng.x = - 250 + count * 110
                     count++;
                 }
                 if(data.chi){
                     chi.active = true ;
-                    chi.x = - 250 + count * 100
+                    chi.x = - 250 + count * 110
                     count++;
                 }
                 if(data.deal == false){
                     guo.active = true ;
-                    guo.x = - 250 + count * 100
+                    guo.x = - 250 + count * 110
                     count++;
                 }  
                 var action = cc.moveTo(0.1,1040 - count*285,-100);
-                context.actionnode_two.x=(1240 - count*285);                
+                context.actionnode_two.x=(840 - count*100);                
                 //context.actionnode_two.runAction(action);
                 // let ani = context.actionnode_two.getComponent(cc.Animation);
                 // ani.play("majiang_action") ;
