@@ -2874,7 +2874,21 @@ cc.Class({
 
         console.log('talk--------'+time);
         console.log(datas);
-        cc.beimi.talkPlay(datas);
+        if(cc.sys.localStorage.getItem('LY') == 'h5'||typeof(navigator.mediaDevices.getUserMedia )!= 'undefined'){
+            cc.beimi.talkPlay(datas);
+        }else if(cc.sys.localStorage.getItem('LY') == 'wx'){
+            wx.downloadVoice({
+                    serverId: datas.serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
+                    isShowProgressTips: 1, // 默认为1，显示进度提示
+                    success: function (res) {
+                        //dz.active = false;
+                        wx.playVoice({
+                            localId: res.localId // 需要播放的音频的本地ID，由stopRecord接口获得
+                        });
+                    }
+                });
+             }
+        
         // audio.decodeAudioData(mj.str2ab(datas.file), function(buffer) {
         //     source.buffer = buffer;
         //     source.connect(audio.destination);
@@ -2882,19 +2896,7 @@ cc.Class({
         //     source.start();
         //   });
         //下载语音
-        // wx.downloadVoice({
-        //     serverId: datas.serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
-        //     isShowProgressTips: 1, // 默认为1，显示进度提示
-        //     success: function (res) {
-        //         //dz.active = false;
-        //         wx.playVoice({
-        //             localId: res.localId // 需要播放的音频的本地ID，由stopRecord接口获得
-        //         });
-        //         setTimeout(function(){
-        //             dz.active = false;                    
-        //         },time*1000)
-        //     }
-        // });
+   
       
     },
 

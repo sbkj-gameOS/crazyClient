@@ -80,7 +80,7 @@ cc.Class({
                 cardframe = this.beimi0.getSpriteFrame(deskcard);
                 this.target.getComponent(cc.Sprite).spriteFrame = cardframe;
             } 
-            if(dd&&(cvalue.toString().indexOf("-") && cc.beimi.powerCard[0].toString().indexOf(cvalue.toString()) || cc.beimi.powerCard[1].toString().indexOf(cvalue.toString()))){
+            if(dd&&(cvalue.toString().indexOf("-") && cc.beimi.powerCard[0].toString().indexOf(cvalue.toString()) || (cc.beimi.powerCard[1] !=null&&cc.beimi.powerCard[1].toString().indexOf(cvalue.toString()))  )){
                 this.caishenCards();
             }
         }else{

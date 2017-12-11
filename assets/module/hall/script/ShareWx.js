@@ -5,6 +5,7 @@ cc.Class({
     properties: {
         typeStatus:0,
         tape:cc.Button,
+        tape2: cc.Button
     },
 
     // use this for initialization
@@ -31,13 +32,12 @@ cc.Class({
             this.urlAppend = '?roomNum='+cc.beimi.room;
             this.descName = cc.beimi.user.nickname+"邀请您加入房间:"+cc.beimi.room+",开始游戏！";
         }
-        // if(this.tape != null){
-        // 按下开始录音
-        // this.tape.node.on('touchstart', this.touchstartClick2, this);
-        // //松手结束录音
-        // this.tape.node.on('touchend', this.touchendClick2, this);
-        // this.tape.node.on('touchmove',this.touchendClick2, this);        
-        // }
+        if(this.tape != null&&cc.sys.localStorage.getItem('LY') != 'h5'&&cc.sys.localStorage.getItem('LY') == 'wx'){
+            this.tape2.node.destroy() ;        
+            this.tape.node.active = true ;  
+        }else if(cc.sys.localStorage.getItem('LY') == 'null'){
+            this.tape2.node.active = false ;
+        }
         console.log("this.urlAppend:"+this.urlAppend);
         cc.beimi.http.httpPost("/wxController/getWxConfig",{url:window.location.href}, this.sucess , this.error , this);
         
@@ -116,14 +116,13 @@ cc.Class({
             });
         });
     },
-   error:function(object){
+    error:function(object){
    },
    //开始录音
-   touchstartClick: function (event) {
+    touchstartClick: function (event) {
         var share = cc.find("Canvas/script/ShareWx").getComponent("ShareWx") ;
         cc.find('Canvas/录音/发送语音2').active =true;
         share.START = new Date().getTime();
-
         share.recordTimer = setTimeout(function(){
             wx.startRecord({
                 success: function(){
@@ -135,13 +134,7 @@ cc.Class({
             });
         },300);
     },
-    // touchstartClick2: function (event) {
-    //     var share = cc.find("Canvas/script/ShareWx").getComponent("ShareWx") ;
-    //     cc.find('Canvas/录音/发送语音2').active =true;
-    //     share.START = new Date().getTime();
-    //     cc.recorder.start();
-        
-    // },
+
     //停止录音
     touchendClick: function (event) {
         var share = cc.find("Canvas/script/ShareWx").getComponent("ShareWx") ;
@@ -152,22 +145,22 @@ cc.Class({
             wx.stopRecord({
                 success: function (res) {
                   //录音上传到微信服务器
-                  wx.uploadVoice({
-                      localId: res.localId, // 需要上传的音频的本地ID，由stopRecord接口获得
-                      isShowProgressTips: 1, // 默认为1，显示进度提示
-                      success: function (res) {
-                          //复制微信服务器返回录音id
-                          let socket = share.socket();
-                          socket.emit('sayOnSound',JSON.stringify({
-                              userid : cc.beimi.user.id,
-                              serverId : res.serverId,
-                              start : share.START,
-                              end : share.END
-                          })) ;
-                          //cc.beimi.serverId = res.serverId;
-                      }
-                  });
-                },
+                wx.uploadVoice({
+                    localId: res.localId, // 需要上传的音频的本地ID，由stopRecord接口获得
+                    isShowProgressTips: 1, // 默认为1，显示进度提示
+                    success: function (res) {
+                        //复制微信服务器返回录音id
+                        let socket = share.socket();
+                        socket.emit('sayOnSound',JSON.stringify({
+                            userid : cc.beimi.user.id,
+                            serverId : res.serverId,
+                            start : share.START,
+                            end : share.END
+                        })) ;
+                        //cc.beimi.serverId = res.serverId;
+                    }
+                });
+            },
                 fail: function (res) {
                     cc.find('Canvas/录音/发送语音1').active =true;
                     setTimeout(function(){
@@ -183,17 +176,7 @@ cc.Class({
             },1000);
         }
     },
-    // touchendClick2: function (event) {
-    //     var share = cc.find("Canvas/script/ShareWx").getComponent("ShareWx") ;
-    //     cc.find('Canvas/录音/发送语音2').active =false;
-    //     share.END = new Date().getTime();
-    //     if(cc.recorder.state != 'inactive'){
-    //         cc.recorder.stop();
-    //     }  
-    // },
-    // ab2str: function(buf) {
-    //     return String.fromCharCode.apply(null, new Uint8Array(buf));
-    //  },
+
     //播放语音
     startClick:function(){
         //下载语音
@@ -215,10 +198,10 @@ cc.Class({
     },
     talkClick: function(){
         var share = cc.find("Canvas/script/ShareWx").getComponent("ShareWx") ;
-        if(this.talk == true){
-            this.talk = false;
-            this.tape.node.children[1].active = false ;
-            this.tape.node.children[0].active = true ;         
+        if(share.talk == true){
+            share.talk = false;
+            share.tape.node.children[1].active = false ;
+            share.tape.node.children[0].active = true ;         
             //cc.find('Canvas/录音/发送语音2').active =false;
             share.END = new Date().getTime();
             let time = new Date(share.end - share.start).getSeconds();
@@ -243,9 +226,9 @@ cc.Class({
                 }
             });
         }else{
-            this.talk = true;
-            this.tape.node.children[1].active = true ;
-            this.tape.node.children[0].active = false ;      
+            share.talk = true;
+            share.tape.node.children[1].active = true ;
+            share.tape.node.children[0].active = false ;      
             //cc.find('Canvas/录音/发送语音2').active =true;
             share.START = new Date().getTime();
     

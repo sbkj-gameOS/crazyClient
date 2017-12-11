@@ -54,29 +54,34 @@ cc.Class({
     
     initMgr:function(){
         let he = this;
-
-        cc.promise=navigator.mediaDevices.getUserMedia({audio:true});
-        cc.promise.then(function(stream){
-        cc.recorder=new MediaRecorder(stream);
-        cc.recorder.ondataavailable=function(event){
-            //收集媒体设备 获得到的 可以使用的 媒体流数据
-            console.log(event.data)
-            var file = new FileReader();
-            file.readAsArrayBuffer(event.data);
-            console.log(file);
-            file.onloadend = function() {              
-                let ab = he.ab2str(file.result);
-                let socket = he.socket();
-                socket.emit('sayOnSound',JSON.stringify({
-                    userid : cc.beimi.user.id,
-                    file : ab,
-                    start : he.START,
-                    end : he.END
-                }))}
-            }
-         });
-
-
+        if(typeof(navigator.mediaDevices.getUserMedia )!= 'undefined'){
+            cc.sys.localStorage.setItem('LY','h5');
+            cc.promise=navigator.mediaDevices.getUserMedia({audio:true});
+            cc.promise.then(function(stream){
+            cc.recorder=new MediaRecorder(stream);
+            cc.recorder.ondataavailable=function(event){
+                //收集媒体设备 获得到的 可以使用的 媒体流数据
+                console.log(event.data)
+                var file = new FileReader();
+                file.readAsArrayBuffer(event.data);
+                console.log(file);
+                file.onloadend = function() {              
+                    let ab = he.ab2str(file.result);
+                    let socket = he.socket();
+                    socket.emit('sayOnSound',JSON.stringify({
+                        userid : cc.beimi.user.id,
+                        file : ab,
+                        start : he.START,
+                        end : he.END
+                    }))}
+                }
+             });
+        }else if(wx !=null){
+            cc.sys.localStorage.setItem('LY','wx');
+            
+        }else{
+            cc.sys.localStorage.setItem('LY','null');
+        }
         if(cc.beimi == null){
             cc.beimi = {};
             cc.beimi.http = require("HTTP");

@@ -131,7 +131,7 @@ cc.Class({
             }
 
             //牌面显示财神标志
-            if(cvalue.toString().indexOf("-") && cc.beimi.powerCard[0].toString().indexOf(cvalue.toString()) || cc.beimi.powerCard[1].toString().indexOf(cvalue.toString())){
+            if(cvalue.toString().indexOf("-") && cc.beimi.powerCard[0].toString().indexOf(cvalue.toString()) ||(cc.beimi.powerCard[1]!=null&& cc.beimi.powerCard[1].toString().indexOf(cvalue.toString()))){
                 this.caishenCards();
             }
         }
