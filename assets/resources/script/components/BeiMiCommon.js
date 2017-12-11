@@ -167,7 +167,9 @@ cc.Class({
     },
     route:function(command){
         return this.routes[command] || function(){};
-    }
+    },
+    talkPlay:function(){},
+    talkRecord:function(){}
 
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {

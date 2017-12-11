@@ -19,7 +19,8 @@ cc.Class({
             default: null,
             type : cc.Node
         },
-        alert2: cc.Node
+        alert2: cc.Node,
+        message: cc.Label
     },
 	
 	//创建房间-模式类型值选择
@@ -56,6 +57,7 @@ cc.Class({
     },
 
     onLoad: function () {
+        this.messages = '';
         moShi = "2";
         playerData = "both@@";
         userType = "4";
@@ -103,7 +105,8 @@ cc.Class({
             cc.director.loadScene("majiang");
         }else if(data.error){
             object.alert2.active = true;
-            object.closeloadding();            
+            object.closeloadding();  
+            object.message.string = data.msg;          
             // alert(data.msg);
             // cc.beimi.dialog.destroy();
             // cc.beimi.dialog = null ;

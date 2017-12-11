@@ -2868,11 +2868,13 @@ cc.Class({
         let player = mj.player(datas.userid , mj);
         var dz = cc.find('Canvas/music/'+player.tablepos);
         dz.active = true;        
-        // setTimeout(function(){
-        //     dz.active = false;                    
-        // },time*1000);
+        setTimeout(function(){
+            dz.active = false;                    
+        },time*1000);
+
         console.log('talk--------'+time);
         console.log(datas);
+        cc.beimi.talkPlay(datas);
         // audio.decodeAudioData(mj.str2ab(datas.file), function(buffer) {
         //     source.buffer = buffer;
         //     source.connect(audio.destination);
@@ -2880,29 +2882,22 @@ cc.Class({
         //     source.start();
         //   });
         //下载语音
-        wx.downloadVoice({
-            serverId: datas.serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
-            isShowProgressTips: 1, // 默认为1，显示进度提示
-            success: function (res) {
-                //dz.active = false;
-                wx.playVoice({
-                    localId: res.localId // 需要播放的音频的本地ID，由stopRecord接口获得
-                });
-                setTimeout(function(){
-                    dz.active = false;                    
-                },time*1000)
-            }
-        });
+        // wx.downloadVoice({
+        //     serverId: datas.serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
+        //     isShowProgressTips: 1, // 默认为1，显示进度提示
+        //     success: function (res) {
+        //         //dz.active = false;
+        //         wx.playVoice({
+        //             localId: res.localId // 需要播放的音频的本地ID，由stopRecord接口获得
+        //         });
+        //         setTimeout(function(){
+        //             dz.active = false;                    
+        //         },time*1000)
+        //     }
+        // });
       
     },
-    str2ab: function(str) {
-        var buf = new ArrayBuffer(str.length*2); // 每个字符占用2个字节
-        var bufView = new Uint8Array(buf);
-        for (var i=0, strLen=str.length; i<strLen; i++) {
-             bufView[i] = str.charCodeAt(i);
-        }
-        return buf;
-    },
+
     tingAction: function(dd){
         let length =cc.find('Canvas/content/handcards/deskcard/layout').children.length;
         for(let i =0; i<length;i++){

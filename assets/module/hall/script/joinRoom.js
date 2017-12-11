@@ -72,11 +72,15 @@ cc.Class({
             default: null,
             type: cc.Label
         },
+        cardNum:cc.Label
     },
 
     // use this for initialization
     onLoad: function () {
          array = "";
+         if(this.cardNum){
+            this.cardNum.string = '房卡：' +cc.beimi.user.cards + '张'
+         }
          //this.notice.active =false;
     },
     

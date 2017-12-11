@@ -6055,7 +6055,7 @@
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "房间暂未开放",
+    "_N$string": "",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -6550,6 +6550,9 @@
     "notice": null,
     "alert2": {
       "__id__": 183
+    },
+    "message": {
+      "__id__": 189
     }
   },
   {
