@@ -2874,7 +2874,7 @@ cc.Class({
 
         console.log('talk--------'+time);
         console.log(datas);
-        if(cc.sys.localStorage.getItem('LY') == 'h5'&&typeof(navigator.mediaDevices.getUserMedia )!= 'undefined'&&cc.recorder!=null){
+        if(cc.sys.localStorage.getItem('LY') != 'wx'){
             cc.beimi.talkPlay(datas);
         }else if(cc.sys.localStorage.getItem('LY') == 'wx'){
             wx.downloadVoice({
