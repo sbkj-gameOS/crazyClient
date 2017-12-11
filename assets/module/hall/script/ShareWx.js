@@ -32,10 +32,10 @@ cc.Class({
             this.urlAppend = '?roomNum='+cc.beimi.room;
             this.descName = cc.beimi.user.nickname+"邀请您加入房间:"+cc.beimi.room+",开始游戏！";
         }
-        if(this.tape != null&&cc.sys.localStorage.getItem('LY') != 'h5'&&cc.sys.localStorage.getItem('LY') == 'wx'){
-            this.tape2.node.destroy() ;        
+        if(cc.recorder!=null&&this.tape != null&&cc.sys.localStorage.getItem('LY') != 'h5'&&cc.sys.localStorage.getItem('LY') == 'wx'){
+            this.tape2.node.active = false ;
             this.tape.node.active = true ;  
-        }else if(cc.sys.localStorage.getItem('LY') == 'null'){
+        }else if(this.tape != null&&(cc.recorder==null||cc.sys.localStorage.getItem('LY') == 'null')){
             this.tape2.node.active = false ;
         }
         console.log("this.urlAppend:"+this.urlAppend);
