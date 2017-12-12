@@ -203,7 +203,7 @@ cc.Class({
             },300);
         }
     },
-    talkAction: function(datas){
+    talkPlay: function(datas){
         wx.downloadVoice({
             serverId: datas.serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
             isShowProgressTips: 1, // 默认为1，显示进度提示

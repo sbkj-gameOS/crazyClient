@@ -2879,14 +2879,8 @@ cc.Class({
         setTimeout(function(){
             dz.active = false;                    
         },time*1000);
-
-        if(cc.beimi.browserType=="wechat"){
-            cc.beimi.LYAudio.talkAction(datas);
-        }else{
-            if(datas.file){
-                cc.beimi.LYAudio.talkPlay(datas.file);
-            }
-        }
+        cc.beimi.LYAudio.talkPlay(datas);
+       
 
         console.log('talk--------'+time);
         console.log(datas); 

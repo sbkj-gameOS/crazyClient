@@ -46,8 +46,8 @@ cc.Class({
     });
     },
     talkPlay: function(data){
-        if(typeof(data) == 'string'){
-            let str =  this.str2ab(data);
+        if(typeof(data.file) == 'string'){
+            let str =  this.str2ab(data.file);
             var aud = new Audio();
             var blob = new Blob([str],{'type':'video/webm'}) ;
             aud.src = URL.createObjectURL(blob);
