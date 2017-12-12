@@ -222,14 +222,22 @@ cc.Class({
         cs2:{
             default:null,
             type:cc.SpriteFrame
-        }
+        },
+        wxButton: cc.Button,
+        ggButton: cc.Button
     },
+
 
     // use this for initialization
     /**
      * 重构后，只有两个消息类型
      */
     onLoad: function () {
+        if(cc.beimi.browserType=="wechat"){
+            this.wxButton.node.active = true ;
+        }else if(cc.beimi.browserType == 'chrome'){
+            this.ggButton.node.active = true ;
+        }
         var sprite = this.bkLogoImg.getComponent(cc.Sprite);
         //切换游戏首页背景图logo
         var sprite = this.bkLogoImg.getComponent(cc.Sprite);
@@ -2872,33 +2880,18 @@ cc.Class({
             dz.active = false;                    
         },time*1000);
 
+        if(cc.beimi.browserType=="wechat"){
+            cc.beimi.ShareWx.talkAction(datas);
+        }else{
+            if(data.file){
+                cc.beimi.LYAudio.talkPlay(datas.file);
+            }
+        }
+
         console.log('talk--------'+time);
-        console.log(datas);
-        if(cc.sys.localStorage.getItem('LY') != 'wx'){
-            cc.beimi.talkPlay(datas);
-        }else if(cc.sys.localStorage.getItem('LY') == 'wx'){
-            wx.downloadVoice({
-                    serverId: datas.serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
-                    isShowProgressTips: 1, // 默认为1，显示进度提示
-                    success: function (res) {
-                        //dz.active = false;
-                        wx.playVoice({
-                            localId: res.localId // 需要播放的音频的本地ID，由stopRecord接口获得
-                        });
-                    }
-                });
-             }
-        
-        // audio.decodeAudioData(mj.str2ab(datas.file), function(buffer) {
-        //     source.buffer = buffer;
-        //     source.connect(audio.destination);
-        //     //source.loop = true;
-        //     source.start();
-        //   });
-        //下载语音
-   
-      
+        console.log(datas); 
     },
+   
 
     tingAction: function(dd){
         let length =cc.find('Canvas/content/handcards/deskcard/layout').children.length;

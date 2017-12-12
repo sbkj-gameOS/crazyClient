@@ -39,11 +39,14 @@ cc.Class({
             default: null,
             type : cc.RichText
         },
+        alert2: cc.Node,
+        message: cc.Label,
     },
 
     // use this for initialization
     onLoad: function () {
         //龙港数据初始化
+        this.messages = '';        
         this.LGPlayer = 'classic';
         this.LGPlayer2 = '3-6-9-12';
         this.LGUser = '4';
@@ -238,11 +241,24 @@ cc.Class({
             cc.beimi.room = data.room;
             cc.beimi.playway = data.playway;
             cc.director.loadScene("majiang");
+        }else if(data.error){
+            object.alert2.active = true;
+            object.closeloadding();  
+            object.message.string = data.msg;          
+            // alert(data.msg);
+            // cc.beimi.dialog.destroy();
+            // cc.beimi.dialog = null ;
+            // object.closeloadding();
         }else{
             object.notice.getComponent('cc.Label').string ='请求失败';
         }  
     },
     error:function(object){
         object.notice.getComponent('cc.Label').string ='连接出错';
+    },
+    closeClick:function(){
+        this.alert2.active = false ;
+        cc.beimi.dialog.destroy();
+        cc.beimi.dialog = null ;
     }
 });

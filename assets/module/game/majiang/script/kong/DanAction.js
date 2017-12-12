@@ -118,7 +118,7 @@ cc.Class({
                 }else if(cardcolors == -1){
                     deskcard = fw+'_white';
                 }       
-                if(dd&&(cardcolors == csCardColors1 || cardcolors == csCardColors2)){
+                if(dd&&(cardcolors == csCardColors1 || (csCardColors2!=null &&cardcolors == csCardColors2))){
                     this.caishenCards();
                 }
             }else{

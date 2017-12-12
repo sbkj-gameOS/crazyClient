@@ -12,7 +12,8 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
-        tape:cc.Button
+        tape:cc.Button,
+        wxButton:cc.Button,
     },
 
     // use this for initialization
@@ -25,12 +26,15 @@ cc.Class({
     },
     touchstartClick2:function(){
         cc.find('Canvas/录音/发送语音2').active =true;        
-        cc.beimi.talkRecordStart();
+        cc.beimi.LYAudio.talkRecordStart();
     },
     touchendClick2:function(){
         cc.find('Canvas/录音/发送语音2').active =false;
-        cc.beimi.talkRecordEnd();
-    }
+        cc.beimi.LYAudio.talkRecordEnd();
+    },
+    wxClick: function(){
+        cc.beimi.ShareWx.talkClick(this.wxButton);
+    },
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 

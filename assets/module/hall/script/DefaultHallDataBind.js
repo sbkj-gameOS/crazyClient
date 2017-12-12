@@ -62,6 +62,16 @@ cc.Class({
         // }
         
         if(this.ready()){
+            if(cc.beimi.browserType=="wechat"){
+                let ShareWx = require('ShareWx');
+                cc.beimi.ShareWx = new ShareWx();
+                cc.beimi.ShareWx.init();
+
+            }else if(cc.beimi.browserType == 'chrome'){
+                let LYAudio = require('LYAudio');
+                cc.beimi.LYAudio = new LYAudio();
+                cc.beimi.LYAudio.init();
+            }
             //ljh 加新场景的alert节点池子
             cc.beimi.dialog = new cc.NodePool();
             cc.beimi.dialog.put(cc.instantiate(this.alertPrefab));
@@ -99,7 +109,6 @@ cc.Class({
             //     this.goldcoins.string = cc.beimi.user.goldcoins;
             // }
             this.cards.string = cc.beimi.user.cards + "张" ;
-    
         }
     },
     // seccess: function(result,object){

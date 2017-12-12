@@ -10,11 +10,12 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        let he = this;   
+        this.init();
+    },
+    init: function(){
         let selfs = this;
         this.talk =false;
-        this.START = 0;
-        this.END = 0;
+
         this.recordTimer = 0;
         this.urlAppend = '';
         if(GameBase.gameModel == 'wz'){
@@ -32,16 +33,7 @@ cc.Class({
             this.urlAppend = '?roomNum='+cc.beimi.room;
             this.descName = cc.beimi.user.nickname+"邀请您加入房间:"+cc.beimi.room+",开始游戏！";
         }
-        if((this.tape != null&&cc.sys.localStorage.getItem('LY') != 'h5')&&cc.sys.localStorage.getItem('LY') == 'wx'){
-            this.tape2.node.active = false ;
-            this.tape.node.active = true ;  
-        }else if(this.tape != null&&(cc.recorder==null||cc.sys.localStorage.getItem('LY') == 'null')){
-            this.tape2.node.active = false ;
-        }
-        console.log("this.urlAppend:"+this.urlAppend);
         cc.beimi.http.httpPost("/wxController/getWxConfig",{url:window.location.href}, this.sucess , this.error , this);
-        
-
     },
     sucess:function(result,object){
         result = JSON.parse(result) ;
@@ -118,26 +110,10 @@ cc.Class({
     },
     error:function(object){
    },
-   //开始录音
-    touchstartClick: function (event) {
-        var share = cc.find("Canvas/script/ShareWx").getComponent("ShareWx") ;
-        cc.find('Canvas/录音/发送语音2').active =true;
-        share.START = new Date().getTime();
-        share.recordTimer = setTimeout(function(){
-            wx.startRecord({
-                success: function(){
-                    localStorage.rainAllowRecord = 'true';
-                },
-                cancel: function () {
-                    alert('用户拒绝授权录音');
-                }
-            });
-        },300);
-    },
 
     //停止录音
     touchendClick: function (event) {
-        var share = cc.find("Canvas/script/ShareWx").getComponent("ShareWx") ;
+        var share = this ;
         cc.find('Canvas/录音/发送语音2').active =false;
         share.END = new Date().getTime();
         let time = new Date(share.end - share.start).getSeconds();
@@ -176,42 +152,25 @@ cc.Class({
             },1000);
         }
     },
-
-    //播放语音
-    startClick:function(){
-        //下载语音
-        wx.downloadVoice({
-            serverId: cc.beimi.serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
-            isShowProgressTips: 1, // 默认为1，显示进度提示
-            success: function (res) {
-                wx.playVoice({
-                    localId: res.localId // 需要播放的音频的本地ID，由stopRecord接口获得
-                });
-            }
-        });
-
-
-
-        // wx.playVoice({
-        //     localId: res.localId // 需要播放的音频的本地ID，由stopRecord接口获得
-        // });
-    },
-    talkClick: function(){
-        var share = cc.find("Canvas/script/ShareWx").getComponent("ShareWx") ;
+    talkClick: function(wxButton){
+        var share = this;
+        var wxButton = wxButton;
         if(share.talk == true){
             share.talk = false;
-            share.tape.node.children[1].active = false ;
-            share.tape.node.children[0].active = true ;         
+            wxButton.node.children[1].active = false ;
+            wxButton.node.children[0].active = true ;         
             //cc.find('Canvas/录音/发送语音2').active =false;
             share.END = new Date().getTime();
-            let time = new Date(share.end - share.start).getSeconds();
             wx.stopRecord({
                 success: function (res) {
+                    console.log(res);
+                    console.log('-------')
                     //录音上传到微信服务器
                     wx.uploadVoice({
                         localId: res.localId, // 需要上传的音频的本地ID，由stopRecord接口获得
                         isShowProgressTips: 1, // 默认为1，显示进度提示
                         success: function (res) {
+                           
                             //复制微信服务器返回录音id
                             let socket = share.socket();
                             socket.emit('sayOnSound',JSON.stringify({
@@ -227,8 +186,8 @@ cc.Class({
             });
         }else{
             share.talk = true;
-            share.tape.node.children[1].active = true ;
-            share.tape.node.children[0].active = false ;      
+            wxButton.node.children[1].active = true ;
+            wxButton.node.children[0].active = false ;      
             //cc.find('Canvas/录音/发送语音2').active =true;
             share.START = new Date().getTime();
     
@@ -244,4 +203,16 @@ cc.Class({
             },300);
         }
     },
+    talkAction: function(datas){
+        wx.downloadVoice({
+            serverId: datas.serverId, // 需要下载的音频的服务器端ID，由uploadVoice接口获得
+            isShowProgressTips: 1, // 默认为1，显示进度提示
+            success: function (res) {
+                //dz.active = false;
+                wx.playVoice({
+                    localId: res.localId // 需要播放的音频的本地ID，由stopRecord接口获得
+                });
+            }
+        });
+    }
 });

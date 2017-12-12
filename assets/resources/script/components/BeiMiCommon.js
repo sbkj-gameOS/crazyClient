@@ -169,8 +169,18 @@ cc.Class({
         return this.routes[command] || function(){};
     },
     talkPlay:function(){},
-    talkRecord:function(){}
-
+    talkRecord:function(){},
+    ab2str: function(buf) {
+        return String.fromCharCode.apply(null, new Uint8Array(buf));
+    },
+    str2ab: function(str) {
+        var buf = new ArrayBuffer(str.length*2); // 每个字符占用2个字节
+        var bufView = new Uint8Array(buf);
+        for (var i=0, strLen=str.length; i<strLen; i++) {
+             bufView[i] = str.charCodeAt(i);
+        }
+        return buf;
+    },
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 

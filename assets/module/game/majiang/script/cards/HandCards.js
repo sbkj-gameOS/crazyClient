@@ -92,7 +92,7 @@ cc.Class({
             }
             
             //东南西北风 ， 中发白
-            if(cardcolors == csCardColors1 || cardcolors == csCardColors2){
+            if(cardcolors == csCardColors1 || (csCardColors2!=null &&cardcolors == csCardColors2)){
                 this.caishenCards();
             }
         }else{
