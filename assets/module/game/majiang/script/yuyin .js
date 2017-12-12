@@ -33,7 +33,7 @@ cc.Class({
         cc.beimi.LYAudio.talkRecordEnd();
     },
     wxClick: function(){
-        cc.beimi.ShareWx.talkClick(this.wxButton);
+        cc.beimi.LYAudio.talkClick(this.wxButton);
     },
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {

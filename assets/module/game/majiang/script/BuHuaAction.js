@@ -42,6 +42,20 @@ cc.Class({
         this.fangwei = fangwei;
 
         var deskcard , cardframe ;
+        let cardcolors = parseInt(this.value/4 );
+        let csType1,csType2;
+        let csCardColors1,csCardColors2;
+        let csValue1,csValue2;
+        if(cc.beimi.powerCard){
+            csCardColors1 = parseInt(cc.beimi.powerCard[0]/4 );
+            csType1 = parseInt(csCardColors1 / 9);//第一张财神牌类型 
+            csValue1 = (parseInt((cc.beimi.powerCard[0]%36)/4)+1);
+            if(cc.beimi.powerCard.length == 2){
+                csCardColors2 = parseInt(cc.beimi.powerCard[1]/4 );
+                csType2 = parseInt(csCardColors2 / 9);//第二张财神牌类型
+                csValue2 = (parseInt((cc.beimi.powerCard[1]%36)/4)+1);
+            }
+        }
 
         
         //确定牌的花色
@@ -80,7 +94,7 @@ cc.Class({
                 cardframe = this.beimi0.getSpriteFrame(deskcard);
                 this.target.getComponent(cc.Sprite).spriteFrame = cardframe;
             } 
-            if(dd&&(cvalue.toString().indexOf("-") && cc.beimi.powerCard[0].toString().indexOf(cvalue.toString()) || (cc.beimi.powerCard[1] !=null&&cc.beimi.powerCard[1].toString().indexOf(cvalue.toString()))  )){
+            if(dd&&(cardcolors == csCardColors1 || (csCardColors2!=null &&cardcolors == csCardColors2))){
                 this.caishenCards();
             }
         }else{

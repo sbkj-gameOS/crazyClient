@@ -1,3 +1,5 @@
+// GameBase = {};
+// GameBase.gameModel = 'ch';
 var beiMiCommon = require("BeiMiCommon");
 cc.Class({
     extends: beiMiCommon,
@@ -28,6 +30,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+        let LYAudio;
         let he = this;
         if(!cc.sys.isNative && cc.sys.isMobile){
             var canvas = this.node.getComponent(cc.Canvas);
@@ -39,7 +42,17 @@ cc.Class({
         //预加载majiang场景
         cc.director.preloadScene('majiang');
         
-         this.initMgr();         
+         this.initMgr();   
+         if(cc.beimi.browserType=="wechat"){
+            LYAudio = require('ShareWx');
+            cc.beimi.LYAudio = new ShareWx();
+            cc.beimi.LYAudio.init();
+
+        }else if(cc.beimi.browserType == 'chrome'){
+            LYAudio = require('LYAudio');
+            cc.beimi.LYAudio = new LYAudio();
+            cc.beimi.LYAudio.init();
+        }      
     },
     start:function(){
         var self = this;
@@ -59,6 +72,7 @@ cc.Class({
             cc.beimi.http = require("HTTP");
             cc.beimi.seckey = "beimi";
             cc.beimi.browserType =  cc.sys.browserType; 
+            cc.beimi.LYAudio =null;
             cc.beimi.dialog = null ;
             cc.beimi.dialogtwo = null;
             cc.beimi.paystatus = null ;
