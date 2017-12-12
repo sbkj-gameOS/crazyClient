@@ -62,14 +62,27 @@ cc.Class({
         }  
     },
     talkRecordStart: function(){
-        this.START = new Date().getTime();
-        cc.recorder.start();
+        try{        
+            this.START = new Date().getTime();
+            cc.recorder.start();
+        }catch(error){
+            cc.find('Canvas/YY').active = true;
+            setTimeout(function(){
+                cc.find('Canvas/YY').active = false;                
+            },2000);
+        }
+
     },
     talkRecordEnd : function(){
-        if(cc.recorder.state != 'inactive'){
-            this.END = new Date().getTime(); 
-            cc.recorder.stop();
-        } 
+        try{        
+            if(cc.recorder.state != 'inactive'){
+                this.END = new Date().getTime(); 
+                cc.recorder.stop();
+            } 
+        }catch(error){
+            
+        }
+      
     }
 
 
