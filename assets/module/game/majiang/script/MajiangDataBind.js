@@ -2883,7 +2883,7 @@ cc.Class({
         if(cc.beimi.browserType=="wechat"){
             cc.beimi.ShareWx.talkAction(datas);
         }else{
-            if(data.file){
+            if(datas.file){
                 cc.beimi.LYAudio.talkPlay(datas.file);
             }
         }

@@ -44,7 +44,7 @@ cc.Class({
          */
         // this.loginFormPool = new cc.NodePool();
         // this.loginFormPool.put(cc.instantiate(this.prefab)); // 创建节点
-        var xySuccess = localStorage.getItem("xySuccess");
+        var xySuccess = cc.sys.localStorage.getItem("xySuccess");
         //this.tourist();        
         if(xySuccess == 1){
             this.successBtn.active = false;
@@ -114,7 +114,7 @@ cc.Class({
     },
     wxlogin: function(){
         if(tongyi){
-            localStorage.setItem("xySuccess","1");
+            cc.sys.localStorage.setItem("xySuccess","1");
             //this.tourist();
             this.login();    
         }else{
