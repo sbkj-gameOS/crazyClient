@@ -48,7 +48,7 @@ cc.Class({
             cc.beimi.LYAudio = new ShareWx();
             cc.beimi.LYAudio.init();
 
-        }else if(cc.beimi.browserType == 'chrome'){
+        }else{
             LYAudio = require('LYAudio');
             cc.beimi.LYAudio = new LYAudio();
             cc.beimi.LYAudio.init();

@@ -235,7 +235,7 @@ cc.Class({
     onLoad: function () {
         if(cc.beimi.browserType=="wechat"){
             this.wxButton.node.active = true ;
-        }else if(cc.beimi.browserType == 'chrome'){
+        }else if(cc.beimi.browserType != null){
             this.ggButton.node.active = true ;
         }
         var sprite = this.bkLogoImg.getComponent(cc.Sprite);
