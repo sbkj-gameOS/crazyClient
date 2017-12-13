@@ -1039,7 +1039,6 @@ cc.Class({
             
         }
         if(data.userid == cc.beimi.user.id) {
-            //kongcard = cc.find('Canvas/content/handcards/deskcard/kong')
             context.initcardwidth();
             if(data.ting){
                 cc.sys.localStorage.setItem('alting','true');                
@@ -1167,7 +1166,6 @@ cc.Class({
     },
     dealcards: function(data,context){
         context=cc.find('Canvas').getComponent('MajiangDataBind');  
-        //context.initcardwidth();
         context.closeloadding();
         if(cc.beimi.playerNum){
             var peoNum = cc.beimi.playerNum;
@@ -1760,12 +1758,15 @@ cc.Class({
                 var sprite = context.csNode.getComponent(cc.Sprite);
                 if(powerCard.length == 1){//财神个数
                     sprite.spriteFrame = context.cs1;
-                    context.csNode.width = 60;
+                    context.csNode.width = 65;
                     context.csNode.setPosition(-568,301);
+                    context.godcard.children[1].x = context.godcard.children[1].x -5;
+                    
                 }else{
                     sprite.spriteFrame = context.cs2;
                     context.csNode.width = 110;
                     context.csNode.setPosition(-551,301);
+                    context.godcard.children[1].x = context.godcard.children[1].x +7;                    
                 }
                 if(powerCard&&powerCard.length>0){
                     for(let i=0 ; i<cc.find('Canvas/global/main/godcard/child').children.length;i++){
@@ -2081,6 +2082,10 @@ cc.Class({
                 context.closeloadding();
         },2000)      
     },
+    /**
+     * 此为恢复麻将状态  1、宽度 2、缩回来 3、颜色 
+     * ting  true 为听牌时的状态
+     */
     initcardwidth: function(ting){
         let length  = cc.find('Canvas/content/handcards/deskcard/layout').children.length; 
         for(let i =0; i<length;i++){
@@ -2095,10 +2100,12 @@ cc.Class({
                 target.width=73;    
             }
             card.target.y = 0; 
+            //ting牌的时候 和 财神的牌是灰色的   听牌听完恢复 财神为持续状态
             if(!ting&&!card.caishen){
                 card.cardvalue.color = new cc.Color(255, 255, 255); 
             }
         }
+        cc.find('Canvas/content/handcards/deskcard/layout').sortAllChildren();
     },
     initDeskCards: function(card,fangwei,context){
         if(fangwei =='left'){

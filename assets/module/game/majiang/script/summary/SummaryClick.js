@@ -86,7 +86,7 @@ cc.Class({
                 for(var i = 0;i<cc.beimi.baopai.length; i++){
                     card = cc.instantiate(this.bp);
                     baopai  = card.getComponent('DeskCards');
-                    if(cc.beimi.powerCards!=null){
+                    if(cc.beimi.powerCard!=null){
                         baopai.node.children[1].active = true;
                     }    
                     baopai.init(cc.beimi.baopai[i],'B');
