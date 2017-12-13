@@ -43,7 +43,7 @@
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 208
+      "__id__": 205
     },
     "_id": "",
     "_opacity": 255,
@@ -6282,23 +6282,19 @@
     "_parent": {
       "__id__": 1
     },
-    "_children": [
-      {
-        "__id__": 201
-      }
-    ],
+    "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 204
+        "__id__": 201
       },
       {
-        "__id__": 205
+        "__id__": 202
       }
     ],
     "_prefab": {
-      "__id__": 207
+      "__id__": 204
     },
     "_id": "",
     "_opacity": 255,
@@ -6337,93 +6333,6 @@
     "groupIndex": 0
   },
   {
-    "__type__": "cc.Node",
-    "_name": "New Label",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 200
-    },
-    "_children": [],
-    "_tag": -1,
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 202
-      }
-    ],
-    "_prefab": {
-      "__id__": 203
-    },
-    "_id": "",
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 173,
-      "b": 0,
-      "a": 255
-    },
-    "_cascadeOpacityEnabled": true,
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 160,
-      "height": 40
-    },
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
-    "_position": {
-      "__type__": "cc.Vec2",
-      "x": -1,
-      "y": 11
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_localZOrder": 0,
-    "_globalZOrder": 0,
-    "_opacityModifyRGB": false,
-    "groupIndex": 0
-  },
-  {
-    "__type__": "cc.Label",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 201
-    },
-    "_enabled": true,
-    "_useOriginalSize": false,
-    "_actualFontSize": 40,
-    "_fontSize": 40,
-    "_lineHeight": 40,
-    "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
-    "_spacingX": 0,
-    "_N$string": "创建房间",
-    "_N$horizontalAlign": 1,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 0
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__uuid__": "b25fd271-f0f2-4430-ad25-8f5be4b706be"
-    },
-    "fileId": "b5fvlTxylImZ+ROVCS7YJe",
-    "sync": false
-  },
-  {
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
@@ -6432,7 +6341,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "241ecd6f-4807-43e4-91a4-23299ad000b7"
+      "__uuid__": "baa66cc5-7ac0-411b-b141-127b4665dc3b"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -6447,9 +6356,7 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": {
-      "__uuid__": "c1a3894d-ecd5-4442-adcb-3363966af0a2"
-    }
+    "_atlas": null
   },
   {
     "__type__": "cc.Button",
@@ -6480,7 +6387,7 @@
     "hoverSprite": null,
     "clickEvents": [
       {
-        "__id__": 206
+        "__id__": 203
       }
     ],
     "_N$interactable": true,

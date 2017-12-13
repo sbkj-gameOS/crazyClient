@@ -41,9 +41,13 @@ cc.Class({
 
     },
     init:function(cvalue,back,fangwei,count,target,dd){
+        this.fangwei = fangwei;
         if(target !=null){
             if(this.juju&&!dd){
-                this.juju.active = true;                
+                this.juju.active = true;
+                this.ani = this.juju.getComponent(cc.Animation);
+                this.ani.play("juju_"+fangwei) ;   
+                
             }
             if(target == 'current'){
                 this.current.active = true ;
@@ -166,7 +170,10 @@ cc.Class({
         this.target.zIndex = -999+this.value;
     },
     jujufei: function(){
-        this.juju.active = false ; 
+        if(this.juju.active == true){
+            this.juju.active = false ; 
+            this.ani.stop("juju_"+this.fangwei) ;
+        }
     }
 
     // called every frame, uncomment this function to activate update callback

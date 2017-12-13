@@ -1,0 +1,45 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "juju_top",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 1.3333333333333333,
+  "sample": 60,
+  "speed": 0.8,
+  "wrapMode": 2,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            -1,
+            24
+          ]
+        },
+        {
+          "frame": 0.3333333333333333,
+          "value": [
+            -1,
+            35
+          ]
+        },
+        {
+          "frame": 1,
+          "value": [
+            -1,
+            9
+          ]
+        },
+        {
+          "frame": 1.3333333333333333,
+          "value": [
+            -1,
+            24
+          ]
+        }
+      ]
+    }
+  },
+  "events": []
+}
