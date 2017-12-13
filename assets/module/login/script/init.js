@@ -45,14 +45,11 @@ cc.Class({
         
         if(cc.beimi.browserType=="wechat"){
             LYAudio = require('ShareWx');
-            cc.beimi.LYAudio = new ShareWx();
-            cc.beimi.LYAudio.init();
-
         }else{
             LYAudio = require('LYAudio');
-            cc.beimi.LYAudio = new LYAudio();
-            cc.beimi.LYAudio.init();
-        }      
+        }
+        cc.beimi.LYAudio = new LYAudio();
+        cc.beimi.LYAudio.init();        
     },
     start:function(){
         var self = this;

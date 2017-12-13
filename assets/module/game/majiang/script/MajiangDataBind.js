@@ -710,7 +710,8 @@ cc.Class({
         cc.sys.localStorage.removeItem('top');
         cc.sys.localStorage.removeItem('altake');      
         cc.sys.localStorage.removeItem('alting');
-        cc.sys.localStorage.removeItem('guo');           
+        cc.sys.localStorage.removeItem('guo');  
+        cc.sys.localStorage.removeItem('unOver');         
         this.joinRoom();
         if(cc.beimi.playerNum){
             if(cc.beimi.playerNum == 2){
@@ -763,6 +764,7 @@ cc.Class({
     isOver_event:function(){
 
         var mj = cc.find('Canvas').getComponent('MajiangDataBind');
+        cc.sys.localStorage.setItem('unOver','true');
         if(mj.alert.size()>0){
             var alert = mj.alert.get();
             alert.parent = cc.find("Canvas");
@@ -795,6 +797,7 @@ cc.Class({
     },
     unOver_event: function(){
         let mj = cc.find('Canvas').getComponent('MajiangDataBind')
+        cc.sys.localStorage.removeItem('unOver');
         let dialog = cc.find("Canvas/isover") ;
         clearTimeout(mj.t);
         mj.alert.put(dialog);
@@ -1229,6 +1232,7 @@ cc.Class({
     allcards_event:function(data , context){
         //结算界面，
         let playerid;
+        
         for(let i = 0;i<data.playOvers.length;i++){
             if(data.playOvers[i].win==true){
                 playerid = data.playOvers[i].user;
@@ -1265,7 +1269,14 @@ cc.Class({
         
     },
     gameOver_event: function(data,context){
-        setTimeout(function(){context.endGameOver(data,context)},3000)   
+        let time;
+        if(cc.sys.localStorage.getItem('unOver')=='true'){
+            time = 0;
+            cc.sys.localStorage.removeItem('unOver');
+        }else{
+            time = 3000;
+        }
+        setTimeout(function(){context.endGameOver(data,context)},time)   
     },
     endGameOver: function(data,context){
         let temp = cc.instantiate(context.summary) ;

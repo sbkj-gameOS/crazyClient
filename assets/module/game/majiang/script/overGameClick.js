@@ -55,6 +55,7 @@ cc.Class({
     overGameClick:function(){
         
         //this.scene("gameMain" , this);
+        cc.sys.localStorage.setItem('unOver','true');
         this.button.active = false;
         this.button2.active = false;
         
