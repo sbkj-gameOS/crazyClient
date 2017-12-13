@@ -420,6 +420,7 @@ cc.Class({
             let mjdata = cc.find('Canvas').getComponent('MajiangDataBind');
             var action = cc.moveTo(0.5,880,274);
             mjdata.setting_coin.runAction(action);
+            mjdata.initcardwidth();
         });
         this.node.on('leaveGame',function(){
             let socket = self.getSelf().socket();
@@ -1026,6 +1027,7 @@ cc.Class({
     //掉线 和上线
     takecard_event:function(data , context){
         context = cc.find('Canvas').getComponent('MajiangDataBind');
+        context.qujuju(data);
         let kongcard ; 
         cc.beimi.audio.playSFX('give.mp3');
         let playerss = context.player(data.userid , context);
@@ -2916,6 +2918,18 @@ cc.Class({
         context.left_ready.active = false;
         context.top_ready.active = false;
         context.current_ready.active =false;  
+    },
+    qujuju: function(data){
+        let player = this.player(data.userid , this);
+        let opParent;
+        if(player.tablepos == 'current'){
+            opParent = cc.find("Canvas/content/handcards/deskcard/kong") ;
+        }else{
+            opParent = cc.find("Canvas/content/handcards/"+player.tablepos+"desk/kong") ;
+        }
+        if(opParent.children.length>1){
+            opParent.children[opParent.children.length-1].children[1].getComponent('DanAction').jujufei();            
+        }
     },
     dosomething: function (context){
         context.gameOver_event({playOvers:[{huCount:1,dianCount:20,touchBao:3,bankerCount:4,pointCount:15},{huCount:1,dianCount:2,touchBao:3,bankerCount:4,pointCount:-5},{huCount:1,dianCount:2,touchBao:3,bankerCount:4,pointCount:5},{huCount:1,dianCount:2,touchBao:3,bankerCount:4,pointCount:5}]},context)

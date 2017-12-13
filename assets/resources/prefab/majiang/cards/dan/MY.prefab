@@ -848,7 +848,9 @@
       "__id__": 18
     },
     "hua": null,
-    "juju": null
+    "juju": {
+      "__id__": 21
+    }
   },
   {
     "__type__": "cc.PrefabInfo",

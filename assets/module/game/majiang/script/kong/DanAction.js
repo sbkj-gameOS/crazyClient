@@ -42,7 +42,9 @@ cc.Class({
     },
     init:function(cvalue,back,fangwei,count,target,dd){
         if(target !=null){
-            //this.juju.active = active;
+            if(this.juju&&!dd){
+                this.juju.active = true;                
+            }
             if(target == 'current'){
                 this.current.active = true ;
             }else if(target == 'right'){
@@ -163,7 +165,9 @@ cc.Class({
         this.hua.active = true;
         this.target.zIndex = -999+this.value;
     },
-
+    jujufei: function(){
+        this.juju.active = false ; 
+    }
 
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
