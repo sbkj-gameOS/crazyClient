@@ -46,7 +46,7 @@ cc.Class({
         this.colorBrown = new cc.Color(122, 69, 11);//棕色
         this.init();
         
-        if(GameBase.gameModel == 'wz'){
+        if(cc.beimi.GameBase.gameModel == 'wz'){
             selectlastToggle = this.tpBtn;
             
         }else{
@@ -67,7 +67,7 @@ cc.Class({
         this.right3 = cc.instantiate(this.lgMjType);
         this.right3.parent = this.node;
         this.right3.setPosition(111,-18);
-        if(GameBase.gameModel == 'wz'){
+        if(cc.beimi.GameBase.gameModel == 'wz'){
             this.ccBtn.isChecked = false;
             this.tpBtn.isChecked = true;
             this.ccBtn.active = false;

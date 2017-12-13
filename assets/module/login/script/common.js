@@ -33,7 +33,8 @@ cc.Class({
     onLoad: function () {
         tongyi = true;
         var sprite = this.loginLogoNode.getComponent(cc.Sprite);
-        if(GameBase.gameModel =='wz'){
+        cc.beimi.GameBase = GameBase ;
+        if(cc.beimi.GameBase.gameModel =='wz'){
             sprite.spriteFrame = this.WZLogo;
         }else{
             sprite.spriteFrame = this.CCLogo;

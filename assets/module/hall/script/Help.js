@@ -21,7 +21,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        if(GameBase.gameModel =='wz'){
+        if(cc.beimi.GameBase.gameModel =='wz'){
             this.wzlogo.active =true;
             this.tpmjPlery.active =true;
         }else{

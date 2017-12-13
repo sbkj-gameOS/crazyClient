@@ -242,7 +242,7 @@ cc.Class({
         //切换游戏首页背景图logo
         var sprite = this.bkLogoImg.getComponent(cc.Sprite);
         
-        if(GameBase.gameModel =='wz'){
+        if(cc.beimi.GameBase.gameModel =='wz'){
             if(cc.beimi.playType == "LG"){
                 sprite.spriteFrame = this.bkLogoImgLG;//龙港游戏logo
             }else{
@@ -1738,7 +1738,7 @@ cc.Class({
         var temp_player = data.player ;
         var cards = context.decode(temp_player.cards);
 
-        if(GameBase.gameModel == 'wz'){
+        if(cc.beimi.GameBase.gameModel == 'wz'){
             if(temp_player.powerCard){
                 var powerCard = context.decode(temp_player.powerCard);
                 cc.beimi.powerCard = powerCard;
@@ -1816,7 +1816,7 @@ cc.Class({
         } , 0) ;
         var groupNums = 0 ;
         var pTimes;
-        if(GameBase.gameModel =='wz'){
+        if(cc.beimi.GameBase.gameModel =='wz'){
             pTimes = 5;
         }else{
             pTimes = 4;

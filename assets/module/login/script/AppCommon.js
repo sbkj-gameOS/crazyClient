@@ -40,8 +40,9 @@ cc.Class({
     // 首次加载页面方法
     onLoad: function () {
         tongyi = true;
+        cc.beimi.GameBase.gameModel = 'ch' ;
         var sprite = this.loginLogoNode.getComponent(cc.Sprite);
-        if(GameBase.gameModel =='wz'){
+        if(cc.beimi.GameBase.gameModel =='wz'){
             sprite.spriteFrame = this.WZLogo;
         }else{
             sprite.spriteFrame = this.CCLogo;

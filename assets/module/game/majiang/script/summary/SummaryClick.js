@@ -60,7 +60,7 @@ cc.Class({
         }
         //切换游戏财神图片
         var sprite = this.csNode.getComponent(cc.Sprite);
-        if(GameBase.gameModel =='wz'){
+        if(cc.beimi.GameBase.gameModel =='wz'){
             sprite.spriteFrame = this.cs1;
             this.csNode.width = this.csNode.width - 40 ;
             this.csNode.y = this.csNode.y - 10 ;
@@ -81,7 +81,7 @@ cc.Class({
         this.dabaopai.active = true;
         console.log(userInfo);
         let card,baopai;
-        if(GameBase.gameModel =='wz'){
+        if(cc.beimi.GameBase.gameModel =='wz'){
             if(cc.beimi.baopai){
                 for(var i = 0;i<cc.beimi.baopai.length; i++){
                     card = cc.instantiate(this.bp);

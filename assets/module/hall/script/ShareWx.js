@@ -18,7 +18,7 @@ cc.Class({
 
         this.recordTimer = 0;
         this.urlAppend = '';
-        if(GameBase.gameModel == 'wz'){
+        if(cc.beimi.GameBase.gameModel == 'wz'){
             this.descNametitle = "首游宝·温州棋牌";
             this.urlType = "toWZAuth";
         }else{

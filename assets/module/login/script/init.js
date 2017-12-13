@@ -30,6 +30,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+        this.initMgr();
         let LYAudio;
         let he = this;
         if(!cc.sys.isNative && cc.sys.isMobile){
@@ -42,8 +43,7 @@ cc.Class({
         //预加载majiang场景
         cc.director.preloadScene('majiang');
         
-         this.initMgr();   
-         if(cc.beimi.browserType=="wechat"){
+        if(cc.beimi.browserType=="wechat"){
             LYAudio = require('ShareWx');
             cc.beimi.LYAudio = new ShareWx();
             cc.beimi.LYAudio.init();
@@ -96,7 +96,8 @@ cc.Class({
             if(cc.sys.localStorage.getItem('nobgm') != 'true'){
                 cc.beimi.audio.playBGM("bgMain.mp3");
             }
-
+            
+            cc.beimi.GameBase = {} ;
         }
 
     },

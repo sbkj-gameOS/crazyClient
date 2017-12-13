@@ -50,7 +50,7 @@ cc.Class({
         if(roomNum <= 0) {
             this.notice.getComponent('cc.Label').string = "支付金额异常!请联系客服人员";
         }else{
-            window.location.href = 'http://game.bizpartner.cn/wxController/wxPayHtml?gameType='+ GameBase.gameModel + '&roomNum='+roomNum+'&userId='+cc.beimi.userId+"&token="+cc.beimi.authorization;   
+            window.location.href = 'http://game.bizpartner.cn/wxController/wxPayHtml?gameType='+ cc.beimi.GameBase.gameModel + '&roomNum='+roomNum+'&userId='+cc.beimi.userId+"&token="+cc.beimi.authorization;   
         }
        
     },

@@ -79,7 +79,7 @@ cc.Class({
                 } 
             }   
         }
-        if(GameBase.gameModel != 'wz'){
+        if(cc.beimi.GameBase.gameModel != 'wz'){
             this.jifan.string = fan +'番'+'   '+gang +'杠   ';
             if(this.data.balance.noTing == true){
                 noTing = '未上听';

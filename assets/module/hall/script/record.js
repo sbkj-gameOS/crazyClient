@@ -50,7 +50,7 @@ cc.Class({
 	    	};
             cc.beimi.http.httpPost('/record/perRecord',parm,this.success,this.error,this);
         };
-        if(GameBase.gameModel =='ch'||GameBase.gameModel =='CH'){
+        if(cc.beimi.GameBase.gameModel =='ch'||cc.beimi.GameBase.gameModel =='CH'){
             this.ch.active = true ;
             this.wz.active = false ;
             
