@@ -44,8 +44,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 26.1,
-      "height": 39.9
+      "width": 35,
+      "height": 53
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -53,8 +53,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -102.45,
-      "y": -1.6
+      "x": -93,
+      "y": 5
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -108,7 +108,14 @@
     "cardvalue": null,
     "target": {
       "__id__": 1
-    }
+    },
+    "jiantou": null,
+    "jiantou2": null,
+    "b_chun": null,
+    "b_ju": null,
+    "b_lan": null,
+    "b_xia": null,
+    "b_zhu": null
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -116,7 +123,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "461db64c-2592-46fc-bda3-8512a6e0e946"
     },
     "fileId": "39K7F9QyNCrYLUCEluGZPk",
     "sync": false

@@ -1760,13 +1760,13 @@ cc.Class({
                     sprite.spriteFrame = context.cs1;
                     context.csNode.width = 65;
                     context.csNode.setPosition(-568,301);
-                    context.godcard.children[1].x = context.godcard.children[1].x -5;
+                    context.godcard.children[1].x = -570;
                     
                 }else{
                     sprite.spriteFrame = context.cs2;
-                    context.csNode.width = 110;
+                    context.csNode.width = 110; 
                     context.csNode.setPosition(-551,301);
-                    context.godcard.children[1].x = context.godcard.children[1].x +7;                    
+                    context.godcard.children[1].x = -555;                    
                 }
                 if(powerCard&&powerCard.length>0){
                     for(let i=0 ; i<cc.find('Canvas/global/main/godcard/child').children.length;i++){
@@ -1794,6 +1794,7 @@ cc.Class({
                     LZH.init(data.player.powerCard[i],'B',true);
                 }
             }else{
+                context.godcard.children[1].x = -560;                
                 var laiziFM = cc.instantiate(context.FM);
                 var LZH = laiziFM.getComponent('DeskCards');
                 //LZH.init(-4);
