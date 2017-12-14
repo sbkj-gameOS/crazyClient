@@ -48,11 +48,11 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        this.musicSlider.progress = cc.beimi.audio.getBGMVolume();
-        this.music.fillRange  = cc.beimi.audio.getBGMVolume() ;
+        // this.musicSlider.progress = cc.beimi.audio.getBGMVolume();
+        // this.music.fillRange  = cc.beimi.audio.getBGMVolume() ;
 
-        this.soundSlider.progress = cc.beimi.audio.getSFXVolume();
-        this.sound.fillRange =cc.beimi.audio.getSFXVolume();
+        // this.soundSlider.progress = cc.beimi.audio.getSFXVolume();
+        // this.sound.fillRange =cc.beimi.audio.getSFXVolume();
         
         if(cc.beimi.audio.getState() == cc.audioEngine.AudioState.PLAYING){
             this.musicon.active = true ;
@@ -61,28 +61,31 @@ cc.Class({
             this.musicon.active = false ;
             this.musicoff.active =  true
         }
-        if(this.sound.fillRange==0){
+        if(cc.beimi.audio.getSFXVolume()>0){
+            this.soundon.active = true ;
+            this.soundoff.active =false;
+        }else{
             this.soundon.active = false ;
             this.soundoff.active =true;
         }
 
     },
-    onMusicSlide:function(slider){
-        if(cc.sys.localStorage.getItem('nobgm')=='true'){
-            cc.beimi.audio.playBGM("bgMain.mp3");
-            cc.sys.localStorage.removeItem('nobgm');
-        }
-        this.music.fillRange  = slider.progress ;
-        cc.beimi.audio.setBGMVolume(slider.progress) ;
-        this.musicon.active = true ;
-        this.musicoff.active =  false;
-    },
-    onSoundSlide:function(slider){
-        this.sound.fillRange  = slider.progress ;
-        cc.beimi.audio.setSFXVolume(slider.progress) ;
-        this.soundon.active = true ;
-        this.soundoff.active =  false;
-    },
+    // onMusicSlide:function(slider){
+    //     if(cc.sys.localStorage.getItem('nobgm')=='true'){
+    //         cc.beimi.audio.playBGM("bgMain.mp3");
+    //         cc.sys.localStorage.removeItem('nobgm');
+    //     }
+    //     this.music.fillRange  = slider.progress ;
+    //     cc.beimi.audio.setBGMVolume(slider.progress) ;
+    //     this.musicon.active = true ;
+    //     this.musicoff.active =  false;
+    // },
+    // onSoundSlide:function(slider){
+    //     this.sound.fillRange  = slider.progress ;
+    //     cc.beimi.audio.setSFXVolume(slider.progress) ;
+    //     this.soundon.active = true ;
+    //     this.soundoff.active =  false;
+    // },
     onSoundBtnClick:function(){
         //console.log(cc.beimi.audio.getSFXVolume());
         if(cc.beimi.audio.getSFXVolume()>0){
@@ -92,7 +95,7 @@ cc.Class({
         }else{
             this.soundon.active =true;
             this.soundoff.active =false;
-            cc.beimi.audio.setSFXVolume(this.sound.fillRange); 
+            cc.beimi.audio.setSFXVolume(1); 
         }
     },
     onMusiceBtnClick:function(){
@@ -100,13 +103,13 @@ cc.Class({
             this.musicon.active = false ;
             this.musicoff.active =  true;
             cc.beimi.audio.pauseAll();
-            cc.beimi.audio.setBGMVolume(0);
+            //cc.beimi.audio.setBGMVolume(0);
             cc.sys.localStorage.setItem('nobgm','true');
         }else{
             this.musicon.active = true ;
             this.musicoff.active =  false;
             cc.beimi.audio.playBGM("bgMain.mp3");
-            cc.beimi.audio.setBGMVolume(this.musicSlider.progress);
+            cc.beimi.audio.setBGMVolume(1);           
             cc.sys.localStorage.removeItem('nobgm');
         }
     }

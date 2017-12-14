@@ -36,8 +36,11 @@ cc.Class({
             cc.audioEngine.pauseAll();
         });
         cc.game.on(cc.game.EVENT_SHOW, function () {
-            cc.audioEngine.resumeAll();
+            if(cc.sys.localStorage.getItem('nobgm') != 'true'){
+                cc.audioEngine.resumeAll();
+            }  
         });
+
     },
 
     // called every frame, uncomment this function to activate update callback
