@@ -153,7 +153,13 @@ cc.Class({
         }
     },
     talkClick: function(wxButton){
+        if(this.t){
+            clearTimeout(this.t); 
+            this.time = 15;
+            this.wxButton.node.children[1].children[0].children[1].getComponent(cc.Label).string = 15;
+        }
         var share = this;
+        this.wxButton = wxButton;
         var wxButton = wxButton;
         if(share.talk == true){
             share.talk = false;
@@ -187,7 +193,9 @@ cc.Class({
         }else{
             share.talk = true;
             wxButton.node.children[1].active = true ;
-            wxButton.node.children[0].active = false ;      
+            this.time = 15;
+            wxButton.node.children[0].active = false ;     
+
             //cc.find('Canvas/录音/发送语音2').active =true;
             share.START = new Date().getTime();
     
@@ -202,6 +210,17 @@ cc.Class({
                 });
             },300);
         }
+        this.t = setInterval(function(){share.settime()},1000)  ; 
+    },
+    settime: function(){
+        this.time = this.time -1 ; 
+        if(this.time == 0 ){
+            this.talkClick(this.wxButton);
+            clearTimeout(this.t);              
+        }else{
+            this.wxButton.node.children[1].children[0].children[1].getComponent(cc.Label).string = this.time;
+        }
+      
     },
     talkPlay: function(datas){
         wx.downloadVoice({
