@@ -51,7 +51,7 @@ cc.Class({
             }
         }
         if(cc.beimi.authorization!=null){//+cc.beimi.authorization
-            cc.beimi.http.httpGet('/presentapp/runSummary?token=b4361cdff21d4760a1a9d882db87f97a',this.success,this.error,this);
+            cc.beimi.http.httpGet('/presentapp/runSummary?token='+cc.beimi.authorization,this.success,this.error,this);
         }     
     },
     success:function(result,object){

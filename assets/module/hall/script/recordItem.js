@@ -50,7 +50,7 @@ cc.Class({
     },
 	//时间处理返回格式：yyyy-MM-dd HH:MM:SS
 	getNowFormatDate:function(time){
-		var date = new Date();
+		var date = new Date(time);
 		var seperator1 = "-";
 		var seperator2 = ":";
 		var month = date.getMonth() + 1;

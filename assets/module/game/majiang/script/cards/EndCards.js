@@ -74,8 +74,12 @@ cc.Class({
             fan = this.data.balance.count ; 
             
             if(units){
+                let point = '';
                 for(let i =0 ;i< units.length;i++){
-                    this.hu.string += (units[i].tip+' '+units[i].point +' ');
+                    if(cc.beimi.GameBase.gameModel == 'wz'){
+                        point = units[i].point;
+                    }
+                    this.hu.string += (units[i].tip+' '+ point +' ');
                 } 
             }   
         }

@@ -148,7 +148,7 @@ cc.Class({
         let zhen = true;
         let count = this.data.players[inx][counts];
         for(let i = 0;i < this.data.players.length;i++){
-            if(i!=inx && this.data.players[i][counts] > count){
+            if(count==0||(i!=inx && this.data.players[i][counts] > count)){
                 zhen = false;
                 break;
             }

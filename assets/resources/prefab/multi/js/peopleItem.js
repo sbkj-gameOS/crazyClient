@@ -13,14 +13,14 @@ cc.Class({
         }, this);
     },
 	updateItem: function(itemId,sourceName, getProfitAmount,getProfitTime) {
-        this.itemID = itemId;
+		this.itemID = itemId;
 		this.label0.string = this.getNowFormatDate(getProfitTime);
 		this.label1.string = "金额："+getProfitAmount;
         this.label2.string = "分润人："+sourceName;
     },
 	//时间处理返回格式：yyyy-MM-dd HH:MM:SS
 	getNowFormatDate:function(time){
-		var date = new Date();
+		var date = new Date(time);
 		var seperator1 = "-";
 		var seperator2 = ":";
 		var month = date.getMonth() + 1;

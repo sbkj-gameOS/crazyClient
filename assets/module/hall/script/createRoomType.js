@@ -242,23 +242,24 @@ cc.Class({
             cc.beimi.playway = data.playway;
             cc.director.loadScene("majiang");
         }else if(data.error){
-            object.alert2.active = true;
-            object.closeloadding();  
-            object.message.string = data.msg;          
-            // alert(data.msg);
-            // cc.beimi.dialog.destroy();
-            // cc.beimi.dialog = null ;
-            // object.closeloadding();
+            object.Alertnotice(data.msg);        
+
         }else{
-            object.notice.getComponent('cc.Label').string ='请求失败';
+            object.Alertnotice('请求失败');
         }  
     },
     error:function(object){
-        object.notice.getComponent('cc.Label').string ='连接出错';
+        object.Alertnotice('连接出错');
+ 
     },
     closeClick:function(){
         this.alert2.active = false ;
         cc.beimi.dialog.destroy();
         cc.beimi.dialog = null ;
+    },
+    Alertnotice: function(str){
+        this.alert2.active = true;
+        this.closeloadding();  
+        this.message.string = str;   
     }
 });
