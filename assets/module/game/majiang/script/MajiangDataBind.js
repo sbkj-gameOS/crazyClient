@@ -235,6 +235,7 @@ cc.Class({
     onLoad: function () {
         if(cc.beimi.browserType=="wechat"){
             this.wxButton.node.active = true ;
+            cc.beimi.LYAudio.init();                    
         }else if(cc.beimi.browserType != null){
             this.ggButton.node.active = true ;
         }

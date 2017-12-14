@@ -33,7 +33,6 @@ cc.Class({
     onLoad: function () {
         tongyi = true;
         var sprite = this.loginLogoNode.getComponent(cc.Sprite);
-        cc.beimi.GameBase = GameBase ;
         if(cc.beimi.GameBase.gameModel =='wz'){
             sprite.spriteFrame = this.WZLogo;
         }else{
@@ -46,7 +45,7 @@ cc.Class({
         // this.loginFormPool = new cc.NodePool();
         // this.loginFormPool.put(cc.instantiate(this.prefab)); // 创建节点
         var xySuccess = cc.sys.localStorage.getItem("xySuccess");
-        //this.tourist();        
+        this.tourist();        
         if(xySuccess == 1){
             this.successBtn.active = false;
             this.login();

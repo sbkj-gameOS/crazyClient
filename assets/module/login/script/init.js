@@ -66,6 +66,7 @@ cc.Class({
         let he = this;
         if(cc.beimi == null){
             cc.beimi = {};
+            cc.beimi.GameBase = GameBase ;            
             cc.beimi.http = require("HTTP");
             cc.beimi.seckey = "beimi";
             cc.beimi.browserType =  cc.sys.browserType; 
@@ -93,8 +94,6 @@ cc.Class({
             if(cc.sys.localStorage.getItem('nobgm') != 'true'){
                 cc.beimi.audio.playBGM("bgMain.mp3");
             }
-            
-            cc.beimi.GameBase = {} ;
         }
 
     },
