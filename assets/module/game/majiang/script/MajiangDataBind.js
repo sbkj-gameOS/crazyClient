@@ -1937,7 +1937,7 @@ cc.Class({
             }
             context.initcardwidth(); 
             if(temp_player.banker == true&&!data.player.played){
-                maxvalluecard.getComponent("HandCards").lastone() ;
+                //maxvalluecard.getComponent("HandCards").lastone() ;
             }         
         } , 1000);
         setTimeout(function(){
