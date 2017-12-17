@@ -68,13 +68,11 @@ cc.Class({
                 return temp ;
             }
         };
-        if(cc.beimi.browserType=="wechat"){
-            WXorBlow = require('ShareWx');
-        }else{
-            WXorBlow = require('LYAudio');
-        }
+        
+        WXorBlow = require('ShareWx');  
         cc.beimi.WXorBlow = new WXorBlow();
         cc.beimi.WXorBlow.init();   
+        
     },
     //游客登录方法
     tourist: function(){

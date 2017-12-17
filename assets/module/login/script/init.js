@@ -62,7 +62,6 @@ cc.Class({
             cc.beimi.GameBase = GameBase ;            
             cc.beimi.http = require("HTTP");
             cc.beimi.seckey = "beimi";
-            cc.beimi.browserType =  cc.sys.browserType; 
             cc.beimi.dialog = null ;
             cc.beimi.dialogtwo = null;
             cc.beimi.paystatus = null ;

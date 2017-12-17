@@ -16,50 +16,53 @@ cc.Class({
         this.talk =false;
 
         this.recordTimer = 0;
-      
-
-       
-        // if(cc.beimi.room!=null){
-        //     this.urlAppend = '?roomNum='+cc.beimi.room;
-        //     this.descName = cc.beimi.user.nickname+"邀请您加入房间:"+cc.beimi.room+",开始游戏！";
-        // }else{
-        //     this.urlAppend = '';
-        //     this.descName ="你的好友邀请您一起游戏";
-        // }
         cc.beimi.http.httpPost("/wxController/getWxConfig",{url:window.location.href}, this.sucess , this.error , this);
     },
     sucess:function(result,object){
-        result = JSON.parse(result) ;
-        console.log(result);
-        console.log(result.appId);
-           wx.config({
-                appId: result.appId,
-                timestamp: result.timestamp,
-                nonceStr: result.nonceStr,
-                signature: result.signature,
-                jsApiList: [
-                    'checkJsApi',
-                    'onMenuShareTimeline',
-                    'onMenuShareAppMessage',
-                    'startRecord', 
-                    'stopRecord',
-                    'translateVoice',
-                    'onVoicePlayEnd',
-                    'playVoice',
-                    'uploadVoice','downloadVoice'
-                ]
-            });
-        
-        wx.ready(function(){
-
-            //注册微信播放录音结束事件【一定要放在wx.ready函数内】
-            wx.onVoicePlayEnd({
-                success: function (res) {
-                    stopWave();
+       
+            result = JSON.parse(result) ;
+            console.log(result);
+            console.log(result.appId);
+               wx.config({
+                    appId: result.appId,
+                    timestamp: result.timestamp,
+                    nonceStr: result.nonceStr,
+                    signature: result.signature,
+                    jsApiList: [
+                        'checkJsApi',
+                        'onMenuShareTimeline',
+                        'onMenuShareAppMessage',
+                        'startRecord', 
+                        'stopRecord',
+                        'translateVoice',
+                        'onVoicePlayEnd',
+                        'playVoice',
+                        'uploadVoice','downloadVoice'
+                    ]
+                });
+            
+            wx.ready(function(){
+                if(cc.beimi.browserTyp !="wechat"){
+                    let WXorBlow = require('ShareWx');  
+                    cc.beimi.WXorBlow = new WXorBlow()
                 }
+                cc.beimi.browserType="wechat";                
+                //注册微信播放录音结束事件【一定要放在wx.ready函数内】
+                
+               
+                wx.onVoicePlayEnd({
+                    success: function (res) {
+                        stopWave();
+                    }
+                });
+            object.shareRoom();
             });
-        object.shareRoom();
-        });
+            if(cc.beimi.browserTyp !="wechat" ){
+                let WXorBlow = require('LYAudio');
+                cc.beimi.WXorBlow = new WXorBlow();
+                cc.beimi.WXorBlow.init(); 
+                cc.beimi.browserType ='brow';
+            }
     },
     shareRoom: function(room){
             let descNametitle;
@@ -113,6 +116,10 @@ cc.Class({
             });
     },
     error:function(object){
+        let WXorBlow = require('LYAudio');
+        cc.beimi.WXorBlow = new WXorBlow();
+        cc.beimi.WXorBlow.init(); 
+        cc.beimi.browserType ='brow';
    },
 
     //停止录音

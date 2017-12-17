@@ -2108,7 +2108,7 @@ cc.Class({
             }
             card.target.y = 0; 
             //ting牌的时候 和 财神的牌是灰色的   听牌听完恢复 财神为持续状态
-            if(!ting&&!card.caishen){
+            if(!ting&&!card.caishen&&cc.sys.localStorage.getItem('ting')!='true'){
                 card.cardvalue.color = new cc.Color(255, 255, 255); 
             }
         }
