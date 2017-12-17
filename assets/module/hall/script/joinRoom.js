@@ -72,7 +72,8 @@ cc.Class({
             default: null,
             type: cc.Label
         },
-        cardNum:cc.Label
+        cardNum:cc.Label,
+        help: cc.Prefab
     },
 
     // use this for initialization
@@ -198,7 +199,11 @@ cc.Class({
 			}
 			array = array.substr(0,array.length-1);
 		}
-	}
+    },
+    helpClick: function(){
+        cc.beimi.dialog1 = cc.instantiate(this.help);
+        cc.beimi.dialog1.parent = this.root();
+    }
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 

@@ -83,6 +83,10 @@ cc.Class({
             cc.beimi.dialog = new cc.NodePool();
             cc.beimi.dialog.put(cc.instantiate(this.alertPrefab)); // 创建节点
 
+            cc.beimi.click = cc.sys.localStorage.getItem('click');
+            cc.beimi.bgcolor = cc.sys.localStorage.getItem('bgcolor');
+            cc.beimi.cardcolor = cc.sys.localStorage.getItem('cardcolor');
+
             var Audios = require("Audios");
             cc.beimi.audio = new Audios();
             cc.beimi.audio.init();

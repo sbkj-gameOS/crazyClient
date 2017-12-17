@@ -233,6 +233,8 @@ cc.Class({
      * 重构后，只有两个消息类型
      */
     onLoad: function () {
+        this.bgsetting();
+        
         if(cc.beimi.browserType=="wechat"){
             this.wxButton.node.active = true ;
         }else if(cc.beimi.browserType != null){
@@ -1230,19 +1232,19 @@ cc.Class({
     allcards_event:function(data , context){
         //结算界面，
         let playerid;
-        
         for(let i = 0;i<data.playOvers.length;i++){
             if(data.playOvers[i].win==true){
                 playerid = data.playOvers[i].user;
                 if(data.playOvers[i].balance.huCard>-32){
-                    var dan = context.current_hu.children[0].getComponent('DanAction');
+                    var dan = context.current_hu.children[1].getComponent('DanAction');
                     dan.init(data.playOvers[i].balance.huCard,false,'current','1');                
                     break;
                 }else{
-                   this.top_hua.active = true;
-                   var dan = context.current_hu.children[0].children[1].getComponent('BuHuaAction');
-                   dan.init(data.playOvers[i].balance.huCard,'',true);
-                   break;
+                    context.current_hu.children[1].active = false;
+                    context.top_hua.active = true;
+                    var dan = context.top_hua.getComponent('BuHuaAction');
+                    dan.init(data.playOvers[i].balance.huCard,'',false);
+                    break;
                 }
             }
         }
@@ -1748,6 +1750,7 @@ cc.Class({
         context.exchange_state("begin" , context);
         var temp_player = data.player ;
         var cards = context.decode(temp_player.cards);
+        
 
         if(cc.beimi.GameBase.gameModel == 'wz'){
             if(temp_player.powerCard){
@@ -1778,7 +1781,7 @@ cc.Class({
                         var laiziZM = cc.instantiate(context.ZM);
                         laiziZM.parent = context.godcard.children[1];
                         var LZH  = laiziZM.getComponent('DeskCards');
-                        LZH.init(powerCard[i],'B',powerCard.length);
+                        LZH.init(powerCard[i],'B',true);
                         // cc.beimi.baopai = powerCard[i];
                     }
                 }
@@ -1805,6 +1808,7 @@ cc.Class({
         var buhua;
         if(temp_player.buHua){
             buhua = context.decode(temp_player.buHua);//补花
+            console.log(buhua);
             let temp = context.player(temp_player.playuser, context);
             //console.log(temp.tablepos);
             for(var i = 0;i<buhua.length;i++){
@@ -1816,6 +1820,7 @@ cc.Class({
         for(var i = 0; i <data.players.length;i++){
             if(data.players[i].buHua){
                 buhua = context.decode(data.players[i].buHua);//补花
+                console.log(buhua);
                 let temp = context.player(data.players[i].playuser, context);
                 //console.log(temp.tablepos);
                 for(var j = 0;j<buhua.length;j++){
@@ -2168,36 +2173,47 @@ cc.Class({
     },
     huaction: function(playerid){
         if(playerid){
+            cc.beimi.audio.playSFX('nv/hu.mp3');                    
             let hu_hu = this.current_hu.getComponent(cc.Animation);
             let player = this.player(playerid , this);
             if(player.tablepos == 'top'){
                 hu_hu.node.children[0].x = 7 ;
                 hu_hu.node.children[0].y = 142 ;
-                hu_hu.node.children[1].x = 11 ;
-                hu_hu.node.children[1].y = 121 ;
-                hu_hu.node.children[2].x = -156 ;
-                hu_hu.node.children[2].y = 146 ;
+                hu_hu.node.children[1].x = 7 ;
+                hu_hu.node.children[1].y = 142 ;
+
+                hu_hu.node.children[2].x = 11 ;
+                hu_hu.node.children[2].y = 121 ;
+                hu_hu.node.children[3].x = -156 ;
+                hu_hu.node.children[3].y = 146 ;
             }else if(player.tablepos == 'left'){
                 hu_hu.node.children[0].x = -369 ;
                 hu_hu.node.children[0].y = 76 ;
-                hu_hu.node.children[1].x = -365 ;
-                hu_hu.node.children[1].y = 55 ;
-                hu_hu.node.children[1].x = -358 ;
-                hu_hu.node.children[1].y = -72 ;              
+                hu_hu.node.children[1].x = -369 ;
+                hu_hu.node.children[1].y = 76 ;
+
+                hu_hu.node.children[2].x = -365 ;
+                hu_hu.node.children[2].y = 55 ;
+                hu_hu.node.children[3].x = -358 ;
+                hu_hu.node.children[3].y = -72 ;              
             }else if(player.tablepos == 'right'){
                 hu_hu.node.children[0].x = 383 ;
                 hu_hu.node.children[0].y = -31 ;
-                hu_hu.node.children[1].x = 387 ;
-                hu_hu.node.children[1].y = -52 ;   
-                hu_hu.node.children[2].x = 372 ;
-                hu_hu.node.children[2].y = 115 ;             
+                hu_hu.node.children[1].x = 383 ;
+                hu_hu.node.children[1].y = -31 ;
+                hu_hu.node.children[2].x = 387 ;
+                hu_hu.node.children[2].y = -52 ;   
+                hu_hu.node.children[3].x = 372 ;
+                hu_hu.node.children[3].y = 115 ;             
             }else{
                 hu_hu.node.children[0].x = 7 ;
                 hu_hu.node.children[0].y = -69 ;
-                hu_hu.node.children[1].x = 11 ;
-                hu_hu.node.children[1].y = -90 ;
-                hu_hu.node.children[2].x = 219 ;
-                hu_hu.node.children[2].y = -65 ;              
+                hu_hu.node.children[1].x = 7 ;
+                hu_hu.node.children[1].y = -69 ;
+                hu_hu.node.children[2].x = 11 ;
+                hu_hu.node.children[2].y = -90 ;
+                hu_hu.node.children[3].x = 219 ;
+                hu_hu.node.children[3].y = -65 ;              
             }
             this.current_hu.active =true;
             let ani = this.current_hu.getComponent(cc.Animation);
@@ -2948,6 +2964,65 @@ cc.Class({
         }
         if(opParent.children.length>1){
             opParent.children[opParent.children.length-1].children[1].getComponent('DanAction').jujufei();            
+        }
+    },
+    bgsetting: function(){
+        let bg = cc.find('Canvas/global/main/bg/背景');
+        if(cc.sys.localStorage.getItem('bgcolor')=='green'){
+            bg.children[0].active = true ;
+            bg.children[1].active = false;
+            bg.children[2].active = false;                
+        }else if(cc.sys.localStorage.getItem('bgcolor')=='blue'){
+            bg.children[0].active = false ;
+            bg.children[1].active = true;
+            bg.children[2].active = false; 
+        }else if(cc.sys.localStorage.getItem('bgcolor')=='red'){
+            bg.children[0].active = false ;
+            bg.children[1].active = false;
+            bg.children[2].active = true; 
+        }
+    },
+    cardsetting: function(){
+        let he = this;
+        //手牌颜色变化
+        for(let i = 0; i< he.cards_panel.children.length;i++){
+            he.cards_panel.children[i].getComponent('HandCards').cardcolor();
+        };
+        he.foreachCards(he.top_panel,'SpecCards');
+        he.foreachCards(he.left_panel,'SpecCards');
+        he.foreachCards(he.right_panel,'SpecCards');
+        //桌面牌颜色变化
+        he.foreachCards(he.deskcards_current_panel,'DeskCards');
+        he.foreachCards(he.deskcards_left_panel,'DeskCards');
+        he.foreachCards(he.deskcards_right_panel,'DeskCards');
+        he.foreachCards(he.deskcards_top_panel,'DeskCards');
+        //宝牌颜色变化
+        he.foreachCards(he.godcard.children[1],'DeskCards');        
+        //补花颜色变化 判断如果有的情况
+        he.foreachCards(cc.find('Canvas/content/handcards/my/bh-bottom'),'BuHuaAction');
+        he.foreachCards(cc.find("Canvas/content/handcards/right/buhua"),'BuHuaAction');
+        he.foreachCards(cc.find("Canvas/content/handcards/left/buhua"),'BuHuaAction');
+        he.foreachCards(cc.find("Canvas/content/handcards/top/buhua"),'BuHuaAction');
+        
+        //king里面啊的牌变化
+
+        he.foreachDancrads(cc.find("Canvas/content/handcards/deskcard/kong"));
+        he.foreachDancrads(cc.find("Canvas/content/handcards/topdesk/kong"));
+        he.foreachDancrads(cc.find("Canvas/content/handcards/leftdesk/kong"));
+        he.foreachDancrads(cc.find("Canvas/content/handcards/rightdesk/kong"));
+       
+
+    },
+    foreachDancrads: function(fangwei){
+        for(let i = 0 ; i < fangwei.children.length; i++){
+            this.foreachCards(fangwei.children[i],'DanAction');
+        }    
+    },
+    foreachCards: function(fangwei,ff){
+        for(let i = 0; i< fangwei.children.length;i++){
+            if(fangwei.children[i]!=null){
+                fangwei.children[i].getComponent(ff).cardcolor();                
+            }
         }
     },
     dosomething: function (context){

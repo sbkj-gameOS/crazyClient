@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "1def489c-b530-48ec-b061-3a8848b5cfa3",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "蓝色桌布": {
+      "ver": "1.0.3",
+      "uuid": "9668b44c-feed-4bc0-b8f5-0a6bcef92d5c",
+      "rawTextureUuid": "1def489c-b530-48ec-b061-3a8848b5cfa3",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 1334,
+      "height": 750,
+      "rawWidth": 1334,
+      "rawHeight": 750,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

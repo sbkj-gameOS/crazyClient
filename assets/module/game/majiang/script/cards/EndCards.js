@@ -120,7 +120,7 @@ cc.Class({
         }
         this.count.string= this.data.count;
         if(this.data.win ==true){
-            cc.beimi.audio.playSFX('nv/hu.mp3');
+            //cc.beimi.audio.playSFX('nv/hu.mp3');
             this.target.getComponent(cc.Sprite).spriteFrame = this.redwin;
             this.win.active = true;
         }

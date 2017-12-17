@@ -2,21 +2,14 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //    default: null,      // The default value will be used only when the component attaching
-        //                           to a node for the first time
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
+        cardvalue:{
+            default: null,
+            type: cc.Node
+        },
     },
 
     // use this for initialization
     onLoad: function () {
-
     },
     /**
      * 记录牌的 特殊属性， 是否刚抓起来的牌，已经玩家位置 ， 右、上、左
@@ -24,6 +17,7 @@ cc.Class({
      * @param inx
      */
     init:function(spec , inx){
+        this.cardcolor();                
         this.spec = spec ;
         this.inx = inx ;
         if(this.spec == true){
@@ -40,9 +34,17 @@ cc.Class({
         this.node.height = this.node.height =0;    
         this.node.width = this.node.width = 0 ;
         this.spec = false ;
-    }
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
-
-    // },
+    },
+    cardcolor:function(){
+        if(cc.sys.localStorage.getItem('cardcolor')=='yellow'){
+            this.cardvalue.children[0].active = false;
+            this.cardvalue.children[1].active = false;
+        }else if(cc.sys.localStorage.getItem('cardcolor')=='green'){
+            this.cardvalue.children[0].active = true;
+            this.cardvalue.children[1].active = false;
+        }else if(cc.sys.localStorage.getItem('cardcolor')=='red'){
+            this.cardvalue.children[0].active = false;
+            this.cardvalue.children[1].active = true;
+        }
+    }, 
 });

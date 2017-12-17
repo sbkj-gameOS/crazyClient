@@ -47,6 +47,7 @@ cc.Class({
         });
     },
     init:function(cvalue,pd){
+        this.cardcolor();        
         this.caishen = false ; 
         this.take = false;
         this.value = cvalue ;
@@ -205,9 +206,17 @@ cc.Class({
     },
     tingcolor:function(){
         this.cardvalue.color = new cc.Color(118, 118, 118);
-    }
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
-
-    // },
+    },
+    cardcolor:function(){
+        if(cc.sys.localStorage.getItem('cardcolor')=='yellow'){
+            this.cardvalue.children[0].active = false;
+            this.cardvalue.children[1].active = false;
+        }else if(cc.sys.localStorage.getItem('cardcolor')=='green'){
+            this.cardvalue.children[0].active = true;
+            this.cardvalue.children[1].active = false;
+        }else if(cc.sys.localStorage.getItem('cardcolor')=='red'){
+            this.cardvalue.children[0].active = false;
+            this.cardvalue.children[1].active = true;
+        }
+    },
 });

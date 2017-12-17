@@ -41,6 +41,7 @@ cc.Class({
 
     },
     init:function(cvalue,back,fangwei,count,target,dd){
+        this.cardcolor();                                
         this.fangwei = fangwei;
         if(target !=null){
             if(this.juju&&!dd){
@@ -174,7 +175,19 @@ cc.Class({
             this.juju.active = false ; 
             this.ani.stop("juju_"+this.fangwei) ;
         }
-    }
+    },    
+    cardcolor:function(){
+        if(cc.sys.localStorage.getItem('cardcolor')=='yellow'){
+            this.target.children[0].active = false;
+            this.target.children[1].active = false;
+        }else if(cc.sys.localStorage.getItem('cardcolor')=='green'){
+            this.target.children[0].active = true;
+            this.target.children[1].active = false;
+        }else if(cc.sys.localStorage.getItem('cardcolor')=='red'){
+            this.target.children[0].active = false;
+            this.target.children[1].active = true;
+        }
+    }, 
 
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {

@@ -25,6 +25,12 @@ cc.Class({
     onCloseClick:function(){
         cc.beimi.dialog.destroy();
         cc.beimi.dialog = null ;
+      
+    },
+    onCloseClick2:function(){
+        cc.beimi.dialog1.destroy();
+        cc.beimi.dialog1 = null ;
+      
     },
     onClick:function(){
         console.log(1);

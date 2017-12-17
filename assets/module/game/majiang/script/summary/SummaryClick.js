@@ -89,7 +89,7 @@ cc.Class({
                     if(cc.beimi.powerCard!=null){
                         baopai.node.children[1].active = true;
                     }    
-                    baopai.init(cc.beimi.baopai[i],'B');
+                    baopai.init(cc.beimi.baopai[i],'B',true);
                     card.parent = this.bpp;    
                 }
             }else{

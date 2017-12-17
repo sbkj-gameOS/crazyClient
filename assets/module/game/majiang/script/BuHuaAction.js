@@ -38,6 +38,7 @@ cc.Class({
 
     },
     init:function(cvalue,fangwei,dd){
+        this.cardcolor();                        
         this.value = cvalue ;
         this.fangwei = fangwei;
 
@@ -114,7 +115,7 @@ cc.Class({
                 deskcard = fw+'_summer';//夏
             }else if(cvalue == -39){
                 deskcard = fw+'_winter';//冬
-            }else if(cvalue == -5){
+            }else if(cvalue <= -4||cvalue >= -7){
                 deskcard = fw+'_white';//白
             }
             
@@ -127,8 +128,16 @@ cc.Class({
         this.hua.active = true;
         this.target.zIndex = -999+this.value;
     },
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
-
-    // },
+    cardcolor:function(){
+        if(cc.sys.localStorage.getItem('cardcolor')=='yellow'){
+            this.target.children[0].active = false;
+            this.target.children[1].active = false;
+        }else if(cc.sys.localStorage.getItem('cardcolor')=='green'){
+            this.target.children[0].active = true;
+            this.target.children[1].active = false;
+        }else if(cc.sys.localStorage.getItem('cardcolor')=='red'){
+            this.target.children[0].active = false;
+            this.target.children[1].active = true;
+        }
+    }, 
 });

@@ -7,3 +7,4 @@ build/
 creator.d.ts
 jsconfig.json
 project.json
+assets/module/login/script/common.js

@@ -58,6 +58,7 @@ cc.Class({
 
     init:function(cvalue,fangwei,bol){
         //this.jiantou.active  = true;
+        this.cardcolor();
         this.xiaochu();
         // let ani = this.jiantou.getComponent(cc.Animation);
         // let c = fangwei;
@@ -175,5 +176,17 @@ cc.Class({
          this.initjiantou(context.deskcards_right_panel);
          this.initjiantou(context.deskcards_top_panel);
          this.initjiantou(context.deskcards_left_panel);
-    }
+    },
+    cardcolor:function(){
+        if(cc.sys.localStorage.getItem('cardcolor')=='yellow'){
+            this.cardvalue.children[0].active = false;
+            this.cardvalue.children[1].active = false;
+        }else if(cc.sys.localStorage.getItem('cardcolor')=='green'){
+            this.cardvalue.children[0].active = true;
+            this.cardvalue.children[1].active = false;
+        }else if(cc.sys.localStorage.getItem('cardcolor')=='red'){
+            this.cardvalue.children[0].active = false;
+            this.cardvalue.children[1].active = true;
+        }
+    },
 });
