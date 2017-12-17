@@ -16,13 +16,7 @@ cc.Class({
         this.talk =false;
 
         this.recordTimer = 0;
-        if(cc.beimi.GameBase.gameModel == 'wz'){
-            this.descNametitle = "首游宝-温州棋牌";
-            this.urlType = "toWZAuth";
-        }else{
-            this.descNametitle = "巡天游-心缘长春";
-            this.urlType = "toCHAuth";
-        }
+      
 
        
         // if(cc.beimi.room!=null){
@@ -64,15 +58,25 @@ cc.Class({
                     stopWave();
                 }
             });
-        object.shareRoom(room);
+        object.shareRoom();
         });
     },
     shareRoom: function(room){
+            let descNametitle;
+            let urlType;
+            if(cc.beimi.GameBase.gameModel == 'wz'){
+                descNametitle = "首游宝-温州棋牌";
+                urlType = "toWZAuth";
+            }else{
+                descNametitle = "巡天游-心缘长春";
+                urlType = "toCHAuth";
+            }     
+            console.log('game.bizpartner.cn/wxController/'+urlType+'?roomNum='+room);
             // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
             wx.onMenuShareAppMessage({
-                title: object.descNametitle,
+                title: descNametitle,
                 desc: "您的好友"+cc.beimi.user.nickname+"邀请您一起游戏",
-                link: 'http://game.bizpartner.cn/wxController/'+object.urlType+'?roomNum='+room,
+                link: 'http://game.bizpartner.cn/wxController/'+urlType+'?roomNum='+room,
                 imgUrl: cc.beimi.user.headimgurl,
                 trigger: function (res) {
                     // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
@@ -90,8 +94,8 @@ cc.Class({
             });
             // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
             wx.onMenuShareTimeline({
-                title: object.descNametitle,
-                link: 'http://game.bizpartner.cn/wxController/'+object.urlType+'?roomNum='+room,
+                title: descNametitle,
+                link: 'http://game.bizpartner.cn/wxController/'+urlType+'?roomNum='+room,
                 imgUrl: cc.beimi.user.headimgurl,
                 trigger: function (res) {
                     // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
@@ -113,6 +117,7 @@ cc.Class({
 
     //停止录音
     touchendClick: function (event) {
+
         var share = this ;
         cc.find('Canvas/录音/发送语音2').active =false;
         share.END = new Date().getTime();
