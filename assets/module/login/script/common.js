@@ -31,6 +31,7 @@ cc.Class({
     },
     // 首次加载页面方法
     onLoad: function () {
+        let WXorBlow;
         tongyi = true;
         var sprite = this.loginLogoNode.getComponent(cc.Sprite);
         if(cc.beimi.GameBase.gameModel =='wz'){
@@ -45,7 +46,7 @@ cc.Class({
         // this.loginFormPool = new cc.NodePool();
         // this.loginFormPool.put(cc.instantiate(this.prefab)); // 创建节点
         var xySuccess = cc.sys.localStorage.getItem("xySuccess");
-        this.tourist();        
+        //this.tourist();        
         if(xySuccess == 1){
             this.successBtn.active = false;
             this.login();
@@ -67,6 +68,13 @@ cc.Class({
                 return temp ;
             }
         };
+        if(cc.beimi.browserType=="wechat"){
+            WXorBlow = require('ShareWx');
+        }else{
+            WXorBlow = require('LYAudio');
+        }
+        cc.beimi.WXorBlow = new WXorBlow();
+        cc.beimi.WXorBlow.init();   
     },
     //游客登录方法
     tourist: function(){
