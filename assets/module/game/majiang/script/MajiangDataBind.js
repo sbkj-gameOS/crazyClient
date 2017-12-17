@@ -237,6 +237,7 @@ cc.Class({
         
         if(cc.beimi.browserType=="wechat"){
             this.wxButton.node.active = true ;
+            cc.beimi.WXorBlow.shareRoom(cc.beimi.room);                    
         }else if(cc.beimi.browserType != null){
             this.ggButton.node.active = true ;
         }
@@ -2916,7 +2917,7 @@ cc.Class({
         setTimeout(function(){
             dz.active = false;                    
         },time*1000);
-        cc.beimi.LYAudio.talkPlay(datas);
+        cc.beimi.WXorBlow.talkPlay(datas);
        
 
         console.log('talk--------'+time);

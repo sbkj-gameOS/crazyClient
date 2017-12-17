@@ -26,14 +26,14 @@ cc.Class({
     },
     touchstartClick2:function(){
         cc.find('Canvas/录音/发送语音2').active =true;        
-        cc.beimi.LYAudio.talkRecordStart();
+        cc.beimi.WXorBlow.talkRecordStart();
     },
     touchendClick2:function(){
         cc.find('Canvas/录音/发送语音2').active =false;
-        cc.beimi.LYAudio.talkRecordEnd();
+        cc.beimi.WXorBlow.talkRecordEnd();
     },
     wxClick: function(){
-        cc.beimi.LYAudio.talkClick(this.wxButton);
+        cc.beimi.WXorBlow.talkClick(this.wxButton);
     },
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {

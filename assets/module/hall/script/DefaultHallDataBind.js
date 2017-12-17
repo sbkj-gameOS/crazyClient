@@ -63,6 +63,9 @@ cc.Class({
         
         if(this.ready()){
        
+            if(cc.beimi.browserType=="wechat"){
+                cc.beimi.WXorBlow.shareRoom();
+            }   
             //ljh 加新场景的alert节点池子
             cc.beimi.dialog = new cc.NodePool();
             cc.beimi.dialog.put(cc.instantiate(this.alertPrefab));

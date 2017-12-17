@@ -64,12 +64,15 @@ cc.Class({
                     stopWave();
                 }
             });
-
+        object.shareRoom(room);
+        });
+    },
+    shareRoom: function(room){
             // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
             wx.onMenuShareAppMessage({
                 title: object.descNametitle,
                 desc: "您的好友"+cc.beimi.user.nickname+"邀请您一起游戏",
-                link: 'http://game.bizpartner.cn/wxController/'+object.urlType+'?roomNum='+cc.beimi.room,
+                link: 'http://game.bizpartner.cn/wxController/'+object.urlType+'?roomNum='+room,
                 imgUrl: cc.beimi.user.headimgurl,
                 trigger: function (res) {
                     // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
@@ -85,11 +88,10 @@ cc.Class({
                     console.log(JSON.stringify(res));
                 }
             });
-
             // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
             wx.onMenuShareTimeline({
                 title: object.descNametitle,
-                link: 'http://game.bizpartner.cn/wxController/'+object.urlType+'?roomNum='+cc.beimi.room,
+                link: 'http://game.bizpartner.cn/wxController/'+object.urlType+'?roomNum='+room,
                 imgUrl: cc.beimi.user.headimgurl,
                 trigger: function (res) {
                     // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
@@ -105,7 +107,6 @@ cc.Class({
                     console.log(JSON.stringify(res));
                 }
             });
-        });
     },
     error:function(object){
    },
