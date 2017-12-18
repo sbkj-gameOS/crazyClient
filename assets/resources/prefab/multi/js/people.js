@@ -23,7 +23,8 @@ cc.Class({
 		spacing: 0, // space between each item
         label0: cc.Label,
         label1: cc.Label,
-        label2: cc.Label
+        label2: cc.Label,
+        ccshuoming: cc.Prefab,
     },
 
     // use this for initialization
@@ -108,5 +109,9 @@ cc.Class({
     closeBtn:function(){
         var closrBtn = cc.find("Canvas/heading/js/heading/right2");
         closrBtn.destroy();
+    },
+    xiangqing: function(){
+        let hehe = cc.instantiate(this.ccshuoming);
+        hehe.parent = cc.find('Canvas');
     }
 });

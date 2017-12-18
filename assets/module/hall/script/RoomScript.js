@@ -96,7 +96,12 @@ cc.Class({
    
 
 	onLoad: function () {
-		this.message.string = "本游戏仅供娱乐，严禁赌博。   每月定期举办周赛、月赛，冠军赢万元大奖。";
+		if(cc.beimi.GameBase.gameModel == 'wz'){
+			this.message.string = '本软件为好友竞技休闲游戏，敬请各位玩家注意健康娱乐，禁止赌博！';
+		}else if(cc.beimi.GameBase.gameModel == 'ch'||cc.beimi.GameBase.gameModel == 'CH'){
+			this.message.string = "本游戏仅供娱乐，严禁赌博。   每月定期举办周赛、月赛，冠军赢万元大奖。";
+		}
+		
         this.gundongText();
 		//请求获取当前用户是否已经参加了房间
         cc.beimi.http.httpGet('/api/room/reConnection?token='+cc.beimi.authorization,this.roomSuccess,this.roomError,this);

@@ -31,13 +31,16 @@
       },
       {
         "__id__": 15
+      },
+      {
+        "__id__": 47
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 47
+      "__id__": 52
     },
     "_id": "",
     "_opacity": 255,
@@ -684,7 +687,10 @@
     "spacing": 0,
     "label0": null,
     "label1": null,
-    "label2": null
+    "label2": null,
+    "ccshuoming": {
+      "__uuid__": "c4190924-7eeb-4b98-b474-77dd8a070f59"
+    }
   },
   {
     "__type__": "cc.ScrollView",
@@ -760,7 +766,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 933,
-      "height": 481
+      "height": 404
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -769,7 +775,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": -1,
-      "y": -53
+      "y": -86
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -824,7 +830,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 12,
-      "height": 481
+      "height": 404
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1056,7 +1062,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 916,
-      "height": 482
+      "height": 430
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1065,7 +1071,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": -6,
-      "y": -4
+      "y": 22
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1406,6 +1412,159 @@
       "__uuid__": "42fc7307-8d41-4edf-ad89-b56e88672ae3"
     },
     "fileId": "b2szgWswxAhYzNOwAEpvAC",
+    "sync": false
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "New Label",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 48
+      },
+      {
+        "__id__": 49
+      }
+    ],
+    "_prefab": {
+      "__id__": 51
+    },
+    "_id": "",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 8,
+      "g": 27,
+      "b": 167,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 160,
+      "height": 40
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": -444,
+      "y": 152
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 47
+    },
+    "_enabled": true,
+    "_useOriginalSize": false,
+    "_actualFontSize": 40,
+    "_fontSize": 40,
+    "_lineHeight": 40,
+    "_enableWrapText": true,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
+    "_spacingX": 0,
+    "_N$string": "佣金说明",
+    "_N$horizontalAlign": 1,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0
+  },
+  {
+    "__type__": "cc.Button",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 47
+    },
+    "_enabled": true,
+    "transition": 3,
+    "pressedColor": {
+      "__type__": "cc.Color",
+      "r": 211,
+      "g": 211,
+      "b": 211,
+      "a": 255
+    },
+    "hoverColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "duration": 0.1,
+    "zoomScale": 1.2,
+    "pressedSprite": null,
+    "hoverSprite": null,
+    "clickEvents": [
+      {
+        "__id__": 50
+      }
+    ],
+    "_N$interactable": true,
+    "_N$enableAutoGrayEffect": false,
+    "_N$normalColor": {
+      "__type__": "cc.Color",
+      "r": 214,
+      "g": 214,
+      "b": 214,
+      "a": 255
+    },
+    "_N$disabledColor": {
+      "__type__": "cc.Color",
+      "r": 124,
+      "g": 124,
+      "b": 124,
+      "a": 255
+    },
+    "_N$normalSprite": null,
+    "_N$disabledSprite": null,
+    "_N$target": {
+      "__id__": 47
+    }
+  },
+  {
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 14
+    },
+    "component": "people",
+    "handler": "xiangqing",
+    "customEventData": ""
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "42fc7307-8d41-4edf-ad89-b56e88672ae3"
+    },
+    "fileId": "637NCZ8vRDgYmjAb4XGQ/4",
     "sync": false
   },
   {

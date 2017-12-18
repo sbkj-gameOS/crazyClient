@@ -55,7 +55,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 890,
-      "height": 160
+      "height": 94
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -64,7 +64,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 2,
-      "y": -51
+      "y": -68
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -117,8 +117,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 271,
-      "y": -26
+      "x": 285,
+      "y": -3
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -155,7 +155,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "33bd60d2-4c86-4694-bf38-4496f75bc324"
     },
     "fileId": "d5pKgazahAHZCRO0jXeitw",
     "sync": false
@@ -195,8 +195,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 300,
-      "height": 40
+      "width": 268,
+      "height": 38
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -204,8 +204,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -269,
-      "y": -26
+      "x": -10,
+      "y": -2
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -223,7 +223,7 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 30,
+    "_actualFontSize": 29,
     "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -242,7 +242,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "33bd60d2-4c86-4694-bf38-4496f75bc324"
     },
     "fileId": "b099jUnlpFqqhSkj0cDmGm",
     "sync": false
@@ -282,8 +282,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 500,
-      "height": 40
+      "width": 263,
+      "height": 38
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -291,8 +291,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -169,
-      "y": 22
+      "x": -287,
+      "y": -2
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -310,7 +310,7 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 30,
+    "_actualFontSize": 20,
     "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -329,7 +329,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "33bd60d2-4c86-4694-bf38-4496f75bc324"
     },
     "fileId": "97J6OwG4pK5JufC42l4Ftj",
     "sync": false
@@ -384,7 +384,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "33bd60d2-4c86-4694-bf38-4496f75bc324"
     },
     "fileId": "d9fngoydBAJZYUnZwheLed",
     "sync": false

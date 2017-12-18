@@ -75,92 +75,92 @@ cc.Class({
         let cardcolors = parseInt(this.value/4 ) ;
         let cardtype  = parseInt(cardcolors / 9);
         let deskcard ;
-        
-        if(cardcolors < 0){
-            
-            if(cardcolors==-7){
-                deskcard = fangwei+'_wind_east';
-            } else if(cardcolors==-6){
-                deskcard = fangwei+'_wind_south';
-            } else if(cardcolors==-5){
-                deskcard = fangwei+'_wind_west';
-            } else if(cardcolors == -4){
-                deskcard = fangwei+'_wind_north';
-            }else if(cardcolors == -3){
-                deskcard = fangwei+'_red';
-            }else if(cardcolors == -2){
-                deskcard = fangwei+'_green';
-            }else if(cardcolors == -1){
-                deskcard = fangwei+'_white';
-            }
-            if(bol != true){
-                cc.beimi.audio.playSFX('nv/wind_'+(cardcolors+8)+'.mp3');                
-            }
-            //东南西北风 ， 中发白
-        }else{
-            if(cardtype == 0){ //万
-                deskcard = fangwei+"_character_"+ (parseInt((this.value%36)/4)+1) ;
-                if(bol != true){
-                    cc.beimi.audio.playSFX('nv/wan_'+(parseInt((this.value%36)/4)+1)+'.mp3');
+        if(fangwei !='Z'){
+            if(cardcolors < 0){
+                
+                if(cardcolors==-7){
+                    deskcard = fangwei+'_wind_east';
+                } else if(cardcolors==-6){
+                    deskcard = fangwei+'_wind_south';
+                } else if(cardcolors==-5){
+                    deskcard = fangwei+'_wind_west';
+                } else if(cardcolors == -4){
+                    deskcard = fangwei+'_wind_north';
+                }else if(cardcolors == -3){
+                    deskcard = fangwei+'_red';
+                }else if(cardcolors == -2){
+                    deskcard = fangwei+'_green';
+                }else if(cardcolors == -1){
+                    deskcard = fangwei+'_white';
                 }
-            }else if(cardtype == 1){ //筒
-                deskcard = fangwei+"_dot_"+ (parseInt((this.value%36)/4)+1) ;
                 if(bol != true){
-                    cc.beimi.audio.playSFX('nv/tong_'+(parseInt((this.value%36)/4)+1)+'.mp3');
+                    cc.beimi.audio.playSFX('nv/wind_'+(cardcolors+8)+'.mp3');                
                 }
-            }else if(cardtype == 2){  //条
-                deskcard = fangwei+"_bamboo_"+ (parseInt((this.value%36)/4)+1) ;
-                if(bol != true){
-                cc.beimi.audio.playSFX('nv/suo_'+(parseInt((this.value%36)/4)+1)+'.mp3');
+                //东南西北风 ， 中发白
+            }else{
+                if(cardtype == 0){ //万
+                    deskcard = fangwei+"_character_"+ (parseInt((this.value%36)/4)+1) ;
+                    if(bol != true){
+                        cc.beimi.audio.playSFX('nv/wan_'+(parseInt((this.value%36)/4)+1)+'.mp3');
+                    }
+                }else if(cardtype == 1){ //筒
+                    deskcard = fangwei+"_dot_"+ (parseInt((this.value%36)/4)+1) ;
+                    if(bol != true){
+                        cc.beimi.audio.playSFX('nv/tong_'+(parseInt((this.value%36)/4)+1)+'.mp3');
+                    }
+                }else if(cardtype == 2){  //条
+                    deskcard = fangwei+"_bamboo_"+ (parseInt((this.value%36)/4)+1) ;
+                    if(bol != true){
+                    cc.beimi.audio.playSFX('nv/suo_'+(parseInt((this.value%36)/4)+1)+'.mp3');
+                    }
                 }
             }
-        }
-        var buhuaTrue = false;
-        if(deskcard == null){
-            var buhua = "-32,-33,-34,-35,-36,-37,-38,-39";
-            if(buhua.indexOf(cvalue) >= 0){
-                buhuaTrue = true;
-                if(cvalue==-38){
-                    deskcard = 'B_autumn';//秋
-                    cardframe = this.beimi0.getSpriteFrame(deskcard);
-                    this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
-                } else if(cvalue==-35){
-                    deskcard = this.b_zhu;//竹
-                    this.cardvalue.getComponent(cc.Sprite).spriteFrame = deskcard;
-                } else if(cvalue==-34){
-                    deskcard = this.b_ju;//菊
-                    this.cardvalue.getComponent(cc.Sprite).spriteFrame = deskcard;
-                } else if(cvalue==-33){
-                    deskcard = this.b_lan;//兰
-                    this.cardvalue.getComponent(cc.Sprite).spriteFrame = deskcard;
-                } else if(cvalue == -32){
-                    deskcard = 'B_plum';//梅
-                    cardframe = this.beimi0.getSpriteFrame(deskcard);
-                    this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
-                }else if(cvalue == -36){
-                    deskcard = this.b_chun;//春
-                    this.cardvalue.getComponent(cc.Sprite).spriteFrame = deskcard;
-                }else if(cvalue == -37){
-                    deskcard = this.b_xia;//夏
-                    this.cardvalue.getComponent(cc.Sprite).spriteFrame = deskcard;
-                }else if(cvalue == -39){
-                    deskcard = 'B_winter';//冬
-                    cardframe = this.beimi0.getSpriteFrame(deskcard);
-                    this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
-                } 
+            var buhuaTrue = false;
+            if(deskcard == null){
+                var buhua = "-32,-33,-34,-35,-36,-37,-38,-39";
+                if(buhua.indexOf(cvalue) >= 0){
+                    buhuaTrue = true;
+                    if(cvalue==-38){
+                        deskcard = 'B_autumn';//秋
+                        cardframe = this.beimi0.getSpriteFrame(deskcard);
+                        this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
+                    } else if(cvalue==-35){
+                        deskcard = this.b_zhu;//竹
+                        this.cardvalue.getComponent(cc.Sprite).spriteFrame = deskcard;
+                    } else if(cvalue==-34){
+                        deskcard = this.b_ju;//菊
+                        this.cardvalue.getComponent(cc.Sprite).spriteFrame = deskcard;
+                    } else if(cvalue==-33){
+                        deskcard = this.b_lan;//兰
+                        this.cardvalue.getComponent(cc.Sprite).spriteFrame = deskcard;
+                    } else if(cvalue == -32){
+                        deskcard = 'B_plum';//梅
+                        cardframe = this.beimi0.getSpriteFrame(deskcard);
+                        this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
+                    }else if(cvalue == -36){
+                        deskcard = this.b_chun;//春
+                        this.cardvalue.getComponent(cc.Sprite).spriteFrame = deskcard;
+                    }else if(cvalue == -37){
+                        deskcard = this.b_xia;//夏
+                        this.cardvalue.getComponent(cc.Sprite).spriteFrame = deskcard;
+                    }else if(cvalue == -39){
+                        deskcard = 'B_winter';//冬
+                        cardframe = this.beimi0.getSpriteFrame(deskcard);
+                        this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
+                    } 
+                }
             }
-        }
-
-        if(!buhuaTrue){
-            cardframe = this.atlas.getSpriteFrame(deskcard);
-            this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
-        }
-        if(cc.sys.localStorage.getItem('cl')!='true'){
-            if(this.jiantou){
-                this.jiantou.active = true;                
+    
+            if(!buhuaTrue){
+                cardframe = this.atlas.getSpriteFrame(deskcard);
+                this.cardvalue.getComponent(cc.Sprite).spriteFrame = cardframe;
             }
-        }
-       
+            if(cc.sys.localStorage.getItem('cl')!='true'){
+                if(this.jiantou){
+                    this.jiantou.active = true;                
+                }
+            }
+        }  
     },
     initjiantou: function(cards){
         if(cards.children){

@@ -1785,7 +1785,6 @@ cc.Class({
                         laiziZM.parent = context.godcard.children[1];
                         var LZH  = laiziZM.getComponent('DeskCards');
                         LZH.init(powerCard[i],'B',true);
-                        // cc.beimi.baopai = powerCard[i];
                     }
                 }
             }
@@ -1803,7 +1802,7 @@ cc.Class({
                 context.godcard.children[1].x = -560;                
                 var laiziFM = cc.instantiate(context.FM);
                 var LZH = laiziFM.getComponent('DeskCards');
-                //LZH.init(-4);
+                LZH.init(-3,'Z',true);
                 laiziFM.parent = context.godcard.children[1];
             }
         }
@@ -2883,18 +2882,18 @@ cc.Class({
         }
     },
     otherHandCardRemove: function(data,context,tablepos){
-        for(let i = 0 ; i<data.cards.length; i++){
-            if(tablepos =='top'){
-                context.top_panel.children[i].destroy();
-                context.topcards.splice(i,1);
-            }else if(tablepos =='right'){
-                context.right_panel.children[i].destroy();
-                context.rightcards.splice(i,1);
-            }else if(tablepos =='left'){
-                context.left_panel.children[i].destroy();
-                context.leftcards.splice(i,1);
-            }
-        }      
+        // for(let i = 0 ; i<data.cards.length; i++){
+        //     if(tablepos =='top'){
+        //         context.top_panel.children[i].destroy();
+        //         context.topcards.splice(i,1);
+        //     }else if(tablepos =='right'){
+        //         context.right_panel.children[i].destroy();
+        //         context.rightcards.splice(i,1);
+        //     }else if(tablepos =='left'){
+        //         context.left_panel.children[i].destroy();
+        //         context.leftcards.splice(i,1);
+        //     }
+        // }      
     },
     shouOperationMune: function(){
         var action = cc.moveTo(0.5,1122,-100);
@@ -3038,7 +3037,10 @@ cc.Class({
         //  this.cardModle([-8,-9,-10],cc.find('Canvas/content/handcards/deskcard/kong'),false,'',context,'peng')
     },
     dosomethings: function (data , context){
-        this.selectaction_event({userid:cc.beimi.user.id,cards:[-11],card:-1,action:'gang'},context)  
+        this.selectaction_event({userid:cc.beimi.user.id,cards:[-11,-11,-11,-11],card:-1,action:'gang',actype:'an' },context)  ;
+        this.selectaction_event({userid:'b4eedc06b616467bb9a2d4e1c2f25789',cards:[-11,-11,-11,-11],card:-1,action:'gang',actype:'an' },context)  ;
+        this.selectaction_event({userid:"5ada0da075ec443c9f1f23a218ee2bcb",cards:[-11,-11,-11,-11],card:-1,action:'gang',actype:'an' },context)  ;
+        this.selectaction_event({userid:"f7bf579d16534dcda9eb3cf20c5e7f39",cards:[-11,-11,-11,-11],card:-1,action:'gang',actype:'an' },context)  ;
    },
    dosomethings2: function (data , context){
     this.selectaction_event({userid:cc.beimi.user.id,cards:[1,37,74],card:1,action:'chi'},context) 
