@@ -1,14 +1,14 @@
 {
   "ver": "1.0.0",
-  "uuid": "7f781bba-ff0c-47bd-a0da-ddc51c3a174d",
+  "uuid": "de1361c2-ba32-47dc-8f75-c520049925d9",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "龙港麻将": {
+    "青色牌面": {
       "ver": "1.0.3",
-      "uuid": "b421863f-6e75-49f8-be2b-95847ca791a8",
-      "rawTextureUuid": "7f781bba-ff0c-47bd-a0da-ddc51c3a174d",
+      "uuid": "2257a460-41b2-452a-b79b-4840d4c883ca",
+      "rawTextureUuid": "de1361c2-ba32-47dc-8f75-c520049925d9",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
@@ -16,10 +16,10 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 235,
-      "height": 56,
-      "rawWidth": 235,
-      "rawHeight": 56,
+      "width": 90,
+      "height": 119,
+      "rawWidth": 90,
+      "rawHeight": 119,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,
