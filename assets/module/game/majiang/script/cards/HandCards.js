@@ -142,6 +142,11 @@ cc.Class({
         if(cc.beimi.cardNum >14 &&!pd){        
             this.cardvalue.width = 65;
             this.cardvalue.height = 100;
+            this.cardvalue.children[0].y = 42;
+            this.cardvalue.children[0].width = 70;
+            this.cardvalue.children[1].y = 42;
+            this.cardvalue.children[1].width = 70;
+            
             this.target.width=63;
             cc.find('Canvas/content/handcards/deskcard/layout').y =5;
         }else if(!pd){
