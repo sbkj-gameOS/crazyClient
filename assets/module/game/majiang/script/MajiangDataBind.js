@@ -252,11 +252,13 @@ cc.Class({
                 sprite.spriteFrame = this.bkLogoImgTP;//台炮游戏logo
             }
         }
-         if(cc.beimi.cardNum > 14){
+         if(cc.beimi.cardNum > 14){ 
             this.top_panel.parent.x = -142;
             this.top_panel.parent.y = 258;
             this.cards_panel.parent.y = this.cards_panel.parent.y + 12;
             this.cards_panel.parent.x = this.cards_panel.parent.x - 20;
+        }else{
+            this.cards_panel.parent.children[0].y = this.cards_panel.parent.children[0].y + 10 ;
         }
          //cc.beimi.playerNum = 2;
         this.noticeShare.cascadeOpacity =false;
