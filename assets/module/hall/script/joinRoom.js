@@ -75,6 +75,7 @@ cc.Class({
         cardNum:cc.Label,
         help: cc.Prefab,
         alert2: cc.Prefab,
+        shopping : cc.Prefab
     },
 
     // use this for initialization
@@ -158,6 +159,12 @@ cc.Class({
             object.inputNum5.string = "";
             object.inputNum6.string = "";
             array = "";
+            if(cc.beimi.user.cards == 0 ){
+                cc.beimi.dialog.destroy();
+                cc.beimi.dialog = null ;
+                cc.beimi.dialog = cc.instantiate(object.shopping);
+                cc.beimi.dialog.parent = cc.find('Canvas')
+            }
         }     
     },
     

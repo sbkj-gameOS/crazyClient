@@ -5654,6 +5654,12 @@
     },
     "inputNum6": {
       "__id__": 53
+    },
+    "cardNum": null,
+    "help": null,
+    "alert2": null,
+    "shopping": {
+      "__uuid__": "42df2b20-8167-43b2-96a1-32dbb3cb4640"
     }
   },
   {
