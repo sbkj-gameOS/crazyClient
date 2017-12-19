@@ -62,7 +62,6 @@ cc.Class({
         // }
         
         if(this.ready()){
-       
             if(cc.beimi.browserType=="wechat"){
                 cc.beimi.WXorBlow.shareRoom();
             }   
@@ -104,6 +103,9 @@ cc.Class({
             //     this.goldcoins.string = cc.beimi.user.goldcoins;
             // }
             this.cards.string = cc.beimi.user.cards + "张" ;
+            
+            cc.beimi.http.httpGet('/wxController/getWxUserToken?userId='+cc.beimi.user.id,this.sucess,this.error,this)
+            
         }
     },
     // seccess: function(result,object){
@@ -118,9 +120,16 @@ cc.Class({
     //     }
         
     // },
-    // error: function(result,object){
-    //     this.alert('充值失败');
-    // },
+    error: function(result,object){
+        // this.alert('充值失败');
+    },
+    sucess:function(result,object){
+        var data = JSON.parse(result) ;
+        if(data != null && data.success == true && data.token!=null){
+            cc.beimi.user = data.playUser;
+            object.cards.string = cc.beimi.user.cards + "张" ;
+        }
+    },
     playToLeft:function(){
         this._girlAnimCtrl = this.girl.getComponent(cc.Animation);
         this._girlAnimCtrl.play("girl_to_left");

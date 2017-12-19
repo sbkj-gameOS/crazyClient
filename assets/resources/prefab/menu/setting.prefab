@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "setting3",
+    "_name": "setting2",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -237,9 +237,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "b698xiGMRAzbppppMSWDHr",
+    "fileId": "b8ysXhvBZHB7QOvqt0GEVB",
     "sync": false
   },
   {
@@ -293,8 +293,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 814,
-      "height": 454
+      "width": 1139,
+      "height": 577
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -302,8 +302,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 7,
-      "y": 1
+      "x": 6,
+      "y": -2
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -357,7 +357,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 173
+      "y": 219
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -400,9 +400,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "94gPRicGNB7Kvr80/a8RVg",
+    "fileId": "44DX0EtX9JspkZAKMRBoH2",
     "sync": false
   },
   {
@@ -465,8 +465,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -240,
-      "y": -3
+      "x": -332,
+      "y": 10
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -557,9 +557,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "43b3JrHSNMoKc4zDs/zf6u",
+    "fileId": "0bS6YRmCFLIrivJw9zUYb6",
     "sync": false
   },
   {
@@ -714,9 +714,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "b9tm8GhjNIY4WC6BNNmtKr",
+    "fileId": "c2fE12BMhJxYmN7Tp/v2RD",
     "sync": false
   },
   {
@@ -807,9 +807,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "bdliI3y6VAyLnMdJnL6Yol",
+    "fileId": "36c41Tk/lOGq1G9j7LzRTJ",
     "sync": false
   },
   {
@@ -1031,10 +1031,10 @@
     },
     "_children": [
       {
-        "__id__": 26
+        "__id__": 28
       },
       {
-        "__id__": 28
+        "__id__": 26
       },
       {
         "__id__": 31
@@ -1087,7 +1087,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "LogoutClick",
+    "_name": "DialogClick",
     "_objFlags": 0,
     "_parent": {
       "__id__": 27
@@ -1140,7 +1140,7 @@
     "groupIndex": 0
   },
   {
-    "__type__": "c02c1wqe0JFrrSphy0Aek62",
+    "__type__": "a07b3XLiwVBk5RFzHmd50Gx",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -1154,14 +1154,14 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "4dLjct3K9HdrjXGjJgr0QV",
+    "fileId": "a9azuKW2hB+5zIYiZHPG+o",
     "sync": false
   },
   {
     "__type__": "cc.Node",
-    "_name": "MJMenuClick",
+    "_name": "LogoutClick",
     "_objFlags": 0,
     "_parent": {
       "__id__": 27
@@ -1214,16 +1214,13 @@
     "groupIndex": 0
   },
   {
-    "__type__": "ce2c1CkWWFBsK4mdw3v5/n2",
+    "__type__": "c02c1wqe0JFrrSphy0Aek62",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 31
     },
-    "_enabled": true,
-    "button": null,
-    "labei": null,
-    "txt": null
+    "_enabled": true
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1231,14 +1228,14 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "5f7xK9yWNIW5OzVQzOoPwN",
+    "fileId": "a0fPvihvNLTLe6RBhpjIdV",
     "sync": false
   },
   {
     "__type__": "cc.Node",
-    "_name": "DialogClick",
+    "_name": "MJMenuClick",
     "_objFlags": 0,
     "_parent": {
       "__id__": 27
@@ -1291,13 +1288,16 @@
     "groupIndex": 0
   },
   {
-    "__type__": "a07b3XLiwVBk5RFzHmd50Gx",
+    "__type__": "ce2c1CkWWFBsK4mdw3v5/n2",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 34
     },
-    "_enabled": true
+    "_enabled": true,
+    "button": null,
+    "labei": null,
+    "txt": null
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1305,9 +1305,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "89zhSE+Q9Cc4kfPxTPHHpv",
+    "fileId": "61i2EQtv9H9pidOI37XtOK",
     "sync": false
   },
   {
@@ -1316,9 +1316,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "9d6GJY0NxOYqAkxMkZn+jH",
+    "fileId": "d6Ul25/MhKVbKACPrOR6kF",
     "sync": false
   },
   {
@@ -1612,9 +1612,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "3aaxrDGgJBSIHeYBCc7qIy",
+    "fileId": "41Yz3fwMBEA7vBYtbMLXs0",
     "sync": false
   },
   {
@@ -1779,9 +1779,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "12GKdiNZtIj7zJ9B8R652F",
+    "fileId": "86sBZ+AHhI1L9NOjikuELp",
     "sync": false
   },
   {
@@ -1818,9 +1818,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "09Mmv8M0hJ+qMftx72Baf9",
+    "fileId": "46gtB5W2xNVKiUICfrO2Qr",
     "sync": false
   },
   {
@@ -1829,9 +1829,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "3csbVJ7nVAWqNrFdQ1c2wt",
+    "fileId": "4efLI7G6dL6ruVV6beisaf",
     "sync": false
   },
   {
@@ -2037,8 +2037,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -243,
-      "y": -59
+      "x": -335,
+      "y": -70
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -2129,9 +2129,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "c9/aoV9oRJY4s0pzzoXV1t",
+    "fileId": "90KE6cDd5F/IA9AXZhSG3J",
     "sync": false
   },
   {
@@ -2283,9 +2283,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "29yB+j58tD6L1vg8jqdBp1",
+    "fileId": "87NOsMYMdJYK/JGHKOfXH6",
     "sync": false
   },
   {
@@ -2376,9 +2376,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "a96QmwUTJFm5rF5spAML3i",
+    "fileId": "be8XFFoYFHNbd4+NjSlUxG",
     "sync": false
   },
   {
@@ -2450,9 +2450,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "8581dRyV5LoI1h5OLbiXr5",
+    "fileId": "35/xGpkkZP86ItBzcWe14E",
     "sync": false
   },
   {
@@ -2518,9 +2518,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "a2XEb8DltJ9pz4SF32BNhp",
+    "fileId": "d1gEuxJ41GW5X1g4lAzegd",
     "sync": false
   },
   {
@@ -2611,9 +2611,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "033eOU/XNG0KkL6s67EGBd",
+    "fileId": "6dZnOh8JJOe5/IzBZDzGWl",
     "sync": false
   },
   {
@@ -2765,9 +2765,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "265zp9Ol5FLqBkyox9zL7b",
+    "fileId": "3dvb+OPMlBYYptjswriCwD",
     "sync": false
   },
   {
@@ -2804,9 +2804,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "ffx+tAMnFG2ruHVgOIEeBN",
+    "fileId": "0afyzO2+9NmKwObVmyU5hf",
     "sync": false
   },
   {
@@ -2815,9 +2815,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "9ciWVMrtlGuYrzuHbb+sD4",
+    "fileId": "0ecEwgir5CFIULA2WYhiAs",
     "sync": false
   },
   {
@@ -3023,9 +3023,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "a5jyDVutNFAaxDvZj39o/L",
+    "fileId": "3csn9Kgd9Dc7qzl1oSQhy+",
     "sync": false
   },
   {
@@ -3097,9 +3097,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "55YcA33oFIN5i7/5Xy2drw",
+    "fileId": "480yB5U8dL8pc/qFKA2qxX",
     "sync": false
   },
   {
@@ -3136,9 +3136,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "88jQkIJ6pGq7xP94xEMhZi",
+    "fileId": "aavrcnu4lGGJwl38Trl5hs",
     "sync": false
   },
   {
@@ -3310,8 +3310,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -264,
-      "y": -116
+      "x": -356,
+      "y": -146
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -3402,9 +3402,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "a3RxtIUxhEHZ98I9qXq6se",
+    "fileId": "83Tu6RNwpLcr0Vjy2tHyGq",
     "sync": false
   },
   {
@@ -3470,9 +3470,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "ccdCOCSzBHapAxltYMYUy6",
+    "fileId": "519zoep3hJaJCe/1b1GGpE",
     "sync": false
   },
   {
@@ -3563,9 +3563,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "67otB5jCxGxYoNF5QbxiqC",
+    "fileId": "4eNpKUWe1JmKwVCrjmQMmW",
     "sync": false
   },
   {
@@ -3637,9 +3637,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "37jSJiVJxGpa/G7HdmpyHj",
+    "fileId": "55EkxqGnxDsbHUcFcQig0X",
     "sync": false
   },
   {
@@ -3676,9 +3676,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "9anGxzVwxKJKg3VmuW1afi",
+    "fileId": "a4Fgh8/0NERJlcmeVxLwV4",
     "sync": false
   },
   {
@@ -3716,8 +3716,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 91,
-      "height": 87
+      "width": 115,
+      "height": 102
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -3725,8 +3725,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -78,
-      "y": -50
+      "x": -98,
+      "y": -59
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -3782,7 +3782,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 17,
+      "x": 21,
       "y": 0
     },
     "_skewX": 0,
@@ -3842,8 +3842,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 113,
-      "y": 37
+      "x": 194,
+      "y": 43
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -3899,7 +3899,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 17,
+      "x": 21,
       "y": 0
     },
     "_skewX": 0,
@@ -3944,8 +3944,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 91,
-      "height": 87
+      "width": 115,
+      "height": 102
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -3953,8 +3953,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 12,
-      "y": -50
+      "x": 15,
+      "y": -59
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -3995,9 +3995,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "cbhZJTd95OF5iuLrO/ElyD",
+    "fileId": "aeZ4V0Y+5N5L/iDTsVZwyd",
     "sync": false
   },
   {
@@ -4038,8 +4038,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 58,
-      "height": 70
+      "width": 73,
+      "height": 82
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -4047,8 +4047,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 12,
-      "y": -49
+      "x": 15,
+      "y": -57
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -4066,7 +4066,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "6025686b-efc2-4290-bc19-b6757508ed33"
+      "__uuid__": "2257a460-41b2-452a-b79b-4840d4c883ca"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -4152,9 +4152,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "70KL7aRMJL5qazhAMT2Jbx",
+    "fileId": "34flOrNshNkLJDe1yxUv0i",
     "sync": false
   },
   {
@@ -4163,9 +4163,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "feEnV1pGxITbIFLcILCZ1T",
+    "fileId": "0cDdnd/PdLgr+bPk4AOZ+E",
     "sync": false
   },
   {
@@ -4215,7 +4215,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 17,
+      "x": 21,
       "y": 0
     },
     "_skewX": 0,
@@ -4260,8 +4260,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 91,
-      "height": 87
+      "width": 115,
+      "height": 102
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -4269,8 +4269,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 102,
-      "y": -50
+      "x": 129,
+      "y": -59
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -4311,9 +4311,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "9bRi5tSU1KLpLT0BV6Rmuk",
+    "fileId": "2cifCIid1FzJYKs0KE9s9W",
     "sync": false
   },
   {
@@ -4354,8 +4354,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 58,
-      "height": 70
+      "width": 73,
+      "height": 82
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -4363,8 +4363,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 103,
-      "y": -49
+      "x": 130,
+      "y": -57
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -4468,9 +4468,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "a2e/MU5kpD6Ku/mRB/3Szm",
+    "fileId": "7a4SMxXfZIIpLkEBED1a6v",
     "sync": false
   },
   {
@@ -4479,9 +4479,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "dcYvK60LNPDJXsxO07RFK+",
+    "fileId": "c2xWxxWdtI2qAofvCcJa/e",
     "sync": false
   },
   {
@@ -4490,9 +4490,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "a2wwFzeMVMSIOww+F9iQAB",
+    "fileId": "faSZpOa9BMT7yBFpbhqBnX",
     "sync": false
   },
   {
@@ -4533,8 +4533,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 58,
-      "height": 70
+      "width": 73,
+      "height": 82
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -4542,8 +4542,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -77,
-      "y": -49
+      "x": -97,
+      "y": -57
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -4647,9 +4647,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "25mzQkUCxDBaqM+W+zq+RD",
+    "fileId": "3aYTSGD8NDgLfktnneO8Mp",
     "sync": false
   },
   {
@@ -4658,9 +4658,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "85L0WYtHRD84D3eTSh5xi2",
+    "fileId": "c2dkTMg15IrayjvVvQBiOi",
     "sync": false
   },
   {
@@ -4695,9 +4695,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "cdq0vYTO9Px6spIlwE7qwV",
+    "fileId": "eduIBM3o9Doa31sGZqaHtc",
     "sync": false
   },
   {
@@ -4735,8 +4735,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 103,
-      "height": 37
+      "width": 130,
+      "height": 46
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -4745,7 +4745,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 1
+      "y": -1
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -4796,8 +4796,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 106,
-      "height": 38
+      "width": 134,
+      "height": 47
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -4805,8 +4805,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -169,
-      "y": 34
+      "x": -213,
+      "y": 39
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -4865,8 +4865,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 180,
-      "y": -147
+      "x": 279,
+      "y": -174
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -4917,8 +4917,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 108,
-      "height": 38
+      "width": 136,
+      "height": 47
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -4926,8 +4926,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -37,
-      "y": 34
+      "x": -47,
+      "y": 39
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -4971,8 +4971,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 103,
-      "height": 37
+      "width": 130,
+      "height": 46
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -4981,7 +4981,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 1
+      "y": -1
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -5022,9 +5022,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "5541O292VEHpYaxEhgm/jw",
+    "fileId": "b3z+5fKbNF9YcMrY32wOQk",
     "sync": false
   },
   {
@@ -5122,9 +5122,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "01jwmzh8BIproEtRWJJOh4",
+    "fileId": "a1xX1rtwdK54OiDyoOYpC2",
     "sync": false
   },
   {
@@ -5169,8 +5169,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 108,
-      "height": 38
+      "width": 136,
+      "height": 47
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -5178,8 +5178,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 92,
-      "y": 34
+      "x": 116,
+      "y": 39
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -5223,8 +5223,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 103,
-      "height": 37
+      "width": 130,
+      "height": 46
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -5233,7 +5233,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 0
+      "y": -1
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -5274,9 +5274,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "5ajByipiZJ5KHdRMOjmenf",
+    "fileId": "cffcv0oxdCXJdG9DuxI1nv",
     "sync": false
   },
   {
@@ -5374,9 +5374,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "65s0CgVh1Bz6CILrO8mOMF",
+    "fileId": "97rw0DLpJMHpIGkuvIhnkD",
     "sync": false
   },
   {
@@ -5385,9 +5385,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "42vSNiw2ZD/6cBh+8HjWdG",
+    "fileId": "0bi7+7eiRKy4jeSe1p7Z/z",
     "sync": false
   },
   {
@@ -5485,9 +5485,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "6drAxWA+xO1oS6vvvE6rd/",
+    "fileId": "d3keab6QNLB6BIbCt8+X2/",
     "sync": false
   },
   {
@@ -5522,9 +5522,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "e6P9I271dEf7olTSDOZ9Wh",
+    "fileId": "c8ZrxdYMZKMqd1vZ0rhUyq",
     "sync": false
   },
   {
@@ -5533,9 +5533,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "1bqw8QAHpCZpfUwrQQcoSI",
+    "fileId": "d6xVwhBatBwYBJ0mLYuz68",
     "sync": false
   },
   {
@@ -5544,9 +5544,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "0fHMoyGORGM7mFSfDWS7rV",
+    "fileId": "41AfWHZrZIO5vzE7JuWk5s",
     "sync": false
   },
   {
@@ -5583,9 +5583,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "64TA2qCtdFOpiMJubKG/Fx",
+    "fileId": "c2uA5McHtAhaQ0yS9tqT+k",
     "sync": false
   },
   {
@@ -5651,9 +5651,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "08a/e+bWdM0qmnpyYl1cUa",
+    "fileId": "09l/q3JnFOG5VH42kTHgTb",
     "sync": false
   },
   {
@@ -5700,7 +5700,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -114,
+      "x": -143,
       "y": -30
     },
     "_skewX": 0,
@@ -5742,9 +5742,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "04usD6ycBKco1+UWzxnyQn",
+    "fileId": "e3tR0pzV5NcqWRZf1tNwwo",
     "sync": false
   },
   {
@@ -5781,9 +5781,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "bcc6P9GzVB0bomSoBOHnOC",
+    "fileId": "72mxY+UylI77RSjBs8kvsE",
     "sync": false
   },
   {
@@ -5833,8 +5833,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 406,
-      "y": 178
+      "x": 547,
+      "y": 242
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -5928,7 +5928,7 @@
   {
     "__type__": "cc.ClickEvent",
     "target": {
-      "__id__": 34
+      "__id__": 28
     },
     "component": "DialogClick",
     "handler": "onCloseClick",
@@ -5940,9 +5940,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "adVhyh2aRLjKbIiuAj9P6/",
+    "fileId": "3d739NYX9HxZcSDfnGujJ1",
     "sync": false
   },
   {
@@ -5993,8 +5993,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -289,
-      "y": 82
+      "x": -381,
+      "y": 99
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -6085,9 +6085,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "f2GouxtBdPNIWcF6klP20E",
+    "fileId": "7fQVp+4hlKypLHy4NGVWtw",
     "sync": false
   },
   {
@@ -6122,9 +6122,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "e92L8fy2RGCL0Vqo1SDEId",
+    "fileId": "75jhAzomRNvYIq2aQR6VyY",
     "sync": false
   },
   {
@@ -6175,8 +6175,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 80,
-      "y": 84
+      "x": 171,
+      "y": 101
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -6267,9 +6267,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "73t3f4SBREKaXFbUdC3LB9",
+    "fileId": "7b5NnUPpdPlqpNCdKBCMjU",
     "sync": false
   },
   {
@@ -6304,9 +6304,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "2e6zu27BZDFa1yFKWJMluI",
+    "fileId": "7dFDmPWxBFnbywHUPBxHKk",
     "sync": false
   },
   {
@@ -6353,8 +6353,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -36,
-      "y": 28
+      "x": 28,
+      "y": 36
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -6391,9 +6391,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "9fY9SZkqlC8YpR7ZKXr6DG",
+    "fileId": "02mDfeYzxCqrhkFK0QZqcD",
     "sync": false
   },
   {
@@ -6440,8 +6440,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -31,
-      "y": -73
+      "x": 27,
+      "y": -87
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -6478,9 +6478,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "a4HmISh7pIQIGnEow+loR9",
+    "fileId": "50z0sFpnRJepCL+dJ9FElx",
     "sync": false
   },
   {
@@ -6489,9 +6489,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c127e06f-0d5c-493e-9910-1ecbbadb6089"
+      "__uuid__": "166be19f-0ab9-43a4-a1e0-d90b514fe7a3"
     },
-    "fileId": "f5nY2K53xM+ogI6sSDl0RQ",
+    "fileId": "a5iL+C9NlEj6oVaflTN/QH",
     "sync": false
   }
 ]

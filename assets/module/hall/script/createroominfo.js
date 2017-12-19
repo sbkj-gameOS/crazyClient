@@ -20,7 +20,8 @@ cc.Class({
             type : cc.Node
         },
         alert2: cc.Node,
-        message: cc.Label
+        message: cc.Label,
+        shopping: cc.Prefab
     },
 	
 	//创建房间-模式类型值选择
@@ -105,6 +106,12 @@ cc.Class({
             cc.director.loadScene("majiang");
         }else if(data.error){
             object.Alertnotice(data.msg); 
+            if(cc.beimi.user.cards == 0 ){
+                cc.beimi.dialog.destroy();
+                cc.beimi.dialog = null ;
+                cc.beimi.dialog = cc.instantiate(object.shopping);
+                cc.beimi.dialog.parent = cc.find('Canvas')
+            }
         }else{
             object.Alertnotice('请求失败');
         }  

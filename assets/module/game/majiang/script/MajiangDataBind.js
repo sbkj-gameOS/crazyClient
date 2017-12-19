@@ -2885,18 +2885,18 @@ cc.Class({
         }
     },
     otherHandCardRemove: function(data,context,tablepos){
-        // for(let i = 0 ; i<data.cards.length; i++){
-        //     if(tablepos =='top'){
-        //         context.top_panel.children[i].destroy();
-        //         context.topcards.splice(i,1);
-        //     }else if(tablepos =='right'){
-        //         context.right_panel.children[i].destroy();
-        //         context.rightcards.splice(i,1);
-        //     }else if(tablepos =='left'){
-        //         context.left_panel.children[i].destroy();
-        //         context.leftcards.splice(i,1);
-        //     }
-        // }      
+        for(let i = 0 ; i<data.cards.length; i++){
+            if(tablepos =='top'){
+                context.top_panel.children[i].destroy();
+                context.topcards.splice(i,1);
+            }else if(tablepos =='right'){
+                context.right_panel.children[i].destroy();
+                context.rightcards.splice(i,1);
+            }else if(tablepos =='left'){
+                context.left_panel.children[i].destroy();
+                context.leftcards.splice(i,1);
+            }
+        }      
     },
     shouOperationMune: function(){
         var action = cc.moveTo(0.5,1122,-100);

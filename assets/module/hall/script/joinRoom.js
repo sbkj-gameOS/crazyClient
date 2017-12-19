@@ -213,9 +213,34 @@ cc.Class({
         cc.beimi.dialog1.parent = this.root();
     },
     jjroom: function(event){
-        let alert = cc.instantiate(this.alert2);
-        alert.parent = this.root();
-        //cc.director.loadScene('majiang');
+        // let alert = cc.instantiate(this.alert2);
+        // alert.parent = this.root();
+        // cc.director.loadScene('majiang');
+        cc.beimi.http.httpGet('/api/room/match?token='+cc.beimi.authorization,this.jjsucess,this.jjerror,this);
+    },
+    jjsucess: function(result,object){
+        var data = JSON.parse(result);
+        console.log(data);
+        //playerNum,cardNum
+            if(data.playway){
+                cc.beimi.playway = data.playway;                  
+            }
+            if(data.room){
+                cc.beimi.room = data.room; 
+            }
+            if(data.playerNum){
+                cc.beimi.playerNum = data.playerNum;
+            }
+            if(data.cardNum){
+                cc.beimi.cardNum = data.cardNum;
+            }
+            if(data.maxRound){
+                cc.beimi.maxRound = data.maxRound;
+            }
+            cc.director.loadScene("majiang");
+    },
+    jjerror: function(result,object){
+
     }
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {

@@ -358,7 +358,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 320,
+      "width": 160,
       "height": 50
     },
     "_rotationX": 0,
@@ -385,7 +385,7 @@
       "__id__": 10
     },
     "_enabled": true,
-    "_N$string": "<color=#ffffff><b>《家长监护工程》</b></c>",
+    "_N$string": "<color=#ffffff><b>佣金说明</b></c>",
     "_N$horizontalAlign": 0,
     "_N$fontSize": 40,
     "_N$font": null,

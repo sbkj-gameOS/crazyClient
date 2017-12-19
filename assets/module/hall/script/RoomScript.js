@@ -191,6 +191,7 @@ cc.Class({
     },
 	roomSuccess: function(result,object){
 		result = JSON.parse(result);
+		console.log(result);
         if(result.room){
 			roomNum = result.room;
 			//playerNum,cardNum
