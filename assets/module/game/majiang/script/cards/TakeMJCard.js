@@ -91,9 +91,9 @@ cc.Class({
                             context.tingSelect.active = true;                            
                             for(let s = 0 ; s< tingcards.length;s++){
                                 let limian = cc.instantiate(context.tingSelectch);
-                                if(context.tings[i].counts){
-                                    limian.getComponent('tingAction').label.string = '还剩:'+context.tings[j].counts.length+'张';
-                                }
+                                // if(context.tings[i].counts){
+                                //     limian.getComponent('tingAction').label.string = '还剩:'+context.tings[j].counts.length+'张';
+                                // }
                                 let cccc = limian.getComponent('tingAction').target.getComponent('HandCards');
                                 cccc.init(tingcards[s],true);
                                 limian.parent = context.tingSelect.children[0];

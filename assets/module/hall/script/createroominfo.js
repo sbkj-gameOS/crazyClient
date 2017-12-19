@@ -70,7 +70,7 @@ cc.Class({
          var garams ={};
 		 //模式类型
          garams.modeltype = moShi;
-         playerData = 'both@@xjmissile@@sfmissile@@xdszl@@bandgap@@';
+         //playerData = 'both@@xjmissile@@sfmissile@@xdszl@@bandgap@@';
          playerData = playerData.split("@@");
 		 playerData.pop();
 		 //玩法类型

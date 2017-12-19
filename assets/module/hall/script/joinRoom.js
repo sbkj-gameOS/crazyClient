@@ -220,8 +220,9 @@ cc.Class({
         cc.beimi.http.httpGet('/api/room/match?token='+cc.beimi.authorization,this.jjsucess,this.jjerror,this);
     },
     jjsucess: function(result,object){
+        console.log(result);
+        
         var data = JSON.parse(result);
-        console.log(data);
         //playerNum,cardNum
 
         if(data.error){  

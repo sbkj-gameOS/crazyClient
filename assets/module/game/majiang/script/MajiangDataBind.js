@@ -269,7 +269,9 @@ cc.Class({
         if(cc.beimi.room&&cc.beimi.room.length==6){
             this.room_num.getComponent(cc.Label).string = cc.beimi.room;
         }else{
-            this.room_num.parent.active =false;
+            this.room_num.parent.children[2].active =false;
+            this.room_num.parent.children[1].getComponent(cc.Label).string = '比赛模式';
+            this.room_num.parent.children[1].x = this.room_num.parent.children[1].x +20;
         };
         this.maxRound = 0;
         if(cc.beimi.maxRound){
