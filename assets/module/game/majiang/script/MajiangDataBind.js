@@ -2433,7 +2433,9 @@ cc.Class({
             case "init" :
                 object.desk_tip.active = false;
                 readybtn.active = true ;
-                //ready2.active = true ;
+                if(cc.beimi.room.length ==6){
+                    ready2.active = true ;
+                }
                 object.actionnode_deal.active =false ;
 
                 /**
