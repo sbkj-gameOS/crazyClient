@@ -272,6 +272,8 @@ cc.Class({
             this.room_num.parent.children[2].active =false;
             this.room_num.parent.children[1].getComponent(cc.Label).string = '比赛模式';
             this.room_num.parent.children[1].x = this.room_num.parent.children[1].x +20;
+            this.ready2.active = false;
+            this.readybth.x = -4;
         };
         this.maxRound = 0;
         if(cc.beimi.maxRound){
@@ -2431,7 +2433,7 @@ cc.Class({
             case "init" :
                 object.desk_tip.active = false;
                 readybtn.active = true ;
-                ready2.active = true ;
+                //ready2.active = true ;
                 object.actionnode_deal.active =false ;
 
                 /**

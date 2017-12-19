@@ -39,6 +39,16 @@ cc.Class({
         let tai = '';
         let hua ;
         this.hu.string='';
+        if(this.data.point){
+            let id = this.data.user;
+            let players = cc.find('Canvas').getComponent('MajiangDataBind').playersarray;
+            for(let i = 0 ; i < players.length ; i++){
+                let player = players[i].getComponent('MaJiangPlayer')
+                if(id == player.data.id){
+                    player.goldcoins.string = this.data.point ; 
+                }
+            }
+        }
         if(this.data.gang){
             gang = this.data.gang.count;
         }
@@ -81,16 +91,17 @@ cc.Class({
                     }
                     this.hu.string += (units[i].tip+' '+ point +' ');
                 } 
-            }   
+            }  
+            if(cc.beimi.GameBase.gameModel != 'wz'){
+                this.jifan.string = fan +'番'+'   '+gang +'杠   ';
+                if(this.data.balance.noTing == true){
+                    noTing = '未上听';
+                }else{
+                    noTing = '上听';
+                }
+            } 
         }
-        if(cc.beimi.GameBase.gameModel != 'wz'){
-            this.jifan.string = fan +'番'+'   '+gang +'杠   ';
-            if(this.data.balance.noTing == true){
-                noTing = '未上听';
-            }else{
-                noTing = '上听';
-            }
-        }
+      
         
         this.hu.string += noTing + '  '+drop + ' ' + tai;
         let player = cc.find('Canvas').getComponent('MajiangDataBind').playersarray;

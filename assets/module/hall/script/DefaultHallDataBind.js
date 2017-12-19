@@ -64,6 +64,7 @@ cc.Class({
         // }
         
         if(this.ready()){
+            
             if(cc.beimi.browserType=="wechat"){
                 cc.beimi.WXorBlow.shareRoom();
             }   
@@ -108,7 +109,7 @@ cc.Class({
             //     this.goldcoins.string = cc.beimi.user.goldcoins;
             // }
             this.cards.string = cc.beimi.user.cards + "张" ;
-            
+            cc.beimi.http.httpGet('/api/room/queryRoomCard?token='+cc.beimi.authorization,this.sucess,this.error,this)
             
         }
     },
@@ -129,10 +130,9 @@ cc.Class({
     },
     sucess:function(result,object){
         var data = JSON.parse(result) ;
-        if(data != null && data.success == true && data.token!=null){
-            cc.beimi.user = data.playUser;
+            cc.beimi.user.cards = data.cards;
             object.cards.string = cc.beimi.user.cards + "张" ;
-        }
+
     },
     playToLeft:function(){
         this._girlAnimCtrl = this.girl.getComponent(cc.Animation);
