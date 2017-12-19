@@ -72,7 +72,16 @@ cc.Class({
             }
         }
     },
-
+    alert2:function(message){
+        if(cc.beimi.alert.size() > 0){
+            this.alertdialog2 = cc.beimi.alert.get();
+            this.alertdialog2.parent = cc.find("Canvas");
+            let node = this.alertdialog2.getChildByName("message") ;
+            if(node!=null && node.getComponent(cc.Label)){
+                node.getComponent(cc.Label).string = message ;
+            }
+        }
+    },
     closeloadding:function(){
         cc.beimi.loadding.put(cc.find("Canvas/loadding"));
     },

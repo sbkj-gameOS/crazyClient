@@ -24,6 +24,10 @@ cc.Class({
     onClose:function(){
         let dialog = cc.find("Canvas/alert") ;
         cc.beimi.dialog.put(dialog);
+    },  
+    onClose2:function(){
+        let alert = cc.find("Canvas/alert") ;
+        cc.beimi.alert.put(alert);
     }
 
     // called every frame, uncomment this function to activate update callback

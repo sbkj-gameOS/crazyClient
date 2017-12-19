@@ -19,7 +19,7 @@ cc.Class({
             default: null,
             type : cc.Node
         },
-        alert2: cc.Node,
+        alert23: cc.Node,
         message: cc.Label,
         shopping: cc.Prefab
     },
@@ -70,7 +70,8 @@ cc.Class({
          var garams ={};
 		 //模式类型
          garams.modeltype = moShi;
-		 playerData = playerData.split("@@");
+         playerData = 'both@@xjmissile@@sfmissile@@xdszl@@bandgap@@';
+         playerData = playerData.split("@@");
 		 playerData.pop();
 		 //玩法类型
          garams.waytype = playerData;
@@ -120,12 +121,12 @@ cc.Class({
         object.Alertnotice('连接出错'); 
     },
     closeClick:function(){
-        this.alert2.active = false ;
+        this.alert23.active = false ;
         cc.beimi.dialog.destroy();
         cc.beimi.dialog = null ;
     },
     Alertnotice: function(str){
-        this.alert2.active = true;
+        this.alert23.active = true;
         this.closeloadding();  
         this.message.string = str;   
     }

@@ -41,7 +41,9 @@ cc.Class({
         headimg:{
             default:null,
             type:cc.Node
-        }
+        },
+        alert20: cc.Prefab
+        
     },
 
     // use this for initialization
@@ -68,6 +70,9 @@ cc.Class({
             //ljh 加新场景的alert节点池子
             cc.beimi.dialog = new cc.NodePool();
             cc.beimi.dialog.put(cc.instantiate(this.alertPrefab));
+
+            cc.beimi.alert = new cc.NodePool();
+            cc.beimi.alert.put(cc.instantiate(this.alert20));
 
             if(cc.beimi.paystatus){
                 if( cc.beimi.paystatus=='true'){
@@ -104,7 +109,6 @@ cc.Class({
             // }
             this.cards.string = cc.beimi.user.cards + "张" ;
             
-            cc.beimi.http.httpGet('/wxController/getWxUserToken?userId='+cc.beimi.user.id,this.sucess,this.error,this)
             
         }
     },

@@ -39,7 +39,7 @@ cc.Class({
             default: null,
             type : cc.RichText
         },
-        alert2: cc.Node,
+        alert22: cc.Node,
         message: cc.Label,
     },
 
@@ -253,12 +253,12 @@ cc.Class({
  
     },
     closeClick:function(){
-        this.alert2.active = false ;
+        this.alert22.active = false ;
         cc.beimi.dialog.destroy();
         cc.beimi.dialog = null ;
     },
     Alertnotice: function(str){
-        this.alert2.active = true;
+        this.alert22.active = true;
         this.closeloadding();  
         this.message.string = str;   
     }

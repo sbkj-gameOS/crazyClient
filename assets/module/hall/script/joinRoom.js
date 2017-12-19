@@ -74,7 +74,7 @@ cc.Class({
         },
         cardNum:cc.Label,
         help: cc.Prefab,
-        alert2: cc.Prefab,
+        alert21: cc.Prefab,
         shopping : cc.Prefab
     },
 
@@ -216,12 +216,18 @@ cc.Class({
         // let alert = cc.instantiate(this.alert2);
         // alert.parent = this.root();
         // cc.director.loadScene('majiang');
+        this.loadding();
         cc.beimi.http.httpGet('/api/room/match?token='+cc.beimi.authorization,this.jjsucess,this.jjerror,this);
     },
     jjsucess: function(result,object){
         var data = JSON.parse(result);
         console.log(data);
         //playerNum,cardNum
+
+        if(data.error){  
+            object.closeloadding();
+            object.alert2(data.msg);
+        }else{
             if(data.playway){
                 cc.beimi.playway = data.playway;                  
             }
@@ -238,6 +244,7 @@ cc.Class({
                 cc.beimi.maxRound = data.maxRound;
             }
             cc.director.loadScene("majiang");
+        }    
     },
     jjerror: function(result,object){
 
