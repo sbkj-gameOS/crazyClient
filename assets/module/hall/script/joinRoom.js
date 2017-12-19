@@ -73,7 +73,8 @@ cc.Class({
             type: cc.Label
         },
         cardNum:cc.Label,
-        help: cc.Prefab
+        help: cc.Prefab,
+        alert2: cc.Prefab,
     },
 
     // use this for initialization
@@ -203,6 +204,11 @@ cc.Class({
     helpClick: function(){
         cc.beimi.dialog1 = cc.instantiate(this.help);
         cc.beimi.dialog1.parent = this.root();
+    },
+    jjroom: function(event){
+        let alert = cc.instantiate(this.alert2);
+        alert.parent = this.root();
+        //cc.director.loadScene('majiang');
     }
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {

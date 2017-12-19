@@ -69,6 +69,7 @@ cc.Class({
             //ljh 加新场景的alert节点池子
             cc.beimi.dialog = new cc.NodePool();
             cc.beimi.dialog.put(cc.instantiate(this.alertPrefab));
+
             if(cc.beimi.paystatus){
                 if( cc.beimi.paystatus=='true'){
                     this.alert('充值成功');

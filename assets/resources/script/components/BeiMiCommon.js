@@ -72,6 +72,7 @@ cc.Class({
             }
         }
     },
+
     closeloadding:function(){
         cc.beimi.loadding.put(cc.find("Canvas/loadding"));
     },

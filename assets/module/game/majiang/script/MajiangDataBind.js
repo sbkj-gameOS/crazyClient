@@ -760,6 +760,9 @@ cc.Class({
         } ;
         if ( cc.beimi.room ) {
             param.room = cc.beimi.room ;
+        }else{
+            param.playway = '402888815e6f0177015e71529f3a0001',
+            param.match = 1 ; 
         }
         socket.emit("joinroom" ,JSON.stringify(param)) ;
     },
