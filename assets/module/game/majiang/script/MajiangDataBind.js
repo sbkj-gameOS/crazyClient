@@ -1272,7 +1272,7 @@ cc.Class({
         temp.getComponent('SummaryClick').setData(data); 
         temp.zIndex = 999;
         if(playerid){
-            context.huaction2();
+            context.huaction2(playerid);
         }else{
             context.liuju.active = false;
         }
@@ -2185,6 +2185,8 @@ cc.Class({
             cc.beimi.audio.playSFX('nv/hu.mp3');                    
             let hu_hu = this.current_hu.getComponent(cc.Animation);
             let player = this.player(playerid , this);
+            let action = cc.scaleTo(1.5,1.5);
+            player.target.runAction(action);
             if(player.tablepos == 'top'){
                 hu_hu.node.children[0].x = 7 ;
                 hu_hu.node.children[0].y = 142 ;
@@ -2231,10 +2233,14 @@ cc.Class({
             this.liuju.active = true;
         }
     },
-    huaction2:function(){
+    huaction2:function(playerid){
         let ani = this.current_hu.getComponent(cc.Animation);
         this.current_hu.active =false;
         ani.stop("current_hu") ;
+        let player = this.player(playerid , this);
+        player.target.scale = 0.91;
+        
+
     },
     /**
      * 开始打牌，状态标记

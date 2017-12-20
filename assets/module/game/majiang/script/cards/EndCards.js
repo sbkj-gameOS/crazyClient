@@ -18,6 +18,7 @@ cc.Class({
         nan:cc.Node,        
         bei:cc.Node,
         redwin:cc.SpriteFrame,
+        diaopao:cc.SpriteFrame,
         target:cc.Node,
         hua: cc.Prefab,
         buhua: cc.Prefab,
@@ -68,7 +69,7 @@ cc.Class({
             if(this.data.balance.bao!= -1){
                 card = cc.instantiate(summary.bp);
                 baopai  = card.getComponent('DeskCards');    
-                baopai.init(this.data.balance.bao,'B');
+                baopai.init(this.data.balance.bao,'B',true);
                 card.parent = summary.bpp;   
             }
             if(this.data.balance.huCard){
@@ -76,6 +77,7 @@ cc.Class({
             }
             if(this.data.balance.drop == true){
                 drop = '点炮';
+                this.target.getComponent(cc.Sprite).spriteFrame = this.diaopao;
             }    
             if(this.data.balance.taishu){
                 tai = ' '+this.data.balance.taishu + '台';

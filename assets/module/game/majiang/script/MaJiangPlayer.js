@@ -11,7 +11,8 @@ cc.Class({
         //    displayName: 'Foo', // optional
         //    readonly: false,    // optional, default is false
         // },
-        // ...
+        // ...]
+        target: cc.Node,
         dong:cc.Node,
         nan:cc.Node,
         xi:cc.Node,
