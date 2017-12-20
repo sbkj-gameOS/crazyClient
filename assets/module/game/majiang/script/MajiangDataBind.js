@@ -269,8 +269,8 @@ cc.Class({
         if(cc.beimi.match =='false'){
             this.room_num.getComponent(cc.Label).string = cc.beimi.room;
         }else if(cc.beimi.match == 'true'){
-            cc.find('Canvas/settings/leave/leave/txt').getComponent(cc.Label).string = '退出';
-            cc.find('Canvas/settings/over').active = false;
+            this.setting_coin.children[0].children[0].children[0].getComponent(cc.Label).string = '退出';
+            this.setting_coin.children[1].active = false;
             this.room_num.parent.children[2].active =false;
             this.room_num.parent.children[1].getComponent(cc.Label).string = '比赛模式';
             this.room_num.parent.children[1].x = this.room_num.parent.children[1].x +20;
