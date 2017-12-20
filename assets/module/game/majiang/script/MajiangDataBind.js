@@ -1451,6 +1451,7 @@ cc.Class({
         for(var inx = 0 ; inx<context.playersarray.length ; inx++){
             let temp = context.playersarray[inx].getComponent("MaJiangPlayer") ;
             if(temp.data.id == data.userid){
+                cc.beimi.banker = data.userid ; 
                 temp.banker(); 
                 break ;
             }

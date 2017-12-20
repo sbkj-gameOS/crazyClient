@@ -22,7 +22,8 @@ cc.Class({
         target:cc.Node,
         hua: cc.Prefab,
         buhua: cc.Prefab,
-        huaParent: cc.Node
+        huaParent: cc.Node,
+        banker: cc.Node,
     },
     
     // use this for initialization
@@ -47,6 +48,7 @@ cc.Class({
                 let player = players[i].getComponent('MaJiangPlayer')
                 if(id == player.data.id){
                     player.goldcoins.string = this.data.point ; 
+
                 }
             }
         }
@@ -78,6 +80,7 @@ cc.Class({
             if(this.data.balance.drop == true){
                 drop = '点炮';
                 this.target.getComponent(cc.Sprite).spriteFrame = this.diaopao;
+                this.target.color = new cc.Color(255,255,255);
             }    
             if(this.data.balance.taishu){
                 tai = ' '+this.data.balance.taishu + '台';
@@ -116,6 +119,9 @@ cc.Class({
             if(pl.data.id == this.data.user){
                 if(this[pl.wind]){
                     this[pl.wind].active = true;                    
+                }
+                if(this.data.user == cc.beimi.banker){
+                    this.banker.active = true ; 
                 }
                 headimg = pl.data.headimgurl;
                 this.peoname.string = pl.data.username;
