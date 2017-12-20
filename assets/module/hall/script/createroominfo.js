@@ -95,6 +95,9 @@ cc.Class({
         if(data.room&&data.playway){
             cc.beimi.room = data.room;
             cc.beimi.playway = data.playway;
+            if(data.match){
+                cc.beimi.match = data.match ; 
+            }
             if(data.playerNum){
                 cc.beimi.playerNum = data.playerNum;
             }

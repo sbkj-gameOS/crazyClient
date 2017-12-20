@@ -43,8 +43,13 @@ cc.Class({
     sureLiveGameClick:function(){
         
         let mjdata = cc.find('Canvas').getComponent('MajiangDataBind');
-        let setting = cc.instantiate(mjdata.leave_alert);
-        setting.parent = mjdata.node;
+        if(cc.sys.localStorage.getItem('already') != 'true' &&cc.beimi.match == 'true'){
+            this.leaveGameClick();
+        }else{
+            let setting = cc.instantiate(mjdata.leave_alert);
+            setting.parent = mjdata.node;
+        }
+
         //this.node.dispatchEvent( new cc.Event.EventCustom('overGame', true) );
         
     },

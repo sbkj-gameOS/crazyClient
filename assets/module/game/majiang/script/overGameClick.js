@@ -88,8 +88,8 @@ cc.Class({
         cc.sys.localStorage.setItem('dis','true');        
         this.disconnect();
         this.scene("gameMain" , this);
-        //this.node.dispatchEvent( new cc.Event.EventCustom('leaveGame', true) );
-            },
+        this.node.dispatchEvent( new cc.Event.EventCustom('leaveGame', true) );
+    },
     daojishi: function(){
         this.time =this.time-1;
         if(this.labei2){

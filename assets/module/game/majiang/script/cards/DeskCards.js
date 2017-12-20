@@ -94,10 +94,17 @@ cc.Class({
                     deskcard = fangwei+'_white';
                 }
                 if(bol != true){
-                    cc.beimi.audio.playSFX('nv/wind_'+(cardcolors+8)+'.mp3');                
+                    let time = 0;
+                    if(cc.sys.localStorage.getItem('ting') == 'true'){
+                        time = 1000;
+                    }
+                    setTimeout(function(){
+                        cc.beimi.audio.playSFX('nv/wind_'+(cardcolors+8)+'.mp3');                
+                    },time);
                 }
                 //东南西北风 ， 中发白
             }else{
+                
                 if(cardtype == 0){ //万
                     deskcard = fangwei+"_character_"+ (parseInt((this.value%36)/4)+1) ;
                     if(bol != true){

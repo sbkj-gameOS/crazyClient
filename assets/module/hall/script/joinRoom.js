@@ -135,6 +135,9 @@ cc.Class({
         if(data.playway&&data.room){
             //cc.beimi.room = data.room;
             cc.beimi.playway = data.playway;
+            if(data.match){
+                cc.beimi.match = data.match ; 
+            }
             if(data.game){
                 cc.beimi.playType = data.game;
             }
@@ -229,6 +232,9 @@ cc.Class({
             object.closeloadding();
             object.alert2(data.msg);
         }else{
+            if(data.match){
+                cc.beimi.match = data.match ; 
+            }
             if(data.playway){
                 cc.beimi.playway = data.playway;                  
             }

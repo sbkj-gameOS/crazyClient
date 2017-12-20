@@ -229,6 +229,9 @@ cc.Class({
     sucess: function(result,object){
         var data = JSON.parse(result);
         if(data.room&&data.playway){
+            if(data.match){
+                cc.beimi.match = data.match ; 
+            }
             if(data.playerNum){
                 cc.beimi.playerNum = data.playerNum;
             }

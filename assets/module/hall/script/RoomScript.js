@@ -198,6 +198,9 @@ cc.Class({
 			//playerNum,cardNum
         	//cc.beimi.room = result.room;
 			cc.beimi.playway = result.playway;
+			if(result.match){
+                cc.beimi.match = result.match ; 
+            }
 			if(result.maxRound){
                 cc.beimi.maxRound = result.maxRound;
             }

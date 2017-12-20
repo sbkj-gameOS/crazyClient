@@ -266,9 +266,11 @@ cc.Class({
         this.connect();
         cc.sys.localStorage.removeItem('dis');        
         //ljh追加 房号的显示
-        if(cc.beimi.room&&cc.beimi.room.length==6){
+        if(cc.beimi.match =='false'){
             this.room_num.getComponent(cc.Label).string = cc.beimi.room;
-        }else{
+        }else if(cc.beimi.match == 'true'){
+            cc.find('Canvas/settings/leave/leave/txt').getComponent(cc.Label).string = '退出';
+            cc.find('Canvas/settings/over').active = false;
             this.room_num.parent.children[2].active =false;
             this.room_num.parent.children[1].getComponent(cc.Label).string = '比赛模式';
             this.room_num.parent.children[1].x = this.room_num.parent.children[1].x +20;
@@ -508,7 +510,7 @@ cc.Class({
         this.node.on('readyGM',function(event){ 
             //alert();
             var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
-            context.current_ready.active = true ;            
+            context.current_ready.active = true ;    
             let socket = self.getSelf().socket();
             socket.emit('readyGame',JSON.stringify({
             }))
@@ -659,6 +661,7 @@ cc.Class({
             //记录听得状态后，在出牌阶段判断状态并发送听牌事件。
             var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
             cc.sys.localStorage.setItem('ting','true') ;
+            cc.sys.localStorage.setItem('alting','true') ;
             context.initcardwidth(true);
             self.getSelf().tingAction();                 
             if (context.tings){
@@ -699,7 +702,7 @@ cc.Class({
          */
         this.node.on("guo",function(event){
             cc.sys.localStorage.setItem('take','true');
-            if(cc.sys.localStorage.getItem('guo')!='true'){
+            if(cc.sys.localStorage.getItem('guo')!='true'||cc.sys.localStorage.getItem('alting')=='true'){
                 let socket = self.getSelf().socket();
                 socket.emit("selectaction" , JSON.stringify({
                     action:"guo",
@@ -752,6 +755,11 @@ cc.Class({
             cc.sys.localStorage.setItem('chonglian','true');
             cc.sys.localStorage.removeItem('duankai');
             this.node.dispatchEvent( new cc.Event.EventCustom('chonglian', true) )
+        };
+        if(this.readybth.active == true){
+            cc.sys.localStorage.removeItem('already');                    
+        }else{
+            cc.sys.localStorage.setItem('already',true);
         }
     },
     joinRoom:function(){
@@ -1053,7 +1061,9 @@ cc.Class({
         if(data.userid == cc.beimi.user.id) {
             context.initcardwidth();
             if(data.ting){
-                cc.sys.localStorage.setItem('alting','true');                
+                cc.sys.localStorage.setItem('alting','true');   
+                cc.sys.localStorage.setItem('take','true');   
+
             }
             if(cc.sys.localStorage.getItem('take') != 'true'){
                 return;
@@ -1169,7 +1179,7 @@ cc.Class({
      * @param context
      */
     dealcard_event:function(data , context){   
-        if(cc.sys.localStorage.getItem('cb') == 'true'){
+        if(cc.sys.localStorage.getItem('cb') == 'true'&&cc.sys.localStorage.getItem('alting') != 'true'){
             setTimeout(function(){context.dealcards(data,context)},2100);
             cc.sys.localStorage.removeItem('cb');
         }else{
@@ -1756,6 +1766,7 @@ cc.Class({
         context.top_player.runAction(action);
         }
         //游戏开始 干掉打牌和听得缓存
+        
         cc.sys.localStorage.removeItem('take');
         cc.sys.localStorage.removeItem('ting') ;        
         context.exchange_state("begin" , context);
@@ -1988,6 +1999,7 @@ cc.Class({
             if(data.player.ting){
                 context.currentting.active = true ; 
                 cc.sys.localStorage.setItem('alting','true');
+                cc.sys.localStorage.setItem('take','true')
                 context.tingAction(true);                
             }
             //如果自己有已经打的牌或者其他人有打牌 或者有action的时候
