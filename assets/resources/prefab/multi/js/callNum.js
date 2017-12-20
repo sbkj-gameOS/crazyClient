@@ -35,8 +35,8 @@ cc.Class({
     click:function(){
         var money = Number(this.text.string);
 		cc.beimi.money = 1000.00;
-        if(money<100){
-            this.notice.string = '提现金额不能小于100元';
+        if(money<10){
+            this.notice.string = '提现金额不能小于10元';
         }else{
             if(money > cc.beimi.money){
                 this.notice.string='余额不足';
