@@ -183,6 +183,9 @@ cc.Class({
    JRsucess: function(result,object){
         var data = JSON.parse(result);
         if(data.playway&&data.room){
+            if(data.match){
+                cc.beimi.match = data.match ; 
+            }
             cc.beimi.room = object.getUrlParam('roomNum');
             if(data.game){
                 cc.beimi.playType = data.game;
@@ -214,5 +217,7 @@ cc.Class({
        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
        var r = url.substr(1).match(reg); //匹配目标参数
        if (r != null) return unescape(r[2]); return null; //返回参数值
-    }
+    },
+    
+
 });
