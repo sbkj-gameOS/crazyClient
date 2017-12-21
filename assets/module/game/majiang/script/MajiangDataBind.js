@@ -2832,7 +2832,18 @@ cc.Class({
             var kaction = kcards.action;//获取 事件
             var length = kcards.length;    //获取子集长度
             var type =kcards.type; //获取类型  当为dan 事件时用来判定
-            
+            var actiontype;
+            let cardcolors = parseInt(card/4 );
+            if(cardcolors<=-1&&cardcolors>=-3){
+                actiontype ='xi';
+            }else if(cardcolors<=-4 &&cardcolors>=-7){
+                actiontype='wind';
+            }else if(parseInt((card%36)/4) == 8){
+                actiontype= 'jiu';
+            }else if((parseInt(card/36 )==0||parseInt(card/36 )==1)&&parseInt((card%36)/4) == 0){
+                actiontype ='yao'
+            }
+
             var cardcolors = parseInt(card/4 ) ;
             var cardtype  = parseInt(cardcolors / 9);
             var dans = cards.children ;
@@ -2857,7 +2868,7 @@ cc.Class({
                         }
                     }
                 //当action 为dan
-                }else if(action == kaction&&dans.length>0){
+                }else if(actiontype == type&&dans.length>0||(parseInt(card/36 )==2&&parseInt((card%36)/4) == 0)){
                     isGang = true;
                     //有两种情况  一种长度为4 和长度为3   
                    
