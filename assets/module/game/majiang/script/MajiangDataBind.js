@@ -1215,7 +1215,7 @@ cc.Class({
                 cc.sys.localStorage.removeItem('altake');                
             }
             context.initDealHandCards(context , data);   
-            if(!data.deal){
+            if(context.action123 != 'deal'){
                 context.shouOperationMune();                                    
             }
         }else{
@@ -1595,7 +1595,7 @@ cc.Class({
                 //context.actionnode_two.runAction(action);
                 //context.actionnode_deal.active = true ;
 
-                //context.action = "deal" ;
+                context.action123 = "deal" ;
             }else{
                 for(var inx = 0 ; inx < context.actionnode_two_list.children.length ; inx++){
                     let temp = context.actionnode_two_list.children[inx] ;
@@ -1637,7 +1637,7 @@ cc.Class({
                 //context.actionnode_two.runAction(action);
                 // let ani = context.actionnode_two.getComponent(cc.Animation);
                 // ani.play("majiang_action") ;
-                //context.action = "two" ;
+                context.action = "two" ;
             }
        // }
     },
@@ -2837,13 +2837,14 @@ cc.Class({
             var cardtype  = parseInt(cardcolors / 9);
             var dans = cards.children ;
             //当这个牌是妖姬时
-            if(cardtype==2&& parseInt((card%36)/4)==0&&cards.children.length>0&&type!='yao'&&action=='dan'){
-                resNode = cards ;
-                cardNum = 0;
-                isGang = false;
-                break;
-            //当这个牌不是妖姬时
-            }else{
+            // if(cardtype==2&& parseInt((card%36)/4)==0&&cards.children.length>0&&type!='yao'&&action=='dan'){
+            //     resNode = cards ;
+            //     cardNum = 0;
+            //     isGang = false;
+            //     break;
+            // //当这个牌不是妖姬时
+            // }else
+            {
                 //cards是peng   action 为gang时
                 if(action == 'gang'&&dans.length>0&kaction == 'peng'){
                     for(let j = 0 ; j<dans.length; j++){
@@ -2857,50 +2858,64 @@ cc.Class({
                     }
                 //当action 为dan
                 }else if(action == kaction&&dans.length>0){
-                    isGang = false;
+                    isGang = true;
                     //有两种情况  一种长度为4 和长度为3   
                    
                     for(let j = 0 ; j<dans.length; j++){
 
                         var cardUnit = dans[j] ; 
-                        
-                        if(dans.length ==3 &&type=='wind'){
-                            isGang =true;
-                            for(let h = 0 ; h< dans.length;h++){
-                                let cardUnit = dans[h]
-                                if ( parseInt(card/4 ) == cardUnit.getComponent("DanAction").cardcolors ){
-                                    isGang = false;
-                                    resNode = cards;
-                                    cardNum = h;
-                                    break;              
-                                }
-                                resNode = cards;
-                                cardNum = h;
-                            }
+                        if(card<0&&parseInt(card/4 ) == cardUnit.getComponent("DanAction").cardcolors){
+                            isGang = false;
+                            resNode = cards;
+                            cardNum = j;
+                            break;     
+                        }else if(parseInt((card%36)/4 ) == parseInt((cardUnit.getComponent("DanAction").value%36)/4 )&&parseInt(cardUnit.getComponent("DanAction").value/36)==parseInt(card/36)){
+                            isGang = false;
+                            resNode = cards;
+                            cardNum = j;
                             break;  
-                        }else if(card <0&&(type=='wind'||type =='xi')){
-                            if ( parseInt(card/4 ) == parseInt(cardUnit.getComponent("DanAction").value/4) ){   
-                                resNode = cards ;
-                                cardNum = j;
-                                break;
-                            }else if(cardUnit.getComponent("DanAction").cardtype == 2 && parseInt((cardUnit.getComponent("DanAction").value%36)/4) == 0){
-                                cardUnit.getComponent("DanAction").setValue(card);
-                                resNode = cards ;
-                                cardNum = j;
-                                break;
-                            }
-                        }else if(card >0&&(type == 'yao'||type == 'jiu')){
-                            if(parseInt((card%36)/4 ) == parseInt((cardUnit.getComponent("DanAction").value%36)/4 )&&parseInt(cardUnit.getComponent("DanAction").value/36)==parseInt(card/36)){
-                                resNode = cards ;
-                                cardNum = j;
-                                break;
-                            }else if(cardUnit.getComponent("DanAction").cardtype == 2 && parseInt((cardUnit.getComponent("DanAction").value%36)/4) == 0){
-                                cardUnit.getComponent("DanAction").setValue(card);
-                                resNode = cards ;
-                                cardNum = j;
-                                break;
-                            }
                         }
+                        resNode = cards;
+                        cardNum = j;
+
+                        // if(dans.length ==3 &&type=='wind'){
+                        //     isGang =true;
+                        //     for(let h = 0 ; h< dans.length;h++){
+                        //         let cardUnit = dans[h]
+                        //         if ( parseInt(card/4 ) == cardUnit.getComponent("DanAction").cardcolors ){
+                        //             isGang = false;
+                        //             resNode = cards;
+                        //             cardNum = h;
+                        //             break;              
+                        //         }
+
+                        //         resNode = cards;
+                        //         cardNum = h;
+                        //     }
+                        //     break;  
+                        // }else if(card <0&&(type=='wind'||type =='xi')){
+                        //     if ( parseInt(card/4 ) == parseInt(cardUnit.getComponent("DanAction").value/4) ){   
+                        //         resNode = cards ;
+                        //         cardNum = j;
+                        //         break;
+                        //     }else if(cardUnit.getComponent("DanAction").cardtype == 2 && parseInt((cardUnit.getComponent("DanAction").value%36)/4) == 0){
+                        //         cardUnit.getComponent("DanAction").setValue(card);
+                        //         resNode = cards ;
+                        //         cardNum = j;
+                        //         break;
+                        //     }
+                        // }else if(card >0&&(type == 'yao'||type == 'jiu')){
+                        //     if(parseInt((card%36)/4 ) == parseInt((cardUnit.getComponent("DanAction").value%36)/4 )&&parseInt(cardUnit.getComponent("DanAction").value/36)==parseInt(card/36)){
+                        //         resNode = cards ;
+                        //         cardNum = j;
+                        //         break;
+                        //     }else if(cardUnit.getComponent("DanAction").cardtype == 2 && parseInt((cardUnit.getComponent("DanAction").value%36)/4) == 0){
+                        //         cardUnit.getComponent("DanAction").setValue(card);
+                        //         resNode = cards ;
+                        //         cardNum = j;
+                        //         break;
+                        //     }
+                        // }
                     }
                 }
             }
