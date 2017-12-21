@@ -1,6 +1,7 @@
 var array =[]
+var beiMiCommon = require("BeiMiCommon");
 cc.Class({
-    extends: cc.Component,
+    extends: beiMiCommon,
 
     properties: {
         // foo: {
@@ -34,7 +35,7 @@ cc.Class({
     },
     click:function(){
         var money = Number(this.text.string);
-		//cc.beimi.money = 1000.00;
+	    //cc.beimi.money = 1000.00;
         if(money<10){
             this.notice.string = '提现金额不能小于10元';
         }else{
@@ -48,10 +49,18 @@ cc.Class({
         }
     },   
     success: function(result,object){
+        var data = JSON.parse(result);
+        array = [];
+        object.text.string = array.join('');
+        if(data.success =='true'||data.success == true){
+            object.alert2('申请成功！24小时审核到账微信钱包...');
+        }else if(data.msg){
+            object.alert2(data.msg);
+        }
         
     },
-    error: function(result){
-
+    error: function(result,object){
+        object.alert2('申请失败');
     },
     closeBtn:function(){
         var closrBtn = cc.find("Canvas/heading/js/heading/right");
