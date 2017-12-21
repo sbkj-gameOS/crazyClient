@@ -1215,7 +1215,7 @@ cc.Class({
                 cc.sys.localStorage.removeItem('altake');                
             }
             context.initDealHandCards(context , data);   
-            if(!data.deal){
+            if(context.action123 !='deal'){
                 context.shouOperationMune();                                    
             }
         }else{
@@ -1595,7 +1595,7 @@ cc.Class({
                 //context.actionnode_two.runAction(action);
                 //context.actionnode_deal.active = true ;
 
-                //context.action = "deal" ;
+                context.action123 = "deal" ;
             }else{
                 for(var inx = 0 ; inx < context.actionnode_two_list.children.length ; inx++){
                     let temp = context.actionnode_two_list.children[inx] ;
@@ -1637,7 +1637,7 @@ cc.Class({
                 //context.actionnode_two.runAction(action);
                 // let ani = context.actionnode_two.getComponent(cc.Animation);
                 // ani.play("majiang_action") ;
-                //context.action = "two" ;
+                context.action123 = "two" ;
             }
        // }
     },
