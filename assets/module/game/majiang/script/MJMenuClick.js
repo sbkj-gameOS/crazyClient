@@ -47,7 +47,11 @@ cc.Class({
             this.leaveGameClick();
         }else{
             let setting = cc.instantiate(mjdata.leave_alert);
+            let set = setting.getComponent('overGameClick');
             setting.parent = mjdata.node;
+            if(cc.beimi.match == 'true'){
+                set.txt.string = '游戏开始后退出可返回房间';
+            }
         }
 
         //this.node.dispatchEvent( new cc.Event.EventCustom('overGame', true) );

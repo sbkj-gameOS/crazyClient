@@ -390,6 +390,7 @@ cc.Class({
             /**
              * 接受传送的 玩家列表（含AI）
              */
+
             socket.on("players" , function(result){
                 var data = self.getSelf().parse(result) ;
                 console.log('players');
@@ -519,17 +520,20 @@ cc.Class({
             if(event.getUserData()){
                 cc.director.loadScene('gameMain');
             }else{
-                var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
-                var bth = cc.find('Canvas/global/main/button/readybtn');
-                bth.active =true;  
-                bth.x= -10;
-                var laizi = cc.find('Canvas/global/main/godcard/child').children
-                if(laizi){
-                    for(let i =0 ; i < laizi.length ; i ++ ){
-                        cc.find('Canvas/global/main/godcard/child').children[i].destroy();
-                    }
-                }     
-                context.reinitGame(context);
+                if(cc.sys.localStorage.getItem('clear') != 'true'){
+                    var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
+                    var bth = cc.find('Canvas/global/main/button/readybtn');
+                    bth.active =true;  
+                    bth.x= -10;
+                    var laizi = cc.find('Canvas/global/main/godcard/child').children
+                    if(laizi){
+                        for(let i =0 ; i < laizi.length ; i ++ ){
+                            cc.find('Canvas/global/main/godcard/child').children[i].destroy();
+                        }
+                    }     
+                    context.reinitGame(context);
+                }
+                cc.sys.localStorage.removeItem('clear');
                 self.getSelf().shouOperationMune();
                 event.target.parent.destroy(); 
             }        
@@ -723,7 +727,8 @@ cc.Class({
         cc.sys.localStorage.removeItem('altake');      
         cc.sys.localStorage.removeItem('alting');
         cc.sys.localStorage.removeItem('guo');  
-        cc.sys.localStorage.removeItem('unOver');         
+        cc.sys.localStorage.removeItem('unOver');      
+        cc.sys.localStorage.removeItem('clear');        
         this.joinRoom();
         if(cc.beimi.playerNum){
             if(cc.beimi.playerNum == 2){
@@ -1065,7 +1070,7 @@ cc.Class({
                 cc.sys.localStorage.setItem('take','true');   
 
             }
-            if(cc.sys.localStorage.getItem('take') != 'true'){
+            if(cc.sys.localStorage.getItem('take') != 'true'&&cc.beimi.match == 'false'){
                 return;
             }
             cc.sys.localStorage.removeItem('altake');
@@ -1210,6 +1215,9 @@ cc.Class({
                 cc.sys.localStorage.removeItem('altake');                
             }
             context.initDealHandCards(context , data);   
+            if(!data.deal){
+                context.shouOperationMune();                                    
+            }
         }else{
             context.shouOperationMune();                    
             let inx = 0 ;
@@ -1252,6 +1260,7 @@ cc.Class({
     allcards_event:function(data , context){
         //结算界面，
         let playerid;
+        cc.sys.localStorage.removeItem('clear');
         for(let i = 0;i<data.playOvers.length;i++){
             if(data.playOvers[i].win==true){
                 playerid = data.playOvers[i].user;
@@ -1735,6 +1744,20 @@ cc.Class({
      * @param context
      */
     play_event:function(data , context){
+        {
+            cc.sys.localStorage.setItem('clear','true');
+            var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
+            var bth = cc.find('Canvas/global/main/button/readybtn');
+            bth.active =true;  
+            bth.x= -10;
+            var laizi = cc.find('Canvas/global/main/godcard/child').children
+            if(laizi){
+                for(let i =0 ; i < laizi.length ; i ++ ){
+                    cc.find('Canvas/global/main/godcard/child').children[i].destroy();
+                }
+            }     
+            context.reinitGame(context);
+        }
         if(cc.find('Canvas/notice')){
             cc.sys.localStorage.setItem('notice','true');
             cc.find('Canvas/notice').active = false;
@@ -2651,7 +2674,7 @@ cc.Class({
         var array = context.playersarray;
         for(let i=0;i<array.length;i++){
             array[i].getComponent('MaJiangPlayer').creator.active =false;
-            array[i].getComponent('MaJiangPlayer').nowind();
+            //array[i].getComponent('MaJiangPlayer').nowind();
         }
      },
      tingactivefalse: function(){
