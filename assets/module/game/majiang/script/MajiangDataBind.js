@@ -234,7 +234,6 @@ cc.Class({
      */
     onLoad: function () {
         this.bgsetting();
-        
         if(cc.beimi.browserType=="wechat"){
             this.wxButton.node.active = true ;
             cc.beimi.WXorBlow.shareRoom(cc.beimi.room);                    
@@ -2864,7 +2863,7 @@ cc.Class({
 
                         var cardUnit = dans[j] ; 
                         
-                        if(dans.length ==3 &&type=='wind'){
+                        if(dans.length ==3 &&type=='wind'&&parseInt(card/4 )>=-7&&parseInt(card/4 )<=-4){
                             isGang =true;
                             for(let h = 0 ; h< dans.length;h++){
                                 let cardUnit = dans[h]
@@ -2874,11 +2873,11 @@ cc.Class({
                                     cardNum = h;
                                     break;              
                                 }
-                                resNode = cards;
-                                cardNum = h;
+                                    resNode = cards;
+                                    cardNum = h; 
                             }
                             break;  
-                        }else if(card <0&&(type=='wind'||type =='xi')){
+                        }else if(card <0&&((type=='wind'&&parseInt(card/4 )>=-7&&parseInt(card/4 )<=-4)||(type =='xi'&&parseInt(card/4 )>=-3&&parseInt(card/4 )<=-1))){
                             if ( parseInt(card/4 ) == parseInt(cardUnit.getComponent("DanAction").value/4) ){   
                                 resNode = cards ;
                                 cardNum = j;
@@ -2889,7 +2888,7 @@ cc.Class({
                                 cardNum = j;
                                 break;
                             }
-                        }else if(card >0&&(type == 'yao'||type == 'jiu')){
+                        }else if(card >0&&((type == 'yao'&&parseInt((card%36)/4 )==0)||(type == 'jiu'&&parseInt((card%36)/4 )==8))){
                             if(parseInt((card%36)/4 ) == parseInt((cardUnit.getComponent("DanAction").value%36)/4 )&&parseInt(cardUnit.getComponent("DanAction").value/36)==parseInt(card/36)){
                                 resNode = cards ;
                                 cardNum = j;
