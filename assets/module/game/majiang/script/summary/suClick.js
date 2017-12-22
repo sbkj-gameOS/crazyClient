@@ -22,6 +22,10 @@ cc.Class({
     onBGClick:function(event){
         //var myAction = event.target.getComponent('SummartClick').action ;
        // oper.setUserData(myAction) ;
+       if(cc.beimi.match == 'true'){
+        this.node.dispatchEvent(new cc.Event.EventCustom('readyGM', true));
+        
+       }
         this.node.dispatchEvent(new cc.Event.EventCustom('restar', true));
   
     },

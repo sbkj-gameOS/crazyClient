@@ -12,6 +12,7 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
+        miao: cc.Label,
         list: cc.Prefab,
         endlist: cc.Prefab,
         layout:cc.Node,
@@ -46,6 +47,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+        this.times = 60;
         if(cc.beimi.wanfa){
             this.op.string = cc.beimi.wanfa;
         }
@@ -68,10 +70,26 @@ cc.Class({
         }
 
         this.time.string = '时间：'+time.getFullYear()+'/'+(time.getMonth()+1)+'/'+time.getDate()+'  ' + hours +': ' +minutes;
+        
+    },
+    daojishi: function(){
+        this.times =this.times-1;
+        if(this.miao){
+            this.miao.string = this.times;
+            //console.log(this.time);
+            if(this.times==0){
+                clearTimeout(this.t);  
+                cc.find('Canvas/summary').destroy();
+            }
+        }
     },
     init:function(){
+        let he = this;
         this.goon1.active = true;
         this.close1.active =true;
+        if(cc.beimi.match == 'true'){
+            this.t = setInterval(function(){he.daojishi()},1000)  ;
+        }
         var userInfo = this.data;
         // if(userInfo.gameOver==true){
         //     var a = this.goon1.children[0].getComponent(cc.Label);
