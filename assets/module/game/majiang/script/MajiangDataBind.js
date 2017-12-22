@@ -522,8 +522,10 @@ cc.Class({
                 if(cc.sys.localStorage.getItem('clear') != 'true'){
                     var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
                     var bth = cc.find('Canvas/global/main/button/readybtn');
-                    bth.active =true;  
-                    bth.x= -10;
+                    if(cc.beimi.match != 'true'){
+                        bth.active =true;  
+                        bth.x= -10;
+                    }
                     var laizi = cc.find('Canvas/global/main/godcard/child').children
                     if(laizi){
                         for(let i =0 ; i < laizi.length ; i ++ ){
@@ -1054,6 +1056,7 @@ cc.Class({
      */
     //掉线 和上线
     takecard_event:function(data , context){
+
         context = cc.find('Canvas').getComponent('MajiangDataBind');
         context.qujuju(data);
         let kongcard ; 
@@ -1064,11 +1067,18 @@ cc.Class({
             
         }
         if(data.userid == cc.beimi.user.id) {
+            if(!data.ting){
+               context.tingnoaction();
+        }
             context.initcardwidth();
+        
             if(data.ting){
-                cc.sys.localStorage.setItem('alting','true');   
+                cc.sys.localStorage.setItem('alting','true'); 
+                cc.sys.localStorage.setItem('altings','true');  
                 cc.sys.localStorage.setItem('take','true');   
 
+            }else{
+                cc.sys.localStorage.removeItem('alting');
             }
             if(cc.sys.localStorage.getItem('take') != 'true'&&cc.beimi.match == 'false'){
                 return;
@@ -1184,7 +1194,8 @@ cc.Class({
      * @param context
      */
     dealcard_event:function(data , context){   
-        if(cc.sys.localStorage.getItem('cb') == 'true'&&cc.sys.localStorage.getItem('alting') != 'true'){
+      
+        if(cc.sys.localStorage.getItem('cb') == 'true'&&cc.sys.localStorage.getItem('altings') != 'true'){
             setTimeout(function(){context.dealcards(data,context)},2100);
             cc.sys.localStorage.removeItem('cb');
         }else{
@@ -1209,6 +1220,9 @@ cc.Class({
         }
 
         if(data.userid == cc.beimi.user.id){
+            if(cc.sys.localStorage.getItem('altings') != 'true'){
+                context.tingnoaction();
+            }
             if(cc.sys.localStorage.getItem('altake')!='true'){
                 cc.sys.localStorage.setItem('take','true');
             }else{
@@ -2025,6 +2039,7 @@ cc.Class({
             if(data.player.ting){
                 context.currentting.active = true ; 
                 cc.sys.localStorage.setItem('alting','true');
+                cc.sys.localStorage.setItem('altings','true');
                 cc.sys.localStorage.setItem('take','true')
                 context.tingAction(true);                
             }
@@ -2540,14 +2555,22 @@ cc.Class({
                 /**
                  * 计时器方向
                  */
-                object.timer(object , 8) ;
+                if(cc.beimi.match){
+                    object.timer(object , 15) ;             
+                }else{
+                    object.timer(object , 8) ; 
+                }
                 break   ;
             case "otherplayer" :
             
                 /**
                  * 计时器方向
                  */
-                object.timer(object , 8) ;
+                if(cc.beimi.match){
+                    object.timer(object , 15) ;             
+                }else{
+                    object.timer(object , 8) ; 
+                }
                 break   ;
             case "takecard" :
                 /**
@@ -2574,7 +2597,11 @@ cc.Class({
                  * 选择了定缺结果，关闭选择按钮
                  * @type {boolean}
                  */
-                object.timer(object , 8) ;
+                if(cc.beimi.match){
+                    object.timer(object , 15) ;             
+                }else{
+                    object.timer(object , 8) ; 
+                }
                 break   ;
         }
     },
@@ -3002,6 +3029,9 @@ cc.Class({
             let handCards = cards.getComponent("HandCards");
             handCards.cardvalue.color = new cc.Color(255, 255, 255);
             button.getComponent(cc.Button).interactable= true;
+        }
+        if(cc.find('Canvas/tingselect')){
+            cc.find('Canvas/tingselect').active = false;
         }
     },
     readyNoActive: function(context){

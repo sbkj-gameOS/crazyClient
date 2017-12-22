@@ -56,7 +56,7 @@ cc.Class({
         let context = cc.find('Canvas').getComponent('MajiangDataBind');         
         let handCards = this.target.getComponent("HandCards")
         let self = this ;
-        if(cc.beimi.click == 1 &&cc.sys.localStorage.getItem('ting') !='true'){
+        if(cc.beimi.click == 1 &&cc.sys.localStorage.getItem('alting') !='true'){
             this.huifu();            
             this.node.dispatchEvent( new cc.Event.EventCustom('takecard', true) );
         }else{
