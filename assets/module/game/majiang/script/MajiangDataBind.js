@@ -1744,6 +1744,9 @@ cc.Class({
      * @param context
      */
     play_event:function(data , context){
+        if(cc.find('Canvas/summary')){
+            cc.find('Canvas/summary').destroy();
+        }
         {
             cc.sys.localStorage.setItem('clear','true');
             var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
