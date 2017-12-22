@@ -234,12 +234,12 @@ cc.Class({
      */
     onLoad: function () {
         this.bgsetting();
-        if(cc.beimi.browserType=="wechat"){
-            this.wxButton.node.active = true ;
-            cc.beimi.WXorBlow.shareRoom(cc.beimi.room);                    
-        }else if(cc.beimi.browserType != null){
-            this.ggButton.node.active = true ;
-        }
+        // if(cc.beimi.browserType=="wechat"){
+        //     this.wxButton.node.active = true ;
+        //     cc.beimi.WXorBlow.shareRoom(cc.beimi.room);                    
+        // }else if(cc.beimi.browserType != null){
+        //     this.ggButton.node.active = true ;
+        // }
         var sprite = this.bkLogoImg.getComponent(cc.Sprite);
         //切换游戏首页背景图logo
         var sprite = this.bkLogoImg.getComponent(cc.Sprite);
