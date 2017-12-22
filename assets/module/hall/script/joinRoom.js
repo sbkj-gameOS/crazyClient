@@ -88,7 +88,9 @@ cc.Class({
          if(this.cardNum){
             this.cardNum.string = '房卡：' +cc.beimi.user.cards + '张'
          }
-         cc.beimi.http.httpGet('/api/room/queryUserWinner?token='+cc.beimi.authorization,this.countsucess,this.counterror,this);
+         if(this.zhoupic){
+            cc.beimi.http.httpGet('/api/room/queryUserWinner?token='+cc.beimi.authorization,this.countsucess,this.counterror,this);            
+         }
          //this.notice.active =false;
     },
     countsucess(result,object){
