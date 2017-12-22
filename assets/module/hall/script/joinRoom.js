@@ -75,7 +75,11 @@ cc.Class({
         cardNum:cc.Label,
         help: cc.Prefab,
         alert21: cc.Prefab,
-        shopping : cc.Prefab
+        shopping : cc.Prefab,
+        zhoupic: cc.Node,
+        yuepic: cc.Node,
+        zhouLab: cc.Label,
+        yueLab: cc.Label,
     },
 
     // use this for initialization
@@ -84,8 +88,21 @@ cc.Class({
          if(this.cardNum){
             this.cardNum.string = '房卡：' +cc.beimi.user.cards + '张'
          }
+         cc.beimi.http.httpGet('/api/room/queryUserWinner?token='+cc.beimi.authorization,this.countsucess,this.counterror,this);
          //this.notice.active =false;
     },
+    countsucess(result,object){
+        var data = JSON.parse(result);
+        object.zhouLab.string = data.week;
+        object.yueLab.string = data.month;
+        if(Number(data.week)>=7){
+            object.zhoupic.active = false;
+        }
+        if(Number(data.month)>=7){
+            object.yuepic.active = false;
+        }
+    },
+    counterror(result,object){},
     
     clickNum: function(event){
         console.log(event.currentTarget.name);

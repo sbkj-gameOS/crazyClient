@@ -24,7 +24,7 @@
         "__id__": 10
       },
       {
-        "__id__": 136
+        "__id__": 145
       },
       {
         "__id__": 23
@@ -33,7 +33,7 @@
         "__id__": 64
       },
       {
-        "__id__": 103
+        "__id__": 112
       },
       {
         "__id__": 15
@@ -43,7 +43,7 @@
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 139
+      "__id__": 148
     },
     "_id": "",
     "_opacity": 255,
@@ -348,7 +348,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 135
+      "__id__": 144
     },
     "_id": "",
     "_opacity": 255,
@@ -489,11 +489,11 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 133
+        "__id__": 142
       }
     ],
     "_prefab": {
-      "__id__": 134
+      "__id__": 143
     },
     "_id": "",
     "_opacity": 255,
@@ -550,7 +550,7 @@
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 132
+      "__id__": 141
     },
     "_id": "",
     "_opacity": 255,
@@ -604,7 +604,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 131
+      "__id__": 140
     },
     "_id": "",
     "_opacity": 255,
@@ -657,7 +657,7 @@
       "__id__": 64
     },
     "tpmjPlery": {
-      "__id__": 103
+      "__id__": 112
     },
     "wzlogo": {
       "__id__": 38
@@ -2091,17 +2091,17 @@
       }
     ],
     "_tag": -1,
-    "_active": false,
+    "_active": true,
     "_components": [
       {
-        "__id__": 101
+        "__id__": 110
       },
       {
         "__id__": 70
       }
     ],
     "_prefab": {
-      "__id__": 102
+      "__id__": 111
     },
     "_id": "",
     "_opacity": 255,
@@ -2158,14 +2158,14 @@
         "__id__": 69
       },
       {
-        "__id__": 98
+        "__id__": 107
       },
       {
-        "__id__": 99
+        "__id__": 108
       }
     ],
     "_prefab": {
-      "__id__": 100
+      "__id__": 109
     },
     "_id": "",
     "_opacity": 255,
@@ -2350,14 +2350,14 @@
         "__id__": 75
       },
       {
-        "__id__": 86
+        "__id__": 95
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 97
+      "__id__": 106
     },
     "_id": "",
     "_opacity": 255,
@@ -2377,7 +2377,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 941,
-      "height": 3000
+      "height": 5530
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -2386,7 +2386,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 8,
-      "y": 159
+      "y": 205
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -2434,8 +2434,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 921,
-      "height": 478
+      "width": 923,
+      "height": 464
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -2443,8 +2443,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -26,
-      "y": -2
+      "x": -25,
+      "y": 5
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -2494,13 +2494,22 @@
       },
       {
         "__id__": 82
+      },
+      {
+        "__id__": 85
+      },
+      {
+        "__id__": 88
+      },
+      {
+        "__id__": 91
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 85
+      "__id__": 94
     },
     "_id": "",
     "_opacity": 255,
@@ -2519,8 +2528,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 934,
-      "height": 482
+      "width": 874,
+      "height": 385
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -2528,8 +2537,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -1,
-      "y": -238
+      "x": -3,
+      "y": -228
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -2794,6 +2803,279 @@
     "sync": false
   },
   {
+    "__type__": "cc.Node",
+    "_name": "F7DB8EAD-8573-443D-8FDE-62948C1590EC",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 75
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 86
+      }
+    ],
+    "_prefab": {
+      "__id__": 87
+    },
+    "_id": "",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 916,
+      "height": 702
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 28,
+      "y": -2950
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 85
+    },
+    "_enabled": true,
+    "_spriteFrame": {
+      "__uuid__": "fe910952-3282-4a8b-b812-0d791f621d58"
+    },
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_atlas": null
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "d90cf211-42a0-4cbb-bf90-d0c799a066fe"
+    },
+    "fileId": "4ftF5j9qFG9qfSb0/dKT5p",
+    "sync": false
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "838B9765-FD40-42E4-BFF9-F2D7E96FE89B",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 75
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 89
+      }
+    ],
+    "_prefab": {
+      "__id__": 90
+    },
+    "_id": "",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 916,
+      "height": 786
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 24,
+      "y": -3709
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 88
+    },
+    "_enabled": true,
+    "_spriteFrame": {
+      "__uuid__": "3bfaa3d6-11c5-4bb7-ad9d-c404c027b485"
+    },
+    "_type": 0,
+    "_sizeMode": 0,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_atlas": null
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "d90cf211-42a0-4cbb-bf90-d0c799a066fe"
+    },
+    "fileId": "e3HeRatNFEwIO0q46CEsdI",
+    "sync": false
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "65E241E9-2865-4593-9673-80534CED9FA8",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 75
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 92
+      }
+    ],
+    "_prefab": {
+      "__id__": 93
+    },
+    "_id": "",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 928,
+      "height": 1110
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 18,
+      "y": -4675
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 91
+    },
+    "_enabled": true,
+    "_spriteFrame": {
+      "__uuid__": "7af35f4a-9a62-4eea-abbe-1368894ad8b8"
+    },
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_atlas": null
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "d90cf211-42a0-4cbb-bf90-d0c799a066fe"
+    },
+    "fileId": "98pkL1kYNAD5quaIv+L1/3",
+    "sync": false
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -2813,20 +3095,20 @@
     },
     "_children": [
       {
-        "__id__": 87
+        "__id__": 96
       },
       {
-        "__id__": 90
+        "__id__": 99
       },
       {
-        "__id__": 93
+        "__id__": 102
       }
     ],
     "_tag": -1,
     "_active": false,
     "_components": [],
     "_prefab": {
-      "__id__": 96
+      "__id__": 105
     },
     "_id": "",
     "_opacity": 255,
@@ -2869,18 +3151,18 @@
     "_name": "长春麻将",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 86
+      "__id__": 95
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 88
+        "__id__": 97
       }
     ],
     "_prefab": {
-      "__id__": 89
+      "__id__": 98
     },
     "_id": "",
     "_opacity": 255,
@@ -2923,7 +3205,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 87
+      "__id__": 96
     },
     "_enabled": true,
     "_useOriginalSize": false,
@@ -2956,18 +3238,18 @@
     "_name": "label",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 86
+      "__id__": 95
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 91
+        "__id__": 100
       }
     ],
     "_prefab": {
-      "__id__": 92
+      "__id__": 101
     },
     "_id": "",
     "_opacity": 255,
@@ -3010,7 +3292,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 90
+      "__id__": 99
     },
     "_enabled": true,
     "_useOriginalSize": false,
@@ -3043,18 +3325,18 @@
     "_name": "richtext",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 86
+      "__id__": 95
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 94
+        "__id__": 103
       }
     ],
     "_prefab": {
-      "__id__": 95
+      "__id__": 104
     },
     "_id": "",
     "_opacity": 255,
@@ -3097,7 +3379,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 93
+      "__id__": 102
     },
     "_enabled": true,
     "_N$string": "<color=#7C4908><size=30><b>（一）和家非和家通用基础牌点计算规则 （用台数计算）</b></size></color>\n<color=#7C4908><size=25>财神一张2台，两张5台，三张8台，如果风牌，花牌，字牌为财神，则一张3台，两张7台，三张11台。\n花牌一张为1台，同种花色两张3台，三张5台，四张10台。\n普通1 9字的明扛3台，暗扛4台。 \n自家风牌明扛4台，暗扛5台。\n中发明扛4台，暗扛5台。\n自家风牌中发碰起或刻都加1台。\n明杠每个3台，中发与自家风牌为4台（没杠出的按刻子计算）。\n暗杠每个4台，中发与自家风牌为5台（没杠出的按刻子计算）。</size></color>\n<color=#7C4908><size=30><b>（二）和家特有牌点计算规则</b></size></color>\n<color=#7C4908><size=25>自摸：加1台\n天胡：加13台\n地胡：加13台\n硬牌：加7台\n平胡：加13台\n绿一色：加26台\n清一色：加13台\n混一色：加7台\n对对和：加7台\n四风会齐：加13台\n扛上开花：明开花加7台，暗开花加8台。红中或自加风牌在此基础上多加1台\n抢扛胡：加3台\n财神汇：加7台\n杀猪：四张财神加13台，五张加30台，六张加100台。\n杀猪胡：杀猪的台数加财神台数，再加台面上的所有台数。</size></color>\n<color=#7C4908><size=30><b>（三）和家奖励规则</b></size></color>\n<color=#7C4908><size=25>在胡家的台数量达到13台或13以上时为2翻，就（13加X）乘2。\n番数计算为：以上所有发生的番数累计。\n和家牌点汇总 ：基础台数 + 奖励，有番的再按番数算。\n注：非和家给和家相应的台数点，如是庄家和，应给庄家双倍的台数点，如闲家和，庄家也双倍给和家。\n非和家（非和家可用“财神”替代其他牌来计算牌点，还可加花与扛刻计算台数，再与另外两家没和和牌的玩家计算。）\n非和家牌点汇总 ：基础牌点算出后，有番的不再按番数算。</size></color>\n<color=#7C4908><size=30><b>（四）特殊限制类术语和规则</b></size></color>\n<color=#7C4908><size=25>黄牌\n所有玩家没有杠过的，剩下牌的总数等于24张时（如有玩家杠过的，杠一过二，即杠了一次，最后要多留两张。）没有人“和牌”，便留4张分牌，四家有和的便和牌。分牌和牌的玩家要多加3台。无和即为黄牌，这局麻将将强制结束，各玩家间不再进\n行该副牌的结算，同时庄家自动下庄。</size></color></color>\n<color=#7C4908><size=30><b>（五）和牌后结果支付规则（其他三个玩家都要支付给和家，其他三玩家间也要相互结算）</b></size></color>\n<color=#7C4908><size=25>A：因和牌方的“财神”替代方法不同，会导致和牌家的牌点汇总出现较大的差别，因此，服务器会自动为玩家算出最高的牌点。\nB：若本副牌是黄牌结算，则不再进行计算，自动进入换庄。\nC：和牌方的 牌点汇总（基础台数 + 奖励），有番的再按番数算）。\nD ：和牌方的身份及支付方式：\n1. 若和牌方是闲家：\n庄家向和牌方支付的方式为： 和家的牌点汇总乘2\n其他闲家向和牌方支付的方式为： 和家的牌点汇总\n其他三家也要互相结算：\n庄家和另两闲家间的支付方式为：牌点小的向牌点大的支付（两种牌点相减）两方差距都是按2倍计算，就庄家付闲家是两倍，闲家付庄家也是两倍。\n另两闲家间的支付方式为：牌点小的向牌点大的支付\n2. 若和牌方是庄家：\n其他闲家向和牌方支付的方式为： 和家的牌点汇总乘2\n其他三闲家也要互相结算：牌点小的向牌点大的支付\n</size>\n</color>",
@@ -3248,24 +3530,24 @@
     },
     "_children": [
       {
-        "__id__": 104
+        "__id__": 113
       },
       {
-        "__id__": 111
+        "__id__": 120
       }
     ],
     "_tag": -1,
     "_active": false,
     "_components": [
       {
-        "__id__": 129
+        "__id__": 138
       },
       {
-        "__id__": 109
+        "__id__": 118
       }
     ],
     "_prefab": {
-      "__id__": 130
+      "__id__": 139
     },
     "_id": "",
     "_opacity": 255,
@@ -3308,28 +3590,28 @@
     "_name": "scrollBar",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 103
+      "__id__": 112
     },
     "_children": [
       {
-        "__id__": 105
+        "__id__": 114
       }
     ],
     "_tag": -1,
     "_active": false,
     "_components": [
       {
-        "__id__": 108
+        "__id__": 117
       },
       {
-        "__id__": 126
+        "__id__": 135
       },
       {
-        "__id__": 127
+        "__id__": 136
       }
     ],
     "_prefab": {
-      "__id__": 128
+      "__id__": 137
     },
     "_id": "",
     "_opacity": 255,
@@ -3372,18 +3654,18 @@
     "_name": "bar",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 104
+      "__id__": 113
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 106
+        "__id__": 115
       }
     ],
     "_prefab": {
-      "__id__": 107
+      "__id__": 116
     },
     "_id": "",
     "_opacity": 255,
@@ -3426,7 +3708,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 105
+      "__id__": 114
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -3463,18 +3745,18 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 104
+      "__id__": 113
     },
     "_enabled": true,
     "_scrollView": {
-      "__id__": 109
+      "__id__": 118
     },
     "_touching": false,
     "_opacity": 255,
     "enableAutoHide": true,
     "autoHideTime": 1,
     "_N$handle": {
-      "__id__": 106
+      "__id__": 115
     },
     "_N$direction": 1
   },
@@ -3483,11 +3765,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 103
+      "__id__": 112
     },
     "_enabled": true,
     "content": {
-      "__id__": 110
+      "__id__": 119
     },
     "horizontal": false,
     "vertical": true,
@@ -3499,7 +3781,7 @@
     "cancelInnerEvents": true,
     "_N$horizontalScrollBar": null,
     "_N$verticalScrollBar": {
-      "__id__": 108
+      "__id__": 117
     }
   },
   {
@@ -3507,18 +3789,18 @@
     "_name": "content",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 111
+      "__id__": 120
     },
     "_children": [
       {
-        "__id__": 114
+        "__id__": 123
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 125
+      "__id__": 134
     },
     "_id": "",
     "_opacity": 255,
@@ -3561,22 +3843,22 @@
     "_name": "view",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 103
+      "__id__": 112
     },
     "_children": [
       {
-        "__id__": 110
+        "__id__": 119
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 112
+        "__id__": 121
       }
     ],
     "_prefab": {
-      "__id__": 113
+      "__id__": 122
     },
     "_id": "",
     "_opacity": 255,
@@ -3619,7 +3901,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 111
+      "__id__": 120
     },
     "_enabled": true,
     "_type": 0,
@@ -3644,24 +3926,24 @@
     "_name": "tpmjPlay",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 110
+      "__id__": 119
     },
     "_children": [
       {
-        "__id__": 115
+        "__id__": 124
       },
       {
-        "__id__": 118
+        "__id__": 127
       },
       {
-        "__id__": 121
+        "__id__": 130
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 124
+      "__id__": 133
     },
     "_id": "",
     "_opacity": 255,
@@ -3704,18 +3986,18 @@
     "_name": "长春麻将",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 114
+      "__id__": 123
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 116
+        "__id__": 125
       }
     ],
     "_prefab": {
-      "__id__": 117
+      "__id__": 126
     },
     "_id": "",
     "_opacity": 255,
@@ -3758,7 +4040,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 115
+      "__id__": 124
     },
     "_enabled": true,
     "_useOriginalSize": false,
@@ -3791,18 +4073,18 @@
     "_name": "label",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 114
+      "__id__": 123
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 119
+        "__id__": 128
       }
     ],
     "_prefab": {
-      "__id__": 120
+      "__id__": 129
     },
     "_id": "",
     "_opacity": 255,
@@ -3845,7 +4127,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 118
+      "__id__": 127
     },
     "_enabled": true,
     "_useOriginalSize": false,
@@ -3878,18 +4160,18 @@
     "_name": "richtext",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 114
+      "__id__": 123
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 122
+        "__id__": 131
       }
     ],
     "_prefab": {
-      "__id__": 123
+      "__id__": 132
     },
     "_id": "",
     "_opacity": 255,
@@ -3932,7 +4214,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 121
+      "__id__": 130
     },
     "_enabled": true,
     "_N$string": "<color=#7C4908><size=30><b>（一）和家非和家通用基础牌点计算规则 （用台数计算）</b></size></color>\n<color=#7C4908><size=25>财神一张2台，两张5台，三张8台，如果风牌，花牌，字牌为财神，则一张3台，两张7台，三张11台。\n花牌一张为1台，同种花色两张3台，三张5台，四张10台。\n普通1 9字的明扛3台，暗扛4台。 \n自家风牌明扛4台，暗扛5台。\n中发明扛4台，暗扛5台。\n自家风牌中发碰起或刻都加1台。\n明杠每个3台，中发与自家风牌为4台（没杠出的按刻子计算）。\n暗杠每个4台，中发与自家风牌为5台（没杠出的按刻子计算）。</size></color>\n<color=#7C4908><size=30><b>（二）和家特有牌点计算规则</b></size></color>\n<color=#7C4908><size=25>自摸：加1台\n天胡：加13台\n地胡：加13台\n硬牌：加7台\n平胡：加13台\n绿一色：加26台\n清一色：加13台\n混一色：加7台\n对对和：加7台\n四风会齐：加13台\n扛上开花：明开花加7台，暗开花加8台。红中或自加风牌在此基础上多加1台\n抢扛胡：加3台\n财神汇：加7台\n杀猪：四张财神加13台，五张加30台，六张加100台。\n杀猪胡：杀猪的台数加财神台数，再加台面上的所有台数。</size></color>\n<color=#7C4908><size=30><b>（三）和家奖励规则</b></size></color>\n<color=#7C4908><size=25>在胡家的台数量达到13台或13以上时为2翻，就（13加X）乘2。\n番数计算为：以上所有发生的番数累计。\n和家牌点汇总 ：基础台数 + 奖励，有番的再按番数算。\n注：非和家给和家相应的台数点，如是庄家和，应给庄家双倍的台数点，如闲家和，庄家也双倍给和家。\n非和家（非和家可用“财神”替代其他牌来计算牌点，还可加花与扛刻计算台数，再与另外两家没和和牌的玩家计算。）\n非和家牌点汇总 ：基础牌点算出后，有番的不再按番数算。</size></color>\n<color=#7C4908><size=30><b>（四）特殊限制类术语和规则</b></size></color>\n<color=#7C4908><size=25>黄牌\n所有玩家没有杠过的，剩下牌的总数等于24张时（如有玩家杠过的，杠一过二，即杠了一次，最后要多留两张。）没有人“和牌”，便留4张分牌，四家有和的便和牌。分牌和牌的玩家要多加3台。无和即为黄牌，这局麻将将强制结束，各玩家间不再进\n行该副牌的结算，同时庄家自动下庄。</size></color></color>\n<color=#7C4908><size=30><b>（五）和牌后结果支付规则（其他三个玩家都要支付给和家，其他三玩家间也要相互结算）</b></size></color>\n<color=#7C4908><size=25>A：因和牌方的“财神”替代方法不同，会导致和牌家的牌点汇总出现较大的差别，因此，服务器会自动为玩家算出最高的牌点。\nB：若本副牌是黄牌结算，则不再进行计算，自动进入换庄。\nC：和牌方的 牌点汇总（基础台数 + 奖励），有番的再按番数算）。\nD ：和牌方的身份及支付方式：\n1. 若和牌方是闲家：\n庄家向和牌方支付的方式为： 和家的牌点汇总乘2\n其他闲家向和牌方支付的方式为： 和家的牌点汇总\n其他三家也要互相结算：\n庄家和另两闲家间的支付方式为：牌点小的向牌点大的支付（两种牌点相减）两方差距都是按2倍计算，就庄家付闲家是两倍，闲家付庄家也是两倍。\n另两闲家间的支付方式为：牌点小的向牌点大的支付\n2. 若和牌方是庄家：\n其他闲家向和牌方支付的方式为： 和家的牌点汇总乘2\n其他三闲家也要互相结算：牌点小的向牌点大的支付\n</size>\n</color>",
@@ -3981,7 +4263,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 104
+      "__id__": 113
     },
     "_enabled": true,
     "isAlignOnce": true,
@@ -4007,7 +4289,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 104
+      "__id__": 113
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -4044,7 +4326,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 103
+      "__id__": 112
     },
     "_enabled": true,
     "_spriteFrame": null,
@@ -4139,11 +4421,11 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 137
+        "__id__": 146
       }
     ],
     "_prefab": {
-      "__id__": 138
+      "__id__": 147
     },
     "_id": "",
     "_opacity": 255,
@@ -4186,7 +4468,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 136
+      "__id__": 145
     },
     "_enabled": true,
     "_spriteFrame": {
