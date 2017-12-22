@@ -704,13 +704,14 @@ cc.Class({
          * ActionEvent发射的事件 ， 点击 过
          */
         this.node.on("guo",function(event){
-            cc.sys.localStorage.setItem('take','true');
             if(cc.sys.localStorage.getItem('guo')!='true'||cc.sys.localStorage.getItem('alting')=='true'){
                 let socket = self.getSelf().socket();
                 socket.emit("selectaction" , JSON.stringify({
                     action:"guo",
                     actionCard:[]
                 }));
+            }else{
+                cc.sys.localStorage.setItem('take','true');                
             }
             cc.sys.localStorage.removeItem('guo');
             self.getSelf().shouOperationMune();
