@@ -89,6 +89,8 @@ cc.Class({
         this.close1.active =true;
         if(cc.beimi.match == 'true'){
             this.t = setInterval(function(){he.daojishi()},1000)  ;
+        }else{
+            this.miao.node.active = false;
         }
         var userInfo = this.data;
         // if(userInfo.gameOver==true){
