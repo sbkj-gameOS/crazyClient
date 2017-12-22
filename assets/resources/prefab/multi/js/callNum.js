@@ -34,7 +34,7 @@ cc.Class({
         this.text.string = array.join('');
     },
     click:function(){
-        var money = Number(this.text.string);
+        let money = Number(this.text.string);
 	    //cc.beimi.money = 1000.00;
         if(money<10){
             this.notice.string = '提现金额不能小于10元';
@@ -57,6 +57,9 @@ cc.Class({
         }else if(data.msg){
             object.alert2(data.msg);
         }
+        cc.find('Canvas/heading/js/heading').getComponent('heading').initshuju();
+        cc.find('Canvas/heading/js/heading/right').destroy();        
+        
         
     },
     error: function(result,object){

@@ -50,9 +50,12 @@ cc.Class({
                 })
             }
         }
+           this.initshuju();
+    },
+    initshuju: function(){
         if(cc.beimi.authorization!=null){//+cc.beimi.authorization
             cc.beimi.http.httpGet('/presentapp/runSummary?token='+cc.beimi.authorization,this.success,this.error,this);
-        }     
+        } 
     },
     success:function(result,object){
         result = JSON.parse(result);
