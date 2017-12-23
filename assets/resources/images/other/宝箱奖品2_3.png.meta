@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "83f950b0-c76c-4120-a43d-fdc21a5e2069",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "宝箱奖品2_3": {
+      "ver": "1.0.3",
+      "uuid": "a6ee9c6b-34c3-420b-9b67-57b719f79e3a",
+      "rawTextureUuid": "83f950b0-c76c-4120-a43d-fdc21a5e2069",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 1,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 200,
+      "height": 198,
+      "rawWidth": 200,
+      "rawHeight": 200,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

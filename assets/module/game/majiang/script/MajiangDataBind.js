@@ -4,6 +4,7 @@ cc.Class({
     extends: beiMiCommon,
     //extends: cc.Component,
     properties: {
+        tingting: cc.Node,
         top_hua: cc.Node,
         liuju: cc.Node,
         //huaction
@@ -379,6 +380,9 @@ cc.Class({
             this.map("over" , this.over_event);
             this.map("unOver" , this.unOver_event);
             this.map("gameOver",this.gameOver_event);
+            this.map("changeRoom",this.changeRoom_event);
+            
+            
             //this.doSomethingBH({action:'buhua'},this);
             socket.on("command" , function(result){
                 var data = self.getSelf().parse(result) ;
@@ -478,7 +482,9 @@ cc.Class({
                         //开始匹配
                     let socket = self.getSelf().socket();
                     
-                    if (cc.sys.localStorage.getItem('ting') == 'true') {   
+                    if (cc.sys.localStorage.getItem('ting') == 'true') {  
+                        context.tingting.active = true ;
+                        setTimeout(function(){context.tingting.active = false},2000);
                         cc.beimi.audio.playSFX('nv/ting.mp3');                                
                         let socket = self.getSelf().socket();
                         cc.sys.localStorage.removeItem('ting') ;
@@ -732,6 +738,27 @@ cc.Class({
         cc.sys.localStorage.removeItem('unOver');      
         cc.sys.localStorage.removeItem('clear');        
         this.joinRoom();
+        let playerNum;
+        playerNum = cc.beimi.playerNum;
+        this.playerNum(playerNum);
+    },
+    update: function(){
+        if(!navigator.onLine&&cc.sys.localStorage.getItem('duankai')!='true'){
+            this.node.dispatchEvent( new cc.Event.EventCustom('duankai', true) )
+            cc.sys.localStorage.removeItem('chonglian');
+        }else if(navigator.onLine&&cc.sys.localStorage.getItem('chonglian')!='true'){
+            cc.sys.localStorage.setItem('chonglian','true');
+            cc.sys.localStorage.removeItem('duankai');
+            this.node.dispatchEvent( new cc.Event.EventCustom('chonglian', true) )
+        };
+        if(this.readybth.active == true){
+            cc.sys.localStorage.removeItem('already');                    
+        }else{
+            cc.sys.localStorage.setItem('already',true);
+        }
+    },
+    playerNum: function(playerNum){
+        cc.beimi.playerNum = playerNum;
         if(cc.beimi.playerNum){
             if(cc.beimi.playerNum == 2){
                 this.left_player.active = false;
@@ -754,20 +781,9 @@ cc.Class({
             // }
         }
     },
-    update: function(){
-        if(!navigator.onLine&&cc.sys.localStorage.getItem('duankai')!='true'){
-            this.node.dispatchEvent( new cc.Event.EventCustom('duankai', true) )
-            cc.sys.localStorage.removeItem('chonglian');
-        }else if(navigator.onLine&&cc.sys.localStorage.getItem('chonglian')!='true'){
-            cc.sys.localStorage.setItem('chonglian','true');
-            cc.sys.localStorage.removeItem('duankai');
-            this.node.dispatchEvent( new cc.Event.EventCustom('chonglian', true) )
-        };
-        if(this.readybth.active == true){
-            cc.sys.localStorage.removeItem('already');                    
-        }else{
-            cc.sys.localStorage.setItem('already',true);
-        }
+    changeRoom_event: function(data,context){
+        cc.beimi.playerNum = data.playerNum;
+        cc.director.loadScene('majiang');
     },
     joinRoom:function(){
         //开始匹配
@@ -1063,8 +1079,11 @@ cc.Class({
         cc.beimi.audio.playSFX('give.mp3');
         let playerss = context.player(data.userid , context);
         if(data.ting){
-            context[playerss.tablepos+'ting'].active = true ; 
-            
+            if(context[playerss.tablepos+'ting'].active ==false){
+                context.tingting.active = true ;
+                setTimeout(function(){context.tingting.active = false ;},2000);
+                context[playerss.tablepos+'ting'].active = true ; 
+            }
         }
         if(data.userid == cc.beimi.user.id) {
             if(!data.ting){
@@ -1428,6 +1447,7 @@ cc.Class({
         }     
         var peo = context.playersarray;
         for(let i = 0 ; i< data.players.length;i++){
+            
             for(let j=0; j<peo.length; j++){
                 var py = peo[j].getComponent('MaJiangPlayer');
                 if(data.players[i].id == py.data.id){
@@ -1437,6 +1457,13 @@ cc.Class({
                 }
             }
         }
+
+        //如果不在线的人数比总玩家少于1个人的时候   cc.beimi.gameOver =  true;
+        // if(cc.beimi.playerNum -1 ==count){
+        //     cc.beimi.gameOver = true ;
+        // }else{
+        //     cc.beimi.gameOver = false ;
+        // }
     },
     readyTrue: function(fangwei,context){
         if(fangwei == 'left'){

@@ -80,6 +80,9 @@ cc.Class({
         yuepic: cc.Node,
         zhouLab: cc.Label,
         yueLab: cc.Label,
+        huise:cc.SpriteFrame,
+        zhoubisai: cc.Node,
+        yuebisai:cc.Node
     },
 
     // use this for initialization
@@ -88,21 +91,36 @@ cc.Class({
          if(this.cardNum){
             this.cardNum.string = '房卡：' +cc.beimi.user.cards + '张'
          }
+
+    
          if(this.zhoupic){
             cc.beimi.http.httpGet('/api/room/queryUserWinner?token='+cc.beimi.authorization,this.countsucess,this.counterror,this);            
          }
          //this.notice.active =false;
     },
     countsucess(result,object){
+
+ 
+
         var data = JSON.parse(result);
         object.zhouLab.string = data.week;
         object.yueLab.string = data.month;
-        if(Number(data.week)>=7){
+        if(data.weekMah&&data.goMah){
             object.zhoupic.active = false;
+        }else if(data.weekMah &&!data.goMah ){
+            object.zhoubisai.getComponent(cc.Button).interactable= false;
+        }else if(!data.week){
+            var sprite = object.zhoubisai.getComponent(cc.Sprite);
+            sprite.spriteFrame = object.huise;
+            object.zhoubisai.getComponent(cc.Button).interactable= false;            
         }
-        if(Number(data.month)>=7){
-            object.yuepic.active = false;
-        }
+        // if(Number(data.month)>=1){
+        //     object.yuepic.active = false;
+        // }else{
+            var sprite = object.yuebisai.getComponent(cc.Sprite);
+            sprite.spriteFrame = object.huise;
+            object.yuebisai.getComponent(cc.Button).interactable= false;
+        // }
     },
     counterror(result,object){},
     
@@ -235,11 +253,12 @@ cc.Class({
         cc.beimi.dialog1.parent = this.root();
     },
     jjroom: function(event){
+        let type = event.target.name;
         // let alert = cc.instantiate(this.alert2);
         // alert.parent = this.root();
         // cc.director.loadScene('majiang');
         this.loadding();
-        cc.beimi.http.httpGet('/api/room/match?token='+cc.beimi.authorization,this.jjsucess,this.jjerror,this);
+        cc.beimi.http.httpGet('/api/room/match?token='+cc.beimi.authorization+'&type='+type,this.jjsucess,this.jjerror,this);
     },
     jjsucess: function(result,object){
         console.log(result);

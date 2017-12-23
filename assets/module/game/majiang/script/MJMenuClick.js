@@ -50,12 +50,29 @@ cc.Class({
             let set = setting.getComponent('overGameClick');
             setting.parent = mjdata.node;
             if(cc.beimi.match == 'true'){
-                set.txt.string = '游戏开始后退出可返回房间';
+                let count = this.player();
+                if(count +1 == cc.beimi.playerNum){
+                    set.txt.string = '离开即解散房间';
+                }else{
+                    set.txt.string = '游戏开始后退出可返回房间';
+                }
             }
         }
 
         //this.node.dispatchEvent( new cc.Event.EventCustom('overGame', true) );
         
+    },
+    player: function(){
+        let count = 0;
+        let context = cc.find('Canvas').getComponent('MajiangDataBind');
+        var players = context.playersarray
+        for(let i = 0 ; i < players.length ; i++){
+            let play = players[i].getComponent('MaJiangPlayer');
+            if(play.on_off_line.active == true){
+                count = count +1 ;
+            }
+        }
+        return count;
     },
     // goonGameClick: function(){
     //     let mj = cc.find('Canvas').getComponent('MajiangDataBind')

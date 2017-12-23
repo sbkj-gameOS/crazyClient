@@ -128,7 +128,7 @@ cc.Class({
         }else{
             this.musicon.active = true ;
             this.musicoff.active =  false;
-            cc.beimi.audio.playBGM("bgMain.mp3");
+            cc.beimi.audio.playBGM("bgFight.mp3");
             cc.beimi.audio.setBGMVolume(1);           
             cc.sys.localStorage.removeItem('nobgm');
         }

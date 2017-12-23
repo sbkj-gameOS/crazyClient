@@ -88,7 +88,7 @@ cc.Class({
                 window.io = require("socket.io");
             }
             if(cc.sys.localStorage.getItem('nobgm') != 'true'){
-                cc.beimi.audio.playBGM("bgMain.mp3");
+                cc.beimi.audio.playBGM("bgFight.mp3");
             }
         }
 

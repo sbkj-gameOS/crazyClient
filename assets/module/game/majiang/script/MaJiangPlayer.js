@@ -57,6 +57,10 @@ cc.Class({
         this.data = playerdata ;    //存放玩家数据
         this.tablepos = tablepos ;
         this.count = count;
+        if(!playerdata.online){
+            this.on_off_line.active = true;
+            this.headimg.color = new cc.Color(42, 25, 25);
+        }
         if(inx == 0){
             this.selectcards.parent.x = this.selectcards.parent.x * -1 ;
         }else if(inx == 1){
