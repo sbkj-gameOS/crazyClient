@@ -108,8 +108,12 @@ cc.Class({
         }
     },
     winds:function(wind){
-       this[wind].active = true;
-       this.wind = wind;
+        this.dong.active = false;
+        this.nan.active = false ; 
+        this.xi.active = false ;
+        this.bei.active = false ;
+        this[wind].active = true;
+        this.wind = wind;
     },
     nowind: function(){
         this[this.wind].active = false;
