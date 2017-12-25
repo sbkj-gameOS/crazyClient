@@ -1483,7 +1483,7 @@ cc.Class({
     },
     killPlayers: function(data){
       
-    
+        
         cc.sys.localStorage.removeItem('top');
         cc.sys.localStorage.removeItem('left');
         cc.sys.localStorage.removeItem('right');
