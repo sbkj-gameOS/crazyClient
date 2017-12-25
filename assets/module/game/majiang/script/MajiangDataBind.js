@@ -1368,7 +1368,9 @@ cc.Class({
         context = cc.find("Canvas").getComponent("MajiangDataBind") ;
         //cc.sys.localStorage.setItem(players,data.players.length);
         cc.sys.localStorage.setItem(players,data.players.length);
-        context.allReadyFalse();
+        if(cc.beimi.state !='init' &&cc.beimi.state != 'ready'){        
+            context.allReadyFalse();
+        }
         context.killPlayers(data);
         context.collect(context) ;    //先回收资源，然后再初始化
 
@@ -1515,7 +1517,8 @@ cc.Class({
         this.left_ready.active = false;
         this.right_ready.active = false;
         this.top_ready.active = false ;
-        this.current_ready.active = false ;          
+        this.current_ready.active = false ;                      
+        
         
         
     },
