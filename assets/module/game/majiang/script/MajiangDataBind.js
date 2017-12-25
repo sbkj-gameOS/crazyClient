@@ -235,12 +235,16 @@ cc.Class({
      */
     onLoad: function () {
         this.bgsetting();
-        // if(cc.beimi.browserType=="wechat"){
-        //     this.wxButton.node.active = true ;
-        //     cc.beimi.WXorBlow.shareRoom(cc.beimi.room);                    
-        // }else if(cc.beimi.browserType != null){
-        //     this.ggButton.node.active = true ;
-        // }
+        if(cc.beimi.browserType=="wechat"){
+            // this.wxButton.node.active = true ;
+            let room ='';
+            if(cc.beimi.match != 'true'){
+                room = cc.beimi.room
+            }
+            cc.beimi.WXorBlow.shareRoom(room);                    
+        }else if(cc.beimi.browserType != null){
+            // this.ggButton.node.active = true ;
+        }
         var sprite = this.bkLogoImg.getComponent(cc.Sprite);
         //切换游戏首页背景图logo
         var sprite = this.bkLogoImg.getComponent(cc.Sprite);
@@ -712,6 +716,7 @@ cc.Class({
          * ActionEvent发射的事件 ， 点击 过
          */
         this.node.on("guo",function(event){
+            //当自己收到的事件是guo时  为true  别人
             if(cc.sys.localStorage.getItem('guo')!='true'||cc.sys.localStorage.getItem('alting')=='true'){
                 let socket = self.getSelf().socket();
                 socket.emit("selectaction" , JSON.stringify({
@@ -1696,7 +1701,8 @@ cc.Class({
          * 首先，需要找到触发对象，如果触发对象不是 all ， 则 直接找到 对象对应的玩家 桌牌列表，并找到 桌牌里 的最后 的 牌，
          * 然后将此牌 移除即可，如果对象是 all， 则不用做任何处理即可
          */
-        if(cc.beimi.user.id == data.userid){              
+        if(cc.beimi.user.id == data.userid){   
+            cc.sys.localStorage.setItem('take','true');             
             /**
              * 碰，显示碰的动画，
              * 杠，显示杠的动画，杠分为：明杠，暗杠，弯杠，每种动画效果不同，明杠/暗杠需要扣三家分，弯杠需要扣一家分
@@ -1785,12 +1791,12 @@ cc.Class({
      * @param context
      */
     play_event:function(data , context){
+        context.loadding();                                                
         if(cc.find('Canvas/summary')){
             cc.find('Canvas/summary').destroy();
         }
         {
             cc.sys.localStorage.setItem('clear','true');
-            var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
             var bth = cc.find('Canvas/global/main/button/readybtn');
             bth.active =true;  
             bth.x= -10;
@@ -1934,7 +1940,6 @@ cc.Class({
                 var players = data.players[h];
                 //这里有一个判定 如果是重连的话 就不用setouttime   
                 if(data.player.played||players.played||data.player.actions.length>0||players.action){
-                    context.loadding();                    
                     cc.sys.localStorage.setItem('cb','true');
                     context.initMjCards(groupNums , context , cards , temp_player.banker) ;
 
@@ -2563,7 +2568,7 @@ cc.Class({
                  */
                 object.exchange_searchlight("current",object);
                 selectbtn.active = true ;
-                object.timer(object , 5) ;
+                object.timer(object , 0) ;
                 break   ;
             case "selectresult" :
                 /**
