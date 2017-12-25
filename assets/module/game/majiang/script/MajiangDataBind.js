@@ -234,16 +234,17 @@ cc.Class({
      * 重构后，只有两个消息类型
      */
     onLoad: function () {
+        cc.beimi.playersss = 0;        
         this.bgsetting();
         if(cc.beimi.browserType=="wechat"){
-            // this.wxButton.node.active = true ;
+            this.wxButton.node.active = true ;
             let room ='';
             if(cc.beimi.match != 'true'){
                 room = cc.beimi.room
             }
             cc.beimi.WXorBlow.shareRoom(room);                    
         }else if(cc.beimi.browserType != null){
-            // this.ggButton.node.active = true ;
+            this.ggButton.node.active = true ;
         }
         var sprite = this.bkLogoImg.getComponent(cc.Sprite);
         //切换游戏首页背景图logo
@@ -718,6 +719,7 @@ cc.Class({
         this.node.on("guo",function(event){
             //当自己收到的事件是guo时  为true  别人
             if(cc.sys.localStorage.getItem('guo')!='true'||cc.sys.localStorage.getItem('alting')=='true'){
+                cc.sys.localStorage.removeItem('altake');
                 let socket = self.getSelf().socket();
                 socket.emit("selectaction" , JSON.stringify({
                     action:"guo",
@@ -862,6 +864,7 @@ cc.Class({
         context = cc.find('Canvas').getComponent('MajiangDataBind') ;
         if(cc.beimi.playerNum == 2){
             if(data.id!=cc.sys.localStorage.getItem('current')&&data.id!=cc.sys.localStorage.getItem('top')){
+
                 var player = context.playerspool.get();
                 var playerscript = player.getComponent("MaJiangPlayer");
                 var inx = null , tablepos = "";
@@ -1363,7 +1366,12 @@ cc.Class({
      */
     players_event:function(data,context){
         context = cc.find("Canvas").getComponent("MajiangDataBind") ;
-        //context.collect(context) ;    //先回收资源，然后再初始化
+        //cc.sys.localStorage.setItem(players,data.players.length);
+        cc.sys.localStorage.setItem(players,data.players.length);
+        context.allReadyFalse();
+        context.killPlayers(data);
+        context.collect(context) ;    //先回收资源，然后再初始化
+
         var inx = 0 ;
         context.arry = [];
         var players = context.playersarray; 
@@ -1451,17 +1459,20 @@ cc.Class({
             }
         }     
         var peo = context.playersarray;
-        for(let i = 0 ; i< data.players.length;i++){
-            
-            for(let j=0; j<peo.length; j++){
-                var py = peo[j].getComponent('MaJiangPlayer');
-                if(data.players[i].id == py.data.id){
-                    if(data.players[i].status&&data.players[i].status=='READY'){
-                        context.readyTrue(py.tablepos,context);                   
+        if(cc.beimi.state =='ready' || cc.beimi.state =='init'){
+            for(let i = 0 ; i< data.players.length;i++){
+                
+                for(let j=0; j<peo.length; j++){
+                    var py = peo[j].getComponent('MaJiangPlayer');
+                    if(data.players[i].id == py.data.id){
+                        if(data.players[i].status&&data.players[i].status=='READY'){
+                            context.readyTrue(py.tablepos,context);                   
+                        }
                     }
                 }
             }
         }
+   
 
         //如果不在线的人数比总玩家少于1个人的时候   cc.beimi.gameOver =  true;
         // if(cc.beimi.playerNum -1 ==count){
@@ -1469,6 +1480,44 @@ cc.Class({
         // }else{
         //     cc.beimi.gameOver = false ;
         // }
+    },
+    killPlayers: function(data){
+      
+    
+        cc.sys.localStorage.removeItem('top');
+        cc.sys.localStorage.removeItem('left');
+        cc.sys.localStorage.removeItem('right');
+        let players = data.players.length;
+        let count = cc.sys.localStorage.getItem('count');
+        if(Number(count)==players&&cc.beimi.match == 'true'){
+            cc.sys.localStorage.setItem('count',String(Number(count)-1));
+        }
+
+        cc.beimi.playersss = data.players.length;
+        
+        //cc.sys.localStorage.setItem('count',count-1);
+        // for(let i = 0; i < data.players.length; i++){
+        //     if(data.player[i].id == 'right'){
+        //         rightbol = true;
+        //     }
+        //     if(data.player[i].id == 'left'){
+        //         leftbol = true;
+        //     }
+        //     if(data.player[i].id == 'top'){
+        //         topbol = true;
+        //     }
+        // }
+        // if(right == false && left == true && top == true){
+
+        // }
+    },
+    allReadyFalse: function(){
+        this.left_ready.active = false;
+        this.right_ready.active = false;
+        this.top_ready.active = false ;
+        this.current_ready.active = false ;          
+        
+        
     },
     readyTrue: function(fangwei,context){
         if(fangwei == 'left'){
@@ -2502,6 +2551,7 @@ cc.Class({
      * 状态切换，使用状态参数 切换，避免直接修改 对象状态，避免混乱
      */
     exchange_state:function(state , object){
+        cc.beimi.state = state;
         object = cc.find('Canvas').getComponent('MajiangDataBind');
         let readybtn = null , waitting = null , selectbtn = null , banker = null ,ready2 = null ;
 

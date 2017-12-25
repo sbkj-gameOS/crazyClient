@@ -3056,7 +3056,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 23
+      "y": 12
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -3096,7 +3096,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 74
@@ -3120,7 +3120,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
+      "width": 22.25,
       "height": 40
     },
     "_rotationX": 0,

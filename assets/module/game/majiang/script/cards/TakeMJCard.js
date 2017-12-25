@@ -74,6 +74,9 @@ cc.Class({
                 this.node.dispatchEvent( new cc.Event.EventCustom('takecard', true) );
             }else{
                 this.huifu();
+                if(cc.sys.localStorage.getItem('alting')=='true'){
+                    cc.sys.localStorage.setItem('take','true');                    
+                }
                 handCards.target.y = handCards.target.y + 20 ;
                 handCards.cardvalue.color = new cc.Color(230, 190, 190);
                 handCards.take = true;

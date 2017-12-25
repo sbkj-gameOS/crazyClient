@@ -165,11 +165,11 @@ cc.Class({
         }
     },
     talkClick: function(wxButton){
-        if(this.t){
-            clearTimeout(this.t); 
-            this.time = 15;
-            this.wxButton.node.children[1].children[0].children[1].getComponent(cc.Label).string = 15;
-        }
+        // if(this.t){
+        //     clearTimeout(this.t); 
+        //     this.time = 15;
+        //     this.wxButton.node.children[1].children[0].children[1].getComponent(cc.Label).string = 15;
+        // }
         var share = this;
         this.wxButton = wxButton;
         var wxButton = wxButton;
@@ -205,7 +205,6 @@ cc.Class({
         }else{
             share.talk = true;
             wxButton.node.children[1].active = true ;
-            this.time = 15;
             wxButton.node.children[0].active = false ;     
 
             //cc.find('Canvas/录音/发送语音2').active =true;
@@ -222,7 +221,7 @@ cc.Class({
                 });
             },300);
         }
-        this.t = setInterval(function(){share.settime()},1000)  ; 
+        // this.t = setInterval(function(){share.settime()},1000)  ; 
     },
     settime: function(){
         this.time = this.time -1 ; 
