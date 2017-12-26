@@ -1365,6 +1365,7 @@ cc.Class({
      * @param context
      */
     players_event:function(data,context){
+        
         context = cc.find("Canvas").getComponent("MajiangDataBind") ;
         //cc.sys.localStorage.setItem(players,data.players.length);
         cc.sys.localStorage.setItem(players,data.players.length);
@@ -1379,10 +1380,12 @@ cc.Class({
         var players = context.playersarray; 
         // player 是 配合 joinroom  joinroom 加入房间  立即显示  然后 player 记录数据   下一个玩家 根据 player 来完成之前的渲染 用joinroom 完成之后的   一旦完成joinroom  又发起player 进行存储
         for(let i=0 ;i<data.players.length;i++){
-            var time = data.players[i].createtime;
-            context.arry.push(time);
-            if(data.players[i].id == cc.beimi.user.id ){
-                var mytime = context.arry.length;
+            if(data.players[i]!=null){
+                var time = data.players[i].createtime;
+                context.arry.push(time);
+                if(data.players[i].id == cc.beimi.user.id ){
+                    var mytime = context.arry.length;
+                }
             }
         }
         if(cc.beimi.playerNum==2){
@@ -1934,13 +1937,14 @@ cc.Class({
             }
         }else{
             cc.find('Canvas/global/main/godcard').children[0].active =true;
-            if(data.player.powerCard&&data.player.powerCard.length>0){
-                cc.find('Canvas/global/main/godcard/child').children[0].destroy();
-                for(let i= 0 ; i<data.player.powerCard.length;i++){
+            if(data.player.powerCard){
+                let cards = context.decode(data.player.powerCard);
+                //cc.find('Canvas/global/main/godcard/child').children[0].destroy();
+                for(let i= 0 ; i<cards.length;i++){
                     var laiziZM = cc.instantiate(context.ZM);
                     laiziZM.parent = context.godcard.children[1];
                     var LZH  = laiziZM.getComponent('DeskCards');
-                    LZH.init(data.player.powerCard[i],'B',true);
+                    LZH.init(cards[i],'B',true);
                 }
             }else{
                 context.godcard.children[1].x = -560;                
@@ -3064,6 +3068,7 @@ cc.Class({
     shouOperationMune: function(){
         var action = cc.moveTo(0.5,1122,-100);
         this.actionnode_two.x=1122;
+        cc.sys.localStorage.removeItem('altake');
         //this.actionnode_two.runAction(action);
         //this.actionnode_two.active = false;
         

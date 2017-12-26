@@ -18,6 +18,18 @@ cc.Class({
         	default: null,
         	type: cc.ScrollView
         },
+        scrollView1: {
+        	default: null,
+        	type: cc.ScrollView
+        },
+        scrollView2: {
+        	default: null,
+        	type: cc.ScrollView
+        },
+        scrollView3: {
+        	default: null,
+        	type: cc.ScrollView
+        },
         selectOne:{
             default:null,
             type:cc.Toggle,
@@ -30,10 +42,11 @@ cc.Class({
             default: null,
             type: cc.Node
         },
+        beimian: cc.Prefab
     },
 
     onLoad: function () {
-    
+        this.type = 0;
 		this.content = this.scrollView.content;
         this.items = [];
         this.colorWhite = new cc.Color(255, 255, 255);//白色
@@ -42,14 +55,16 @@ cc.Class({
         selectlastToggle = this.selectOne;
     	//this.initialize();
     	
-		if(cc.beimi.authorization){
-			var parm = {
-	    		token:cc.beimi.authorization,//12d622d439d747a495204e995f431f7e
-	    		page:1,
-	    		limit:10
-	    	};
-            cc.beimi.http.httpPost('/record/perRecord',parm,this.success,this.error,this);
-        };
+		// if(cc.beimi.authorization){
+		// 	var parm = {
+	    // 		token:cc.beimi.authorization,//12d622d439d747a495204e995f431f7e
+	    // 		page:1,
+	    // 		limit:10
+	    // 	};
+           // cc.beimi.http.httpPost('/record/perRecord',parm,this.success,this.error,this);
+           this.init(0);
+           
+        // };
         if(cc.beimi.GameBase.gameModel =='ch'||cc.beimi.GameBase.gameModel =='CH'){
             this.ch.active = true ;
             this.wz.active = false ;
@@ -76,14 +91,35 @@ cc.Class({
             gameType = 2;
         }
         selectlastToggle = toggle;
-        var parm = {
-    		token:cc.beimi.authorization,//12d622d439d747a495204e995f431f7e
-    		gameType:gameType,
-    		page:1,
-    		limit:10
-    	};
-        cc.beimi.http.httpPost('/record/perRecord',parm,this.success,this.error,this);
+    
+        //this.init(1)
     },
+    toclick: function(event){
+        let type = event.target.name;
+        this.type = type;
+        if(type ==0){
+            this.content = this.scrollView.content;   
+        }else if(type ==1){
+            this.content = this.scrollView1.content;     
+        }else if(type ==2){
+            this.content = this.scrollView2.content; 
+        }else{
+            this.content = this.scrollView3.content;  
+        }
+        console.log(type)
+        this.init(type);
+    },
+    init: function(type){
+        var parm = {
+    		token:'c6924c1f104c442a836bda7bf624964b',//12d622d439d747a495204e995f431f7e
+    		type:type,
+    		page:1,
+    		//limit:10
+    	};
+        cc.beimi.http.httpPost('/situation/getGameRoomList',parm,this.success,this.error,this);
+    },
+ 
+
     success:function(result,object){
         
         var data = JSON.parse(result);
@@ -108,12 +144,12 @@ cc.Class({
 				let item = cc.instantiate(object.itemTemplates);
 				object.content.addChild(item);
 				item.setPosition(0, -item.height * (0.5 + i) - object.spacing * (i + 1));
-				var roomNum = data.data[i].roomNum;//房间号
-				var gameNum = data.data[i].gameNum;//局数
-				var time = data.data[i].time;//时间
+				var roomNum = data.data[i].roomNumber;//房间号
+				var gameNum = data.data[i].countNum;//局数
+				var time = data.data[i].createTime;//时间
 				var id = data.data[i].id;//id 
-				var gamerInfo = data.data[i].overPoint;//id 
-				item.getComponent('recordItem').updateItem(roomNum, gameNum, time,id,gamerInfo);
+				var gamerInfo = data.data[i].totalScores;//id 
+				item.getComponent('recordItem').updateItem(roomNum, gameNum, time,id,gamerInfo,object.type,data.data[i]);
 				object.items.push(item);
 			}
         }else{

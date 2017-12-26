@@ -41,16 +41,28 @@ cc.Class({
             console.log("Item " + this.itemID + ' clicked');
         }, this);
     },
-	updateItem: function(roomNum, gameNum, time, itemId,gamerInfo) {
+	updateItem: function(roomNum, gameNum, time, itemId,gamerInfo,type,data) {
+        let room = '';
+        this.room = data.roomId;
+        if(type == 0){
+            room = roomNum;
+        }else if(type ==1){
+            room = '预赛房';
+        }else if(type ==2){
+            room = '周赛房';
+        }else if(type ==3){
+            room = '月赛房';
+        }
         this.itemID = itemId;
-		this.label1.string = "房间号："+roomNum;
+		this.label1.string = "房间："+room;
         this.label2.string = "局数："+gameNum;
 		this.label3.string = this.getNowFormatDate(time);
-		this.gamerInfos.string = '分数：'+gamerInfo + '分';
+        this.gamerInfos.string = '分数：'+gamerInfo + '分';
+      
     },
 	//时间处理返回格式：yyyy-MM-dd HH:MM:SS
 	getNowFormatDate:function(time){
-		var date = new Date(time);
+		var date = new Date(Number(time));
 		var seperator1 = "-";
 		var seperator2 = ":";
 		var month = date.getMonth() + 1;
@@ -68,6 +80,18 @@ cc.Class({
 	},
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
+    click: function(){
+        cc.beimi.http.httpGet('/situation/getGameRoomDetail?roomId='+this.room,this.success,this.error,this);
+    },
+    success: function(result,object){
+        var data = JSON.parse(result);
+        
+        let beimian  = cc.find('Canvas/record/record').getComponent('record');
 
+        let haha = cc.instantiate(beimian.beimian);
+        haha.getComponent('zjxq').init(data.playUserList);
+        haha.parent = cc.find('Canvas/record')
+    },
+    error : function(){}
     // },
 });
