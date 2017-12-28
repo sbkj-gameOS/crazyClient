@@ -746,7 +746,9 @@ cc.Class({
         cc.sys.localStorage.removeItem('alting');
         cc.sys.localStorage.removeItem('guo');  
         cc.sys.localStorage.removeItem('unOver');      
-        cc.sys.localStorage.removeItem('clear');        
+        cc.sys.localStorage.removeItem('clear');   
+        cc.sys.localStorage.removeItem('cb');        
+        
         this.joinRoom();
         let playerNum;
         playerNum = cc.beimi.playerNum;
@@ -1241,6 +1243,7 @@ cc.Class({
             
         }else{
             context.dealcards(data,context);
+            cc.sys.localStorage.removeItem('cb');                    
         }
     },
     dealcards: function(data,context){
@@ -1851,7 +1854,7 @@ cc.Class({
             }
             context.cardModle(opCards,opParent,back,fangwei,context,data.action,jiantou);
         }
-        if( cc.sys.localStorage.getItem('cb')!='true'&&(data.action == 'peng'||(data.action == 'gang'&&data.card!=-1)||data.action=='chi'||data.action == 'hu'||(data.action =='dan'&&data.cards.length==1))){
+        if( cc.sys.localStorage.getItem('cb')!='true'&&(data.action == 'peng'||(data.action == 'gang'&&data.card!=-1)||data.action=='chi'||data.action == 'hu')){
             //以下代码是用于找到 杠/碰/吃/胡牌的 目标牌  ， 然后将此牌 从 桌面牌中移除
             let temp = context.player(data.target, context), deskcardpanel=null;
             if (temp.tablepos == "right") {
@@ -2808,6 +2811,8 @@ cc.Class({
         cc.sys.localStorage.removeItem('altake');
         cc.sys.localStorage.removeItem('alting');
         cc.sys.localStorage.removeItem('guo');
+        cc.sys.localStorage.removeItem('cb');        
+        
      },
      inintBuHuan: function(){
         cc.beimi.powerCard = null;  
@@ -3173,7 +3178,11 @@ cc.Class({
             opParent = cc.find("Canvas/content/handcards/"+player.tablepos+"desk/kong") ;
         }
         if(opParent.children.length>1){
-            opParent.children[opParent.children.length-1].children[1].getComponent('DanAction').jujufei();            
+            try{
+                opParent.children[opParent.children.length-1].children[1].getComponent('DanAction').jujufei();                  
+            }catch(e){
+                console.log('ohuo');
+            }
         }
     },
     bgsetting: function(){
