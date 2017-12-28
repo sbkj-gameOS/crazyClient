@@ -82,7 +82,7 @@ cc.Class({
         yueLab: cc.Label,
         huise:cc.SpriteFrame,
         zhoubisai: cc.Node,
-        yuebisai:cc.Node
+        yuebisai:cc.Node,
     },
 
     // use this for initialization

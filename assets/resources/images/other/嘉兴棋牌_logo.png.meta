@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "6040423d-23ce-40c2-9fd9-d27f82a28dcc",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "嘉兴棋牌_logo": {
+      "ver": "1.0.3",
+      "uuid": "42a75693-4cae-4c27-8f56-2bb4d8a5e72d",
+      "rawTextureUuid": "6040423d-23ce-40c2-9fd9-d27f82a28dcc",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 480,
+      "height": 126,
+      "rawWidth": 480,
+      "rawHeight": 126,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

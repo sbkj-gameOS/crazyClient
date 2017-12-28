@@ -111,7 +111,7 @@ cc.Class({
     },
     init: function(type){
         var parm = {
-    		token:'c6924c1f104c442a836bda7bf624964b',//12d622d439d747a495204e995f431f7e
+    		token:'c6924c1f104c442a836bda7bf624964b',//12d622d439d747a495204e995f431f7e cc.beimi.authorization
     		type:type,
     		page:1,
     		//limit:10

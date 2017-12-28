@@ -67,6 +67,7 @@ cc.Class({
     shareRoom: function(room){
             let descNametitle;
             let urlType;
+            let haha = '';
             if(cc.beimi.GameBase.gameModel == 'wz'){
                 descNametitle = "首游宝-温州棋牌";
                 urlType = "toWZAuth";
@@ -74,11 +75,14 @@ cc.Class({
                 descNametitle = "巡天游-心缘长春";
                 urlType = "toCHAuth";
             }     
+            if(cc.beimi.room){
+                haha = '房间号：' + cc.beimi.room;
+            }
             console.log('game.bizpartner.cn/wxController/'+urlType+'?roomNum='+room);
             // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
             wx.onMenuShareAppMessage({
                 title: descNametitle,
-                desc: "您的好友"+cc.beimi.user.nickname+"邀请您一起游戏",
+                desc: "您的好友"+cc.beimi.user.nickname+"邀请您一起游戏"+haha,
                 link: 'http://game.bizpartner.cn/wxController/'+urlType+'?roomNum='+room,
                 imgUrl: cc.beimi.user.headimgurl,
                 trigger: function (res) {

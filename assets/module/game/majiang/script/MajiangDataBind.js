@@ -208,6 +208,7 @@ cc.Class({
             default:null,
             type:cc.SpriteFrame
         },
+        jxLogoImgLG:cc.SpriteFrame,
         bkLogoImgTP:{
             default:null,
             type:cc.SpriteFrame
@@ -256,6 +257,8 @@ cc.Class({
             }else{
                 sprite.spriteFrame = this.bkLogoImgTP;//台炮游戏logo
             }
+        }else if(cc.beimi.GameBase.gameModel =='jx'){
+            sprite.spriteFrame = this.jxLogoImgLG;
         }
          if(cc.beimi.cardNum > 14){ 
             this.top_panel.parent.x = -142;
@@ -1097,6 +1100,14 @@ cc.Class({
             if(!data.ting){
                context.tingnoaction();
         }
+        
+        let father = cc.find('Canvas').getComponent('MajiangDataBind').selectfather;
+        if(father.active == true){
+            father.active= false;
+            father.children[0].children[1].children.splice(0,father.children[0].children[1].children.length);
+        }
+        
+
             context.initcardwidth();
         
             if(data.ting){
@@ -1224,7 +1235,10 @@ cc.Class({
       
         if(cc.sys.localStorage.getItem('cb') == 'true'&&cc.sys.localStorage.getItem('altings') != 'true'){
             setTimeout(function(){context.dealcards(data,context)},2100);
-            cc.sys.localStorage.removeItem('cb');
+            cc.sys.localStorage.removeItem('cb');        
+
+            
+            
         }else{
             context.dealcards(data,context);
         }
@@ -1369,11 +1383,13 @@ cc.Class({
         context = cc.find("Canvas").getComponent("MajiangDataBind") ;
         //cc.sys.localStorage.setItem(players,data.players.length);
         cc.sys.localStorage.setItem(players,data.players.length);
-        if(cc.beimi.state !='init' &&cc.beimi.state != 'ready'){        
-            context.allReadyFalse();
+        if(cc.beimi.state =='init' ||cc.beimi.state == 'ready'){        
+            context.collect(context) ;    //先回收资源，然后再初始化
+            context.killPlayers(data);
+            
         }
-        context.killPlayers(data);
-        context.collect(context) ;    //先回收资源，然后再初始化
+        context.allReadyFalse();        
+        
 
         var inx = 0 ;
         context.arry = [];
@@ -1465,6 +1481,7 @@ cc.Class({
         }     
         var peo = context.playersarray;
         if(cc.beimi.state =='ready' || cc.beimi.state =='init'){
+            //context.windFW(context);
             for(let i = 0 ; i< data.players.length;i++){
                 
                 for(let j=0; j<peo.length; j++){
@@ -1477,7 +1494,9 @@ cc.Class({
                 }
             }
         }
-   
+        if(cc.beimi.state !='ready' && cc.beimi.state !='init'){
+            context.windFW(context);}
+        
 
         //如果不在线的人数比总玩家少于1个人的时候   cc.beimi.gameOver =  true;
         // if(cc.beimi.playerNum -1 ==count){
@@ -1570,6 +1589,11 @@ cc.Class({
         context = cc.find('Canvas').getComponent('MajiangDataBind');
         for(var inx = 0 ; inx<context.playersarray.length ; inx++){
             let temp = context.playersarray[inx].getComponent("MaJiangPlayer") ;
+            if(data.userid == cc.beimi.user.id){
+                cc.beimi.bankers =true;
+            }else{
+                cc.beimi.bankers =false;
+            }
             if(temp.data.id == data.userid){
                 cc.beimi.banker = data.userid ; 
                 temp.banker(); 
@@ -1578,6 +1602,7 @@ cc.Class({
         }
     },
     dong: function(count){
+        
         cc.beimi.bankercount = count;         
     },
     windFW: function(context){
@@ -1757,7 +1782,10 @@ cc.Class({
          * 然后将此牌 移除即可，如果对象是 all， 则不用做任何处理即可
          */
         if(cc.beimi.user.id == data.userid){   
-            cc.sys.localStorage.setItem('take','true');             
+            if(cc.sys.localStorage.getItem('cb')!='true'){
+                cc.sys.localStorage.setItem('take','true');             
+                
+            }
             /**
              * 碰，显示碰的动画，
              * 杠，显示杠的动画，杠分为：明杠，暗杠，弯杠，每种动画效果不同，明杠/暗杠需要扣三家分，弯杠需要扣一家分
@@ -1823,7 +1851,7 @@ cc.Class({
             }
             context.cardModle(opCards,opParent,back,fangwei,context,data.action,jiantou);
         }
-        if(data.action == 'peng'||(data.action == 'gang'&&data.card!=-1)||data.action=='chi'||data.action == 'hu'){
+        if( cc.sys.localStorage.getItem('cb')!='true'&&(data.action == 'peng'||(data.action == 'gang'&&data.card!=-1)||data.action=='chi'||data.action == 'hu'||(data.action =='dan'&&data.cards.length==1))){
             //以下代码是用于找到 杠/碰/吃/胡牌的 目标牌  ， 然后将此牌 从 桌面牌中移除
             let temp = context.player(data.target, context), deskcardpanel=null;
             if (temp.tablepos == "right") {
@@ -2089,7 +2117,9 @@ cc.Class({
             }         
         } , 1000);
         setTimeout(function(){
-            context.exchange_state("play" , context);
+            if(cc.sys.localStorage.getItem('cb')!='true'){
+                context.exchange_state("play" , context);                
+            }
         } , 1500)
 
         /**
@@ -2124,6 +2154,7 @@ cc.Class({
                 datas.userid = data.player.playuser;
                 context.banker_event(datas,context);
             }
+            // debugger
             if(data.player.ting){
                 context.currentting.active = true ; 
                 cc.sys.localStorage.setItem('alting','true');
@@ -2197,7 +2228,7 @@ cc.Class({
                     }   
                 }
                 if(!data.player.played&&data.player.banker){
-                    cc.sys.localStorage.setItem('take','true');
+                    //cc.sys.localStorage.setItem('take','true');
                 }
                 if(data.players[i].actions.length>0){            
                     var action = data.players[i].actions;                    
@@ -2394,7 +2425,9 @@ cc.Class({
         if(data.userid == cc.beimi.user.id){    //该我出牌 , 庄家出牌，可以不用判断是否庄家了 ，不过，庄家数据已经传过来了
             context.exchange_state("lasthands" , context);
             context.exchange_searchlight("current",context);
-            cc.sys.localStorage.setItem('take','true');            
+            if(cc.sys.localStorage.getItem('altake')!='true'){
+                cc.sys.localStorage.setItem('take','true');            
+            }
         }else{
             context.exchange_state("otherplayer" , context);    //当前玩家出牌，计时器开始计时，探照灯照向该玩家
             for(var inx = 0 ; inx<context.playersarray.length ; inx++){
@@ -2600,7 +2633,7 @@ cc.Class({
                 break;
             case "begin" :
                 object.readyNoActive(object); 
-                waitting.active = false ;
+                //waitting.active = false ;
                 /**
                  * 显示 当前还有多少张底牌
                  * @type {boolean}
@@ -2615,6 +2648,9 @@ cc.Class({
                 /**
                  * 一个短暂的状态，等待下一步指令是 定缺 还是直接开始打牌 ， 持续时间的计时器是 2秒
                  */
+                if(cc.beimi.bankers){
+                    banker.active = true ;
+                }
                 object.readyNoActive(object); 
                 object.timer(object , 0) ;
                 break   ;
@@ -2644,11 +2680,9 @@ cc.Class({
                 /**
                  * 计时器方向
                  */
-                if(cc.beimi.match){
-                    object.timer(object , 15) ;             
-                }else{
-                    object.timer(object , 8) ; 
-                }
+               
+                object.timer(object , 8) ; 
+                
                 break   ;
             case "otherplayer" :
             

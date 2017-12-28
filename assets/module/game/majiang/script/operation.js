@@ -26,7 +26,9 @@ cc.Class({
             // event.target.scaleX=1.2;
             // event.target.scaleY=1.2;
             var myAction = event.target.getComponent('operation').action ;
-            cc.sys.localStorage.setItem('take','true');             
+            if(cc.sys.localStorage.getItem('altake')!=true){
+                cc.sys.localStorage.setItem('take','true');                             
+            }
             var oper = new cc.Event.EventCustom('mjSelection', true) ;
             oper.setUserData(myAction) ;
             this.node.dispatchEvent( oper );

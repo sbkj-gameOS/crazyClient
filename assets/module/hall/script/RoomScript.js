@@ -47,6 +47,11 @@ cc.Class({
 			default:null,
 			type:cc.SpriteFrame
 		},
+		jjhall:cc.Prefab,
+		tongzhi: cc.Prefab,
+		paiming: cc.Prefab
+		
+		
         // foo: {
         //    default: null,      // The default value will be used only when the component attaching
         //                           to a node for the first time
@@ -165,7 +170,24 @@ cc.Class({
         cc.beimi.dialog.parent = this.root();
       
 	},
-	jjclick: function(){
+	tongzhihall:function(){
+		// cc.director.loadScene('joinInRoom');
+		cc.beimi.dialog = cc.instantiate(this.tongzhi) ;
+        cc.beimi.dialog.parent = this.root();
+      
+	},
+	paiminghall:function(){
+		// cc.director.loadScene('joinInRoom');
+		cc.beimi.dialog = cc.instantiate(this.paiming) ;
+        cc.beimi.dialog.parent = this.root();
+      
+	},
+	jjjjbshall:function(){
+		// cc.director.loadScene('joinInRoom');
+		cc.beimi.dialog = cc.instantiate(this.jjhall) ;
+        cc.beimi.dialog.parent = this.root();
+      
+	},	jjclick: function(){
         var room ={};
         
         if(cc.beimi.authorization){

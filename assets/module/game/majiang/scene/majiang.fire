@@ -1755,7 +1755,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": -312
+      "y": -310
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -19597,6 +19597,9 @@
     },
     "bkLogoImgLG": {
       "__uuid__": "b421863f-6e75-49f8-be2b-95847ca791a8"
+    },
+    "jxLogoImgLG": {
+      "__uuid__": "da122689-3708-4f6c-b3bf-13c720bb430d"
     },
     "bkLogoImgTP": {
       "__uuid__": "566a4c00-ad01-4fc6-a80c-65102a9e7669"
