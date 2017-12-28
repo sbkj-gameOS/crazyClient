@@ -2995,7 +2995,7 @@ cc.Class({
             var cardtype  = parseInt(cardcolors / 9);
             var dans = cards.children ;
             //当这个牌是妖姬时
-            if(cardtype==2&& parseInt((card%36)/4)==0&&cards.children.length>0&&type!='yao'&&action=='dan'){
+            if(cardtype==2&& parseInt((card%36)/4)==0&&cards.children.length>0&&type!='yao'&&action=='dan'&&kaction =='dan'){
                 resNode = cards ;
                 cardNum = 0;
                 isGang = false;

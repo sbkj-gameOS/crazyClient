@@ -37,10 +37,10 @@ cc.Class({
                 haha.children[2].getComponent(cc.Label).string = data.list[i].activiteName;
                 haha.children[1].children[0].getComponent(cc.RichText).string = data.list[i].activiteContent;
                 if(data.list[i].isSignUp==1){
-                    haha.children[1].children[1].active =true;
+                    haha.children[1].children[1].children[0].active =true;
                     if(data.list[i].userid){
-                        haha.children[1].children[1].getComponent(cc.Button).interactable= false;   
-                        haha.children[1].children[1].color = new cc.Color(0,0,0);
+                        haha.children[1].children[1].children[0].getComponent(cc.Button).interactable= false;   
+                       // haha.children[1].children[1].color = new cc.Color(0,0,0);
                     }
                     haha.children[1].children[2].getComponent(cc.Label).string = data.list[i].id;
                 }
