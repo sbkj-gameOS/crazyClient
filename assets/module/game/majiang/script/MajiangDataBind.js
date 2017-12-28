@@ -1121,7 +1121,7 @@ cc.Class({
             }else{
                 cc.sys.localStorage.removeItem('alting');
             }
-            if(cc.sys.localStorage.getItem('take') != 'true'&&cc.beimi.match == 'false'){
+            if(data.notSend||cc.sys.localStorage.getItem('take') != 'true'){
                 return;
             }
             cc.sys.localStorage.removeItem('altake');
