@@ -1178,7 +1178,7 @@ cc.Class({
             //其他玩家出牌   
             let temp = context.player(data.userid , context) ;
             let cardpanel  , cardprefab , deskcardpanel;
-            
+            if(!data.notSend){
             if(temp.tablepos == "right"){
                 for(var inx = 0 ; inx < context.right_panel.children.length ; inx++){
                     let right_temp = context.right_panel.children[inx].getComponent("SpecCards");
@@ -1223,7 +1223,7 @@ cc.Class({
             /**
              * 销毁其中一个对象
              */
-            if(!data.notSend){
+            
                 cardpanel.children[cardpanel.children.length - 1].destroy();                
             }
             // let desk_card = cc.instantiate(cardprefab);
