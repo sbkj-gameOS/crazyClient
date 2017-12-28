@@ -1087,6 +1087,7 @@ cc.Class({
     takecard_event:function(data , context){
 
         context = cc.find('Canvas').getComponent('MajiangDataBind');
+        cc.sys.localStorage.removeItem('cb');          
         context.qujuju(data);
         let kongcard ; 
         cc.beimi.audio.playSFX('give.mp3');
@@ -1237,16 +1238,16 @@ cc.Class({
       
         if(cc.sys.localStorage.getItem('cb') == 'true'&&cc.sys.localStorage.getItem('altings') != 'true'){
             setTimeout(function(){context.dealcards(data,context)},2100);
-            cc.sys.localStorage.removeItem('cb');        
+                  
 
             
             
         }else{
             context.dealcards(data,context);
-            cc.sys.localStorage.removeItem('cb');                    
         }
     },
     dealcards: function(data,context){
+        cc.sys.localStorage.removeItem('cb');  
         context=cc.find('Canvas').getComponent('MajiangDataBind');  
         context.closeloadding();
         if(cc.beimi.playerNum){
@@ -1877,6 +1878,14 @@ cc.Class({
      * @param context
      */
     play_event:function(data , context){
+        context.reinitGame(context);
+        for(let h=0 ;h<data.players.length;h++){
+            var players = data.players[h];
+            //这里有一个判定 如果是重连的话 就不用setouttime   
+            if(data.player.played||players.played||data.player.actions.length>0||players.action){
+                cc.sys.localStorage.setItem('cb','true');
+            }
+        }
         context.loadding();                                                
         if(cc.find('Canvas/summary')){
             cc.find('Canvas/summary').destroy();
@@ -1892,7 +1901,6 @@ cc.Class({
                     cc.find('Canvas/global/main/godcard/child').children[i].destroy();
                 }
             }     
-            context.reinitGame(context);
         }
         if(cc.find('Canvas/notice')){
             cc.sys.localStorage.setItem('notice','true');
@@ -2027,7 +2035,7 @@ cc.Class({
                 var players = data.players[h];
                 //这里有一个判定 如果是重连的话 就不用setouttime   
                 if(data.player.played||players.played||data.player.actions.length>0||players.action){
-                    cc.sys.localStorage.setItem('cb','true');
+                    //cc.sys.localStorage.setItem('cb','true');
                     context.initMjCards(groupNums , context , cards , temp_player.banker) ;
 
                     /**
@@ -2810,6 +2818,7 @@ cc.Class({
 
         cc.sys.localStorage.removeItem('altake');
         cc.sys.localStorage.removeItem('alting');
+        cc.sys.localStorage.removeItem('altings');
         cc.sys.localStorage.removeItem('guo');
         cc.sys.localStorage.removeItem('cb');        
         
