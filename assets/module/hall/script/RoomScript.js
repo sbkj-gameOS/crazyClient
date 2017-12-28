@@ -166,8 +166,10 @@ cc.Class({
 	},
 	jjbshall:function(){
 		// cc.director.loadScene('joinInRoom');
-		cc.beimi.dialog = cc.instantiate(this.bshall) ;
-        cc.beimi.dialog.parent = this.root();
+		//cc.beimi.dialog = cc.instantiate(this.bshall) ;
+		cc.beimi.dialog = this.alert2('暂时未开放此功能');
+		
+        //cc.beimi.dialog.parent = this.root();
       
 	},
 	tongzhihall:function(){
@@ -184,8 +186,9 @@ cc.Class({
 	},
 	jjjjbshall:function(){
 		// cc.director.loadScene('joinInRoom');
-		cc.beimi.dialog = cc.instantiate(this.jjhall) ;
-        cc.beimi.dialog.parent = this.root();
+		//cc.beimi.dialog = cc.instantiate(this.jjhall) ;
+		cc.beimi.dialog = this.alert2('暂时未开放此功能');
+        //cc.beimi.dialog.parent = this.root();
       
 	},	jjclick: function(){
         var room ={};
