@@ -55,14 +55,6 @@ cc.Class({
                     haha.children[3].active = true;
                 }
                 haha.children[1].children[2].getComponent(cc.Label).string = 'a&'+data.list[i].id;
-                // if(data.list[i].isSignUp==1){
-                //     haha.children[1].children[1].children[0].active =true;
-                //     if(data.list[i].userid){
-                //         haha.children[1].children[1].children[0].getComponent(cc.Button).interactable= false;   
-                //        // haha.children[1].children[1].color = new cc.Color(0,0,0);
-                //     }
-                //     
-                // }
             }
         }
         if(data.prizeList&&data.prizeList.length>0){
@@ -76,14 +68,6 @@ cc.Class({
                 let haha = object['one'+Number(count)];
                 haha.active = true;
                 haha.children[2].getComponent(cc.Label).string = data.prizeList[i].prizeName;
-                // if(data.list[i].isSignUp==1){
-                //     haha.children[1].children[1].children[0].active =true;
-                //     if(data.list[i].userid){
-                //         haha.children[1].children[1].children[0].getComponent(cc.Button).interactable= false;   
-                //        // haha.children[1].children[1].color = new cc.Color(0,0,0);
-                //     }
-                //     haha.children[1].children[2].getComponent(cc.Label).string = data.list[i].id;
-                // }
                 haha.children[1].children[2].getComponent(cc.Label).string ='b&'+ data.list[i].id;
                 if(data.isRead==0){
                     haha.children[3].active = true;
@@ -102,22 +86,12 @@ cc.Class({
                 let haha = object['one'+Number(count)];
                 haha.active = true;
                 haha.children[2].getComponent(cc.Label).string = data.userMessList[i].prizeName;
-                // if(data.list[i].isSignUp==1){
-                //     haha.children[1].children[1].children[0].active =true;
-                //     if(data.list[i].userid){
-                //         haha.children[1].children[1].children[0].getComponent(cc.Button).interactable= false;   
-                //        // haha.children[1].children[1].color = new cc.Color(0,0,0);
-                //     }
-                //     haha.children[1].children[2].getComponent(cc.Label).string = data.list[i].id;
-                // }
                 haha.children[1].children[2].getComponent(cc.Label).string = 'b&'+data.list[i].id;
                 if(data.isRead==0){
                     haha.children[3].active = true;
                 }
             }
-                    }      
-      
-
+        }      
     },
     error:function(result,object){
 
