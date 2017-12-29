@@ -90,7 +90,7 @@ cc.Class({
     onLoad: function () {
          array = "";
          if(this.cardNum){
-            this.cardNum.string = '房卡：' +cc.beimi.user.cards + '张'
+            this.cardNum.string =  cc.beimi.user.cards + '张'
          }
 
     

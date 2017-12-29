@@ -19,6 +19,7 @@ cc.Class({
         one5: cc.Node,
         one6: cc.Node,
         seven: cc.Node,
+        web: cc.WebView,
     },
 
     // use this for initialization
@@ -27,25 +28,94 @@ cc.Class({
     },
     init: function(){
         cc.beimi.http.httpGet('/activity/findActivityListGame?token='+'bf4b88529d60433586f061ae655c73f0',this.sucess,this.error,this); 
+
+         
+        
+    },
+    xixixi: function(result,object){
+
+    },
+    hahahah: function(result,object){
+
     },
     sucess:function(result,object){
+        let count =0;
         var data = JSON.parse(result);  
         if(data.list&&data.list.length>0){
+                let id = data.list[0].id;  
+                
+                object.web.url=cc.beimi.url+'/activity/getActivityPage?token='+'bf4b88529d60433586f061ae655c73f0&activityId='+id;
             for(let i = 0; i< data.list.length; i++ ){
-                let haha = object['one'+Number(i+1)];
+                count++;                
+
+                let haha = object['one'+Number(count)];
                 haha.active = true;
                 haha.children[2].getComponent(cc.Label).string = data.list[i].activiteName;
-                haha.children[1].children[0].getComponent(cc.RichText).string = data.list[i].activiteContent;
-                if(data.list[i].isSignUp==1){
-                    haha.children[1].children[1].children[0].active =true;
-                    if(data.list[i].userid){
-                        haha.children[1].children[1].children[0].getComponent(cc.Button).interactable= false;   
-                       // haha.children[1].children[1].color = new cc.Color(0,0,0);
-                    }
-                    haha.children[1].children[2].getComponent(cc.Label).string = data.list[i].id;
+                if(data.isRead==0){
+                    haha.children[3].active = true;
+                }
+                haha.children[1].children[2].getComponent(cc.Label).string = 'a&'+data.list[i].id;
+                // if(data.list[i].isSignUp==1){
+                //     haha.children[1].children[1].children[0].active =true;
+                //     if(data.list[i].userid){
+                //         haha.children[1].children[1].children[0].getComponent(cc.Button).interactable= false;   
+                //        // haha.children[1].children[1].color = new cc.Color(0,0,0);
+                //     }
+                //     
+                // }
+            }
+        }
+        if(data.prizeList&&data.prizeList.length>0){
+            if(!data.list){
+                let id = data.prizeList[0].id;  
+                object.web.url=cc.beimi.url+'/activity/getPrizePage?token='+'bf4b88529d60433586f061ae655c73f0&pirzeId='+id;
+                
+            }
+            for(let i = 0; i< data.prizeList.length; i++ ){
+                count++;
+                let haha = object['one'+Number(count)];
+                haha.active = true;
+                haha.children[2].getComponent(cc.Label).string = data.prizeList[i].prizeName;
+                // if(data.list[i].isSignUp==1){
+                //     haha.children[1].children[1].children[0].active =true;
+                //     if(data.list[i].userid){
+                //         haha.children[1].children[1].children[0].getComponent(cc.Button).interactable= false;   
+                //        // haha.children[1].children[1].color = new cc.Color(0,0,0);
+                //     }
+                //     haha.children[1].children[2].getComponent(cc.Label).string = data.list[i].id;
+                // }
+                haha.children[1].children[2].getComponent(cc.Label).string ='b&'+ data.list[i].id;
+                if(data.isRead==0){
+                    haha.children[3].active = true;
+                    
                 }
             }
-        }      
+        } 
+        if(data.userMessList&&data.userMessList.length>0){
+            if(!data.list&&!data.prizeList){
+                let id = data.userMessList[0].id;  
+
+                object.web.url=cc.beimi.url+'/activity/getPrizePage?token='+'bf4b88529d60433586f061ae655c73f0&pirzeId='+id;
+            }
+            for(let i = 0; i< data.userMessList.length; i++ ){
+                count++;
+                let haha = object['one'+Number(count)];
+                haha.active = true;
+                haha.children[2].getComponent(cc.Label).string = data.userMessList[i].prizeName;
+                // if(data.list[i].isSignUp==1){
+                //     haha.children[1].children[1].children[0].active =true;
+                //     if(data.list[i].userid){
+                //         haha.children[1].children[1].children[0].getComponent(cc.Button).interactable= false;   
+                //        // haha.children[1].children[1].color = new cc.Color(0,0,0);
+                //     }
+                //     haha.children[1].children[2].getComponent(cc.Label).string = data.list[i].id;
+                // }
+                haha.children[1].children[2].getComponent(cc.Label).string = 'b&'+data.list[i].id;
+                if(data.isRead==0){
+                    haha.children[3].active = true;
+                }
+            }
+                    }      
       
 
     },
@@ -53,8 +123,17 @@ cc.Class({
 
     },
     click :function(event){
-        let hehe = event.target.parent.children[2].getComponent(cc.Label).string;
-        cc.beimi.http.httpGet('/activity/saveUserActivity?token='+'bf4b88529d60433586f061ae655c73f0&activityId='+hehe,this.sucesss,this.errors,this); 
+        let id = event.target.parent.children[1].children[2].getComponent(cc.Label).string;
+        let arry = id.split('&');
+        let a = arry[0];
+        let b = arry[1];
+        if(a=='a'){
+            this.web.url = cc.beimi.url+'/activity/getActivityPage?token='+'bf4b88529d60433586f061ae655c73f0&activityId='+b;
+        }else if(a=='b'){
+            this.web.url =cc.beimi.url+'/activity/getPrizePage?token='+'bf4b88529d60433586f061ae655c73f0&pirzeId='+b;
+        }
+        event.target.parent.children[3].active = false;
+
     },
     sucesss:function(result,object){},
     errors:function(result,object){},
