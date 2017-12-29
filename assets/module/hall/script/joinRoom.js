@@ -83,6 +83,7 @@ cc.Class({
         huise:cc.SpriteFrame,
         zhoubisai: cc.Node,
         yuebisai:cc.Node,
+        ribisai:cc.Node,
     },
 
     // use this for initialization
@@ -105,6 +106,19 @@ cc.Class({
         var data = JSON.parse(result);
         object.zhouLab.string = data.week;
         object.yueLab.string = data.month;
+
+        {
+            object.zhoubisai.getComponent(cc.Button).interactable= false;
+            var sprite = object.zhoubisai.getComponent(cc.Sprite);
+            sprite.spriteFrame = object.huise;
+            var sprite2 = object.yuebisai.getComponent(cc.Sprite);
+            sprite2.spriteFrame = object.huise;
+            object.ribisai.getComponent(cc.Button).interactable= false;
+            var sprite3 = object.ribisai.getComponent(cc.Sprite);
+            sprite3.spriteFrame = object.huise;
+            object.zhoubisai.getComponent(cc.Button).interactable= false; 
+        }
+
         if(data.weekMah&&data.goMah){
             object.zhoupic.active = false;
         }else if(data.weekMah &&!data.goMah ){
