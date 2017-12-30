@@ -27,7 +27,7 @@ cc.Class({
         this.init();
     },
     init: function(){
-        cc.beimi.http.httpGet('/activity/findActivityListGame?token='+'bf4b88529d60433586f061ae655c73f0',this.sucess,this.error,this); 
+        cc.beimi.http.httpGet('/activity/findActivityListGame?token='+cc.beimi.authorization,this.sucess,this.error,this); 
 
          
         
@@ -44,7 +44,7 @@ cc.Class({
         if(data.list&&data.list.length>0){
                 let id = data.list[0].id;  
                 
-                object.web.url=cc.beimi.url+'/activity/getActivityPage?token='+'bf4b88529d60433586f061ae655c73f0&activityId='+id;
+                object.web.url=cc.beimi.url+'/activity/getActivityPage?token='+cc.beimi.authorization+'&activityId='+id;
             for(let i = 0; i< data.list.length; i++ ){
                 count++;                
 
@@ -60,7 +60,7 @@ cc.Class({
         if(data.prizeList&&data.prizeList.length>0){
             if(!data.list){
                 let id = data.prizeList[0].id;  
-                object.web.url=cc.beimi.url+'/activity/getPrizePage?token='+'bf4b88529d60433586f061ae655c73f0&pirzeId='+id;
+                object.web.url=cc.beimi.url+'/activity/getPrizePage?token='+cc.beimi.authorization+'&pirzeId='+id;
                 
             }
             for(let i = 0; i< data.prizeList.length; i++ ){
@@ -79,7 +79,7 @@ cc.Class({
             if(!data.list&&!data.prizeList){
                 let id = data.userMessList[0].id;  
 
-                object.web.url=cc.beimi.url+'/activity/getPrizePage?token='+'bf4b88529d60433586f061ae655c73f0&pirzeId='+id;
+                object.web.url=cc.beimi.url+'/activity/getPrizePage?token='+cc.beimi.authorization+'&pirzeId='+id;
             }
             for(let i = 0; i< data.userMessList.length; i++ ){
                 count++;
@@ -102,9 +102,9 @@ cc.Class({
         let a = arry[0];
         let b = arry[1];
         if(a=='a'){
-            this.web.url = cc.beimi.url+'/activity/getActivityPage?token='+'bf4b88529d60433586f061ae655c73f0&activityId='+b;
+            this.web.url = cc.beimi.url+'/activity/getActivityPage?token='+cc.beimi.authorization+'&activityId='+b;
         }else if(a=='b'){
-            this.web.url =cc.beimi.url+'/activity/getPrizePage?token='+'bf4b88529d60433586f061ae655c73f0&pirzeId='+b;
+            this.web.url =cc.beimi.url+'/activity/getPrizePage?token='+cc.beimi.authorization+'&pirzeId='+b;
         }
         event.target.parent.children[3].active = false;
 

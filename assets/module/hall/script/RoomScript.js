@@ -110,7 +110,7 @@ cc.Class({
         this.gundongText();
 		//请求获取当前用户是否已经参加了房间
 		cc.beimi.http.httpGet('/api/room/reConnection?token='+cc.beimi.authorization,this.roomSuccess,this.roomError,this);
-		cc.beimi.http.httpGet('/activity/findActivityListGame?token='+'bf4b88529d60433586f061ae655c73f0',this.hehesucess,this.heheerror,this); 
+		cc.beimi.http.httpGet('/activity/findActivityListGame?token='+cc.beimi.authorization,this.hehesucess,this.heheerror,this); 
 	},
 	hehesucess: function(result,object){
 		var data = JSON.parse(result);  
