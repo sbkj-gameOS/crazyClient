@@ -237,7 +237,7 @@ cc.Class({
      */
     onLoad: function () {
         if(cc.beimi.match == 'true'&&cc.beimi.starttime){
-            this.starttime.node.active = true;
+            this.starttime.node.parent.active = true;
             this.starttime.string = '开始时间：'+cc.beimi.starttime;
         }
         cc.beimi.playersss = 0;        
@@ -1896,8 +1896,8 @@ cc.Class({
      * @param context
      */
     play_event:function(data , context){
-        if(context.starttime.node.active ==true){
-            context.starttime.node.active =false;
+        if(context.starttime.node.parent.active ==true){
+            context.starttime.node.parent.active =false;
         }
         context.reinitGame(context);
         for(let h=0 ;h<data.players.length;h++){

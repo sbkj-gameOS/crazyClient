@@ -143,6 +143,7 @@ cc.Class({
         //     sprite.spriteFrame = object.huise;
         //     object.yuebisai.getComponent(cc.Button).interactable= false;
         // // }
+        
         if(cc.beimi.GameBase.gameModel!='wz'){
             if(data.activityList&&data.activityList.length>0){
                 for(let i = 0 ; i < data.activityList.length ; i ++){
@@ -150,6 +151,7 @@ cc.Class({
                         var sprite = object.ribisai.getComponent(cc.Sprite);
                         sprite.spriteFrame = object.huise;
                         object.ribisai.getComponent(cc.Button).interactable= true;
+                        object.ribisai.children[0].getComponent(cc.Label).string = data.activityList[i].startTime;
                         continue;
                     }
                     if(data.activityList[i].activiteType ==3){
@@ -157,6 +159,7 @@ cc.Class({
                         sprite.spriteFrame = object.huise;
                         object.zhoubisai.getComponent(cc.Button).interactable= true;
                         object.zhoupic.active = false;
+                        object.zhoubisai.children[0].getComponent(cc.Label).string = data.activityList[i].startTime;
                         continue;
                     }
                     if(data.activityList[i].activiteType ==4){
@@ -164,12 +167,14 @@ cc.Class({
                         sprite.spriteFrame = object.huise;
                         object.yuebisai.getComponent(cc.Button).interactable= true;
                         object.yuepic.active = false;
+                        object.yuebisai.children[0].getComponent(cc.Label).string = data.activityList[i].startTime;
                         continue;
                     }
                     if(object.yubisai&&data.activityList[i].activiteType ==1){
                         var sprite = object.yubisai.getComponent(cc.Sprite);
                         sprite.spriteFrame = object.huise;
                         object.yubisai.getComponent(cc.Button).interactable= true;
+                        object.yubisai.children[0].getComponent(cc.Label).string = data.activityList[i].startTime;
                         continue;
                     }
                 }
@@ -309,6 +314,7 @@ cc.Class({
     },
     jjroom: function(event){
         let type = event.target.name;
+        cc.beimi.starttime = event.target.children[0].getComponent(cc.Label).string;
         // let alert = cc.instantiate(this.alert2);
         // alert.parent = this.root();
         // cc.director.loadScene('majiang');
