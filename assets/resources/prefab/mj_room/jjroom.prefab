@@ -699,7 +699,8 @@
     },
     "ribisai": {
       "__id__": 173
-    }
+    },
+    "yubisai": null
   },
   {
     "__type__": "cc.Label",
@@ -4041,7 +4042,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "2",
+    "_name": "3",
     "_objFlags": 0,
     "_parent": {
       "__id__": 125
@@ -5690,7 +5691,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "4",
+    "_name": "2",
     "_objFlags": 0,
     "_parent": {
       "__id__": 125
@@ -6778,7 +6779,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "3",
+    "_name": "4",
     "_objFlags": 0,
     "_parent": {
       "__id__": 125
