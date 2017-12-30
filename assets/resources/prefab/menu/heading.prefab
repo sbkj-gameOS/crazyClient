@@ -24,19 +24,16 @@
         "__id__": 10
       },
       {
-        "__id__": 93
-      },
-      {
         "__id__": 20
       },
       {
-        "__id__": 96
+        "__id__": 93
       },
       {
         "__id__": 55
       },
       {
-        "__id__": 99
+        "__id__": 96
       },
       {
         "__id__": 15
@@ -46,7 +43,7 @@
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 104
+      "__id__": 101
     },
     "_id": "",
     "_opacity": 255,
@@ -302,7 +299,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "0831caf6-4c4f-451d-bfbd-020390c34099"
+      "__uuid__": "c6436284-5b34-4eb2-b86f-3807e8b83d7c"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -317,9 +314,7 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": {
-      "__uuid__": "79938bea-34a0-4ab7-8cdb-4ec11ac6ad4b"
-    }
+    "_atlas": null
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -2911,7 +2906,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "玩家信息-title",
+    "_name": "xian",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -2926,99 +2921,6 @@
     ],
     "_prefab": {
       "__id__": 95
-    },
-    "_id": "",
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_cascadeOpacityEnabled": true,
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 200,
-      "height": 51
-    },
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
-    "_position": {
-      "__type__": "cc.Vec2",
-      "x": 647,
-      "y": 612
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_localZOrder": 0,
-    "_globalZOrder": 0,
-    "_opacityModifyRGB": false,
-    "groupIndex": 0
-  },
-  {
-    "__type__": "cc.Sprite",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 93
-    },
-    "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "87355f7e-7a67-4136-b7f4-a1f9fc4c810c"
-    },
-    "_type": 0,
-    "_sizeMode": 0,
-    "_fillType": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_atlas": {
-      "__uuid__": "79938bea-34a0-4ab7-8cdb-4ec11ac6ad4b"
-    }
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__uuid__": "ee1e4c09-24ac-4adc-9984-2ee3c6f1bc43"
-    },
-    "fileId": "1e8A/1sZtOg7h+MkddmVH5",
-    "sync": false
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "xian",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 1
-    },
-    "_children": [],
-    "_tag": -1,
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 97
-      }
-    ],
-    "_prefab": {
-      "__id__": 98
     },
     "_id": "",
     "_opacity": 255,
@@ -3061,7 +2963,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 96
+      "__id__": 93
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -3105,14 +3007,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 100
+        "__id__": 97
       },
       {
-        "__id__": 102
+        "__id__": 99
       }
     ],
     "_prefab": {
-      "__id__": 103
+      "__id__": 100
     },
     "_id": "",
     "_opacity": 255,
@@ -3155,7 +3057,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 99
+      "__id__": 96
     },
     "_enabled": true,
     "transition": 3,
@@ -3179,7 +3081,7 @@
     "hoverSprite": null,
     "clickEvents": [
       {
-        "__id__": 101
+        "__id__": 98
       }
     ],
     "_N$interactable": true,
@@ -3201,7 +3103,7 @@
     "_N$normalSprite": null,
     "_N$disabledSprite": null,
     "_N$target": {
-      "__id__": 99
+      "__id__": 96
     }
   },
   {
@@ -3218,7 +3120,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 99
+      "__id__": 96
     },
     "_enabled": true,
     "_spriteFrame": {

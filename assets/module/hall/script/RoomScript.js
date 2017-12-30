@@ -219,9 +219,9 @@ cc.Class({
 	},
 	paiminghall:function(){
 		// cc.director.loadScene('joinInRoom');
-		cc.beimi.dialog = cc.instantiate(this.paiming) ;
-        cc.beimi.dialog.parent = this.root();
-      
+		// cc.beimi.dialog = cc.instantiate(this.paiming) ;
+        // cc.beimi.dialog.parent = this.root();
+		this.alert2('功能暂未开放');
 	},
 	jjjjbshall:function(){
 		// cc.director.loadScene('joinInRoom');

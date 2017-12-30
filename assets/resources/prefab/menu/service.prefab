@@ -27,10 +27,7 @@
         "__id__": 23
       },
       {
-        "__id__": 26
-      },
-      {
-        "__id__": 41
+        "__id__": 38
       },
       {
         "__id__": 15
@@ -40,7 +37,7 @@
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 57
+      "__id__": 54
     },
     "_id": "",
     "_opacity": 255,
@@ -296,7 +293,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "0831caf6-4c4f-451d-bfbd-020390c34099"
+      "__uuid__": "e59db9bf-a427-4d8d-929c-1e88265991ca"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -311,9 +308,7 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": {
-      "__uuid__": "79938bea-34a0-4ab7-8cdb-4ec11ac6ad4b"
-    }
+    "_atlas": null
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -373,8 +368,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 565,
-      "y": 253
+      "x": 573,
+      "y": 266
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -703,103 +698,15 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "客服",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 1
-    },
-    "_children": [],
-    "_tag": -1,
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 24
-      }
-    ],
-    "_prefab": {
-      "__id__": 25
-    },
-    "_id": "",
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_cascadeOpacityEnabled": true,
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 115,
-      "height": 61
-    },
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
-    "_position": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 253
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_localZOrder": 0,
-    "_globalZOrder": 0,
-    "_opacityModifyRGB": false,
-    "groupIndex": 0
-  },
-  {
-    "__type__": "cc.Sprite",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 23
-    },
-    "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "3444c232-28e3-475a-9356-2f6bea4e4ad2"
-    },
-    "_type": 0,
-    "_sizeMode": 0,
-    "_fillType": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_atlas": null
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__uuid__": "2173c0fd-0f4e-4752-a7db-8ba772ed5cb9"
-    },
-    "fileId": "7cfe+IRg1GvapF+b1JOh6H",
-    "sync": false
-  },
-  {
-    "__type__": "cc.Node",
     "_name": "123456",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
     },
     "_children": [
+      {
+        "__id__": 24
+      },
       {
         "__id__": 27
       },
@@ -808,20 +715,17 @@
       },
       {
         "__id__": 33
-      },
-      {
-        "__id__": 36
       }
     ],
     "_tag": -1,
     "_active": false,
     "_components": [
       {
-        "__id__": 39
+        "__id__": 36
       }
     ],
     "_prefab": {
-      "__id__": 40
+      "__id__": 37
     },
     "_id": "",
     "_opacity": 255,
@@ -864,18 +768,18 @@
     "_name": "分享-wechat_icon",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 26
+      "__id__": 23
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 28
+        "__id__": 25
       }
     ],
     "_prefab": {
-      "__id__": 29
+      "__id__": 26
     },
     "_id": "",
     "_opacity": 255,
@@ -918,7 +822,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 27
+      "__id__": 24
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -957,18 +861,18 @@
     "_name": "用户边框",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 26
+      "__id__": 23
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 31
+        "__id__": 28
       }
     ],
     "_prefab": {
-      "__id__": 32
+      "__id__": 29
     },
     "_id": "",
     "_opacity": 255,
@@ -1011,7 +915,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 30
+      "__id__": 27
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -1050,18 +954,18 @@
     "_name": "label",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 26
+      "__id__": 23
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 34
+        "__id__": 31
       }
     ],
     "_prefab": {
-      "__id__": 35
+      "__id__": 32
     },
     "_id": "",
     "_opacity": 255,
@@ -1104,7 +1008,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 33
+      "__id__": 30
     },
     "_enabled": true,
     "_useOriginalSize": false,
@@ -1137,18 +1041,18 @@
     "_name": "richtext",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 26
+      "__id__": 23
     },
     "_children": [],
     "_tag": -1,
     "_active": false,
     "_components": [
       {
-        "__id__": 37
+        "__id__": 34
       }
     ],
     "_prefab": {
-      "__id__": 38
+      "__id__": 35
     },
     "_id": "",
     "_opacity": 255,
@@ -1191,7 +1095,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 36
+      "__id__": 33
     },
     "_enabled": true,
     "_N$string": "<color=#469E0B><b>复制</b></color>",
@@ -1218,7 +1122,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 26
+      "__id__": 23
     },
     "_enabled": true,
     "transition": 0,
@@ -1260,7 +1164,7 @@
     "_N$normalSprite": null,
     "_N$disabledSprite": null,
     "_N$target": {
-      "__id__": 26
+      "__id__": 23
     }
   },
   {
@@ -1283,6 +1187,9 @@
     },
     "_children": [
       {
+        "__id__": 39
+      },
+      {
         "__id__": 42
       },
       {
@@ -1290,20 +1197,17 @@
       },
       {
         "__id__": 48
-      },
-      {
-        "__id__": 51
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 54
+        "__id__": 51
       }
     ],
     "_prefab": {
-      "__id__": 56
+      "__id__": 53
     },
     "_id": "",
     "_opacity": 255,
@@ -1346,18 +1250,18 @@
     "_name": "分享-wechat_icon",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 41
+      "__id__": 38
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 43
+        "__id__": 40
       }
     ],
     "_prefab": {
-      "__id__": 44
+      "__id__": 41
     },
     "_id": "",
     "_opacity": 255,
@@ -1386,7 +1290,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": -71,
-      "y": 20
+      "y": 79
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1400,7 +1304,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 42
+      "__id__": 39
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -1439,18 +1343,18 @@
     "_name": "用户边框",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 41
+      "__id__": 38
     },
     "_children": [],
     "_tag": -1,
     "_active": false,
     "_components": [
       {
-        "__id__": 46
+        "__id__": 43
       }
     ],
     "_prefab": {
-      "__id__": 47
+      "__id__": 44
     },
     "_id": "",
     "_opacity": 255,
@@ -1493,7 +1397,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 45
+      "__id__": 42
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -1532,18 +1436,18 @@
     "_name": "label",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 41
+      "__id__": 38
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 49
+        "__id__": 46
       }
     ],
     "_prefab": {
-      "__id__": 50
+      "__id__": 47
     },
     "_id": "",
     "_opacity": 255,
@@ -1572,7 +1476,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": -73,
-      "y": -138
+      "y": -87
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1586,7 +1490,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 48
+      "__id__": 45
     },
     "_enabled": true,
     "_useOriginalSize": false,
@@ -1619,18 +1523,18 @@
     "_name": "richtext",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 41
+      "__id__": 38
     },
     "_children": [],
     "_tag": -1,
     "_active": false,
     "_components": [
       {
-        "__id__": 52
+        "__id__": 49
       }
     ],
     "_prefab": {
-      "__id__": 53
+      "__id__": 50
     },
     "_id": "",
     "_opacity": 255,
@@ -1673,7 +1577,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 51
+      "__id__": 48
     },
     "_enabled": true,
     "_N$string": "<color=#469E0B><b>复制</b></color>",
@@ -1700,7 +1604,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 41
+      "__id__": 38
     },
     "_enabled": true,
     "transition": 0,
@@ -1724,7 +1628,7 @@
     "hoverSprite": null,
     "clickEvents": [
       {
-        "__id__": 55
+        "__id__": 52
       }
     ],
     "_N$interactable": true,
@@ -1746,7 +1650,7 @@
     "_N$normalSprite": null,
     "_N$disabledSprite": null,
     "_N$target": {
-      "__id__": 41
+      "__id__": 38
     }
   },
   {

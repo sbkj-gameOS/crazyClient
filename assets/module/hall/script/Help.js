@@ -29,7 +29,7 @@ cc.Class({
             this.ccmjPlery.active =true;
         }
         this.colorWhite = new cc.Color(255, 255, 255);//白色
-        this.colorBrown = new cc.Color(122, 69, 11);//棕色
+        this.colorBrown = new cc.Color(255, 255, 255);//棕色
         //设置第一个选中的状态
         selectlastToggle = this.selectOne;
     },

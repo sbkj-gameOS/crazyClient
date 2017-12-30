@@ -88,9 +88,9 @@ cc.Class({
         cc.sys.localStorage.setItem('dis','true');        
         this.disconnect();
         if(cc.beimi.GameBase.gameModel=='wz'){
-            object.scene("温州" , object) ;
+            this.scene("温州" , this) ;
         }else{
-            object.scene("gameMain" , object) ;
+            this.scene("gameMain" , this) ;
             
         }
         this.node.dispatchEvent( new cc.Event.EventCustom('leaveGame', true) );

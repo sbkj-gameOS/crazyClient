@@ -74,6 +74,7 @@ cc.Class({
 
             cc.find("Canvas/New Node/New ScrollView/view/content/New ToggleGroup/龙港麻将").active = true;
             cc.find("Canvas/New Node/New ScrollView/view/content/New ToggleGroup/台炮麻将").active = true ; 
+            cc.find("Canvas/New Node/New ScrollView/view/content/New ToggleGroup/长春麻将").active = false ;
             this.right1.active = false;
             this.right2.active = true;
             this.right3.active = false; 
