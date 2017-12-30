@@ -109,8 +109,43 @@ cc.Class({
 		
         this.gundongText();
 		//请求获取当前用户是否已经参加了房间
-        cc.beimi.http.httpGet('/api/room/reConnection?token='+cc.beimi.authorization,this.roomSuccess,this.roomError,this);
-    },
+		cc.beimi.http.httpGet('/api/room/reConnection?token='+cc.beimi.authorization,this.roomSuccess,this.roomError,this);
+		cc.beimi.http.httpGet('/activity/findActivityListGame?token='+'bf4b88529d60433586f061ae655c73f0',this.hehesucess,this.heheerror,this); 
+	},
+	hehesucess: function(result,object){
+		var data = JSON.parse(result);  
+		let sb = false;
+		if(data.list&&data.list.length>0){			
+		for(let i = 0; i< data.list.length; i++ ){
+			if(data.list[i].isRead==0){
+				sb =true;
+				break
+			}
+		}
+	}
+	if(data.prizeList&&data.prizeList.length>0){
+		for(let i = 0; i< data.prizeList.length; i++ ){
+			if(data.prizeList[i].isRead==0){
+				sb =true;
+				break
+			}
+		}
+	} 
+	if(data.userMessList&&data.userMessList.length>0){
+		for(let i = 0; i< data.userMessList.length; i++ ){
+			if(data.userMessList[i].isRead==0){
+				sb =true;
+				break
+			}
+		}
+	} 
+	if(sb){
+		object.tongzhihall();
+	}
+	},
+	heheerror: function(result,object){
+		
+	},
 	//滚动公告字幕
 	gundongText:function(){
 		var self = this;

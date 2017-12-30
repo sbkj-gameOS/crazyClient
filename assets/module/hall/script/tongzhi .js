@@ -51,7 +51,7 @@ cc.Class({
                 let haha = object['one'+Number(count)];
                 haha.active = true;
                 haha.children[2].getComponent(cc.Label).string = data.list[i].activiteName;
-                if(data.isRead==0){
+                if(data.list[i].isRead==0){
                     haha.children[3].active = true;
                 }
                 haha.children[1].children[2].getComponent(cc.Label).string = 'a&'+data.list[i].id;
@@ -69,7 +69,7 @@ cc.Class({
                 haha.active = true;
                 haha.children[2].getComponent(cc.Label).string = data.prizeList[i].prizeName;
                 haha.children[1].children[2].getComponent(cc.Label).string ='b&'+ data.list[i].id;
-                if(data.isRead==0){
+                if(data.prizeList[i].isRead==0){
                     haha.children[3].active = true;
                     
                 }
@@ -87,7 +87,7 @@ cc.Class({
                 haha.active = true;
                 haha.children[2].getComponent(cc.Label).string = data.userMessList[i].prizeName;
                 haha.children[1].children[2].getComponent(cc.Label).string = 'b&'+data.list[i].id;
-                if(data.isRead==0){
+                if(data.userMessList[i].isRead==0){
                     haha.children[3].active = true;
                 }
             }
