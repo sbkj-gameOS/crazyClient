@@ -226,7 +226,8 @@ cc.Class({
             type:cc.SpriteFrame
         },
         wxButton: cc.Button,
-        ggButton: cc.Button
+        ggButton: cc.Button,
+        starttime: cc.Label
     },
 
 
@@ -235,6 +236,10 @@ cc.Class({
      * 重构后，只有两个消息类型
      */
     onLoad: function () {
+        if(cc.beimi.match == 'true'&&cc.beimi.starttime){
+            this.starttime.node.active = true;
+            this.starttime.string = '开始时间：'+cc.beimi.starttime;
+        }
         cc.beimi.playersss = 0;        
         this.bgsetting();
         if(cc.beimi.browserType=="wechat"){
@@ -1130,7 +1135,7 @@ cc.Class({
             }else{
                 cc.sys.localStorage.removeItem('alting');
             }
-            if(data.notSend||cc.sys.localStorage.getItem('take') != 'true'){
+            if(!data.allow||data.notSend||cc.sys.localStorage.getItem('take') != 'true'){
                 return;
             }
             cc.sys.localStorage.removeItem('altake');
@@ -1677,6 +1682,7 @@ cc.Class({
         context = cc.find('Canvas').getComponent('MajiangDataBind');     
         cc.sys.localStorage.setItem('altake','true');
         cc.sys.localStorage.removeItem('take');
+        
        // if(cc.beimi.user.id == data.userid){
             let gang , peng , chi , hu , guo ,dan,ting;
             if(data.chis){
@@ -1890,6 +1896,9 @@ cc.Class({
      * @param context
      */
     play_event:function(data , context){
+        if(context.starttime.node.active ==true){
+            context.starttime.node.active =false;
+        }
         context.reinitGame(context);
         for(let h=0 ;h<data.players.length;h++){
             var players = data.players[h];
