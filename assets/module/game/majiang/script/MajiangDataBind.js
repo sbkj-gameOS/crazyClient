@@ -531,7 +531,12 @@ cc.Class({
         });
         this.node.on('restar',function(event){
             if(event.getUserData()){
-                cc.director.loadScene('gameMain');
+                
+                if(cc.beimi.GameBase.gameModel=='wz'){
+                    cc.director.loadScene('温州');
+                }else{
+                    cc.director.loadScene('gameMain');                    
+                }
             }else{
                 if(cc.sys.localStorage.getItem('clear') != 'true'){
                     var context = cc.find('Canvas').getComponent('MajiangDataBind'); 
@@ -843,7 +848,11 @@ cc.Class({
         cc.beimi.room=null;
         cc.beimi.cardNum = null;
         cc.sys.localStorage.setItem('dis','true');        
-        cc.director.loadScene('gameMain');
+        if(cc.beimi.GameBase.gameModel=='wz'){
+            cc.director.loadScene('温州');
+        }else{
+            cc.director.loadScene('gameMain');                    
+        }
         let mj = cc.find('Canvas').getComponent('MajiangDataBind');
         clearTimeout(mj.t);  
         // var desk = require("DeskCards");

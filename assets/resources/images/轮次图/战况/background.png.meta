@@ -1,14 +1,14 @@
 {
   "ver": "1.0.0",
-  "uuid": "a7a23b5b-f8a0-498d-9119-581478d188c7",
+  "uuid": "6c089a4f-548c-44fd-9c1d-bdc9b865aece",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "预赛": {
+    "background": {
       "ver": "1.0.3",
-      "uuid": "77575e2e-3712-45ca-95fe-da186aca8bc1",
-      "rawTextureUuid": "a7a23b5b-f8a0-498d-9119-581478d188c7",
+      "uuid": "4cf9c3ab-d769-45a4-bda2-74dcf44ef18b",
+      "rawTextureUuid": "6c089a4f-548c-44fd-9c1d-bdc9b865aece",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
@@ -16,10 +16,10 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 228,
-      "height": 131,
-      "rawWidth": 228,
-      "rawHeight": 131,
+      "width": 1100,
+      "height": 577,
+      "rawWidth": 1100,
+      "rawHeight": 577,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,

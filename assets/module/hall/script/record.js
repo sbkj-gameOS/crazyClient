@@ -47,10 +47,10 @@ cc.Class({
 
     onLoad: function () {
         this.type = 0;
-		this.content = this.scrollView.content;
+		//this.content = this.scrollView.content;
         this.items = [];
-        this.colorWhite = new cc.Color(255, 255, 255);//白色
-        this.colorBrown = new cc.Color(122, 69, 11);//棕色
+        // this.colorWhite = new cc.Color(255, 255, 255);//白色
+        // this.colorBrown = new cc.Color(122, 69, 11);//棕色
         //设置第一个选中的状态
         selectlastToggle = this.selectOne;
     	//this.initialize();
@@ -62,7 +62,7 @@ cc.Class({
 	    // 		limit:10
 	    // 	};
            // cc.beimi.http.httpPost('/record/perRecord',parm,this.success,this.error,this);
-           this.init(0);
+          // this.init(0);
            
         // };
         if(cc.beimi.GameBase.gameModel =='ch'||cc.beimi.GameBase.gameModel =='CH'){
@@ -95,19 +95,19 @@ cc.Class({
         //this.init(1)
     },
     toclick: function(event){
-        let type = event.target.name;
-        this.type = type;
-        if(type ==0){
-            this.content = this.scrollView.content;   
-        }else if(type ==1){
-            this.content = this.scrollView1.content;     
-        }else if(type ==2){
-            this.content = this.scrollView2.content; 
-        }else{
-            this.content = this.scrollView3.content;  
-        }
-        console.log(type)
-        this.init(type);
+        // let type = event.target.name;
+        // this.type = type;
+        // if(type ==0){
+        //     this.content = this.scrollView.content;   
+        // }else if(type ==1){
+        //     this.content = this.scrollView1.content;     
+        // }else if(type ==2){
+        //     this.content = this.scrollView2.content; 
+        // }else{
+        //     this.content = this.scrollView3.content;  
+        // }
+        // console.log(type)
+        // this.init(type);
     },
     init: function(type){
         var parm = {
