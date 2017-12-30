@@ -41,6 +41,11 @@ cc.Class({
     sucess:function(result,object){
         let count =0;
         var data = JSON.parse(result);  
+    
+        if((data.list.length==0||!data.list)&&(!data.userMessList||data.userMessList.length==0)&&(!data.prizeList||data.prizeList.length==0)) {
+            
+            object.web.node.active = false;
+        }
         if(data.list&&data.list.length>0){
                 let id = data.list[0].id;  
                 
@@ -91,7 +96,7 @@ cc.Class({
                     haha.children[3].active = true;
                 }
             }
-        }      
+        }     
     },
     error:function(result,object){
 
