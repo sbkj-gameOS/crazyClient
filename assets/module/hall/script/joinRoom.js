@@ -96,7 +96,7 @@ cc.Class({
 
     
          if(this.zhoupic){
-            cc.beimi.http.httpGet('/api/room/queryUserWinner?token='+'bf4b88529d60433586f061ae655c73f0',this.countsucess,this.counterror,this);            
+            cc.beimi.http.httpGet('/api/room/queryUserWinner?token='+cc.beimi.authorization,this.countsucess,this.counterror,this);            
          }
          //this.notice.active =false;
     },
