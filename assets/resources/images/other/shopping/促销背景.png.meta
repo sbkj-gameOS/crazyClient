@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "787332e8-ec87-41ac-989e-601d26f8d072",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "促销背景": {
+      "ver": "1.0.3",
+      "uuid": "1ec24eb4-4204-42f2-afde-ae83c2a57163",
+      "rawTextureUuid": "787332e8-ec87-41ac-989e-601d26f8d072",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 520,
+      "height": 33,
+      "rawWidth": 520,
+      "rawHeight": 33,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

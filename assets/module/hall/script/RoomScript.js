@@ -175,7 +175,11 @@ cc.Class({
 	},
 	//返回
 	backRoom:function(){
-		cc.director.loadScene('gameMain');
+		if(cc.beimi.GameBase.gameModel=='wz'){
+			cc.director.loadScene('温州');
+		}else{
+			cc.director.loadScene('gameMain');			
+		}
 	},
 	//创建包厢
 	createRoom:function(){

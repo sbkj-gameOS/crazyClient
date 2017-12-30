@@ -143,36 +143,39 @@ cc.Class({
         //     sprite.spriteFrame = object.huise;
         //     object.yuebisai.getComponent(cc.Button).interactable= false;
         // // }
-        if(data.activityList&&data.activityList.length>0){
-            for(let i = 0 ; i < data.activityList.length ; i ++){
-                if(data.activityList[i].activiteType ==2&&data.activityList[i].isSignUp=='1'){
-                    var sprite = object.ribisai.getComponent(cc.Sprite);
-                    sprite.spriteFrame = object.huise;
-                    object.ribisai.getComponent(cc.Button).interactable= true;
-                    continue;
-                }
-                if(data.activityList[i].activiteType ==3){
-                    var sprite = object.zhoubisai.getComponent(cc.Sprite);
-                    sprite.spriteFrame = object.huise;
-                    object.zhoubisai.getComponent(cc.Button).interactable= true;
-                    object.zhoupic.active = false;
-                    continue;
-                }
-                if(data.activityList[i].activiteType ==4){
-                    var sprite = object.yuebisai.getComponent(cc.Sprite);
-                    sprite.spriteFrame = object.huise;
-                    object.yuebisai.getComponent(cc.Button).interactable= true;
-                    object.yuepic.active = false;
-                    continue;
-                }
-                if(object.yubisai&&data.activityList[i].activiteType ==1){
-                    var sprite = object.yubisai.getComponent(cc.Sprite);
-                    sprite.spriteFrame = object.huise;
-                    object.yubisai.getComponent(cc.Button).interactable= true;
-                    continue;
+        if(cc.beimi.GameBase.gameModel!='wz'){
+            if(data.activityList&&data.activityList.length>0){
+                for(let i = 0 ; i < data.activityList.length ; i ++){
+                    if(data.activityList[i].activiteType ==2&&data.activityList[i].isSignUp=='1'){
+                        var sprite = object.ribisai.getComponent(cc.Sprite);
+                        sprite.spriteFrame = object.huise;
+                        object.ribisai.getComponent(cc.Button).interactable= true;
+                        continue;
+                    }
+                    if(data.activityList[i].activiteType ==3){
+                        var sprite = object.zhoubisai.getComponent(cc.Sprite);
+                        sprite.spriteFrame = object.huise;
+                        object.zhoubisai.getComponent(cc.Button).interactable= true;
+                        object.zhoupic.active = false;
+                        continue;
+                    }
+                    if(data.activityList[i].activiteType ==4){
+                        var sprite = object.yuebisai.getComponent(cc.Sprite);
+                        sprite.spriteFrame = object.huise;
+                        object.yuebisai.getComponent(cc.Button).interactable= true;
+                        object.yuepic.active = false;
+                        continue;
+                    }
+                    if(object.yubisai&&data.activityList[i].activiteType ==1){
+                        var sprite = object.yubisai.getComponent(cc.Sprite);
+                        sprite.spriteFrame = object.huise;
+                        object.yubisai.getComponent(cc.Button).interactable= true;
+                        continue;
+                    }
                 }
             }
         }
+
     },
     counterror(result,object){},
     

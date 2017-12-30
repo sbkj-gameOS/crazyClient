@@ -87,7 +87,12 @@ cc.Class({
     leaveGameClick:function(){
         cc.sys.localStorage.setItem('dis','true');        
         this.disconnect();
-        this.scene("gameMain" , this);
+        if(cc.beimi.GameBase.gameModel=='wz'){
+            object.scene("温州" , object) ;
+        }else{
+            object.scene("gameMain" , object) ;
+            
+        }
         this.node.dispatchEvent( new cc.Event.EventCustom('leaveGame', true) );
     },
     daojishi: function(){

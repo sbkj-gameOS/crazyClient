@@ -27,7 +27,8 @@ cc.Class({
         CCLogo:{
             default:null,
             type:cc.SpriteFrame
-        }
+        },
+        JXLogo:cc.SpriteFrame,
     },
     // 首次加载页面方法
     onLoad: function () {
@@ -36,8 +37,10 @@ cc.Class({
         var sprite = this.loginLogoNode.getComponent(cc.Sprite);
         if(cc.beimi.GameBase.gameModel =='wz'){
             sprite.spriteFrame = this.WZLogo;
-        }else{
+        }else if(cc.beimi.GameBase.gameModel == 'ch'){
             sprite.spriteFrame = this.CCLogo;
+        }else if(cc.beimi.GameBase.gameModel == 'jx'){
+            sprite.spriteFrame = this.JXLogo;
         }
         /**
          * 游客登录，无需弹出注册对话框，先从本地获取是否有过期的对话数据，如果有过期的对话数据，则使用过期的对话数据续期
@@ -71,8 +74,40 @@ cc.Class({
         
         WXorBlow = require('ShareWx');  
         cc.beimi.WXorBlow = new WXorBlow();
+        cc.beimi.http.httpGet('/api/room/reConnection?token='+cc.beimi.authorization,this.roomSuccess,this.roomError,this);        
         cc.beimi.WXorBlow.init();   
+        //请求获取当前用户是否已经参加了房间
         
+    },
+    roomSuccess: function(result,object){
+		result = JSON.parse(result);
+		console.log('--------')
+		console.log(result);
+        if(result.room){
+			//playerNum,cardNum
+                cc.beimi.room = result.room;
+                cc.beimi.playway = result.playway;
+			if(result.match){
+                cc.beimi.match = result.match ; 
+            }
+			if(result.maxRound){
+                cc.beimi.maxRound = result.maxRound;
+            }
+			if(result.playerNum){
+                cc.beimi.playerNum = result.playerNum;
+            }
+            if(result.cardNum){
+                cc.beimi.cardNum = result.cardNum;
+            }
+            var sprite = object.ganmeBtn.getComponent(cc.Sprite);
+        	sprite.spriteFrame = object.backRoomImg;
+        } else {
+			cc.beimi.room = null;
+		}
+        
+    },
+    roomError: function(object){
+        object.alert("网络异常");
     },
     //游客登录方法
     tourist: function(){
@@ -105,7 +140,17 @@ cc.Class({
             //预加载场景
             console.log('ok');
             //if(cc.beimi.games && cc.beimi.games.length == 1){//只定义了单一游戏类型 ，否则 进入游戏大厅
-                object.scene("gameMain" , object) ;
+                if(cc.beimi.GameBase.gameModel=='wz'){
+                    object.scene("温州" , object) ;
+                }else{
+                    if(cc.beimi.GameBase.gameModel=='wz'){
+                        object.scene("温州" , object) ;
+                    }else{
+                        object.scene("gameMain" , object) ;
+                        
+                    }
+                    
+                }
                 //cc.director.loadScene('gameMain');
                 /**
                  * 传递全局参数，当前进入的游戏类型，另外全局参数是 选场
@@ -166,13 +211,23 @@ cc.Class({
             object.loadding();
             //房间号参数不为空    直接进入房间
             if (object.getUrlParam('roomNum') != 'null' && object.getUrlParam('roomNum') != null){
-                var room={};
-                room.room = object.getUrlParam('roomNum');
-                room.token = cc.beimi.authorization;
+                
+                
+                let rooms = object.getUrlParam('roomNum');
+                if(typeof(rooms) =='number'&&((cc.beimi.room!=null&&cc.beimi.room == rooms)||cc.beimi.room==null)){
+                    var room={};
+                    room.token = cc.beimi.authorization;
+                    room.room = rooms;
+                }
                 cc.beimi.http.httpPost('/api/room/query',room,object.JRsucess,object.JRerror,object);
             }else{
                 object.connect();
-                object.scene('gameMain' , object) ;
+                if(cc.beimi.GameBase.gameModel=='wz'){
+                    object.scene("温州" , object) ;
+                }else{
+                    object.scene("gameMain" , object) ;
+                    
+                }
             }
        }
    },
@@ -205,7 +260,12 @@ cc.Class({
             });
         }else{
             object.connect();
-            object.scene('gameMain' , object) ;
+            if(cc.beimi.GameBase.gameModel=='wz'){
+                object.scene("温州" , object) ;
+            }else{
+                object.scene("gameMain" , object) ;
+                
+            }
         }     
     },
     JRerror: function(object){

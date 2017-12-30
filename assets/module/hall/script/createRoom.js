@@ -72,7 +72,7 @@ cc.Class({
             this.tpBtn.isChecked = true;
             this.ccBtn.active = false;
 
-            // cc.find("Canvas/New Node/New ScrollView/view/content/New ToggleGroup/龙港麻将").active = true;
+            cc.find("Canvas/New Node/New ScrollView/view/content/New ToggleGroup/龙港麻将").active = true;
             cc.find("Canvas/New Node/New ScrollView/view/content/New ToggleGroup/台炮麻将").active = true ; 
             this.right1.active = false;
             this.right2.active = true;

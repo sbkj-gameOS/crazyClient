@@ -305,7 +305,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "ccd4ee03-bb27-450f-bd34-852e14dca5d7"
+      "__uuid__": "f702790d-b6be-4487-ae23-42d647df51a3"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -8123,7 +8123,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 257

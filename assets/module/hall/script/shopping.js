@@ -14,12 +14,15 @@ cc.Class({
         default: null,
         type : cc.Node
     },
+    notices: cc.Node,
      
     },
 
     // use this for initialization
     onLoad: function () {
-    
+        if(cc.beimi.GameBase.gameModel=='wz'){
+            this.notices.active = false;
+        }
     },
     // getPrice:function(){
     //     var pricenode = this.price;
