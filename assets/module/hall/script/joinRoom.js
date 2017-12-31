@@ -114,6 +114,7 @@ cc.Class({
         }
         if(object.yubisai){
             object.yubisai.getComponent(cc.Button).interactable= false;
+          
         }
         // {
         //     object.zhoubisai.getComponent(cc.Button).interactable= false;

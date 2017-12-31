@@ -65,6 +65,7 @@ cc.Class({
             cc.beimi.dialog = null ;
             cc.beimi.dialogtwo = null;
             cc.beimi.paystatus = null ;
+            cc.beimi.starttime ='';
             cc.beimi.room = null;
             //cc.beimi.audiocontext = new (window.AudioContext || window.webkitAudioContext)();
             

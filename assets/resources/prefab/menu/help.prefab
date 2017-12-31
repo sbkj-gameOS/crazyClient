@@ -30,7 +30,7 @@
         "__id__": 64
       },
       {
-        "__id__": 112
+        "__id__": 84
       },
       {
         "__id__": 15
@@ -40,7 +40,7 @@
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 145
+      "__id__": 117
     },
     "_id": "",
     "_opacity": 255,
@@ -343,7 +343,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 144
+      "__id__": 116
     },
     "_id": "",
     "_opacity": 255,
@@ -484,11 +484,11 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 142
+        "__id__": 114
       }
     ],
     "_prefab": {
-      "__id__": 143
+      "__id__": 115
     },
     "_id": "",
     "_opacity": 255,
@@ -545,7 +545,7 @@
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 141
+      "__id__": 113
     },
     "_id": "",
     "_opacity": 255,
@@ -599,7 +599,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 140
+      "__id__": 112
     },
     "_id": "",
     "_opacity": 255,
@@ -652,12 +652,14 @@
       "__id__": 64
     },
     "tpmjPlery": {
-      "__id__": 112
+      "__id__": 84
     },
     "wzlogo": {
       "__id__": 38
     },
-    "chlogo": null
+    "chlogo": {
+      "__id__": 75
+    }
   },
   {
     "__type__": "cc.Toggle",
@@ -2082,17 +2084,17 @@
       }
     ],
     "_tag": -1,
-    "_active": false,
+    "_active": true,
     "_components": [
       {
-        "__id__": 110
+        "__id__": 82
       },
       {
         "__id__": 70
       }
     ],
     "_prefab": {
-      "__id__": 111
+      "__id__": 83
     },
     "_id": "",
     "_opacity": 255,
@@ -2149,14 +2151,14 @@
         "__id__": 69
       },
       {
-        "__id__": 107
+        "__id__": 79
       },
       {
-        "__id__": 108
+        "__id__": 80
       }
     ],
     "_prefab": {
-      "__id__": 109
+      "__id__": 81
     },
     "_id": "",
     "_opacity": 255,
@@ -2339,16 +2341,13 @@
     "_children": [
       {
         "__id__": 75
-      },
-      {
-        "__id__": 95
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 106
+      "__id__": 78
     },
     "_id": "",
     "_opacity": 255,
@@ -2367,7 +2366,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 941,
+      "width": 887,
       "height": 5530
     },
     "_rotationX": 0,
@@ -2376,8 +2375,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 8,
-      "y": 205
+      "x": 1,
+      "y": 269
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -2425,8 +2424,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 923,
-      "height": 464
+      "width": 896,
+      "height": 525
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -2434,8 +2433,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -25,
-      "y": 5
+      "x": -12,
+      "y": 19
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -2471,36 +2470,21 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "chmjPlay",
+    "_name": "webview",
     "_objFlags": 0,
     "_parent": {
       "__id__": 71
     },
-    "_children": [
-      {
-        "__id__": 76
-      },
-      {
-        "__id__": 79
-      },
-      {
-        "__id__": 82
-      },
-      {
-        "__id__": 85
-      },
-      {
-        "__id__": 88
-      },
-      {
-        "__id__": 91
-      }
-    ],
+    "_children": [],
     "_tag": -1,
     "_active": true,
-    "_components": [],
+    "_components": [
+      {
+        "__id__": 76
+      }
+    ],
     "_prefab": {
-      "__id__": 94
+      "__id__": 77
     },
     "_id": "",
     "_opacity": 255,
@@ -2519,8 +2503,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 874,
-      "height": 385
+      "width": 867,
+      "height": 500
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -2529,7 +2513,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": -3,
-      "y": -228
+      "y": -272
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -2539,80 +2523,16 @@
     "groupIndex": 0
   },
   {
-    "__type__": "cc.Node",
-    "_name": "长春麻将",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 75
-    },
-    "_children": [],
-    "_tag": -1,
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 77
-      }
-    ],
-    "_prefab": {
-      "__id__": 78
-    },
-    "_id": "",
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 214,
-      "g": 31,
-      "b": 31,
-      "a": 255
-    },
-    "_cascadeOpacityEnabled": true,
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 280,
-      "height": 40
-    },
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
-    "_position": {
-      "__type__": "cc.Vec2",
-      "x": -318,
-      "y": 210
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_localZOrder": 0,
-    "_globalZOrder": 0,
-    "_opacityModifyRGB": false,
-    "groupIndex": 0
-  },
-  {
-    "__type__": "cc.Label",
+    "__type__": "cc.WebView",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 76
+      "__id__": 75
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 35,
-    "_fontSize": 35,
-    "_lineHeight": 40,
-    "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
-    "_spacingX": 0,
-    "_N$string": "【长春麻将玩法】",
-    "_N$horizontalAlign": 0,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 0
+    "_url": "",
+    "webviewEvents": []
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -2622,785 +2542,7 @@
     "asset": {
       "__uuid__": "d90cf211-42a0-4cbb-bf90-d0c799a066fe"
     },
-    "fileId": "d1cddH/doRNQ4Aodz8556bh",
-    "sync": false
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "label",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 75
-    },
-    "_children": [],
-    "_tag": -1,
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 80
-      }
-    ],
-    "_prefab": {
-      "__id__": 81
-    },
-    "_id": "",
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 124,
-      "g": 73,
-      "b": 8,
-      "a": 255
-    },
-    "_cascadeOpacityEnabled": true,
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 833.42,
-      "height": 40
-    },
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
-    "_position": {
-      "__type__": "cc.Vec2",
-      "x": -26,
-      "y": 165
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_localZOrder": 0,
-    "_globalZOrder": 0,
-    "_opacityModifyRGB": false,
-    "groupIndex": 0
-  },
-  {
-    "__type__": "cc.Label",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 79
-    },
-    "_enabled": true,
-    "_useOriginalSize": false,
-    "_actualFontSize": 25,
-    "_fontSize": 25,
-    "_lineHeight": 40,
-    "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
-    "_spacingX": 0,
-    "_N$string": "牌数：长春麻将一共136张牌，其中万饼条各36张，东南西北白中发各4张。",
-    "_N$horizontalAlign": 1,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 0
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__uuid__": "d90cf211-42a0-4cbb-bf90-d0c799a066fe"
-    },
-    "fileId": "d1cddH/doRNQ4Aodz8556bh",
-    "sync": false
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "richtext",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 75
-    },
-    "_children": [],
-    "_tag": -1,
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 83
-      }
-    ],
-    "_prefab": {
-      "__id__": 84
-    },
-    "_id": "",
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_cascadeOpacityEnabled": true,
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 880,
-      "height": 2800
-    },
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
-    "_position": {
-      "__type__": "cc.Vec2",
-      "x": -1,
-      "y": -1251
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_localZOrder": 0,
-    "_globalZOrder": 0,
-    "_opacityModifyRGB": false,
-    "groupIndex": 0
-  },
-  {
-    "__type__": "cc.RichText",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 82
-    },
-    "_enabled": true,
-    "_N$string": "<color=#7C4908><size=30><b>胡牌条件：</b></size></color>\n<color=#7C4908><size=25>1、不能缺门。\n2、不能缺幺九（飘胡除外），风字牌顶幺九。\n3、不能缺大叉（杠和蛋都算大叉）。\n4、允许立门胡（不开门）胡牌时加一番。\n5、胡牌是只有飘胡才能手把一，吃牌不能手把一。\n6、一局只能有一位胡牌者，如有一人点炮两家以上胡牌，从点炮者逆时针方向，顺序在前者胡（截胡）。\n7、需要报听。\n8、东西南北，中发白不算色。\n9、幺九杠、喜杠、旋风杠，算开门。\n10、摸宝：上听以后摸到宝牌算胡并加一番。</size></color>\n<color=#7C4908><size=30><b>特殊术语：</b></size></color>\n<color=#7C4908><size=25>旋风杠：当发完牌后，手牌里有东、南、西、北风时，可以亮出个明杠，如果再有其他风牌时可以补杠。\n喜杠：当发完牌后，手牌里有中、发、白时，可以亮个明杠，如果再有可以补杠。\n幺杠：当发完牌后，手牌里有幺鸡、幺饼、幺万时，可以亮个明杠，如果再有可以补杠。\n九杠：当发完牌后，手牌里有九条、九饼、九万时，可以亮个明杠，如果再有可以补杠。\n大蛋杠：如果手牌里有四个幺鸡、幺饼、红中、发财、白板的杠牌算大蛋。\n宝牌：第一个上听的人在上听后的第二轮掷骰子，骰子多少便从牌尾第几张起算宝。</size></color>\n<color=#7C4908><size=30><b>长春麻将房间玩法：</b></size></color>\n<color=#7C4908><size=25>1、点炮包三家：勾选了该选项的房间，未上听点炮需要包三家；如果点炮的玩家上听，则不需要包三家。\n2、小鸡飞蛋：勾选了该选项的房间，在亮出旋风杠、喜杠和幺九杠时，幺鸡可以作为其中的任何一张牌（九万、幺鸡、九饼，这三张牌可以组成九杠）。\n3、三风蛋：勾选了该选项的房间，幺九杠、旋风杠、喜杠算战立。\n4、下蛋算站立：勾选了该选项的房间，幺九杠、旋风杠、喜杠算站立。\n5、带缺门：勾选了该选项的房间，听牌时不需要万饼条都有。</size></color>\n<color=#7C4908><size=30><b>流局：</b></size></color>\n<color=#7C4908><size=25>游戏过程中，当摸牌摸到牌墙最后14张牌时为流局，重新开局，庄家不变，局数圈算把不算。\n流局后，杠分正常结算。</size></color></color>\n<color=#7C4908><size=30><b>积分算法：</b></size></color>\n<color=#7C4908><size=25>1、屁胡：胡2张为屁胡（手里3,4胡2,5或对2对3胡2,3），1番；\n2、夹胡：胡一张为夹胡（1 3胡2）2番；\n3、七小对：七张不同的牌各两张为七小对，4番；\n4、飘胡：胡牌是手里面有4个叉，4番；\n5、豪华七小对：在七小对的基础上，其中两对是同一张牌，8番；\n6、双豪华七小对：在七小对的基础上，其中两组中的两对是同一张牌，16番；\n7、至尊豪华七小对：在七小对的基础上，其中三组中的两对是同一张牌，32番；\n8、庄：当庄后不管输赢都加1番；\n9、点炮：打出别人要胡的牌，1番；\n10：自摸：上听后摸到自己要胡的牌，1番；\n11、摸宝：上听以后摸到宝牌算胡并加1番；\n12、战立：没有开门胡牌为站立牌，1番；\n13、冲宝：宝牌和胡的牌是一张时，直接算胡，2番；\n14、大蛋（杠）：明杠1番，暗杠2番；\n15、特殊杠（旋风杠、幺九杠、喜杠）亮出时加1分，每补杠一次加1分；\n16、明杠：加1分，暗杠：加2分。\n</size>\n</color>",
-    "_N$horizontalAlign": 0,
-    "_N$fontSize": 40,
-    "_N$font": null,
-    "_N$maxWidth": 880,
-    "_N$lineHeight": 50,
-    "_N$imageAtlas": null
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__uuid__": "d90cf211-42a0-4cbb-bf90-d0c799a066fe"
-    },
-    "fileId": "931BI4m3pFto3Md+lKmdAW",
-    "sync": false
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "F7DB8EAD-8573-443D-8FDE-62948C1590EC",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 75
-    },
-    "_children": [],
-    "_tag": -1,
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 86
-      }
-    ],
-    "_prefab": {
-      "__id__": 87
-    },
-    "_id": "",
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_cascadeOpacityEnabled": true,
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 916,
-      "height": 702
-    },
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
-    "_position": {
-      "__type__": "cc.Vec2",
-      "x": 28,
-      "y": -2950
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_localZOrder": 0,
-    "_globalZOrder": 0,
-    "_opacityModifyRGB": false,
-    "groupIndex": 0
-  },
-  {
-    "__type__": "cc.Sprite",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 85
-    },
-    "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "fe910952-3282-4a8b-b812-0d791f621d58"
-    },
-    "_type": 0,
-    "_sizeMode": 1,
-    "_fillType": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_atlas": null
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__uuid__": "d90cf211-42a0-4cbb-bf90-d0c799a066fe"
-    },
-    "fileId": "4ftF5j9qFG9qfSb0/dKT5p",
-    "sync": false
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "838B9765-FD40-42E4-BFF9-F2D7E96FE89B",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 75
-    },
-    "_children": [],
-    "_tag": -1,
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 89
-      }
-    ],
-    "_prefab": {
-      "__id__": 90
-    },
-    "_id": "",
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_cascadeOpacityEnabled": true,
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 916,
-      "height": 786
-    },
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
-    "_position": {
-      "__type__": "cc.Vec2",
-      "x": 24,
-      "y": -3709
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_localZOrder": 0,
-    "_globalZOrder": 0,
-    "_opacityModifyRGB": false,
-    "groupIndex": 0
-  },
-  {
-    "__type__": "cc.Sprite",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 88
-    },
-    "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "3bfaa3d6-11c5-4bb7-ad9d-c404c027b485"
-    },
-    "_type": 0,
-    "_sizeMode": 0,
-    "_fillType": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_atlas": null
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__uuid__": "d90cf211-42a0-4cbb-bf90-d0c799a066fe"
-    },
-    "fileId": "e3HeRatNFEwIO0q46CEsdI",
-    "sync": false
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "65E241E9-2865-4593-9673-80534CED9FA8",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 75
-    },
-    "_children": [],
-    "_tag": -1,
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 92
-      }
-    ],
-    "_prefab": {
-      "__id__": 93
-    },
-    "_id": "",
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_cascadeOpacityEnabled": true,
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 928,
-      "height": 1110
-    },
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
-    "_position": {
-      "__type__": "cc.Vec2",
-      "x": 18,
-      "y": -4675
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_localZOrder": 0,
-    "_globalZOrder": 0,
-    "_opacityModifyRGB": false,
-    "groupIndex": 0
-  },
-  {
-    "__type__": "cc.Sprite",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 91
-    },
-    "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "7af35f4a-9a62-4eea-abbe-1368894ad8b8"
-    },
-    "_type": 0,
-    "_sizeMode": 1,
-    "_fillType": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_atlas": null
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__uuid__": "d90cf211-42a0-4cbb-bf90-d0c799a066fe"
-    },
-    "fileId": "98pkL1kYNAD5quaIv+L1/3",
-    "sync": false
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__uuid__": "d90cf211-42a0-4cbb-bf90-d0c799a066fe"
-    },
-    "fileId": "18VCu2mIxO3a7HCd/bcESp",
-    "sync": false
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "tpmjPlay",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 71
-    },
-    "_children": [
-      {
-        "__id__": 96
-      },
-      {
-        "__id__": 99
-      },
-      {
-        "__id__": 102
-      }
-    ],
-    "_tag": -1,
-    "_active": false,
-    "_components": [],
-    "_prefab": {
-      "__id__": 105
-    },
-    "_id": "",
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_cascadeOpacityEnabled": true,
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 934,
-      "height": 482
-    },
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
-    "_position": {
-      "__type__": "cc.Vec2",
-      "x": -0.9999999999997726,
-      "y": -238
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_localZOrder": 0,
-    "_globalZOrder": 0,
-    "_opacityModifyRGB": false,
-    "groupIndex": 0
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "长春麻将",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 95
-    },
-    "_children": [],
-    "_tag": -1,
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 97
-      }
-    ],
-    "_prefab": {
-      "__id__": 98
-    },
-    "_id": "",
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 214,
-      "g": 31,
-      "b": 31,
-      "a": 255
-    },
-    "_cascadeOpacityEnabled": true,
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 280,
-      "height": 40
-    },
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
-    "_position": {
-      "__type__": "cc.Vec2",
-      "x": -318,
-      "y": 210
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_localZOrder": 0,
-    "_globalZOrder": 0,
-    "_opacityModifyRGB": false,
-    "groupIndex": 0
-  },
-  {
-    "__type__": "cc.Label",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 96
-    },
-    "_enabled": true,
-    "_useOriginalSize": false,
-    "_actualFontSize": 35,
-    "_fontSize": 35,
-    "_lineHeight": 40,
-    "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
-    "_spacingX": 0,
-    "_N$string": "【台炮麻将玩法】",
-    "_N$horizontalAlign": 0,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 0
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__uuid__": "d90cf211-42a0-4cbb-bf90-d0c799a066fe"
-    },
-    "fileId": "3cMHQEsPVACp/57dpwZgcJ",
-    "sync": false
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "label",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 95
-    },
-    "_children": [],
-    "_tag": -1,
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 100
-      }
-    ],
-    "_prefab": {
-      "__id__": 101
-    },
-    "_id": "",
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 124,
-      "g": 73,
-      "b": 8,
-      "a": 255
-    },
-    "_cascadeOpacityEnabled": true,
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 150,
-      "height": 40
-    },
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
-    "_position": {
-      "__type__": "cc.Vec2",
-      "x": -365,
-      "y": 165
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_localZOrder": 0,
-    "_globalZOrder": 0,
-    "_opacityModifyRGB": false,
-    "groupIndex": 0
-  },
-  {
-    "__type__": "cc.Label",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 99
-    },
-    "_enabled": true,
-    "_useOriginalSize": false,
-    "_actualFontSize": 25,
-    "_fontSize": 25,
-    "_lineHeight": 40,
-    "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
-    "_spacingX": 0,
-    "_N$string": "牌点计算规则",
-    "_N$horizontalAlign": 1,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 0
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__uuid__": "d90cf211-42a0-4cbb-bf90-d0c799a066fe"
-    },
-    "fileId": "67Jhv8eCBF1abkqfffRSBV",
-    "sync": false
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "richtext",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 95
-    },
-    "_children": [],
-    "_tag": -1,
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 103
-      }
-    ],
-    "_prefab": {
-      "__id__": 104
-    },
-    "_id": "",
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_cascadeOpacityEnabled": true,
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 880,
-      "height": 3050
-    },
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
-    "_position": {
-      "__type__": "cc.Vec2",
-      "x": -1,
-      "y": -1386
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_localZOrder": 0,
-    "_globalZOrder": 0,
-    "_opacityModifyRGB": false,
-    "groupIndex": 0
-  },
-  {
-    "__type__": "cc.RichText",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 102
-    },
-    "_enabled": true,
-    "_N$string": "<color=#7C4908><size=30><b>（一）和家非和家通用基础牌点计算规则 （用台数计算）</b></size></color>\n<color=#7C4908><size=25>财神一张2台，两张5台，三张8台，如果风牌，花牌，字牌为财神，则一张3台，两张7台，三张11台。\n花牌一张为1台，同种花色两张3台，三张5台，四张10台。\n普通1 9字的明扛3台，暗扛4台。 \n自家风牌明扛4台，暗扛5台。\n中发明扛4台，暗扛5台。\n自家风牌中发碰起或刻都加1台。\n明杠每个3台，中发与自家风牌为4台（没杠出的按刻子计算）。\n暗杠每个4台，中发与自家风牌为5台（没杠出的按刻子计算）。</size></color>\n<color=#7C4908><size=30><b>（二）和家特有牌点计算规则</b></size></color>\n<color=#7C4908><size=25>自摸：加1台\n天胡：加13台\n地胡：加13台\n硬牌：加7台\n平胡：加13台\n绿一色：加26台\n清一色：加13台\n混一色：加7台\n对对和：加7台\n四风会齐：加13台\n扛上开花：明开花加7台，暗开花加8台。红中或自加风牌在此基础上多加1台\n抢扛胡：加3台\n财神汇：加7台\n杀猪：四张财神加13台，五张加30台，六张加100台。\n杀猪胡：杀猪的台数加财神台数，再加台面上的所有台数。</size></color>\n<color=#7C4908><size=30><b>（三）和家奖励规则</b></size></color>\n<color=#7C4908><size=25>在胡家的台数量达到13台或13以上时为2翻，就（13加X）乘2。\n番数计算为：以上所有发生的番数累计。\n和家牌点汇总 ：基础台数 + 奖励，有番的再按番数算。\n注：非和家给和家相应的台数点，如是庄家和，应给庄家双倍的台数点，如闲家和，庄家也双倍给和家。\n非和家（非和家可用“财神”替代其他牌来计算牌点，还可加花与扛刻计算台数，再与另外两家没和和牌的玩家计算。）\n非和家牌点汇总 ：基础牌点算出后，有番的不再按番数算。</size></color>\n<color=#7C4908><size=30><b>（四）特殊限制类术语和规则</b></size></color>\n<color=#7C4908><size=25>黄牌\n所有玩家没有杠过的，剩下牌的总数等于24张时（如有玩家杠过的，杠一过二，即杠了一次，最后要多留两张。）没有人“和牌”，便留4张分牌，四家有和的便和牌。分牌和牌的玩家要多加3台。无和即为黄牌，这局麻将将强制结束，各玩家间不再进\n行该副牌的结算，同时庄家自动下庄。</size></color></color>\n<color=#7C4908><size=30><b>（五）和牌后结果支付规则（其他三个玩家都要支付给和家，其他三玩家间也要相互结算）</b></size></color>\n<color=#7C4908><size=25>A：因和牌方的“财神”替代方法不同，会导致和牌家的牌点汇总出现较大的差别，因此，服务器会自动为玩家算出最高的牌点。\nB：若本副牌是黄牌结算，则不再进行计算，自动进入换庄。\nC：和牌方的 牌点汇总（基础台数 + 奖励），有番的再按番数算）。\nD ：和牌方的身份及支付方式：\n1. 若和牌方是闲家：\n庄家向和牌方支付的方式为： 和家的牌点汇总乘2\n其他闲家向和牌方支付的方式为： 和家的牌点汇总\n其他三家也要互相结算：\n庄家和另两闲家间的支付方式为：牌点小的向牌点大的支付（两种牌点相减）两方差距都是按2倍计算，就庄家付闲家是两倍，闲家付庄家也是两倍。\n另两闲家间的支付方式为：牌点小的向牌点大的支付\n2. 若和牌方是庄家：\n其他闲家向和牌方支付的方式为： 和家的牌点汇总乘2\n其他三闲家也要互相结算：牌点小的向牌点大的支付\n</size>\n</color>",
-    "_N$horizontalAlign": 0,
-    "_N$fontSize": 40,
-    "_N$font": null,
-    "_N$maxWidth": 880,
-    "_N$lineHeight": 50,
-    "_N$imageAtlas": null
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__uuid__": "d90cf211-42a0-4cbb-bf90-d0c799a066fe"
-    },
-    "fileId": "cfob/eR1ZMerUDp+TvuGD8",
-    "sync": false
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__uuid__": "d90cf211-42a0-4cbb-bf90-d0c799a066fe"
-    },
-    "fileId": "44dRMGCm9PmaQOn++MLIgr",
+    "fileId": "2fb356PwclC8L2CbHhqGUVr",
     "sync": false
   },
   {
@@ -3521,24 +2663,24 @@
     },
     "_children": [
       {
-        "__id__": 113
+        "__id__": 85
       },
       {
-        "__id__": 120
+        "__id__": 92
       }
     ],
     "_tag": -1,
     "_active": false,
     "_components": [
       {
-        "__id__": 138
+        "__id__": 110
       },
       {
-        "__id__": 118
+        "__id__": 90
       }
     ],
     "_prefab": {
-      "__id__": 139
+      "__id__": 111
     },
     "_id": "",
     "_opacity": 255,
@@ -3581,28 +2723,28 @@
     "_name": "scrollBar",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 112
+      "__id__": 84
     },
     "_children": [
       {
-        "__id__": 114
+        "__id__": 86
       }
     ],
     "_tag": -1,
     "_active": false,
     "_components": [
       {
-        "__id__": 117
+        "__id__": 89
       },
       {
-        "__id__": 135
+        "__id__": 107
       },
       {
-        "__id__": 136
+        "__id__": 108
       }
     ],
     "_prefab": {
-      "__id__": 137
+      "__id__": 109
     },
     "_id": "",
     "_opacity": 255,
@@ -3645,18 +2787,18 @@
     "_name": "bar",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 113
+      "__id__": 85
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 115
+        "__id__": 87
       }
     ],
     "_prefab": {
-      "__id__": 116
+      "__id__": 88
     },
     "_id": "",
     "_opacity": 255,
@@ -3699,7 +2841,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 114
+      "__id__": 86
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -3736,18 +2878,18 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 113
+      "__id__": 85
     },
     "_enabled": true,
     "_scrollView": {
-      "__id__": 118
+      "__id__": 90
     },
     "_touching": false,
     "_opacity": 255,
     "enableAutoHide": true,
     "autoHideTime": 1,
     "_N$handle": {
-      "__id__": 115
+      "__id__": 87
     },
     "_N$direction": 1
   },
@@ -3756,11 +2898,11 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 112
+      "__id__": 84
     },
     "_enabled": true,
     "content": {
-      "__id__": 119
+      "__id__": 91
     },
     "horizontal": false,
     "vertical": true,
@@ -3772,7 +2914,7 @@
     "cancelInnerEvents": true,
     "_N$horizontalScrollBar": null,
     "_N$verticalScrollBar": {
-      "__id__": 117
+      "__id__": 89
     }
   },
   {
@@ -3780,18 +2922,18 @@
     "_name": "content",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 120
+      "__id__": 92
     },
     "_children": [
       {
-        "__id__": 123
+        "__id__": 95
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 134
+      "__id__": 106
     },
     "_id": "",
     "_opacity": 255,
@@ -3834,22 +2976,22 @@
     "_name": "view",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 112
+      "__id__": 84
     },
     "_children": [
       {
-        "__id__": 119
+        "__id__": 91
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 121
+        "__id__": 93
       }
     ],
     "_prefab": {
-      "__id__": 122
+      "__id__": 94
     },
     "_id": "",
     "_opacity": 255,
@@ -3892,7 +3034,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 120
+      "__id__": 92
     },
     "_enabled": true,
     "_type": 0,
@@ -3917,24 +3059,24 @@
     "_name": "tpmjPlay",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 119
+      "__id__": 91
     },
     "_children": [
       {
-        "__id__": 124
+        "__id__": 96
       },
       {
-        "__id__": 127
+        "__id__": 99
       },
       {
-        "__id__": 130
+        "__id__": 102
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 133
+      "__id__": 105
     },
     "_id": "",
     "_opacity": 255,
@@ -3977,18 +3119,18 @@
     "_name": "长春麻将",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 123
+      "__id__": 95
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 125
+        "__id__": 97
       }
     ],
     "_prefab": {
-      "__id__": 126
+      "__id__": 98
     },
     "_id": "",
     "_opacity": 255,
@@ -4031,7 +3173,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 124
+      "__id__": 96
     },
     "_enabled": true,
     "_useOriginalSize": false,
@@ -4064,18 +3206,18 @@
     "_name": "label",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 123
+      "__id__": 95
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 128
+        "__id__": 100
       }
     ],
     "_prefab": {
-      "__id__": 129
+      "__id__": 101
     },
     "_id": "",
     "_opacity": 255,
@@ -4118,7 +3260,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 127
+      "__id__": 99
     },
     "_enabled": true,
     "_useOriginalSize": false,
@@ -4151,18 +3293,18 @@
     "_name": "richtext",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 123
+      "__id__": 95
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 131
+        "__id__": 103
       }
     ],
     "_prefab": {
-      "__id__": 132
+      "__id__": 104
     },
     "_id": "",
     "_opacity": 255,
@@ -4205,7 +3347,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 130
+      "__id__": 102
     },
     "_enabled": true,
     "_N$string": "<color=#7C4908><size=30><b>（一）和家非和家通用基础牌点计算规则 （用台数计算）</b></size></color>\n<color=#7C4908><size=25>财神一张2台，两张5台，三张8台，如果风牌，花牌，字牌为财神，则一张3台，两张7台，三张11台。\n花牌一张为1台，同种花色两张3台，三张5台，四张10台。\n普通1 9字的明扛3台，暗扛4台。 \n自家风牌明扛4台，暗扛5台。\n中发明扛4台，暗扛5台。\n自家风牌中发碰起或刻都加1台。\n明杠每个3台，中发与自家风牌为4台（没杠出的按刻子计算）。\n暗杠每个4台，中发与自家风牌为5台（没杠出的按刻子计算）。</size></color>\n<color=#7C4908><size=30><b>（二）和家特有牌点计算规则</b></size></color>\n<color=#7C4908><size=25>自摸：加1台\n天胡：加13台\n地胡：加13台\n硬牌：加7台\n平胡：加13台\n绿一色：加26台\n清一色：加13台\n混一色：加7台\n对对和：加7台\n四风会齐：加13台\n扛上开花：明开花加7台，暗开花加8台。红中或自加风牌在此基础上多加1台\n抢扛胡：加3台\n财神汇：加7台\n杀猪：四张财神加13台，五张加30台，六张加100台。\n杀猪胡：杀猪的台数加财神台数，再加台面上的所有台数。</size></color>\n<color=#7C4908><size=30><b>（三）和家奖励规则</b></size></color>\n<color=#7C4908><size=25>在胡家的台数量达到13台或13以上时为2翻，就（13加X）乘2。\n番数计算为：以上所有发生的番数累计。\n和家牌点汇总 ：基础台数 + 奖励，有番的再按番数算。\n注：非和家给和家相应的台数点，如是庄家和，应给庄家双倍的台数点，如闲家和，庄家也双倍给和家。\n非和家（非和家可用“财神”替代其他牌来计算牌点，还可加花与扛刻计算台数，再与另外两家没和和牌的玩家计算。）\n非和家牌点汇总 ：基础牌点算出后，有番的不再按番数算。</size></color>\n<color=#7C4908><size=30><b>（四）特殊限制类术语和规则</b></size></color>\n<color=#7C4908><size=25>黄牌\n所有玩家没有杠过的，剩下牌的总数等于24张时（如有玩家杠过的，杠一过二，即杠了一次，最后要多留两张。）没有人“和牌”，便留4张分牌，四家有和的便和牌。分牌和牌的玩家要多加3台。无和即为黄牌，这局麻将将强制结束，各玩家间不再进\n行该副牌的结算，同时庄家自动下庄。</size></color></color>\n<color=#7C4908><size=30><b>（五）和牌后结果支付规则（其他三个玩家都要支付给和家，其他三玩家间也要相互结算）</b></size></color>\n<color=#7C4908><size=25>A：因和牌方的“财神”替代方法不同，会导致和牌家的牌点汇总出现较大的差别，因此，服务器会自动为玩家算出最高的牌点。\nB：若本副牌是黄牌结算，则不再进行计算，自动进入换庄。\nC：和牌方的 牌点汇总（基础台数 + 奖励），有番的再按番数算）。\nD ：和牌方的身份及支付方式：\n1. 若和牌方是闲家：\n庄家向和牌方支付的方式为： 和家的牌点汇总乘2\n其他闲家向和牌方支付的方式为： 和家的牌点汇总\n其他三家也要互相结算：\n庄家和另两闲家间的支付方式为：牌点小的向牌点大的支付（两种牌点相减）两方差距都是按2倍计算，就庄家付闲家是两倍，闲家付庄家也是两倍。\n另两闲家间的支付方式为：牌点小的向牌点大的支付\n2. 若和牌方是庄家：\n其他闲家向和牌方支付的方式为： 和家的牌点汇总乘2\n其他三闲家也要互相结算：牌点小的向牌点大的支付\n</size>\n</color>",
@@ -4254,7 +3396,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 113
+      "__id__": 85
     },
     "_enabled": true,
     "isAlignOnce": true,
@@ -4280,7 +3422,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 113
+      "__id__": 85
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -4317,7 +3459,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 112
+      "__id__": 84
     },
     "_enabled": true,
     "_spriteFrame": null,

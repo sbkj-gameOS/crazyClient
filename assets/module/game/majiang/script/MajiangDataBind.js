@@ -1135,7 +1135,7 @@ cc.Class({
             }else{
                 cc.sys.localStorage.removeItem('alting');
             }
-            if(!data.allow||data.notSend||cc.sys.localStorage.getItem('take') != 'true'){
+            if(data.notSend||(cc.sys.localStorage.getItem('take') != 'true'&&!data.allow)){
                 return;
             }
             cc.sys.localStorage.removeItem('altake');

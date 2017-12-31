@@ -24,9 +24,11 @@ cc.Class({
         if(cc.beimi.GameBase.gameModel =='wz'){
             this.wzlogo.active =true;
             this.tpmjPlery.active =true;
+            this.chlogo.active = false;
         }else{
             this.selectOne.active =true;
             this.ccmjPlery.active =true;
+            this.chlogo.getComponent(cc.WebView).url = cc.beimi.url+ '/help/chHelp';
         }
         this.colorWhite = new cc.Color(255, 255, 255);//白色
         this.colorBrown = new cc.Color(255, 255, 255);//棕色

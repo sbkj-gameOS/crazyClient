@@ -80,9 +80,9 @@ cc.Class({
         cc.beimi.dialog.parent =this.root();
     },
 	onRecordClick:function(){
-		// cc.beimi.dialog = cc.instantiate(this.record);
-        // cc.beimi.dialog.parent =this.root();
-        this.alert2('功能暂未开放');
+		cc.beimi.dialog = cc.instantiate(this.record);
+        cc.beimi.dialog.parent =this.root();
+        // this.alert2('功能暂未开放');
         
     },
 	onHelpClick:function(){

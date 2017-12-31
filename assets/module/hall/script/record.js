@@ -42,7 +42,8 @@ cc.Class({
             default: null,
             type: cc.Node
         },
-        beimian: cc.Prefab
+        beimian: cc.Prefab,
+        web: cc.WebView,
     },
 
     onLoad: function () {
@@ -53,6 +54,7 @@ cc.Class({
         // this.colorBrown = new cc.Color(122, 69, 11);//棕色
         //设置第一个选中的状态
         selectlastToggle = this.selectOne;
+        this.web.url = cc.beimi.url+'/situation/goSituationPage?token='+cc.beimi.authorization+'&type=0';
     	//this.initialize();
     	
 		// if(cc.beimi.authorization){
@@ -95,7 +97,9 @@ cc.Class({
         //this.init(1)
     },
     toclick: function(event){
-        // let type = event.target.name;
+
+        let type = event.target.name;
+        this.web.url = cc.beimi.url+'/situation/goSituationPage?token='+cc.beimi.authorization+'&type='+type;
         // this.type = type;
         // if(type ==0){
         //     this.content = this.scrollView.content;   
@@ -109,14 +113,15 @@ cc.Class({
         // console.log(type)
         // this.init(type);
     },
-    init: function(type){
-        var parm = {
-    		token:cc.beimi.authorization,//12d622d439d747a495204e995f431f7e cc.beimi.authorization
-    		type:type,
-    		page:1,
-    		//limit:10
-    	};
-        cc.beimi.http.httpPost('/situation/getGameRoomList',parm,this.success,this.error,this);
+    init: function(){
+        // var parm = {
+    	// 	token:cc.beimi.authorization,//12d622d439d747a495204e995f431f7e cc.beimi.authorization
+    	// 	type:type,
+    	// 	page:1,
+    	// 	//limit:10
+        // };
+        
+        cc.beimi.http.httpGet('/situation/goSituationPage?token='+cc.beimi.authorization,this.success,this.error,this);
     },
  
 
