@@ -197,7 +197,7 @@ cc.Class({
         let arry = times.split(' ');
         let time = arry[1].split(':');
         let hour = time[0];
-        let fen =  tiem[1];
+        let fen =  time[1];
         bisai.children[3].string = hour;
         bisai.children[5].string = fen;
     },
