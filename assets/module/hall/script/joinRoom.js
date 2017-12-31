@@ -4,6 +4,8 @@ cc.Class({
     extends: beiMiCommon,
 
     properties: {
+        
+
         num_1:{
             default:null,
             type:cc.Component
@@ -153,6 +155,7 @@ cc.Class({
                         sprite.spriteFrame = object.huise;
                         object.ribisai.getComponent(cc.Button).interactable= true;
                         object.ribisai.children[0].getComponent(cc.Label).string = data.activityList[i].startTime;
+                        object.getTime(data.activityList[i].startTime,object.ribisai);
                         continue;
                     }
                     if(data.activityList[i].activiteType ==3){
@@ -161,6 +164,8 @@ cc.Class({
                         object.zhoubisai.getComponent(cc.Button).interactable= true;
                         object.zhoupic.active = false;
                         object.zhoubisai.children[0].getComponent(cc.Label).string = data.activityList[i].startTime;
+                        object.getTime(data.activityList[i].startTime,object.zhoubisai);
+
                         continue;
                     }
                     if(data.activityList[i].activiteType ==4){
@@ -169,6 +174,8 @@ cc.Class({
                         object.yuebisai.getComponent(cc.Button).interactable= true;
                         object.yuepic.active = false;
                         object.yuebisai.children[0].getComponent(cc.Label).string = data.activityList[i].startTime;
+                        object.getTime(data.activityList[i].startTime,object.yuebisai);
+
                         continue;
                     }
                     if(object.yubisai&&data.activityList[i].activiteType ==1){
@@ -176,6 +183,8 @@ cc.Class({
                         sprite.spriteFrame = object.huise;
                         object.yubisai.getComponent(cc.Button).interactable= true;
                         object.yubisai.children[0].getComponent(cc.Label).string = data.activityList[i].startTime;
+                        //object.getTime(data.activityList[i].startTime,object.yubisai);
+
                         continue;
                     }
                 }
@@ -184,7 +193,14 @@ cc.Class({
 
     },
     counterror(result,object){},
-    
+    getTime : function(times,bisai){
+        let arry = times.split(' ');
+        let time = arry[1].split(':');
+        let hour = time[0];
+        let fen =  tiem[1];
+        bisai.children[3].string = hour;
+        bisai.children[5].string = fen;
+    },
     clickNum: function(event){
         console.log(event.currentTarget.name);
         var num = event.currentTarget.name;
@@ -315,7 +331,8 @@ cc.Class({
     },
     jjroom: function(event){
         let type = event.target.name;
-        cc.beimi.starttime = event.target.children[0].getComponent(cc.Label).string;
+        let arry = event.target.children[0].getComponent(cc.Label).string.split(' ')
+        cc.beimi.starttime = arry[1];
         // let alert = cc.instantiate(this.alert2);
         // alert.parent = this.root();
         // cc.director.loadScene('majiang');
@@ -330,7 +347,7 @@ cc.Class({
 
         if(data.error){  
             object.closeloadding();
-            object.alert2(data.msg);
+            object.alert2('比赛未开始或者您没资格进入比赛');
         }else{
             if(data.match){
                 cc.beimi.match = data.match ; 

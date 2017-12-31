@@ -19,7 +19,7 @@ var HTTP = cc.Class({
             // baseURL:"http://game.daily.bizpartner.cn",
             // wsURL : "http://game.daily.bizpartner.cn:9081",
             
-            baseURL:"http://game.bizpartner.cn",
+            baseURL:"http://game.bizpartner.cn:8081",
             wsURL : "http://game.bizpartner.cn:9081",
             authorization: null,
             httpGet: function (url , success , error , object) {
