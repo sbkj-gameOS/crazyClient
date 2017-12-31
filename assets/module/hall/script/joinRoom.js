@@ -198,8 +198,8 @@ cc.Class({
         let time = arry[1].split(':');
         let hour = time[0];
         let fen =  time[1];
-        bisai.children[3].string = hour;
-        bisai.children[5].string = fen;
+        bisai.children[3].getComponent(cc.Label).string = hour;
+        bisai.children[5].getComponent(cc.Label).string = fen;
     },
     clickNum: function(event){
         console.log(event.currentTarget.name);
