@@ -1273,11 +1273,15 @@
     "lgMjType": {
       "__uuid__": "b25fd271-f0f2-4430-ad25-8f5be4b706be"
     },
+    "jxMjType": {
+      "__uuid__": "8cab0d46-9b85-41c3-be1b-f30a866f9c97"
+    },
     "right1": {
       "__id__": 37
     },
     "right2": null,
     "right3": null,
+    "right4": null,
     "selectOne": {
       "__id__": 32
     },

@@ -809,6 +809,7 @@ cc.Class({
     },
     joinRoom:function(){
         //开始匹配
+        console.log('--------------');
         let socket = this.socket();
         var param = {
             token:cc.beimi.authorization,
@@ -1932,9 +1933,12 @@ cc.Class({
         cc.beimi.baopai = null;
         context.roomInfo.active = true;                
         context.totaljs.string = '圈数  '+(data.round+1) +'/'+context.maxRound;
-        context.wanfa.string = data.op;
+        if(cc.beimi.GameBase.gameModel == 'jx'){
+            context.wanfa.string = '座风 座花 双头子 风字百搭 19百搭 漂百搭';
+        }else{
+            context.wanfa.string = data.op;
+        }
         cc.beimi.wanfa = data.op;
-        //cc.beimi.op = data.op;
         context = cc.find('Canvas').getComponent('MajiangDataBind');   
         context.readyNoActive(context);   
         /**

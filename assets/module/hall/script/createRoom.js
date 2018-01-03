@@ -6,6 +6,7 @@ cc.Class({
         ccMjType: cc.Prefab,
         tpMjType: cc.Prefab,
         lgMjType: cc.Prefab,
+        jxMjType: cc.Prefab,
         right1:{
             default:null,
             type:cc.Node,
@@ -15,6 +16,10 @@ cc.Class({
             type:cc.Node,
         },
         right3:{
+            default:null,
+            type:cc.Node,
+        },
+        right4:{
             default:null,
             type:cc.Node,
         },
@@ -67,6 +72,9 @@ cc.Class({
         this.right3 = cc.instantiate(this.lgMjType);
         this.right3.parent = this.node;
         this.right3.setPosition(111,-18);
+        this.right4 = cc.instantiate(this.jxMjType);
+        this.right4.parent = this.node;
+        this.right4.setPosition(111,-18);
         if(cc.beimi.GameBase.gameModel == 'wz'){
             this.ccBtn.isChecked = false;
             this.tpBtn.isChecked = true;
@@ -78,12 +86,24 @@ cc.Class({
             this.right1.active = false;
             this.right2.active = true;
             this.right3.active = false; 
+            this.right4.active = false;
             this.btnList.setPosition(0,75);//位置移动
             this.tpBtn.node.children[2].color = this.colorWhite;
+        }else if(cc.beimi.GameBase.gameModel == 'jx'){
+            cc.find("Canvas/New Node/New ScrollView/view/content/New ToggleGroup/长春麻将/richtext").getComponent(cc.RichText).string = '平胡麻将' ;
+
+            this.right4.active = true;
+            this.right1.active = false;
+            this.right2.active = false;
+            this.right3.active = false;
+
+
         }else{
             this.right1.active = true;
             this.right2.active = false;
             this.right3.active = false;
+            this.right4.active = false;
+
         }
         
     },

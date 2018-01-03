@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "3a5ce7f3-51bb-49a9-bcff-aad4f49bf0d7",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "平湖棋牌2": {
+      "ver": "1.0.3",
+      "uuid": "28681dc7-3d64-4b93-839f-5b2c1d117679",
+      "rawTextureUuid": "3a5ce7f3-51bb-49a9-bcff-aad4f49bf0d7",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 235,
+      "height": 56,
+      "rawWidth": 235,
+      "rawHeight": 56,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

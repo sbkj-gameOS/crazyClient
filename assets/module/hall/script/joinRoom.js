@@ -371,7 +371,8 @@ cc.Class({
         }    
     },
     jjerror: function(result,object){
-
+        object.closeloadding();
+        object.alert2('比赛未开始或者您没资格进入比赛');
     }
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
