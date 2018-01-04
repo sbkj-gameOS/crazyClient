@@ -95,7 +95,7 @@ cc.Class({
                 cardframe = this.beimi0.getSpriteFrame(deskcard);
                 this.target.getComponent(cc.Sprite).spriteFrame = cardframe;
             } 
-            if(dd&&(cardcolors == csCardColors1 || (csCardColors2!=null &&cardcolors == csCardColors2))){
+            if(dd&&(cardcolors == csCardColors1 || (csCardColors2!=null &&cardcolors == csCardColors2)||(this.value>=-39&&this.value<=-36))){
                 this.caishenCards();
             }
         }else{
