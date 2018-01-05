@@ -1517,7 +1517,10 @@ cc.Class({
             }
         }
         if(cc.beimi.state !='ready' && cc.beimi.state !='init'){
-            context.windFW(context);}
+            if(cc.beimi.playType != "LG"){
+                context.windFW(context);
+            }
+        }
         
 
         //如果不在线的人数比总玩家少于1个人的时候   cc.beimi.gameOver =  true;
@@ -1622,6 +1625,16 @@ cc.Class({
                 break ;
             }
         }
+    },
+    lgdong:function(){
+        for(var inx = 0 ; inx<this.playersarray.length ; inx++){
+            let temp = this.playersarray[inx].getComponent("MaJiangPlayer") ;
+            if(temp.selected.active  == true){
+                cc.beimi.bankercount = inx;  
+               break;
+            }
+        }
+        this.windFW(this);
     },
     dong: function(count){
         
@@ -1928,8 +1941,9 @@ cc.Class({
             cc.sys.localStorage.setItem('notice','true');
             cc.find('Canvas/notice').active = false;
         }
-        
-        context.windFW(context);
+        if(cc.beimi.playType != "LG"){
+            context.windFW(context);
+        }
         cc.beimi.baopai = null;
         context.roomInfo.active = true;                
         context.totaljs.string = '圈数  '+(data.round+1) +'/'+context.maxRound;
@@ -2304,6 +2318,9 @@ cc.Class({
                 }
             } 
                 context.closeloadding();
+                if(cc.beimi.playType =='LG'){
+                    context.lgdong();
+                }
         },2000)      
     },
     /**

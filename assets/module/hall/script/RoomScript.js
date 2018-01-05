@@ -273,7 +273,10 @@ cc.Class({
             }
             if(result.cardNum){
                 cc.beimi.cardNum = result.cardNum;
-            }
+			}
+			if(result.game){
+				cc.beimi.playType = result.game;
+			}
             var sprite = object.ganmeBtn.getComponent(cc.Sprite);
         	sprite.spriteFrame = object.backRoomImg;
         } else {
