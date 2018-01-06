@@ -1627,9 +1627,10 @@ cc.Class({
         }
     },
     lgdong:function(){
+
         for(var inx = 0 ; inx<this.playersarray.length ; inx++){
             let temp = this.playersarray[inx].getComponent("MaJiangPlayer") ;
-            if(temp.selected.active  == true){
+            if(temp.creator.active  == true){
                 cc.beimi.bankercount = inx;  
                break;
             }
@@ -1681,7 +1682,7 @@ cc.Class({
             if(cc.beimi.bankercount==0){
                 context.playerint(0).winds('dong');
                 context.playerint(2).winds('xi');
-            }else if(cc.beimi.bankercount ==2){
+            }else{
                 context.playerint(2).winds('dong');
                 context.playerint(0).winds('xi');
             }
