@@ -53,7 +53,7 @@ cc.Class({
         // this.colorBrown = new cc.Color(122, 69, 11);//棕色
         //设置第一个选中的状态
         selectlastToggle = this.selectOne;
-        this.web.url = cc.beimi.url+'/situation/goSituationPage?token='+cc.beimi.authorization;
+        this.web.url = cc.beimi.url+'/situation/goSituationPage?token='+cc.beimi.authorization +'&type='+cc.beimi.GameBase.gameModel;
     	//this.initialize();
     	
 		// if(cc.beimi.authorization){
