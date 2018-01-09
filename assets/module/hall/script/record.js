@@ -4,8 +4,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        ch : cc.Node,
-        wz : cc.Node,
+    
 		itemTemplate: { // item template to instantiate other items
             default: null,
             type: cc.Node
@@ -54,7 +53,7 @@ cc.Class({
         // this.colorBrown = new cc.Color(122, 69, 11);//棕色
         //设置第一个选中的状态
         selectlastToggle = this.selectOne;
-        this.web.url = cc.beimi.url+'/situation/goSituationPage?token='+cc.beimi.authorization+'&type=0';
+        this.web.url = cc.beimi.url+'/situation/goSituationPage?token='+cc.beimi.authorization;
     	//this.initialize();
     	
 		// if(cc.beimi.authorization){
@@ -67,14 +66,14 @@ cc.Class({
           // this.init(0);
            
         // };
-        if(cc.beimi.GameBase.gameModel =='ch'||cc.beimi.GameBase.gameModel =='CH'){
-            this.ch.active = true ;
-            this.wz.active = false ;
+        // if(cc.beimi.GameBase.gameModel =='ch'||cc.beimi.GameBase.gameModel =='CH'){
+        //     this.ch.active = true ;
+        //     this.wz.active = false ;
             
-        }else{
-            this.wz.active = true ;
-            this.ch.active = false ;
-        }  
+        // }else{
+        //     this.wz.active = true ;
+        //     this.ch.active = false ;
+        // }  
     },
     toggleClick: function(toggle) {
     	typeStatus = 1;
