@@ -1626,16 +1626,20 @@ cc.Class({
             }
         }
     },
-    lgdong:function(){
-
+    lgdong:function(data){
+        let arry =[];
+        arry.push(data.player);
+        for(let i in data.players){
+            arry.push(data.players[i]);
+        }
         for(var inx = 0 ; inx<this.playersarray.length ; inx++){
             let temp = this.playersarray[inx].getComponent("MaJiangPlayer") ;
-            if(temp.creator.active  == true){
-                cc.beimi.bankercount = inx;  
-               break;
+            for(let i in arry){
+                if( temp.data.id == arry[i].playuser){
+                    temp.windss(arry[i].windSite);
+                }
             }
         }
-        this.windFW(this);
     },
     dong: function(count){
         
@@ -2320,7 +2324,7 @@ cc.Class({
             } 
                 context.closeloadding();
                 if(cc.beimi.playType =='LG'){
-                    context.lgdong();
+                    context.lgdong(data);
                 }
         },2000)      
     },

@@ -120,8 +120,18 @@ cc.Class({
     },
     nowind: function(){
         this[this.wind].active = false;
+    },
+    windss: function(num){
+        if(num == 0){
+            this.winds('dong');
+        }else if(num == 1){
+            this.winds('nan');
+        }else if(num == 2){
+            this.winds('xi');
+        }else if(num == 3){
+            this.winds('bei');
+        }
     }
-
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 
