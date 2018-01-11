@@ -46,6 +46,8 @@ cc.Class({
     },
 
     onLoad: function () {
+        // this.web.node.getBackground().setAlpha(0);
+        //this.web.node.setBackgroundColor(0); 
         this.type = 0;
 		//this.content = this.scrollView.content;
         this.items = [];

@@ -1973,7 +1973,7 @@
     "_actualFontSize": 30,
     "_fontSize": 30,
     "_lineHeight": 50,
-    "_enableWrapText": false,
+    "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
