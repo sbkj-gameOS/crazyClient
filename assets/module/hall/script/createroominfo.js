@@ -1,5 +1,5 @@
 var beiMiCommon = require("BeiMiCommon");
-var moShi = "2",playerData = "both@@",userType = "4";
+var moShi = "2",playerData = "both@@",userType = "4",playerData2 = '100';
 cc.Class({
     extends: beiMiCommon,
     properties: {
@@ -26,14 +26,24 @@ cc.Class({
 	
 	//创建房间-模式类型值选择
 	radioButtonClicked: function(toggle) {
-		var moShiId = toggle.node.name;
-		if(moShiId == "toggle1"){
-			moShi = "2";
-		}else if(moShiId == "toggle2"){
-			moShi = "4";
-		}else if(moShiId == "toggle3"){
-			moShi = "8";
-		}
+        var moShiId = toggle.node.name;
+        if(cc.beimi.GameBase.gameModel =='jx'){
+            if(moShiId == "toggle1"){
+                moShi = "4";
+            }else if(moShiId == "toggle2"){
+                moShi = "8";
+            }else if(moShiId == "toggle3"){
+                moShi = "16";
+            }
+        }else{
+            if(moShiId == "toggle1"){
+                moShi = "2";
+            }else if(moShiId == "toggle2"){
+                moShi = "4";
+            }else if(moShiId == "toggle3"){
+                moShi = "8";
+            }
+        }
     },
 	
 	//创建房间-玩法类型值选择
@@ -47,19 +57,35 @@ cc.Class({
 	
 	//创建房间-人数类型选择
 	radioButtonClickedUser: function(toggle) {
-		var moShiId = toggle.node.name;
-		if(moShiId == "toggle1"){
+        var moShiId = toggle.node.name;
+        if(cc.beimi.GameBase.gameModel =='jx'){
+            if(moShiId == "toggle1"){
+                playerData2 = "100";
+            }else if(moShiId == "toggle2"){
+                playerData2 = '200';
+            }else if(moShiId == "toggle3"){
+                playerData2 = '300';
+            }else if(moShiId == "toggle4"){
+                playerData2 = '0';
+            }
+        }else{
+            if(moShiId == "toggle1"){
 			userType = "4";
-		}else if(moShiId == "toggle2"){
+	    	}else if(moShiId == "toggle2"){
 			userType = 3;
-		}else if(moShiId == "toggle3"){
+	    	}else if(moShiId == "toggle3"){
             userType = 2;
+           }
         }
     },
 
     onLoad: function () {
         this.messages = '';
-        moShi = "2";
+        if(cc.beimi.GameBase.gameModel =='jx'){
+            moShi = '4'; 
+        }else{
+            moShi = "2";
+        }
         playerData = "both@@";
         userType = "4";
     },
@@ -68,17 +94,40 @@ cc.Class({
     createRoom(){
 		//console.log("模式类型:"+moShi + "玩法:"+playerData +"人数:"+ userType);//模式类型moShi 玩法playerData  人数userType
          var garams ={};
-		 //模式类型
-         garams.modeltype = moShi;
-         playerData = 'both@@xjmissile@@sfmissile@@xdszl@@bandgap@@';
+         //模式类型
+         
+         if(cc.beimi.GameBase.gameModel =='jx'){
+            playerData = 'zf@@zh@@stz@@fzbd@@19bd@@pbd@@';
+            garams.player2 = playerData2;
+            garams.count = moShi;
+
+         }else{
+            playerData = 'both@@xjmissile@@sfmissile@@xdszl@@bandgap@@';
+            garams.modeltype = moShi;
+
+         }
+         
          playerData = playerData.split("@@");
-		 playerData.pop();
-		 //玩法类型
-         garams.waytype = playerData;
-         //人数
-         garams.pepNums = userType;
-		 //游戏玩法
+         playerData.pop();
+         
+         if(cc.beimi.GameBase.gameModel =='jx'){
+             //玩法类型
+          garams.player = playerData;
+           //游戏玩法
+         garams.game = 'JX';
+         }else{
+             //玩法类型
+          garams.waytype = playerData;
+           //游戏玩法
          garams.game = 'CH';
+           
+         }
+		 
+         //人数
+         
+         garams.pepNums = userType;
+
+		
 		//token值
          if(cc.beimi.authorization){
              garams.token = cc.beimi.authorization;

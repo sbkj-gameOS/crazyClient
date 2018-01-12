@@ -1825,7 +1825,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "both",
+    "_name": "zf",
     "_objFlags": 0,
     "_parent": {
       "__id__": 55
@@ -2238,7 +2238,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "xjmissile",
+    "_name": "zh",
     "_objFlags": 0,
     "_parent": {
       "__id__": 55
@@ -2651,7 +2651,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "sfmissile",
+    "_name": "stz",
     "_objFlags": 0,
     "_parent": {
       "__id__": 55
@@ -3064,7 +3064,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "xdszl",
+    "_name": "fzbd",
     "_objFlags": 0,
     "_parent": {
       "__id__": 55
@@ -3477,7 +3477,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "bandgap",
+    "_name": "19bd",
     "_objFlags": 0,
     "_parent": {
       "__id__": 55
@@ -3890,7 +3890,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "bandgap",
+    "_name": "pbd",
     "_objFlags": 0,
     "_parent": {
       "__id__": 55

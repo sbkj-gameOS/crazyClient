@@ -77,6 +77,7 @@ cc.Class({
         //     this.ch.active = false ;
         // }  
     },
+ 
     toggleClick: function(toggle) {
     	typeStatus = 1;
         //当前选中文字颜色切换白色
